@@ -1,0 +1,49 @@
+{
+	"name": "ow",
+	"version": "0.0.1",
+	"description": "Argument type validation",
+	"license": "MIT",
+	"repository": "sindresorhus/ow",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js",
+		"example.js"
+	],
+	"keywords": [
+		"type",
+		"types",
+		"check",
+		"checking",
+		"guard",
+		"guards",
+		"assert",
+		"assertion",
+		"predicate",
+		"predicates",
+		"is",
+		"validate",
+		"validation",
+		"utility",
+		"util",
+		"typeof",
+		"instanceof",
+		"object"
+	],
+	"dependencies": {
+		"@sindresorhus/is": "^0.2.0"
+	},
+	"devDependencies": {
+		"ava": "*",
+		"xo": "*"
+	}
+}
