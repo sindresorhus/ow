@@ -21,7 +21,7 @@
 		"build": "del dist && tsc -p tsconfig.json --declaration"
 	},
 	"files": [
-		"index.js",
+		"dist",
 		"example.js"
 	],
 	"keywords": [
