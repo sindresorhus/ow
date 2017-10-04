@@ -3,7 +3,7 @@
 		"target": "es2016",
 		"module": "commonjs",
 		"declaration": false,
-		"removeComments": true,
+		"removeComments": false,
 		"pretty": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
