@@ -9,11 +9,16 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "sindresorhus.com"
 	},
+	"main": "dist/index.js",
+	"typings": "dist/index.d.ts",
 	"engines": {
 		"node": ">=4"
 	},
 	"scripts": {
-		"test": "xo && ava"
+		"prerelease": "npm run build",
+		"pretest": "npm run build -- --sourceMap",
+		"test": "nyc ava dist/test",
+		"build": "del dist && tsc -p tsconfig.json --declaration"
 	},
 	"files": [
 		"index.js",
@@ -43,7 +48,11 @@
 		"@sindresorhus/is": "^0.2.0"
 	},
 	"devDependencies": {
+		"@types/node": "^8.0.31",
 		"ava": "*",
-		"xo": "*"
+		"coveralls": "^3.0.0",
+		"del": "^3.0.0",
+		"nyc": "^11.2.1",
+		"typescript": "^2.5.3"
 	}
 }
