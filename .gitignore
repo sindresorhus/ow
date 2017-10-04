@@ -1,5 +1,5 @@
 node_modules
-dist
-coverage
-.nyc_output
 yarn.lock
+.nyc_output
+coverage
+dist
