@@ -1,6 +1,5 @@
 import * as is from '@sindresorhus/is';
 import { ArgumentError } from './lib/argument-error';
-
 import { Predicate } from './lib/predicates/predicate';
 import { StringPredicate } from './lib/predicates/string';
 
