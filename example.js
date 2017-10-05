@@ -1,5 +1,5 @@
 'use strict';
-const ow = require('.');
+const ow = require('./dist');
 
 const fn = (input, options) => {
 	ow(input, ow.string.minLength(10));
