@@ -26,7 +26,7 @@ export class StringPredicate extends Predicate {
 	 */
 	get alphanumeric() {
 		this.context.validators.push(value => {
-			if (!/^[a-z\d]+$/gi.test(value)) {
+			if (!/^[a-z\d]+$/i.test(value)) {
 				return `Expected string to contain only alphanumeric characters but received \`${value}\``;
 			}
 		});
