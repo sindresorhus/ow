@@ -1,6 +1,9 @@
 import * as is from '@sindresorhus/is';
 
-export type Validator = (value: any) => string | undefined;
+export interface Validator {
+	message: (value: any) => string;
+	validator: (value: any) => boolean;
+}
 
 export interface Context {
 	validators: Validator[];
@@ -11,10 +14,13 @@ export class Predicate {
 		type: string,
 		public context: Context = { validators: [] }
 	) {
-		this.context.validators.push(value => {
-			if (!is[type](value)) {
-				return `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``;
-			}
+		this.register({
+			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
+			validator: value => is[type](value)
 		});
+	}
+
+	protected register(validator: Validator) {
+		this.context.validators.push(validator);
 	}
 }

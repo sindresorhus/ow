@@ -1,4 +1,5 @@
 import { Predicate, Context } from './predicate';
+import { Validator } from '../decorators/validator';
 
 export class StringPredicate extends Predicate {
 
@@ -11,26 +12,22 @@ export class StringPredicate extends Predicate {
 	 *
 	 * @param number The minimum length of the string.
 	 */
-	minLength(number: number) {
-		this.context.validators.push(value => {
-			if (value.length < number) {
-				return `Expected string length to be minimum ${number}`;
-			}
-		});
-
-		return this;
+	@Validator()
+	minLength(number: number): StringPredicate {
+		return {
+			message: () => `Expected string length to be minimum ${number}`,
+			validator: (value: string) => value.length >= number
+		} as any;
 	}
 
 	/**
 	 * Test a string to be alphanumeric.
 	 */
-	get alphanumeric() {
-		this.context.validators.push(value => {
-			if (!/^[a-z\d]+$/i.test(value)) {
-				return `Expected string to contain only alphanumeric characters but received \`${value}\``;
-			}
-		});
-
-		return this;
+	@Validator()
+	get alphanumeric(): StringPredicate {
+		return {
+			message: value => `Expected string to contain only alphanumeric characters but received \`${value}\``,
+			validator: (value: string) => /^[a-z\d]+$/i.test(value)
+		} as any;
 	}
 }
