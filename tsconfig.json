@@ -11,7 +11,6 @@
 		"noImplicitUseStrict": false,
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": false,
 		"outDir": "dist"
 	},
 	"exclude": [
