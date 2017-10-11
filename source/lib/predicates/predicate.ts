@@ -14,13 +14,15 @@ export class Predicate {
 		type: string,
 		public context: Context = { validators: [] }
 	) {
-		this.register({
+		this.addValidator({
 			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
 			validator: value => is[type](value)
 		});
 	}
 
-	protected register(validator: Validator) {
+	protected addValidator(validator: Validator) {
 		this.context.validators.push(validator);
+
+		return this;
 	}
 }
