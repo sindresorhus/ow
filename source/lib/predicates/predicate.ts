@@ -20,6 +20,10 @@ export class Predicate<T = any> {
 		});
 	}
 
+	get validators() {
+		return this.context.validators;
+	}
+
 	protected addValidator(validator: Validator<T>) {
 		this.context.validators.push(validator);
 

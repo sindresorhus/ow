@@ -12,7 +12,7 @@ export interface Ow {
 }
 
 export const ow: Ow = (value: any, predicate: Predicate) => {
-	for (const { validator, message } of predicate.context.validators) {
+	for (const { validator, message } of predicate.validators) {
 		if (!validator(value)) {
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
 			throw new ArgumentError(message(value), ow);
