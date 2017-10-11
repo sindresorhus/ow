@@ -23,7 +23,7 @@ export class StringPredicate extends Predicate {
 	 */
 	get alphanumeric() {
 		return this.addValidator({
-			message: value => `Expected string to contain only alphanumeric characters but received \`${value}\``,
+			message: (value: string) => `Expected string to contain only alphanumeric characters but received \`${value}\``,
 			validator: (value: string) => /^[a-z\d]+$/i.test(value)
 		});
 	}
