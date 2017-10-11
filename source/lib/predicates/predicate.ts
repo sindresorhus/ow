@@ -1,18 +1,18 @@
 import * as is from '@sindresorhus/is';
 
-export interface Validator {
-	message: (value: any) => string;
-	validator: (value: any) => boolean;
+export interface Validator<T> {
+	message: (value: T) => string;
+	validator: (value: T) => boolean;
 }
 
 export interface Context {
-	validators: Validator[];
+	validators: Validator<any>[];
 }
 
-export class Predicate {
+export class Predicate<T = any> {
 	constructor(
 		type: string,
-		public context: Context = { validators: [] }
+		private context: Context = { validators: [] }
 	) {
 		this.addValidator({
 			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
@@ -20,7 +20,7 @@ export class Predicate {
 		});
 	}
 
-	protected addValidator(validator: Validator) {
+	protected addValidator(validator: Validator<T>) {
 		this.context.validators.push(validator);
 
 		return this;

@@ -1,6 +1,6 @@
 import { Predicate, Context } from './predicate';
 
-export class StringPredicate extends Predicate {
+export class StringPredicate extends Predicate<string> {
 
 	constructor(context?: Context) {
 		super('string', context);
@@ -14,7 +14,7 @@ export class StringPredicate extends Predicate {
 	minLength(number: number) {
 		return this.addValidator({
 			message: () => `Expected string length to be minimum ${number}`,
-			validator: (value: string) => value.length >= number
+			validator: value => value.length >= number
 		});
 	}
 
@@ -23,8 +23,8 @@ export class StringPredicate extends Predicate {
 	 */
 	get alphanumeric() {
 		return this.addValidator({
-			message: (value: string) => `Expected string to contain only alphanumeric characters but received \`${value}\``,
-			validator: (value: string) => /^[a-z\d]+$/i.test(value)
+			message: value => `Expected string to contain only alphanumeric characters but received \`${value}\``,
+			validator: value => /^[a-z\d]+$/i.test(value)
 		});
 	}
 }

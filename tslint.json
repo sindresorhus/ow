@@ -1,0 +1,24 @@
+{
+	"rules": {
+		"await-promise": true,
+		"curly": true,
+		"no-duplicate-super": true,
+		"no-duplicate-variable": true,
+		"no-empty": true,
+		"no-eval": true,
+		"no-floating-promises": true,
+		"no-for-in-array": true,
+		"no-invalid-template-strings": true,
+		"no-invalid-this": false,
+		"no-misused-new": true,
+		// "no-object-literal-type-assertion": true,
+		"no-shadowed-variable": true,
+		"no-sparse-arrays": true,
+		"no-string-literal": true,
+		"no-string-throw": true,
+		"no-switch-case-fall-through": true,
+		"no-this-assignment": true,
+		// "no-unbound-method": true,
+		"no-unsafe-any": true
+	}
+}
