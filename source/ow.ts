@@ -12,13 +12,14 @@ export interface Ow {
 }
 
 export const ow: Ow = (value: any, predicate: Predicate) => {
-	for (const validator of predicate.context.validators) {
-		const result = validator(value);
-		if (result) {
+	for (const { validator, message } of predicate.validators) {
+		if (!validator(value)) {
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-			throw new ArgumentError(result, ow);
+			throw new ArgumentError(message(value), ow);
 		}
 	}
 };
 
-ow.string = new StringPredicate();
+Object.defineProperty(ow, 'string', {
+	get: () => new StringPredicate()
+});
