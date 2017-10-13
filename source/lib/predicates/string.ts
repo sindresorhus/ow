@@ -9,12 +9,12 @@ export class StringPredicate extends Predicate<string> {
 	/**
 	 * Test a string to have a minimum length.
 	 *
-	 * @param number The minimum length of the string.
+	 * @param length The minimum length of the string.
 	 */
-	minLength(number: number) {
+	minLength(length: number) {
 		return this.addValidator({
-			message: () => `Expected string length to be minimum ${number}`,
-			validator: value => value.length >= number
+			message: () => `Expected string length to be minimum ${length}`,
+			validator: value => value.length >= length
 		});
 	}
 
