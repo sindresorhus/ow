@@ -9,6 +9,8 @@ export interface Context {
 	validators: Validator<any>[];
 }
 
+export const validatorSymbol = Symbol('validators');
+
 export class Predicate<T = any> {
 	constructor(
 		type: string,
@@ -20,7 +22,7 @@ export class Predicate<T = any> {
 		});
 	}
 
-	get validators() {
+	get [validatorSymbol]() {
 		return this.context.validators;
 	}
 
