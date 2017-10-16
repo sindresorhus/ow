@@ -1,8 +1,8 @@
 import * as is from '@sindresorhus/is';
 
 export interface Validator<T> {
-	message: (value: T) => string;
-	validator: (value: T) => boolean;
+	message(value: T): string;
+	validator(value: T): boolean;
 }
 
 export interface Context {
@@ -26,6 +26,11 @@ export class Predicate<T = any> {
 		return this.context.validators;
 	}
 
+	/**
+	 * Register a new validator.
+	 *
+	 * @param validator Validator to register.
+	 */
 	protected addValidator(validator: Validator<T>) {
 		this.context.validators.push(validator);
 
