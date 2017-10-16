@@ -31,6 +31,12 @@ unicorn('yo');
 ```
 
 
+## Created by
+
+- [Sindre Sorhus](https://github.com/sindresorhus)
+- [Sam Verschueren](https://github.com/SamVerschueren)
+
+
 ## License
 
-MIT © [Sindre Sorhus](https://sindresorhus.com)
+MIT
