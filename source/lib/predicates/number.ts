@@ -1,3 +1,4 @@
+import * as is from '@sindresorhus/is';
 import { Predicate, Context } from './predicate';
 
 export class NumberPredicate extends Predicate<number> {
@@ -15,7 +16,7 @@ export class NumberPredicate extends Predicate<number> {
 	inRange(start: number, end: number) {
 		return this.addValidator({
 			message: value => `Expected ${value} to be in range [${start}..${end}]`,
-			validator: value => value >= start && value <= end
+			validator: value => is.inRange(value, [start, end])
 		});
 	}
 
@@ -61,7 +62,7 @@ export class NumberPredicate extends Predicate<number> {
 	get integer() {
 		return this.addValidator({
 			message: value => `Expected ${value} to be an integer`,
-			validator: value => Number.isInteger(value)
+			validator: value => is.integer(value)
 		});
 	}
 
@@ -71,7 +72,7 @@ export class NumberPredicate extends Predicate<number> {
 	get finite() {
 		return this.addValidator({
 			message: value => `Expected ${value} to be finite`,
-			validator: value => Number.isFinite(value)
+			validator: value => !is.infinite(value)
 		});
 	}
 
