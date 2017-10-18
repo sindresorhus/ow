@@ -21,26 +21,26 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
-	 * Test a number to be greater than or equal to the minimum value.
+	 * Test a number to be greater than the provided value.
 	 *
-	 * @param min Minimum value.
+	 * @param x Minimum value.
 	 */
-	min(min: number) {
+	greaterThan(x: number) {
 		return this.addValidator({
-			message: value => `Expected ${value} to be greater than or equal to ${min}`,
-			validator: value => value >= min
+			message: value => `Expected ${value} to be greater than ${x}`,
+			validator: value => value > x
 		});
 	}
 
 	/**
-	 * Test a number to be less than or equal to the maximum value.
+	 * Test a number to be less than the provided value.
 	 *
-	 * @param max Maximum value.
+	 * @param x Maximum value.
 	 */
-	max(max: number) {
+	lessThan(x: number) {
 		return this.addValidator({
-			message: value => `Expected ${value} to be less than or equal to ${max}`,
-			validator: value => value <= max
+			message: value => `Expected ${value} to be less than ${x}`,
+			validator: value => value < x
 		});
 	}
 
