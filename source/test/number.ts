@@ -22,12 +22,26 @@ test('number.greaterThan', t => {
 	t.throws(() => m(10, m.number.greaterThan(20)), 'Expected 10 to be greater than 20');
 });
 
+test('number.greaterThanOrEqual', t => {
+	t.notThrows(() => m(10, m.number.greaterThanOrEqual(5)));
+	t.notThrows(() => m(10, m.number.greaterThanOrEqual(10)));
+	t.throws(() => m(10, m.number.greaterThanOrEqual(11)), 'Expected 10 to be greater than or equal to 11');
+	t.throws(() => m(10, m.number.greaterThanOrEqual(20)), 'Expected 10 to be greater than or equal to 20');
+});
+
 test('number.lessThan', t => {
 	t.notThrows(() => m(10, m.number.lessThan(20)));
 	t.notThrows(() => m(10, m.number.lessThan(11)));
 	t.throws(() => m(10, m.number.lessThan(10)), 'Expected 10 to be less than 10');
 	t.throws(() => m(10, m.number.lessThan(9)), 'Expected 10 to be less than 9');
 	t.throws(() => m(10, m.number.lessThan(0)), 'Expected 10 to be less than 0');
+});
+
+test('number.lessThanOrEqual', t => {
+	t.notThrows(() => m(10, m.number.lessThanOrEqual(20)));
+	t.notThrows(() => m(10, m.number.lessThanOrEqual(10)));
+	t.throws(() => m(10, m.number.lessThanOrEqual(9)), 'Expected 10 to be less than or equal to 9');
+	t.throws(() => m(10, m.number.lessThanOrEqual(0)), 'Expected 10 to be less than or equal to 0');
 });
 
 test('number.equal', t => {

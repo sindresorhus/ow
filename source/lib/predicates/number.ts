@@ -33,6 +33,18 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
+	 * Test a number to be greater than or equal to the provided value.
+	 *
+	 * @param x Minimum value.
+	 */
+	greaterThanOrEqual(x: number) {
+		return this.addValidator({
+			message: value => `Expected ${value} to be greater than or equal to ${x}`,
+			validator: value => value >= x
+		});
+	}
+
+	/**
 	 * Test a number to be less than the provided value.
 	 *
 	 * @param x Maximum value.
@@ -41,6 +53,18 @@ export class NumberPredicate extends Predicate<number> {
 		return this.addValidator({
 			message: value => `Expected ${value} to be less than ${x}`,
 			validator: value => value < x
+		});
+	}
+
+	/**
+	 * Test a number to be less than or equal to the provided value.
+	 *
+	 * @param x Minimum value.
+	 */
+	lessThanOrEqual(x: number) {
+		return this.addValidator({
+			message: value => `Expected ${value} to be less than or equal to ${x}`,
+			validator: value => value <= x
 		});
 	}
 
