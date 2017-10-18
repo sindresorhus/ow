@@ -77,7 +77,7 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
-	 * Test a number to be finite.
+	 * Test a number to be infinite.
 	 */
 	get infinite() {
 		return this.addValidator({
