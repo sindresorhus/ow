@@ -45,6 +45,11 @@ test('number.finite', t => {
 	t.throws(() => m(Infinity, m.number.finite), 'Expected Infinity to be finite');
 });
 
+test('number.infinite', t => {
+	t.notThrows(() => m(Infinity, m.number.infinite));
+	t.throws(() => m(10, m.number.infinite), 'Expected 10 to be infinite');
+});
+
 test('number.positive', t => {
 	t.notThrows(() => m(1, m.number.positive));
 	t.throws(() => m(-1, m.number.positive), 'Expected -1 to be positive');
