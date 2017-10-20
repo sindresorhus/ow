@@ -1,4 +1,5 @@
 import * as is from '@sindresorhus/is';
+import { not } from '../operators/not';
 
 export interface Validator<T> {
 	message(value: T): string;
@@ -11,14 +12,8 @@ export interface Context {
 
 export const validatorSymbol = Symbol('validators');
 
-<<<<<<< HEAD
 export abstract class Predicate<T = any> {
-=======
-export class Predicate<T = any> {
 
-	private negated: boolean;
-
->>>>>>> Add not predicate
 	constructor(
 		type: string,
 		private context: Context = { validators: [] }
@@ -37,9 +32,7 @@ export class Predicate<T = any> {
 	 * Invert the following validators.
 	 */
 	get not() {
-		this.negated = true;
-
-		return this;
+		return not(this);
 	}
 
 	/**
@@ -48,11 +41,6 @@ export class Predicate<T = any> {
 	 * @param validator Validator to register.
 	 */
 	protected addValidator(validator: Validator<T>) {
-		if (this.negated) {
-			const fn = validator.validator;
-			validator.validator = x => !fn(x);
-		}
-
 		this.context.validators.push(validator);
 
 		return this;
