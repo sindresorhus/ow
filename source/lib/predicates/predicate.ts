@@ -11,7 +11,7 @@ export interface Context {
 
 export const validatorSymbol = Symbol('validators');
 
-export class Predicate<T = any> {
+export abstract class Predicate<T = any> {
 	constructor(
 		type: string,
 		private context: Context = { validators: [] }
