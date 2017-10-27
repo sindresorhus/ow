@@ -43,8 +43,14 @@ export class StringPredicate extends Predicate<string> {
 		});
 	}
 
-	match() {
-		// TODO
+	/**
+	 * Test a string against a regular expression.
+	 */
+	match(regExp: RegExp) {
+		return this.addValidator({
+			message: value => `Expected \`${value}\` to match ${regExp.source}`,
+			validator: value => regExp.test(value)
+		});
 	}
 
 	/**
