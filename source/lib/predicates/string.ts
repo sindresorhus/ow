@@ -86,7 +86,7 @@ export class StringPredicate extends Predicate<string> {
 	/**
 	 * Test a string to be empty.
 	 */
-	get empty {
+	get empty() {
 		return this.addValidator({
 			message: value => `Expected \`${value}\` to be empty`,
 			validator: value => value === ''
