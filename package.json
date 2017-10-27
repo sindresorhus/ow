@@ -45,7 +45,9 @@
 		"object"
 	],
 	"dependencies": {
-		"@sindresorhus/is": "^0.4.0"
+		"@sindresorhus/is": "^0.4.0",
+		"is-email-like": "^1.0.0",
+		"vali-date": "^1.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "^8.0.31",
