@@ -70,7 +70,7 @@
 		"newline-before-return": true,
 		"new-parens": true,
 		"no-angle-bracket-type-assertion": true,
-		"no-boolean-literal-compare": true,
+		"no-boolean-literal-compare": false,
 		"no-consecutive-blank-lines": true,
 		"no-irregular-whitespace": true,
 		"no-reference-import": true,
