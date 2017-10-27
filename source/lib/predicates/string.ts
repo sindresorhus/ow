@@ -1,5 +1,4 @@
 import * as valiDate from 'vali-date';
-import * as isEmailLike from 'is-email-like';
 import { Predicate, Context } from './predicate';
 
 export class StringPredicate extends Predicate<string> {
@@ -84,12 +83,24 @@ export class StringPredicate extends Predicate<string> {
 		});
 	}
 
-	empty() {
-		// TODO
+	/**
+	 * Test a string to be empty.
+	 */
+	get empty {
+		return this.addValidator({
+			message: value => `Expected \`${value}\` to be empty`,
+			validator: value => value === ''
+		});
 	}
 
-	nonEmpty() {
-		// TODO
+	/**
+	 * Test a string to be not empty.
+	 */
+	get nonEmpty() {
+		return this.addValidator({
+			message: () => 'Expected value to be not empty',
+			validator: value => value !== ''
+		});
 	}
 
 	/**
@@ -131,16 +142,6 @@ export class StringPredicate extends Predicate<string> {
 		return this.addValidator({
 			message: value => `Expected \`${value}\` to be a valid date`,
 			validator: value => valiDate(value)
-		});
-	}
-
-	/**
-	 * Test a string to be email like.
-	 */
-	get email() {
-		return this.addValidator({
-			message: value => `Expected \`${value}\` to be email like`,
-			validator: value => isEmailLike(value)
 		});
 	}
 }
