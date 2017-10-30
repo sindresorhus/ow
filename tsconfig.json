@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es2016",
+		"target": "es5",
 		"module": "commonjs",
 		"declaration": false,
 		"removeComments": false,
@@ -12,7 +12,10 @@
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,
 		"strictNullChecks": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"lib": [
+			"es2015"
+		]
 	},
 	"exclude": [
 		"node_modules",
