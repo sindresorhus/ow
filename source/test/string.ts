@@ -7,9 +7,15 @@ test('string', t => {
 });
 
 test('string.minLength', t => {
+	t.notThrows(() => m('foo', m.string.length(3)));
+	t.notThrows(() => m('foobar', m.string.length(6)));
+	t.throws(() => m('foo', m.string.length(4)), 'Expected string length to be 4, got 3');
+});
+
+test('string.minLength', t => {
 	t.notThrows(() => m('foo', m.string.minLength(2)));
 	t.notThrows(() => m('foo', m.string.minLength(3)));
-	t.throws(() => m('foo', m.string.minLength(4)), 'Expected string length to be minimum 4');
+	t.throws(() => m('foo', m.string.minLength(4)), 'Expected string to have a minimum length of 4, got 3');
 });
 
 test('string.alphanumeric', t => {
