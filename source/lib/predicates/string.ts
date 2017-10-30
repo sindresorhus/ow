@@ -139,7 +139,7 @@ export class StringPredicate extends Predicate<string> {
 	get numeric() {
 		return this.addValidator({
 			message: value => `Expected string to be numeric, got \`${value}\``,
-			validator: value => /^[\d]+$/i.test(value)
+			validator: value => /^\d+$/i.test(value)
 		});
 	}
 
