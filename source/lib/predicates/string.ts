@@ -8,7 +8,7 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
-	 * Test a string to have a specific minimum length.
+	 * Test a string to have a specific length.
 	 *
 	 * @param length The length of the string.
 	 */
