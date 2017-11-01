@@ -3,6 +3,7 @@ import {Predicate, validatorSymbol} from './lib/predicates/predicate';
 import {StringPredicate} from './lib/predicates/string';
 import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
+import {ArrayPredicate} from './lib/predicates/array';
 
 export interface Ow {
 	(value: any, predicate: Predicate): void;
@@ -18,6 +19,10 @@ export interface Ow {
 	 * Test the value to be a boolean.
 	 */
 	boolean: BooleanPredicate;
+	/**
+	 * Test the value to be an array.
+	 */
+	array: ArrayPredicate;
 }
 
 const main = (value: any, predicate: Predicate) => {
@@ -38,6 +43,9 @@ Object.defineProperties(main, {
 	},
 	boolean: {
 		get: () => new BooleanPredicate()
+	},
+	array: {
+		get: () => new ArrayPredicate()
 	}
 });
 
