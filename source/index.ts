@@ -1,3 +1,3 @@
-import { ow } from './ow';
+import {ow} from './ow';
 
 export = ow;

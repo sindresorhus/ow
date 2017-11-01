@@ -1,8 +1,7 @@
 import * as valiDate from 'vali-date';
-import { Predicate, Context } from './predicate';
+import {Predicate, Context} from './predicate';
 
 export class StringPredicate extends Predicate<string> {
-
 	constructor(context?: Context) {
 		super('string', context);
 	}

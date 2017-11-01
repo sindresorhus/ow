@@ -1,8 +1,7 @@
 import * as is from '@sindresorhus/is';
-import { Predicate, Context } from './predicate';
+import {Predicate, Context} from './predicate';
 
 export class NumberPredicate extends Predicate<number> {
-
 	constructor(context?: Context) {
 		super('number', context);
 	}

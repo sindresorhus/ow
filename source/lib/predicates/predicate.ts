@@ -1,5 +1,5 @@
 import * as is from '@sindresorhus/is';
-import { not } from '../operators/not';
+import {not} from '../operators/not';
 
 export interface Validator<T> {
 	message(value: T): string;
@@ -13,10 +13,11 @@ export interface Context {
 export const validatorSymbol = Symbol('validators');
 
 export abstract class Predicate<T = any> {
-
 	constructor(
 		type: string,
-		private context: Context = { validators: [] }
+		private context: Context = {
+			validators: []
+		}
 	) {
 		this.addValidator({
 			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,

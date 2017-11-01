@@ -1,4 +1,4 @@
-import { Predicate, Validator, validatorSymbol } from '../predicates/predicate';
+import {Predicate, Validator, validatorSymbol} from '../predicates/predicate';
 
 /**
  * Operator which inverts all the validations.

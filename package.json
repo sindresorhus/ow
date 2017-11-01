@@ -55,7 +55,7 @@
 		"del-cli": "^1.1.0",
 		"nyc": "^11.2.1",
 		"tslint": "^5.8.0",
-		"tslint-xo": "^0.1.0",
+		"tslint-xo": "^0.2.0",
 		"typescript": "^2.6.1"
 	}
 }
