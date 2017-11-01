@@ -1,4 +1,5 @@
 import * as is from '@sindresorhus/is';
+import { not } from '../operators/not';
 
 export interface Validator<T> {
 	message(value: T): string;
@@ -12,6 +13,7 @@ export interface Context {
 export const validatorSymbol = Symbol('validators');
 
 export abstract class Predicate<T = any> {
+
 	constructor(
 		type: string,
 		private context: Context = { validators: [] }
@@ -24,6 +26,13 @@ export abstract class Predicate<T = any> {
 
 	get [validatorSymbol]() {
 		return this.context.validators;
+	}
+
+	/**
+	 * Invert the following validators.
+	 */
+	get not() {
+		return not(this);
 	}
 
 	/**
