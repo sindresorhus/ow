@@ -1,8 +1,8 @@
-import { ArgumentError } from './lib/argument-error';
-import { Predicate, validatorSymbol } from './lib/predicates/predicate';
-import { StringPredicate } from './lib/predicates/string';
-import { NumberPredicate } from './lib/predicates/number';
-import { BooleanPredicate } from './lib/predicates/boolean';
+import {ArgumentError} from './lib/argument-error';
+import {Predicate, validatorSymbol} from './lib/predicates/predicate';
+import {StringPredicate} from './lib/predicates/string';
+import {NumberPredicate} from './lib/predicates/number';
+import {BooleanPredicate} from './lib/predicates/boolean';
 
 export interface Ow {
 	(value: any, predicate: Predicate): void;
@@ -21,7 +21,7 @@ export interface Ow {
 }
 
 const main = (value: any, predicate: Predicate) => {
-	for (const { validator, message } of predicate[validatorSymbol]) {
+	for (const {validator, message} of predicate[validatorSymbol]) {
 		if (!validator(value)) {
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
 			throw new ArgumentError(message(value), main);
