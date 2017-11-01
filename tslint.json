@@ -1,3 +1,6 @@
 {
-	"extends": "tslint-xo"
+	"extends": "tslint-xo",
+	"rules": {
+		"completed-docs": [true, "methods"]
+	}
 }
