@@ -6,12 +6,8 @@
 			"es2015"
 		],
 		"module": "commonjs",
-<<<<<<< HEAD
 		"moduleResolution": "node",
-=======
 		"declaration": true,
-		"removeComments": false,
->>>>>>> Process feedback
 		"pretty": true,
 		"newLine": "lf",
 		"stripInternal": true,
