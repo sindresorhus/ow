@@ -7,6 +7,7 @@
 		],
 		"module": "commonjs",
 		"moduleResolution": "node",
+		"declaration": true,
 		"pretty": true,
 		"newLine": "lf",
 		"stripInternal": true,

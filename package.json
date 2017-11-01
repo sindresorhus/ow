@@ -16,10 +16,12 @@
 	},
 	"scripts": {
 		"prerelease": "npm run build",
-		"pretest": "npm run build -- --sourceMap",
+		"pretest": "npm run compile -- --sourceMap",
 		"test": "npm run lint && nyc ava dist/test",
 		"lint": "tslint --project .",
-		"build": "del dist && tsc --declaration"
+		"build": "npm run clean && webpack",
+		"compile": "npm run clean && tsc",
+		"clean": "del dist"
 	},
 	"files": [
 		"dist"
@@ -44,18 +46,24 @@
 		"instanceof",
 		"object"
 	],
-	"dependencies": {
-		"@sindresorhus/is": "^0.4.0",
-		"vali-date": "^1.0.0"
-	},
 	"devDependencies": {
+		"@sindresorhus/is": "^0.4.0",
 		"@types/node": "^8.0.31",
 		"ava": "*",
+		"awesome-typescript-loader": "^3.2.3",
 		"codecov": "^2.3.0",
 		"del-cli": "^1.1.0",
+		"license-webpack-plugin": "^1.1.1",
 		"nyc": "^11.2.1",
 		"tslint": "^5.8.0",
 		"tslint-xo": "^0.2.0",
-		"typescript": "^2.6.1"
+		"typescript": "^2.6.1",
+		"vali-date": "^1.0.0",
+		"webpack": "^3.8.1"
+	},
+	"nyc": {
+		"exclude": [
+			"dist/test"
+		]
 	}
 }
