@@ -18,8 +18,8 @@
 		"prerelease": "npm run build",
 		"pretest": "npm run build -- --sourceMap",
 		"test": "npm run lint && nyc ava dist/test",
-		"lint": "tslint --type-check -p tsconfig.json \"source/**/*.ts\"",
-		"build": "del dist && tsc -p tsconfig.json --declaration"
+		"lint": "tslint --project .",
+		"build": "del dist && tsc --declaration"
 	},
 	"files": [
 		"dist"
@@ -54,7 +54,8 @@
 		"codecov": "^2.3.0",
 		"del-cli": "^1.1.0",
 		"nyc": "^11.2.1",
-		"tslint": "^5.7.0",
-		"typescript": "^2.5.3"
+		"tslint": "^5.8.0",
+		"tslint-xo": "^0.1.0",
+		"typescript": "^2.6.1"
 	}
 }
