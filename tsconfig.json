@@ -18,6 +18,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,
 		"strictNullChecks": true,
+		"strictFunctionTypes": true,
 		"alwaysStrict": true
 	},
 	"exclude": [
