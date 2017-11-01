@@ -38,9 +38,10 @@ export abstract class Predicate<T = any> {
 	/**
 	 * Register a new validator.
 	 *
+	 * @internal
 	 * @param validator Validator to register.
 	 */
-	protected addValidator(validator: Validator<T>) {
+	addValidator(validator: Validator<T>) {
 		this.context.validators.push(validator);
 
 		return this;
