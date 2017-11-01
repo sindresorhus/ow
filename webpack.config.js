@@ -2,7 +2,7 @@
 module.exports = {
 	entry: './source/index.ts',
 	target: 'node',
-	devtool: 'sourcemap',
+	devtool: 'source-map',
 	output: {
 		filename: 'dist/index.js',
 		libraryTarget: 'commonjs2'
