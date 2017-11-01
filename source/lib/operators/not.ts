@@ -1,23 +1,22 @@
-import { Predicate } from '../predicates/predicate';
+import { Predicate, Validator, validatorSymbol } from '../predicates/predicate';
 
 /**
  * Operator which inverts all the validations.
  *
  * @param predictate Predicate to wrap inside the operator.
  */
-export const not = <T extends Predicate>(predicate: T): T => {
-	return new Proxy(predicate, {
-		get: (target, name, receiver) => {
-			if (name === 'addValidator') {
-				return (validator: any) => {
-					const fn = validator.validator;
-					validator.validator = (x: any) => !fn(x);
+export const not = <T extends Predicate>(predicate: T) => {
+	predicate['addValidator'] = (validator: Validator<any>) => {		// tslint:disable-line:no-string-literal
+		const fn = validator.validator;
+		const message = validator.message;
 
-					return not(target[name](validator));
-				};
-			}
+		validator.message = (x: any) => `[NOT] ${message(x)}`;
+		validator.validator = (x: any) => !fn(x);
 
-			return Reflect.get(target, name, receiver);
-		}
-	});
+		predicate[validatorSymbol].push(validator);
+
+		return predicate;
+	};
+
+	return predicate;
 };
