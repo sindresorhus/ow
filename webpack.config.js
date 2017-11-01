@@ -1,4 +1,6 @@
 'use strict';
+const webpack = require('webpack');
+
 module.exports = {
 	entry: './source/index.ts',
 	target: 'node',
@@ -10,14 +12,14 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.js']
 	},
+	plugins: [
+		new webpack.optimize.ModuleConcatenationPlugin()
+	],
 	module: {
 		rules: [
 			{
 				test: /\.ts$/,
-				loader: 'awesome-typescript-loader',
-				options: {
-					declaration: true
-				}
+				loader: 'awesome-typescript-loader'
 			}
 		]
 	}

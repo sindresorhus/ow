@@ -20,7 +20,7 @@
 		"test": "npm run lint && nyc ava dist/test",
 		"lint": "tslint --project .",
 		"build": "npm run clean && webpack",
-		"compile": "npm run clean && tsc -p tsconfig.json",
+		"compile": "npm run clean && tsc",
 		"clean": "del dist"
 	},
 	"files": [
