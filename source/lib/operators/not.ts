@@ -6,7 +6,7 @@ import { Predicate, Validator, validatorSymbol } from '../predicates/predicate';
  * @param predictate Predicate to wrap inside the operator.
  */
 export const not = <T extends Predicate>(predicate: T) => {
-	predicate['addValidator'] = (validator: Validator<any>) => {		// tslint:disable-line:no-string-literal
+	predicate.addValidator = (validator: Validator<any>) => {
 		const fn = validator.validator;
 		const message = validator.message;
 

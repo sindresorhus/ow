@@ -12,6 +12,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,
 		"strictNullChecks": true,
+		"stripInternal": true,
 		"outDir": "dist",
 		"lib": [
 			"es2015"
