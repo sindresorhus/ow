@@ -1,5 +1,6 @@
 'use strict';
 const webpack = require('webpack');
+const license = require('license-webpack-plugin');
 
 module.exports = {
 	entry: './source/index.ts',
@@ -13,7 +14,11 @@ module.exports = {
 		extensions: ['.ts', '.js']
 	},
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin()
+		new webpack.optimize.ModuleConcatenationPlugin(),
+		new license.LicenseWebpackPlugin({
+			pattern: /.*/,
+			outputFilename: 'dist/licenses.txt'
+		})
 	],
 	module: {
 		rules: [
