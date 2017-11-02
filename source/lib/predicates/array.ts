@@ -43,6 +43,30 @@ export class ArrayPredicate extends Predicate<any[]> {
 	}
 
 	/**
+	 * Test an array to start with a specific value.
+	 *
+	 * @param searchElement The value that should be the start of the array.
+	 */
+	startsWith(searchElement: any) {
+		return this.addValidator({
+			message: value => `Expected array to start with \`${searchElement}\`, got \`${value[0]}\``,
+			validator: value => value[0] === searchElement
+		});
+	}
+
+	/**
+	 * Test an array to end with a specific value.
+	 *
+	 * @param searchElement The value that should be the end of the array.
+	 */
+	endsWith(searchElement: any) {
+		return this.addValidator({
+			message: value => `Expected array to end with \`${searchElement}\`, got \`${value[value.length - 1]}\``,
+			validator: value => value[value.length - 1] === searchElement
+		});
+	}
+
+	/**
 	 * Test an array to include all the provided elements.
 	 *
 	 * @param searchElements The values that should be included in the array.

@@ -24,6 +24,16 @@ test('array.maxLength', t => {
 	t.throws(() => m(['foo', 'bar'], m.array.maxLength(1)), 'Expected array to have a maximum length of `1`, got `2`');
 });
 
+test('array.startsWith', t => {
+	t.notThrows(() => m(['foo', 'bar'], m.array.startsWith('foo')));
+	t.throws(() => m(['foo', 'bar'], m.array.startsWith('bar')), 'Expected array to start with `bar`, got `foo`');
+});
+
+test('array.endsWith', t => {
+	t.notThrows(() => m(['foo', 'bar'], m.array.endsWith('bar')));
+	t.throws(() => m(['foo', 'bar'], m.array.endsWith('foo')), 'Expected array to end with `foo`, got `bar`');
+});
+
 test('array.includes', t => {
 	t.notThrows(() => m(['foo', 'bar'], m.array.includes('foo')));
 	t.notThrows(() => m(['foo', 'bar', 'unicorn'], m.array.includes('foo', 'bar')));
