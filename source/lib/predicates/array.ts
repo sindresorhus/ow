@@ -1,4 +1,5 @@
 import * as deepStrictEqual from 'deep-strict-equal';
+import {ow} from '../../ow';
 import {Predicate, Context} from './predicate';
 
 export class ArrayPredicate extends Predicate<any[]> {
@@ -119,6 +120,32 @@ export class ArrayPredicate extends Predicate<any[]> {
 		return this.addValidator({
 			message: value => `Expected array to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => deepStrictEqual(value, expected)
+		});
+	}
+
+	/**
+	 * Test all elements in the array to match to provided predicate.
+	 *
+	 * @param predicate The predicate that should be applied against every individual item.
+	 */
+	ofType<T>(predicate: Predicate<T>) {
+		let error;
+
+		return this.addValidator({
+			message: () => error,
+			validator: value => {
+				try {
+					for (const item of value) {
+						ow(item, predicate);
+					}
+
+					return true;
+				} catch (err) {
+					error = err.message;
+
+					return false;
+				}
+			}
 		});
 	}
 }

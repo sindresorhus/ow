@@ -61,3 +61,9 @@ test('array.deepEqual', t => {
 	t.notThrows(() => m(['foo', {id: 1}], m.array.deepEqual(['foo', {id: 1}])));
 	t.throws(() => m(['foo', {id: 1}], m.array.deepEqual(['foo', {id: 2}])), 'Expected array to be deeply equal to `["foo",{"id":2}]`, got `["foo",{"id":1}]`');
 });
+
+test('array.ofType', t => {
+	t.notThrows(() => m(['foo', 'bar'], m.array.ofType(m.string)));
+	t.notThrows(() => m(['foo', 'bar'], m.array.ofType(m.string.minLength(3))));
+	t.throws(() => m(['foo', 'b'], m.array.ofType(m.string.minLength(3))), 'Expected string to have a minimum length of `3`, got `b`');
+});
