@@ -1,4 +1,4 @@
-import * as deepStrictEqual from 'deep-strict-equal';
+import * as isEqual from 'lodash.isequal';
 import {ow} from '../../ow';
 import {Predicate, Context} from './predicate';
 
@@ -44,7 +44,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	}
 
 	/**
-	 * Test an array to start with a specific value.
+	 * Test an array to start with a specific value. The value is tested by identity, not structure.
 	 *
 	 * @param searchElement The value that should be the start of the array.
 	 */
@@ -56,7 +56,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	}
 
 	/**
-	 * Test an array to end with a specific value.
+	 * Test an array to end with a specific value. The value is tested by identity, not structure.
 	 *
 	 * @param searchElement The value that should be the end of the array.
 	 */
@@ -68,7 +68,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	}
 
 	/**
-	 * Test an array to include all the provided elements.
+	 * Test an array to include all the provided elements. The values are tested by identity, not structure.
 	 *
 	 * @param searchElements The values that should be included in the array.
 	 */
@@ -80,7 +80,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	}
 
 	/**
-	 * Test an array to include any of the provided elements.
+	 * Test an array to include any of the provided elements. The values are tested by identity, not structure.
 	 *
 	 * @param searchElements The values that should be included in the array.
 	 */
@@ -119,7 +119,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	deepEqual(expected: any[]) {
 		return this.addValidator({
 			message: value => `Expected array to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => deepStrictEqual(value, expected)
+			validator: value => isEqual(value, expected)
 		});
 	}
 
