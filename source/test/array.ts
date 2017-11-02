@@ -23,3 +23,31 @@ test('array.maxLength', t => {
 	t.notThrows(() => m(['foo', 'bar'], m.array.maxLength(4)));
 	t.throws(() => m(['foo', 'bar'], m.array.maxLength(1)), 'Expected array to have a maximum length of `1`, got `2`');
 });
+
+test('array.includes', t => {
+	t.notThrows(() => m(['foo', 'bar'], m.array.includes('foo')));
+	t.notThrows(() => m(['foo', 'bar', 'unicorn'], m.array.includes('foo', 'bar')));
+	t.throws(() => m(['foo', 'bar'], m.array.includes('foo', 'unicorn')), 'Expected array to include all elements of `["foo","unicorn"]`, got `["foo","bar"]`');
+});
+
+test('array.includesAny', t => {
+	t.notThrows(() => m(['foo', 'bar'], m.array.includesAny('foo')));
+	t.notThrows(() => m(['foo', 'bar', 'unicorn'], m.array.includesAny('unicorn', 'rainbow')));
+	t.throws(() => m(['foo', 'bar'], m.array.includesAny('unicorn')), 'Expected array to include any element of `["unicorn"]`, got `["foo","bar"]`');
+});
+
+test('array.empty', t => {
+	t.notThrows(() => m([], m.array.empty));
+	t.throws(() => m(['foo'], m.array.empty), 'Expected array to be empty, got `["foo"]`');
+});
+
+test('array.nonEmpty', t => {
+	t.notThrows(() => m(['foo'], m.array.nonEmpty));
+	t.throws(() => m([], m.array.nonEmpty), 'Expected array to not be empty');
+});
+
+test('array.deepEqual', t => {
+	t.notThrows(() => m(['foo'], m.array.deepEqual(['foo'])));
+	t.notThrows(() => m(['foo', {id: 1}], m.array.deepEqual(['foo', {id: 1}])));
+	t.throws(() => m(['foo', {id: 1}], m.array.deepEqual(['foo', {id: 2}])), 'Expected array to be deeply equal to `["foo",{"id":2}]`, got `["foo",{"id":1}]`');
+});

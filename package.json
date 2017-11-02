@@ -52,6 +52,7 @@
 		"ava": "*",
 		"awesome-typescript-loader": "^3.2.3",
 		"codecov": "^2.3.0",
+		"deep-strict-equal": "^0.2.0",
 		"del-cli": "^1.1.0",
 		"license-webpack-plugin": "^1.1.1",
 		"nyc": "^11.2.1",
