@@ -1,4 +1,4 @@
-import * as is from '@sindresorhus/is';
+import is from '@sindresorhus/is';
 import {Predicate, Context} from './predicate';
 
 export class NumberPredicate extends Predicate<number> {

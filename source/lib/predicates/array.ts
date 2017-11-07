@@ -129,7 +129,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 * @param predicate The predicate that should be applied against every individual item.
 	 */
 	ofType<T>(predicate: Predicate<T>) {
-		let error;
+		let error: string;
 
 		return this.addValidator({
 			message: () => error,

@@ -1,4 +1,4 @@
-import * as is from '@sindresorhus/is';
+import is from '@sindresorhus/is';
 import {not} from '../operators/not';
 
 export interface Validator<T> {
