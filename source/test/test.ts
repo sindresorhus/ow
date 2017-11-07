@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as m from '..';
+import m from '..';
 
 test('not', t => {
 	t.notThrows(() => m(1, m.number.not.infinite));

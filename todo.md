@@ -1,7 +1,5 @@
 # TODO
 
-- Write it in TypeScript so we get great docs.
-
 - Make it easy to extend and add custom predicates
 
 - Parse out the input string literal when possible to create good error messages:

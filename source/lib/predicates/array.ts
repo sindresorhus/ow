@@ -1,5 +1,5 @@
 import * as isEqual from 'lodash.isequal';
-import {ow} from '../../ow';
+import ow from '../..';
 import {Predicate, Context} from './predicate';
 
 export class ArrayPredicate extends Predicate<any[]> {

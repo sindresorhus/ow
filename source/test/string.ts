@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as m from '..';
+import m from '..';
 
 test('string', t => {
 	t.notThrows(() => m('foo', m.string));

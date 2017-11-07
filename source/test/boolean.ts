@@ -1,5 +1,5 @@
 import test from 'ava';
-import * as m from '..';
+import m from '..';
 
 test('boolean', t => {
 	t.notThrows(() => m(true, m.boolean));
