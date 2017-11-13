@@ -21,7 +21,7 @@ module.exports = {
 		new BannerWebpackPlugin({
 			chunks: {
 				'main': {
-					afterContent: `module.exports = ow;\nmodule.exports.default = ow;\n//# sourceMappingURL=index.js.map`,
+					afterContent: `module.exports = ow.default;\nmodule.exports.default = ow.default;\n//# sourceMappingURL=index.js.map`,
 					removeAfter: '//# sourceMappingURL=index.js.map'
 				}
 			}

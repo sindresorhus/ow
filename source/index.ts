@@ -50,7 +50,3 @@ Object.defineProperties(main, {
 });
 
 export default main as Ow;
-
-// For CommonJS default export support
-module.exports = main;
-module.exports.default = main;
