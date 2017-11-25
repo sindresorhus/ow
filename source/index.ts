@@ -4,6 +4,7 @@ import {StringPredicate} from './lib/predicates/string';
 import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
 import {ArrayPredicate} from './lib/predicates/array';
+import {DatePredicate} from './lib/predicates/date';
 
 export interface Ow {
 	(value: any, predicate: Predicate): void;
@@ -23,6 +24,10 @@ export interface Ow {
 	 * Test the value to be an array.
 	 */
 	array: ArrayPredicate;
+	/**
+	 * Test the value to be a Date.
+	 */
+	date: DatePredicate;
 }
 
 const main = (value: any, predicate: Predicate) => {
@@ -46,6 +51,9 @@ Object.defineProperties(main, {
 	},
 	array: {
 		get: () => new ArrayPredicate()
+	},
+	date: {
+		get: () => new DatePredicate()
 	}
 });
 
