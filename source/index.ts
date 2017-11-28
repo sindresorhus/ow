@@ -21,18 +21,6 @@ export interface Ow {
 	 */
 	boolean: BooleanPredicate;
 	/**
-	 * Test the value to be an array.
-	 */
-	array: ArrayPredicate;
-	/**
-	 * Test the value to be a Date.
-	 */
-	date: DatePredicate;
-	/**
-	 * Test the value to be a Symbol.
-	 */
-	symbol: Predicate<Symbol>;
-	/**
 	 * Test the value to be undefined.
 	 */
 	undefined: Predicate<undefined>;
@@ -40,6 +28,18 @@ export interface Ow {
 	 * Test the value to be null.
 	 */
 	null: Predicate<null>;
+	/**
+	 * Test the value to be a Symbol.
+	 */
+	symbol: Predicate<Symbol>;
+	/**
+	 * Test the value to be an array.
+	 */
+	array: ArrayPredicate;
+	/**
+	 * Test the value to be a Date.
+	 */
+	date: DatePredicate;
 }
 
 const main = (value: any, predicate: Predicate) => {
@@ -61,14 +61,14 @@ Object.defineProperties(main, {
 	boolean: {
 		get: () => new BooleanPredicate()
 	},
-	symbol: {
-		get: () => new Predicate('symbol')
-	},
 	undefined: {
 		get: () => new Predicate('undefined')
 	},
 	null: {
 		get: () => new Predicate('null')
+	},
+	symbol: {
+		get: () => new Predicate('symbol')
 	},
 	array: {
 		get: () => new ArrayPredicate()
