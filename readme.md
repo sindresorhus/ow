@@ -12,6 +12,9 @@ $ npm install ow
 ```
 
 
+## [Docs](https://sindresorhus.com/ow/interfaces/ow.html)
+
+
 ## Usage
 
 ```js
