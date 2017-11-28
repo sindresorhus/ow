@@ -32,7 +32,7 @@ export abstract class Predicate<T = any> {
 	/**
 	 * Invert the following validators.
 	 */
-	get not() {
+	get not(): this {
 		return not(this);
 	}
 
