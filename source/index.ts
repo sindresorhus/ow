@@ -21,6 +21,18 @@ export interface Ow {
 	 */
 	boolean: BooleanPredicate;
 	/**
+	 * Test the value to be undefined.
+	 */
+	undefined: Predicate<undefined>;
+	/**
+	 * Test the value to be null.
+	 */
+	null: Predicate<null>;
+	/**
+	 * Test the value to be a Symbol.
+	 */
+	symbol: Predicate<Symbol>;
+	/**
 	 * Test the value to be an array.
 	 */
 	array: ArrayPredicate;
@@ -48,6 +60,15 @@ Object.defineProperties(main, {
 	},
 	boolean: {
 		get: () => new BooleanPredicate()
+	},
+	undefined: {
+		get: () => new Predicate('undefined')
+	},
+	null: {
+		get: () => new Predicate('null')
+	},
+	symbol: {
+		get: () => new Predicate('symbol')
 	},
 	array: {
 		get: () => new ArrayPredicate()
