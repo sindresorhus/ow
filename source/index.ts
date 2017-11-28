@@ -28,6 +28,18 @@ export interface Ow {
 	 * Test the value to be a Date.
 	 */
 	date: DatePredicate;
+	/**
+	 * Test the value to be a Symbol.
+	 */
+	symbol: Predicate<Symbol>;
+	/**
+	 * Test the value to be undefined.
+	 */
+	undefined: Predicate<undefined>;
+	/**
+	 * Test the value to be null.
+	 */
+	null: Predicate<null>;
 }
 
 const main = (value: any, predicate: Predicate) => {
@@ -48,6 +60,15 @@ Object.defineProperties(main, {
 	},
 	boolean: {
 		get: () => new BooleanPredicate()
+	},
+	symbol: {
+		get: () => new Predicate('symbol')
+	},
+	undefined: {
+		get: () => new Predicate('undefined')
+	},
+	null: {
+		get: () => new Predicate('null')
 	},
 	array: {
 		get: () => new ArrayPredicate()
