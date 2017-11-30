@@ -32,6 +32,22 @@ test('error.messageIncludes', t => {
 	t.throws(() => m(new CustomError('foo bar'), m.error.messageIncludes('unicorn')), 'Expected error message to include `unicorn`, got `foo bar`');
 });
 
+test('error.hasKeys', t => {
+	const err: any = new Error('foo');
+	err.unicorn = '🦄';
+	err.rainbow = '🌈';
+
+	t.notThrows(() => m(err, m.error.hasKeys('unicorn')));
+	t.notThrows(() => m(err, m.error.hasKeys('unicorn', 'rainbow')));
+	t.throws(() => m(err, m.error.hasKeys('foo')), 'Expected error message to have keys `foo`');
+	t.throws(() => m(err, m.error.hasKeys('unicorn', 'foo')), 'Expected error message to have keys `unicorn`, `foo`');
+});
+
+test('error.typeError', t => {
+	t.notThrows(() => m(new TypeError('foo'), m.error.typeError));
+	t.throws(() => m(new Error('foo'), m.error.typeError), 'Expected `Error` to be a `TypeError`');
+});
+
 test('error.evalError', t => {
 	t.notThrows(() => m(new EvalError('foo'), m.error.evalError));
 	t.throws(() => m(new Error('foo'), m.error.evalError), 'Expected `Error` to be a `EvalError`');
@@ -50,11 +66,6 @@ test('error.referenceError', t => {
 test('error.syntaxError', t => {
 	t.notThrows(() => m(new SyntaxError('foo'), m.error.syntaxError));
 	t.throws(() => m(new Error('foo'), m.error.syntaxError), 'Expected `Error` to be a `SyntaxError`');
-});
-
-test('error.typeError', t => {
-	t.notThrows(() => m(new TypeError('foo'), m.error.typeError));
-	t.throws(() => m(new Error('foo'), m.error.typeError), 'Expected `Error` to be a `TypeError`');
 });
 
 test('error.uriError', t => {

@@ -54,6 +54,18 @@ export class ErrorPredicate extends Predicate<Error> {
 	}
 
 	/**
+	 * Test the error object to have specific keys.
+	 *
+	 * @param keys One or more keys which should be part of the error object.
+	 */
+	hasKeys(...keys: string[]) {
+		return this.addValidator({
+			message: () => `Expected error message to have keys \`${keys.join('`, `')}\``,
+			validator: error => keys.every(key => (error as Object).hasOwnProperty(key))
+		});
+	}
+
+	/**
 	 * Test an Error to be a TypeError.
 	 */
 	get typeError() {
