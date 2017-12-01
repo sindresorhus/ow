@@ -54,30 +54,30 @@ test('error.instanceOf', t => {
 
 test('error.typeError', t => {
 	t.notThrows(() => m(new TypeError('foo'), m.error.typeError));
-	t.throws(() => m(new Error('foo'), m.error.typeError), 'Expected `Error` to be a `TypeError`');
+	t.throws(() => m(new Error('foo'), m.error.typeError), 'Expected `Error` to be of type `TypeError`');
 });
 
 test('error.evalError', t => {
 	t.notThrows(() => m(new EvalError('foo'), m.error.evalError));
-	t.throws(() => m(new Error('foo'), m.error.evalError), 'Expected `Error` to be a `EvalError`');
+	t.throws(() => m(new Error('foo'), m.error.evalError), 'Expected `Error` to be of type `EvalError`');
 });
 
 test('error.rangeError', t => {
 	t.notThrows(() => m(new RangeError('foo'), m.error.rangeError));
-	t.throws(() => m(new EvalError('foo'), m.error.rangeError), 'Expected `EvalError` to be a `RangeError`');
+	t.throws(() => m(new EvalError('foo'), m.error.rangeError), 'Expected `EvalError` to be of type `RangeError`');
 });
 
 test('error.referenceError', t => {
 	t.notThrows(() => m(new ReferenceError('foo'), m.error.referenceError));
-	t.throws(() => m(new Error('foo'), m.error.referenceError), 'Expected `Error` to be a `ReferenceError`');
+	t.throws(() => m(new Error('foo'), m.error.referenceError), 'Expected `Error` to be of type `ReferenceError`');
 });
 
 test('error.syntaxError', t => {
 	t.notThrows(() => m(new SyntaxError('foo'), m.error.syntaxError));
-	t.throws(() => m(new Error('foo'), m.error.syntaxError), 'Expected `Error` to be a `SyntaxError`');
+	t.throws(() => m(new Error('foo'), m.error.syntaxError), 'Expected `Error` to be of type `SyntaxError`');
 });
 
 test('error.uriError', t => {
 	t.notThrows(() => m(new URIError('foo'), m.error.uriError));
-	t.throws(() => m(new Error('foo'), m.error.uriError), 'Expected `Error` to be a `URIError`');
+	t.throws(() => m(new Error('foo'), m.error.uriError), 'Expected `Error` to be of type `URIError`');
 });
