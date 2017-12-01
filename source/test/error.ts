@@ -43,6 +43,15 @@ test('error.hasKeys', t => {
 	t.throws(() => m(err, m.error.hasKeys('unicorn', 'foo')), 'Expected error message to have keys `unicorn`, `foo`');
 });
 
+test('error.instanceOf', t => {
+	t.notThrows(() => m(new CustomError('foo'), m.error.instanceOf(CustomError)));
+	t.notThrows(() => m(new CustomError('foo'), m.error.instanceOf(Error)));
+	t.notThrows(() => m(new TypeError('foo'), m.error.instanceOf(Error)));
+	t.notThrows(() => m(new Error('foo'), m.error.instanceOf(Error)));
+	t.throws(() => m(new Error('foo'), m.error.instanceOf(CustomError)), 'Expected `Error` to be of type `CustomError`');
+	t.throws(() => m(new TypeError('foo'), m.error.instanceOf(EvalError)), 'Expected `TypeError` to be of type `EvalError`');
+});
+
 test('error.typeError', t => {
 	t.notThrows(() => m(new TypeError('foo'), m.error.typeError));
 	t.throws(() => m(new Error('foo'), m.error.typeError), 'Expected `Error` to be a `TypeError`');

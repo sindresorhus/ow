@@ -61,7 +61,19 @@ export class ErrorPredicate extends Predicate<Error> {
 	hasKeys(...keys: string[]) {
 		return this.addValidator({
 			message: () => `Expected error message to have keys \`${keys.join('`, `')}\``,
-			validator: error => keys.every(key => (error as Object).hasOwnProperty(key))
+			validator: error => keys.every(key => error.hasOwnProperty(key))
+		});
+	}
+
+	/**
+	 * Test an error to be of a specific instance type.
+	 *
+	 * @param instance The expected instance type of the error.
+	 */
+	instanceOf(instance: any) {
+		return this.addValidator({
+			message: error => `Expected \`${error.name}\` to be of type \`${instance.name}\``,
+			validator: error => error instanceof instance
 		});
 	}
 
