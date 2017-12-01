@@ -46,7 +46,7 @@
 		"object"
 	],
 	"devDependencies": {
-		"@sindresorhus/is": "^0.5.0",
+		"@sindresorhus/is": "^0.6.0",
 		"@types/node": "^8.0.31",
 		"ava": "*",
 		"awesome-typescript-loader": "^3.2.3",
@@ -57,7 +57,7 @@
 		"lodash.isequal": "^4.5.0",
 		"nyc": "^11.2.1",
 		"tslint": "^5.8.0",
-		"tslint-xo": "^0.2.0",
+		"tslint-xo": "^0.3.0",
 		"typescript": "^2.6.1",
 		"vali-date": "^1.0.0",
 		"webpack": "^3.8.1"

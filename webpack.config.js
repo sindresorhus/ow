@@ -6,6 +6,7 @@ const BannerWebpackPlugin = require('banner-webpack-plugin');
 module.exports = {
 	entry: './source/index.ts',
 	target: 'node',
+	node: false, // Disables polyfill Node.js globals
 	devtool: 'source-map',
 	output: {
 		filename: 'dist/index.js',
@@ -20,7 +21,7 @@ module.exports = {
 		// For CommonJS default export support
 		new BannerWebpackPlugin({
 			chunks: {
-				'main': {
+				main: {
 					afterContent: `module.exports = ow.default;\nmodule.exports.default = ow.default;\n//# sourceMappingURL=index.js.map`,
 					removeAfter: '//# sourceMappingURL=index.js.map'
 				}
