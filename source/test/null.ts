@@ -1,7 +1,7 @@
 import test from 'ava';
 import m from '..';
 
-test('undefined', t => {
+test('null', t => {
 	const x = null;
 
 	t.notThrows(() => m(null, m.null));
