@@ -1,17 +1,29 @@
 import is from '@sindresorhus/is';
 import {not} from '../operators/not';
 
+/**
+ * @hidden
+ */
 export interface Validator<T> {
 	message(value: T): string;
 	validator(value: T): boolean;
 }
 
+/**
+ * @hidden
+ */
 export interface Context {
 	validators: Validator<any>[];
 }
 
+/**
+ * @hidden
+ */
 export const validatorSymbol = Symbol('validators');
 
+/**
+ * @hidden
+ */
 export class Predicate<T = any> {
 	constructor(
 		type: string,
@@ -25,6 +37,9 @@ export class Predicate<T = any> {
 		});
 	}
 
+	/**
+	 * @hidden
+	 */
 	get [validatorSymbol]() {
 		return this.context.validators;
 	}
@@ -40,6 +55,7 @@ export class Predicate<T = any> {
 	 * Register a new validator.
 	 *
 	 * @internal
+	 * @hidden
 	 * @param validator Validator to register.
 	 */
 	addValidator(validator: Validator<T>) {

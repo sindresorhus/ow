@@ -1,3 +1,6 @@
+/**
+ * @hidden
+ */
 export class ArgumentError extends Error {
 	constructor(message: string, context: Function) {
 		super(message);

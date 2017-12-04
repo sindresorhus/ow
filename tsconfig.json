@@ -24,5 +24,24 @@
 	"exclude": [
 		"node_modules",
 		"dist"
-	]
+	],
+	"typedocOptions": {
+		"out": "docs",
+		// Links to `ArrayPredicate` and others doesn't work when this is specified...
+		// "entryPoint": "Ow",
+		"mode": "file",
+		"target": "ES5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"exclude": "source/test",
+		"ignoreCompilerErrors": true,
+		"excludePrivate": true,
+		"excludeNotExported": true,
+		"stripInternal": true,
+		"suppressExcessPropertyErrors": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"theme": "minimal",
+		"hideGenerator": true,
+		"readme": "none"
+	}
 }
