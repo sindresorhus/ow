@@ -10,7 +10,7 @@ import {ErrorPredicate} from './lib/predicates/error';
 export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 
 export interface Ow {
-	(value: any, predicate: Predicate): void;
+	<T>(value: T, predicate: Predicate<T>): void;
 	/**
 	 * Test the value to be a string.
 	 */
@@ -96,11 +96,11 @@ export interface Ow {
 	 */
 	uint32Array: Predicate<Uint32Array>;
 	/**
-	 * Test the value to be a Int32Array.
+	 * Test the value to be a Float32Array.
 	 */
-	float32Array: Predicate<Float64Array>;
+	float32Array: Predicate<Float32Array>;
 	/**
-	 * Test the value to be a Uint64Array.
+	 * Test the value to be a Float64Array.
 	 */
 	float64Array: Predicate<Float64Array>;
 	/**
@@ -113,7 +113,7 @@ export interface Ow {
 	iterable: Predicate<Iterable<any>>;
 }
 
-const main = (value: any, predicate: Predicate) => {
+const main = <T>(value: T, predicate: Predicate<T>) => {
 	for (const {validator, message} of predicate[validatorSymbol]) {
 		if (!validator(value)) {
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
