@@ -6,6 +6,6 @@ test('null', t => {
 
 	t.notThrows(() => m(null, m.null));
 	t.notThrows(() => m(x, m.null));
-	t.throws(() => m(undefined, m.null), 'Expected argument to be of type `null` but received type `undefined`');
-	t.throws(() => m('foo', m.null), 'Expected argument to be of type `null` but received type `string`');
+	t.throws(() => m(undefined as any, m.null), 'Expected argument to be of type `null` but received type `undefined`');
+	t.throws(() => m('foo' as any, m.null), 'Expected argument to be of type `null` but received type `string`');
 });

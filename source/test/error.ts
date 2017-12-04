@@ -10,7 +10,7 @@ class CustomError extends Error {
 
 test('error', t => {
 	t.notThrows(() => m(new Error('foo'), m.error));
-	t.throws(() => m('12', m.error), 'Expected argument to be of type `error` but received type `string`');
+	t.throws(() => m('12' as any, m.error), 'Expected argument to be of type `error` but received type `string`');
 });
 
 test('error.name', t => {
