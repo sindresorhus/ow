@@ -1,32 +1,28 @@
 'use strict';
 const webpack = require('webpack');
 const license = require('license-webpack-plugin');
-const BannerWebpackPlugin = require('banner-webpack-plugin');
+const GenerateAssetPlugin = require('generate-asset-webpack-plugin');
 
 module.exports = {
 	entry: './source/index.ts',
 	target: 'node',
-	node: false, // Disables polyfill Node.js globals
+	node: false,
 	devtool: 'source-map',
 	output: {
-		filename: 'dist/index.js',
-		libraryTarget: 'var',
-		library: 'ow'
+		filename: 'dist/ow.js',
+		libraryTarget: 'commonjs2'
 	},
 	resolve: {
 		extensions: ['.ts', '.js']
 	},
 	plugins: [
 		new webpack.optimize.ModuleConcatenationPlugin(),
-		// For CommonJS default export support
-		new BannerWebpackPlugin({
-			chunks: {
-				main: {
-					afterContent: `module.exports = ow.default;\nmodule.exports.default = ow.default;\n//# sourceMappingURL=index.js.map`,
-					removeAfter: '//# sourceMappingURL=index.js.map'
-				}
-			}
-		}),
+		new GenerateAssetPlugin({
+            filename: 'dist/index.js',
+            fn: (compilation, cb) => {
+                cb(null, `'use strict';\nmodule.exports = require('./ow').default;\nmodule.exports.default = module.exports;\n`);
+            }
+        }),
 		new license.LicenseWebpackPlugin({
 			pattern: /.*/,
 			outputFilename: 'dist/licenses.txt'
