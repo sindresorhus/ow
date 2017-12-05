@@ -17,103 +17,103 @@ export interface Ow {
 	/**
 	 * Test the value to be a string.
 	 */
-	string: StringPredicate;
+	readonly string: StringPredicate;
 	/**
 	 * Test the value to be a number.
 	 */
-	number: NumberPredicate;
+	readonly number: NumberPredicate;
 	/**
 	 * Test the value to be a boolean.
 	 */
-	boolean: BooleanPredicate;
+	readonly boolean: BooleanPredicate;
 	/**
 	 * Test the value to be undefined.
 	 */
-	undefined: Predicate<undefined>;
+	readonly undefined: Predicate<undefined>;
 	/**
 	 * Test the value to be null.
 	 */
-	null: Predicate<null>;
+	readonly null: Predicate<null>;
 	/**
 	 * Test the value to be a Symbol.
 	 */
-	symbol: Predicate<Symbol>;
+	readonly symbol: Predicate<Symbol>;
 	/**
 	 * Test the value to be an array.
 	 */
-	array: ArrayPredicate;
+	readonly array: ArrayPredicate;
 	/**
 	 * Test the value to be a Date.
 	 */
-	date: DatePredicate;
+	readonly date: DatePredicate;
 	/**
 	 * Test the value to be an Error.
 	 */
-	error: ErrorPredicate;
+	readonly error: ErrorPredicate;
 	/**
 	 * Test the value to be a Function.
 	 */
-	function: Predicate<Function>;
+	readonly function: Predicate<Function>;
 	/**
 	 * Test the value to be a Buffer.
 	 */
-	buffer: Predicate<Buffer>;
+	readonly buffer: Predicate<Buffer>;
 	/**
 	 * Test the value to be a RegExp.
 	 */
-	regExp: Predicate<RegExp>;
+	readonly regExp: Predicate<RegExp>;
 	/**
 	 * Test the value to be a Promise.
 	 */
-	promise: Predicate<Promise<any>>;
+	readonly promise: Predicate<Promise<any>>;
 	/**
 	 * Test the value to be a typed array.
 	 */
-	typedArray: Predicate<TypedArray>;
+	readonly typedArray: Predicate<TypedArray>;
 	/**
 	 * Test the value to be a Int8Array.
 	 */
-	int8Array: Predicate<Int8Array>;
+	readonly int8Array: Predicate<Int8Array>;
 	/**
 	 * Test the value to be a Uint8Array.
 	 */
-	uint8Array: Predicate<Uint8Array>;
+	readonly uint8Array: Predicate<Uint8Array>;
 	/**
 	 * Test the value to be a Uint8ClampedArray.
 	 */
-	uint8ClampedArray: Predicate<Uint8ClampedArray>;
+	readonly uint8ClampedArray: Predicate<Uint8ClampedArray>;
 	/**
 	 * Test the value to be a Int16Array.
 	 */
-	int16Array: Predicate<Int16Array>;
+	readonly int16Array: Predicate<Int16Array>;
 	/**
 	 * Test the value to be a Uint16Array.
 	 */
-	uint16Array: Predicate<Uint16Array>;
+	readonly uint16Array: Predicate<Uint16Array>;
 	/**
 	 * Test the value to be a Int32Array.
 	 */
-	int32Array: Predicate<Int32Array>;
+	readonly int32Array: Predicate<Int32Array>;
 	/**
 	 * Test the value to be a Uint32Array.
 	 */
-	uint32Array: Predicate<Uint32Array>;
+	readonly uint32Array: Predicate<Uint32Array>;
 	/**
 	 * Test the value to be a Float32Array.
 	 */
-	float32Array: Predicate<Float32Array>;
+	readonly float32Array: Predicate<Float32Array>;
 	/**
 	 * Test the value to be a Float64Array.
 	 */
-	float64Array: Predicate<Float64Array>;
+	readonly float64Array: Predicate<Float64Array>;
 	/**
 	 * Test the value to be a ArrayBuffer.
 	 */
-	arrayBuffer: Predicate<ArrayBuffer>;
+	readonly arrayBuffer: Predicate<ArrayBuffer>;
 	/**
 	 * Test the value to be Iterable.
 	 */
-	iterable: Predicate<Iterable<any>>;
+	readonly iterable: Predicate<Iterable<any>>;
 }
 
 const main = <T>(value: T, predicate: Predicate<T>) => {
