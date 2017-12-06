@@ -6,6 +6,7 @@ import {BooleanPredicate} from './lib/predicates/boolean';
 import {ArrayPredicate} from './lib/predicates/array';
 import {DatePredicate} from './lib/predicates/date';
 import {ErrorPredicate} from './lib/predicates/error';
+import {MapPredicate} from './lib/predicates/map';
 
 /**
  * @hidden
@@ -50,6 +51,10 @@ export interface Ow {
 	 * Test the value to be an Error.
 	 */
 	readonly error: ErrorPredicate;
+	/**
+	 * Test the value to be a Map.
+	 */
+	readonly map: MapPredicate;
 	/**
 	 * Test the value to be a Function.
 	 */
@@ -152,6 +157,9 @@ Object.defineProperties(main, {
 	},
 	error: {
 		get: () => new ErrorPredicate()
+	},
+	map: {
+		get: () => new MapPredicate()
 	},
 	function: {
 		get: () => new Predicate('function')
