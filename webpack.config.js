@@ -1,7 +1,7 @@
 'use strict';
 const webpack = require('webpack');
 const license = require('license-webpack-plugin');
-const GenerateAssetPlugin = require('generate-asset-webpack-plugin');
+const AddAssetPlugin = require('add-asset-webpack-plugin');
 
 module.exports = {
 	entry: './source/index.ts',
@@ -17,12 +17,11 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.optimize.ModuleConcatenationPlugin(),
-		new GenerateAssetPlugin({
-            filename: 'dist/index.js',
-            fn: (compilation, cb) => {
-                cb(null, `'use strict';\nmodule.exports = require('./ow').default;\nmodule.exports.default = module.exports;\n`);
-            }
-        }),
+		new AddAssetPlugin('dist/index.js', `
+			'use strict';
+			module.exports = require('./ow').default;
+			module.exports.default = module.exports;
+		`),
 		new license.LicenseWebpackPlugin({
 			pattern: /.*/,
 			outputFilename: 'dist/licenses.txt'
