@@ -29,26 +29,29 @@ test('map.hasKeys', t => {
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.hasKeys('unicorn')));
 	t.notThrows(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasKeys('unicorn', 'rainbow')));
 	t.notThrows(() => m(new Map([[1, '🦄'], [2, '🌈']]), m.map.hasKeys(1, 2)));
-	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasKeys('foo')), 'Expected Map to have all keys of `["foo"]`, got `["unicorn","rainbow"]`');
+	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasKeys('foo')), 'Expected Map to have keys `["foo"]`');
+	t.throws(() => m(new Map([['unicorn', '🦄'], ['foo', '🌈']]), m.map.hasKeys('foo', 'bar')), 'Expected Map to have keys `["bar"]`');
+	t.throws(() => m(new Map([[2, '🦄'], [4, '🌈']]), m.map.hasKeys(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), 'Expected Map to have keys `[1,3,5,6,7]`');
 });
 
 test('map.hasAnyKeys', t => {
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.hasAnyKeys('unicorn', 'rainbow')));
 	t.notThrows(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasAnyKeys('unicorn')));
 	t.notThrows(() => m(new Map([[1, '🦄'], [2, '🌈']]), m.map.hasAnyKeys(1, 2, 3, 4)));
-	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasAnyKeys('foo')), 'Expected Map to have any key of `["foo"]`, got `["unicorn","rainbow"]`');
+	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasAnyKeys('foo')), 'Expected Map to have any key of `["foo"]`');
 });
 
 test('map.hasValues', t => {
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.hasValues('🦄')));
 	t.notThrows(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasValues('🦄', '🌈')));
-	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasValues('🦄', '🌦️')), 'Expected Map to have all values of `["🦄","🌦️"]`, got `["🦄","🌈"]`');
+	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasValues('🦄', '🌦️')), 'Expected Map to have values `["🌦️"]`');
+	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasValues('🌈', '⚡', '👓', '🐬', '🎃', '🎶', '❤', '️🐳', '🍀', '👽')), 'Expected Map to have values `["⚡","👓","🐬","🎃","🎶"]`');
 });
 
 test('map.hasAnyValues', t => {
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.hasAnyValues('🦄', '🌈')));
 	t.notThrows(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasAnyValues('🦄')));
-	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasAnyValues('🌦️')), 'Expected Map to have any value of `["🌦️"]`, got `["🦄","🌈"]`');
+	t.throws(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.hasAnyValues('🌦️')), 'Expected Map to have any value of `["🌦️"]`');
 });
 
 test('map.keysOfType', t => {

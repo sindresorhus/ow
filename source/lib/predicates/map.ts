@@ -49,9 +49,25 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 * @param keys The keys that should be a key in the Map.
 	 */
 	hasKeys(...keys: any[]) {
+		const missingKeys: any[] = [];
+
 		return this.addValidator({
-			message: map => `Expected Map to have all keys of \`${JSON.stringify(keys)}\`, got \`${JSON.stringify(Array.from(map.keys()))}\``,
-			validator: map => keys.every(key => map.has(key))
+			message: () => `Expected Map to have keys \`${JSON.stringify(missingKeys)}\``,
+			validator: map => {
+				for (const key of keys) {
+					if (map.has(key)) {
+						continue;
+					}
+
+					missingKeys.push(key);
+
+					if (missingKeys.length === 5) {
+						return false;
+					}
+				}
+
+				return missingKeys.length === 0;
+			}
 		});
 	}
 
@@ -62,7 +78,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 */
 	hasAnyKeys(...keys: any[]) {
 		return this.addValidator({
-			message: map => `Expected Map to have any key of \`${JSON.stringify(keys)}\`, got \`${JSON.stringify(Array.from(map.keys()))}\``,
+			message: () => `Expected Map to have any key of \`${JSON.stringify(keys)}\``,
 			validator: map => keys.some(key => map.has(key))
 		});
 	}
@@ -73,12 +89,26 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 * @param values The values that should be a value in the Map.
 	 */
 	hasValues(...values: any[]) {
+		const missingValues: any[] = [];
+
 		return this.addValidator({
-			message: map => `Expected Map to have all values of \`${JSON.stringify(values)}\`, got \`${JSON.stringify(Array.from(map.values()))}\``,
+			message: () => `Expected Map to have values \`${JSON.stringify(missingValues)}\``,
 			validator: map => {
 				const valueSet = new Set(map.values());
 
-				return values.every(key => valueSet.has(key));
+				for (const value of values) {
+					if (valueSet.has(value)) {
+						continue;
+					}
+
+					missingValues.push(value);
+
+					if (missingValues.length === 5) {
+						return false;
+					}
+				}
+
+				return missingValues.length === 0;
 			}
 		});
 	}
@@ -90,7 +120,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 */
 	hasAnyValues(...values: any[]) {
 		return this.addValidator({
-			message: map => `Expected Map to have any value of \`${JSON.stringify(values)}\`, got \`${JSON.stringify(Array.from(map.values()))}\``,
+			message: () => `Expected Map to have any value of \`${JSON.stringify(values)}\``,
 			validator: map => {
 				const valueSet = new Set(map.values());
 
