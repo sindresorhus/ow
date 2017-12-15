@@ -1,7 +1,7 @@
 'use strict';
 const webpack = require('webpack');
 const license = require('license-webpack-plugin');
-const AddAssetPlugin = require('add-asset-webpack-plugin');
+const AddModuleExportsPlugin = require('add-module-exports-webpack-plugin');
 
 module.exports = {
 	entry: './source/index.ts',
@@ -9,7 +9,7 @@ module.exports = {
 	node: false,
 	devtool: 'source-map',
 	output: {
-		filename: 'dist/ow.js',
+		filename: 'dist/index.js',
 		libraryTarget: 'commonjs2'
 	},
 	resolve: {
@@ -17,11 +17,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.optimize.ModuleConcatenationPlugin(),
-		new AddAssetPlugin('dist/index.js', `
-			'use strict';
-			module.exports = require('./ow').default;
-			module.exports.default = module.exports;
-		`),
+		new AddModuleExportsPlugin(),
 		new license.LicenseWebpackPlugin({
 			pattern: /.*/,
 			outputFilename: 'dist/licenses.txt'
