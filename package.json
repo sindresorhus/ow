@@ -47,7 +47,7 @@
 		"object"
 	],
 	"devDependencies": {
-		"@sindresorhus/is": "^0.6.0",
+		"@sindresorhus/is": "^0.7.0",
 		"@types/highlight.js": "^9.12.2",
 		"@types/node": "^8.0.31",
 		"add-module-exports-webpack-plugin": "^0.1.0",
