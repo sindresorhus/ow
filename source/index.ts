@@ -7,6 +7,7 @@ import {ArrayPredicate} from './lib/predicates/array';
 import {DatePredicate} from './lib/predicates/date';
 import {ErrorPredicate} from './lib/predicates/error';
 import {MapPredicate} from './lib/predicates/map';
+import {SetPredicate} from './lib/predicates/set';
 
 /**
  * @hidden
@@ -55,6 +56,10 @@ export interface Ow {
 	 * Test the value to be a Map.
 	 */
 	readonly map: MapPredicate;
+	/**
+	 * Test the value to be a Set.
+	 */
+	readonly set: SetPredicate;
 	/**
 	 * Test the value to be a Function.
 	 */
@@ -160,6 +165,9 @@ Object.defineProperties(main, {
 	},
 	map: {
 		get: () => new MapPredicate()
+	},
+	set: {
+		get: () => new SetPredicate()
 	},
 	function: {
 		get: () => new Predicate('function')
