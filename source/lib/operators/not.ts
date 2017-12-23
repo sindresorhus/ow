@@ -1,4 +1,4 @@
-import {Predicate, Validator, validatorSymbol} from '../predicates/predicate';
+import {Predicate, validatorSymbol} from '../predicates/predicate';
 
 /**
  * Operator which inverts all the validations.
@@ -7,7 +7,7 @@ import {Predicate, Validator, validatorSymbol} from '../predicates/predicate';
  * @param predictate Predicate to wrap inside the operator.
  */
 export const not = <T extends Predicate>(predicate: T) => {
-	predicate.addValidator = (validator: Validator<any>) => {
+	predicate.addValidator = validator => {
 		const fn = validator.validator;
 		const message = validator.message;
 
