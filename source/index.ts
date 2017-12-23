@@ -17,6 +17,12 @@ export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array
 export interface Ow {
 	<T>(value: T, predicate: Predicate<T>): void;
 	/**
+	 * Create a reusable validator.
+	 *
+	 * @param predicate Predicate used in the validator function.
+	 */
+	create<T>(predicate: Predicate<T>): (value: T) => void;
+	/**
 	 * Test the value to be a string.
 	 */
 	readonly string: StringPredicate;
@@ -148,6 +154,9 @@ const main = <T>(value: T, predicate: Predicate<T>) => {
 };
 
 Object.defineProperties(main, {
+	create: {
+		value: <T>(predicate: Predicate<T>) => (value: T) => main(value, predicate)
+	},
 	string: {
 		get: () => new StringPredicate()
 	},
