@@ -37,6 +37,14 @@ export interface Ow {
 	 */
 	readonly null: Predicate<null>;
 	/**
+	 * Test the value to be null or undefined.
+	 */
+	readonly nullOrUndefined: Predicate<null | undefined>;
+	/**
+	 * Test the value to be not a number.
+	 */
+	readonly nan: Predicate<number>;
+	/**
 	 * Test the value to be a Symbol.
 	 */
 	readonly symbol: Predicate<Symbol>;
@@ -121,6 +129,10 @@ export interface Ow {
 	 */
 	readonly arrayBuffer: Predicate<ArrayBuffer>;
 	/**
+	 * Test the value to be a DataView.
+	 */
+	readonly dataView: Predicate<DataView>;
+	/**
 	 * Test the value to be Iterable.
 	 */
 	readonly iterable: Predicate<Iterable<any>>;
@@ -150,6 +162,12 @@ Object.defineProperties(main, {
 	},
 	null: {
 		get: () => new Predicate('null')
+	},
+	nullOrUndefined: {
+		get: () => new Predicate('nullOrUndefined')
+	},
+	nan: {
+		get: () => new Predicate('nan')
 	},
 	symbol: {
 		get: () => new Predicate('symbol')
@@ -213,6 +231,9 @@ Object.defineProperties(main, {
 	},
 	arrayBuffer: {
 		get: () => new Predicate('arrayBuffer')
+	},
+	dataView: {
+		get: () => new Predicate('dataView')
 	},
 	iterable: {
 		get: () => new Predicate('iterable')
