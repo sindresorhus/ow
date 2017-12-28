@@ -7,6 +7,7 @@ import {ArrayPredicate} from './lib/predicates/array';
 import {DatePredicate} from './lib/predicates/date';
 import {ErrorPredicate} from './lib/predicates/error';
 import {MapPredicate} from './lib/predicates/map';
+import {WeakMapPredicate} from './lib/predicates/weak-map';
 import {SetPredicate} from './lib/predicates/set';
 
 /**
@@ -70,6 +71,10 @@ export interface Ow {
 	 * Test the value to be a Map.
 	 */
 	readonly map: MapPredicate;
+	/**
+	 * Test the value to be a WeakMap.
+	 */
+	readonly weakMap: WeakMapPredicate;
 	/**
 	 * Test the value to be a Set.
 	 */
@@ -192,6 +197,9 @@ Object.defineProperties(main, {
 	},
 	map: {
 		get: () => new MapPredicate()
+	},
+	weakMap: {
+		get: () => new WeakMapPredicate()
 	},
 	set: {
 		get: () => new SetPredicate()
