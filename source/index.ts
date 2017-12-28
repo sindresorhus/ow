@@ -8,6 +8,7 @@ import {DatePredicate} from './lib/predicates/date';
 import {ErrorPredicate} from './lib/predicates/error';
 import {MapPredicate} from './lib/predicates/map';
 import {SetPredicate} from './lib/predicates/set';
+import {WeakSetPredicate} from './lib/predicates/weak-set';
 
 /**
  * @hidden
@@ -74,6 +75,10 @@ export interface Ow {
 	 * Test the value to be a Set.
 	 */
 	readonly set: SetPredicate;
+	/**
+	 * Test the value to be a WeakSet.
+	 */
+	readonly weakSet: WeakSetPredicate;
 	/**
 	 * Test the value to be a Function.
 	 */
@@ -195,6 +200,9 @@ Object.defineProperties(main, {
 	},
 	set: {
 		get: () => new SetPredicate()
+	},
+	weakSet: {
+		get: () => new WeakSetPredicate()
 	},
 	function: {
 		get: () => new Predicate('function')
