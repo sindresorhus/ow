@@ -5,8 +5,8 @@ import {not} from '../operators/not';
  * @hidden
  */
 export interface Validator<T> {
-	message(value: T): string;
-	validator(value: T): boolean;
+	message(value: T, result?: any): string;
+	validator(value: T): any;
 }
 
 /**

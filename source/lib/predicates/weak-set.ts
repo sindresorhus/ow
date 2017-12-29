@@ -1,4 +1,5 @@
 import {Predicate, Context} from './predicate';
+import hasItems from '../utils/has-items';
 
 export class WeakSetPredicate extends Predicate<WeakSet<any>> {
 	constructor(context?: Context) {
@@ -11,25 +12,9 @@ export class WeakSetPredicate extends Predicate<WeakSet<any>> {
 	 * @param items The items that should be a item in the WeakSet.
 	 */
 	has(...items: any[]) {
-		const missingItems: any[] = [];
-
 		return this.addValidator({
-			message: () => `Expected WeakSet to have items \`${JSON.stringify(missingItems)}\``,
-			validator: set => {
-				for (const key of items) {
-					if (set.has(key)) {
-						continue;
-					}
-
-					missingItems.push(key);
-
-					if (missingItems.length === 5) {
-						return false;
-					}
-				}
-
-				return missingItems.length === 0;
-			}
+			message: (_, missingItems) => `Expected WeakSet to have items \`${JSON.stringify(missingItems)}\``,
+			validator: set => hasItems(set, items)
 		});
 	}
 

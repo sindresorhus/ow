@@ -156,9 +156,11 @@ export interface Ow {
 
 const main = <T>(value: T, predicate: Predicate<T>) => {
 	for (const {validator, message} of predicate[validatorSymbol]) {
-		if (!validator(value)) {
+		const result = validator(value);
+
+		if (typeof result !== 'boolean' || !result) {
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-			throw new ArgumentError(message(value), main);
+			throw new ArgumentError(message(value, result), main);
 		}
 	}
 };
