@@ -1,6 +1,7 @@
 import * as isEqual from 'lodash.isequal';
-import ow from '../..';
 import {Predicate, Context} from './predicate';
+import hasItems from '../utils/has-items';
+import ofType from '../utils/of-type';
 
 export class MapPredicate extends Predicate<Map<any, any>> {
 	constructor(context?: Context) {
@@ -49,25 +50,9 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 * @param keys The keys that should be a key in the Map.
 	 */
 	hasKeys(...keys: any[]) {
-		const missingKeys: any[] = [];
-
 		return this.addValidator({
-			message: () => `Expected Map to have keys \`${JSON.stringify(missingKeys)}\``,
-			validator: map => {
-				for (const key of keys) {
-					if (map.has(key)) {
-						continue;
-					}
-
-					missingKeys.push(key);
-
-					if (missingKeys.length === 5) {
-						return false;
-					}
-				}
-
-				return missingKeys.length === 0;
-			}
+			message: (_, missingKeys) => `Expected Map to have keys \`${JSON.stringify(missingKeys)}\``,
+			validator: map => hasItems(map, keys)
 		});
 	}
 
@@ -89,27 +74,9 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 * @param values The values that should be a value in the Map.
 	 */
 	hasValues(...values: any[]) {
-		const missingValues: any[] = [];
-
 		return this.addValidator({
-			message: () => `Expected Map to have values \`${JSON.stringify(missingValues)}\``,
-			validator: map => {
-				const valueSet = new Set(map.values());
-
-				for (const value of values) {
-					if (valueSet.has(value)) {
-						continue;
-					}
-
-					missingValues.push(value);
-
-					if (missingValues.length === 5) {
-						return false;
-					}
-				}
-
-				return missingValues.length === 0;
-			}
+			message: (_, missingValues) => `Expected Map to have values \`${JSON.stringify(missingValues)}\``,
+			validator: map => hasItems(new Set(map.values()), values)
 		});
 	}
 
@@ -135,23 +102,9 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 * @param predicate The predicate that should be applied against every key in the Map.
 	 */
 	keysOfType<T>(predicate: Predicate<T>) {
-		let error: string;
-
 		return this.addValidator({
-			message: () => error,
-			validator: map => {
-				try {
-					for (const item of map.keys()) {
-						ow(item, predicate);
-					}
-
-					return true;
-				} catch (err) {
-					error = err.message;
-
-					return false;
-				}
-			}
+			message: (_, error) => error,
+			validator: map => ofType(map.keys(), predicate)
 		});
 	}
 
@@ -161,23 +114,9 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 * @param predicate The predicate that should be applied against every value in the Map.
 	 */
 	valuesOfType<T>(predicate: Predicate<T>) {
-		let error: string;
-
 		return this.addValidator({
-			message: () => error,
-			validator: map => {
-				try {
-					for (const item of map.values()) {
-						ow(item, predicate);
-					}
-
-					return true;
-				} catch (err) {
-					error = err.message;
-
-					return false;
-				}
-			}
+			message: (_, error) => error,
+			validator: map => ofType(map.values(), predicate)
 		});
 	}
 

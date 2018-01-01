@@ -1,6 +1,7 @@
 import * as isEqual from 'lodash.isequal';
-import ow from '../..';
 import {Predicate, Context} from './predicate';
+import hasItems from '../utils/has-items';
+import ofType from '../utils/of-type';
 
 export class SetPredicate extends Predicate<Set<any>> {
 	constructor(context?: Context) {
@@ -49,25 +50,9 @@ export class SetPredicate extends Predicate<Set<any>> {
 	 * @param items The items that should be a item in the Set.
 	 */
 	has(...items: any[]) {
-		const missingItems: any[] = [];
-
 		return this.addValidator({
-			message: () => `Expected Set to have items \`${JSON.stringify(missingItems)}\``,
-			validator: set => {
-				for (const item of items) {
-					if (set.has(item)) {
-						continue;
-					}
-
-					missingItems.push(item);
-
-					if (missingItems.length === 5) {
-						return false;
-					}
-				}
-
-				return missingItems.length === 0;
-			}
+			message: (_, missingItems) => `Expected Set to have items \`${JSON.stringify(missingItems)}\``,
+			validator: set => hasItems(set, items)
 		});
 	}
 
@@ -89,23 +74,9 @@ export class SetPredicate extends Predicate<Set<any>> {
 	 * @param predicate The predicate that should be applied against every item in the Set.
 	 */
 	ofType<T>(predicate: Predicate<T>) {
-		let error: string;
-
 		return this.addValidator({
-			message: () => error,
-			validator: set => {
-				try {
-					for (const item of set.keys()) {
-						ow(item, predicate);
-					}
-
-					return true;
-				} catch (err) {
-					error = err.message;
-
-					return false;
-				}
-			}
+			message: (_, error) => error,
+			validator: set => ofType(set, predicate)
 		});
 	}
 

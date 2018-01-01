@@ -1,4 +1,5 @@
 import {Predicate, Context} from './predicate';
+import hasItems from '../utils/has-items';
 
 export class WeakMapPredicate extends Predicate<WeakMap<any, any>> {
 	constructor(context?: Context) {
@@ -11,25 +12,9 @@ export class WeakMapPredicate extends Predicate<WeakMap<any, any>> {
 	 * @param keys The keys that should be a key in the WeakMap.
 	 */
 	hasKeys(...keys: any[]) {
-		const missingKeys: any[] = [];
-
 		return this.addValidator({
-			message: () => `Expected WeakMap to have keys \`${JSON.stringify(missingKeys)}\``,
-			validator: map => {
-				for (const key of keys) {
-					if (map.has(key)) {
-						continue;
-					}
-
-					missingKeys.push(key);
-
-					if (missingKeys.length === 5) {
-						return false;
-					}
-				}
-
-				return missingKeys.length === 0;
-			}
+			message: (_, missingKeys) => `Expected WeakMap to have keys \`${JSON.stringify(missingKeys)}\``,
+			validator: map => hasItems(map, keys)
 		});
 	}
 
