@@ -27,7 +27,7 @@ export const validatorSymbol = Symbol('validators');
 export class Predicate<T = any> {
 	constructor(
 		type: string,
-		private context: Context = {
+		private readonly context: Context = {
 			validators: []
 		}
 	) {
