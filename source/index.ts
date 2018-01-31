@@ -4,6 +4,7 @@ import {StringPredicate} from './lib/predicates/string';
 import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
 import {ArrayPredicate} from './lib/predicates/array';
+import {ObjectPredicate} from './lib/predicates/object';
 import {DatePredicate} from './lib/predicates/date';
 import {ErrorPredicate} from './lib/predicates/error';
 import {MapPredicate} from './lib/predicates/map';
@@ -60,6 +61,10 @@ export interface Ow {
 	 * Test the value to be an array.
 	 */
 	readonly array: ArrayPredicate;
+	/**
+	 * Test the value to be an object.
+	 */
+	readonly object: ObjectPredicate;
 	/**
 	 * Test the value to be a Date.
 	 */
@@ -197,6 +202,9 @@ Object.defineProperties(main, {
 	},
 	array: {
 		get: () => new ArrayPredicate()
+	},
+	object: {
+		get: () => new ObjectPredicate()
 	},
 	date: {
 		get: () => new DatePredicate()
