@@ -1,5 +1,5 @@
 import {ArgumentError} from './lib/argument-error';
-import {Predicate, validatorSymbol} from './lib/predicates/predicate';
+import {Predicate, validatorSymbol, Validator} from './lib/predicates/predicate';
 import {StringPredicate} from './lib/predicates/string';
 import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
@@ -155,7 +155,9 @@ export interface Ow {
 }
 
 const main = <T>(value: T, predicate: Predicate<T>) => {
-	for (const {validator, message} of predicate[validatorSymbol]) {
+	const validators: Validator<any>[] = (predicate as any)[validatorSymbol];
+
+	for (const {validator, message} of validators) {
 		const result = validator(value);
 
 		if (typeof result !== 'boolean' || !result) {

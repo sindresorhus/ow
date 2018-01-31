@@ -11,7 +11,7 @@
 		"pretty": true,
 		"newLine": "lf",
 		"stripInternal": true,
-		"noImplicitAny": false,
+		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
