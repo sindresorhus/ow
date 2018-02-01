@@ -1,4 +1,4 @@
-import * as isEqual from 'lodash.isequal';
+import isEqual = require('lodash.isequal');				// tslint:disable-line:no-require-imports
 import ow from '../..';
 import {Predicate, Context} from './predicate';
 

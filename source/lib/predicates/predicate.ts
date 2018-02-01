@@ -33,7 +33,7 @@ export class Predicate<T = any> {
 	) {
 		this.addValidator({
 			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
-			validator: value => is[type](value)
+			validator: value => (is as any)[type](value)
 		});
 	}
 

@@ -2,7 +2,7 @@ import test from 'ava';
 import m from '..';
 
 test('undefined', t => {
-	let x;						// tslint:disable-line:prefer-const
+	const x = undefined;
 	const y = 12;
 
 	t.notThrows(() => m(undefined, m.undefined));
