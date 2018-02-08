@@ -49,12 +49,18 @@ test('object.instanceOf', t => {
 
 test('object.hasKeys', t => {
 	t.notThrows(() => m({unicorn: '🦄'}, m.object.hasKeys('unicorn')));
+	t.notThrows(() => m({unicorn: {value: '🦄'}}, m.object.hasKeys('unicorn')));
+	t.notThrows(() => m({unicorn: {value: '🦄'}}, m.object.hasKeys('unicorn.value')));
 	t.notThrows(() => m({unicorn: '🦄', rainbow: '🌈'}, m.object.hasKeys('unicorn', 'rainbow')));
 	t.throws(() => m({unicorn: '🦄'}, m.object.hasKeys('unicorn', 'rainbow')), 'Expected object to have keys `["rainbow"]`');
+	t.throws(() => m({unicorn: {value: '🦄'}}, m.object.hasKeys('unicorn.foo')), 'Expected object to have keys `["unicorn.foo"]`');
 });
 
 test('object.hasAnyKeys', t => {
-	t.notThrows(() => m({unicorn: '🦄'}, m.object.hasAnyKeys('unicorn', 'rainbow')));
+	t.notThrows(() => m({unicorn: '🦄'}, m.object.hasAnyKeys('unicorn', 'rainbow', 'foo.bar')));
+	t.notThrows(() => m({unicorn: {value: '🦄'}}, m.object.hasAnyKeys('unicorn', 'rainbow')));
+	t.notThrows(() => m({unicorn: {value: '🦄'}}, m.object.hasAnyKeys('unicorn.value', 'rainbow')));
 	t.notThrows(() => m({unicorn: '🦄', rainbow: '🌈'}, m.object.hasAnyKeys('unicorn')));
 	t.throws(() => m({unicorn: '🦄'}, m.object.hasAnyKeys('foo')), 'Expected object to have any key of `["foo"]`');
+	t.throws(() => m({unicorn: '🦄'}, m.object.hasAnyKeys('unicorn.value')), 'Expected object to have any key of `["unicorn.value"]`');
 });

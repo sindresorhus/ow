@@ -1,4 +1,5 @@
 import is from '@sindresorhus/is';
+import * as dotProp from 'dot-prop';
 import isEqual = require('lodash.isequal'); // tslint:disable-line:no-require-imports
 import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
@@ -88,26 +89,28 @@ export class ObjectPredicate extends Predicate<object> {
 	}
 
 	/**
-	 * Test an object to include all the provided keys.
+	 * Test an object to include all the provided keys. You can use [dot-notation](https://github.com/sindresorhus/dot-prop) in a key to access nested properties.
 	 *
 	 * @param keys The keys that should be present in the object.
 	 */
 	hasKeys(...keys: string[]) {
 		return this.addValidator({
 			message: (_, missingKeys) => `Expected object to have keys \`${JSON.stringify(missingKeys)}\``,
-			validator: object => hasItems(new Set(Object.keys(object)), keys)
+			validator: object => hasItems({
+				has: item => dotProp.has(object, item)
+			}, keys)
 		});
 	}
 
 	/**
-	 * Test an object to include any of the provided keys.
+	 * Test an object to include any of the provided keys. You can use [dot-notation](https://github.com/sindresorhus/dot-prop) in a key to access nested properties.
 	 *
 	 * @param keys The keys that could be a key in the object.
 	 */
 	hasAnyKeys(...keys: string[]) {
 		return this.addValidator({
 			message: () => `Expected object to have any key of \`${JSON.stringify(keys)}\``,
-			validator: (object: any) => keys.some(key => object[key] !== undefined)
+			validator: (object: any) => keys.some(key => dotProp.has(object, key))
 		});
 	}
 }
