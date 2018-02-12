@@ -48,6 +48,7 @@
 	],
 	"devDependencies": {
 		"@sindresorhus/is": "^0.7.0",
+		"@types/dot-prop": "^4.2.0",
 		"@types/highlight.js": "^9.12.2",
 		"@types/lodash.isequal": "^4.5.2",
 		"@types/node": "^8.0.31",
@@ -57,6 +58,7 @@
 		"awesome-typescript-loader": "^3.2.3",
 		"codecov": "^3.0.0",
 		"del-cli": "^1.1.0",
+		"dot-prop": "^4.2.0",
 		"license-webpack-plugin": "^1.1.1",
 		"lodash.isequal": "^4.5.0",
 		"nyc": "^11.2.1",
