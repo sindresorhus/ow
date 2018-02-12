@@ -33,6 +33,15 @@ test('object.valuesOfType', t => {
 	t.throws(() => m({unicorn: 'a', rainbow: 'b'}, m.object.valuesOfType(m.string.minLength(2))), 'Expected string to have a minimum length of `2`, got `a`');
 });
 
+test('object.valuesOfTypeDeep', t => {
+	t.notThrows(() => m({unicorn: '🦄'}, m.object.deepValuesOfType(m.string)));
+	t.notThrows(() => m({unicorn: '🦄', rainbow: '🌈'}, m.object.deepValuesOfType(m.string)));
+	t.notThrows(() => m({unicorn: {key: '🦄', value: '🌈'}}, m.object.deepValuesOfType(m.string)));
+	t.notThrows(() => m({a: {b: {c: {d: 1}, e: 2}, f: 3}}, m.object.deepValuesOfType(m.number)));
+	t.throws(() => m({unicorn: {key: '🦄', value: 1}}, m.object.deepValuesOfType(m.string)), 'Expected argument to be of type `string` but received type `number`');
+	t.throws(() => m({a: {b: {c: {d: 1}, e: '2'}, f: 3}}, m.object.deepValuesOfType(m.number)), 'Expected argument to be of type `number` but received type `string`');
+});
+
 test('object.deepEqual', t => {
 	t.notThrows(() => m({unicorn: '🦄'}, m.object.deepEqual({unicorn: '🦄'})));
 	t.notThrows(() => m({unicorn: '🦄', rain: {bow: '🌈'}}, m.object.deepEqual({unicorn: '🦄', rain: {bow: '🌈'}})));
