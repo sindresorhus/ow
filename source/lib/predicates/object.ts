@@ -3,6 +3,7 @@ import isEqual = require('lodash.isequal'); // tslint:disable-line:no-require-im
 import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
+import ofTypeDeep from '../utils/of-type-deep';
 
 export class ObjectPredicate extends Predicate<object> {
 	constructor(context?: Context) {
@@ -52,6 +53,18 @@ export class ObjectPredicate extends Predicate<object> {
 
 				return ofType(values, predicate);
 			}
+		});
+	}
+
+	/**
+	 * Test all the values in the object deeply to match the provided predicate.
+	 *
+	 * @param predicate The predicate that should be applied against every value in the object.
+	 */
+	deepValuesOfType<T>(predicate: Predicate<T>) {
+		return this.addValidator({
+			message: (_, error) => error,
+			validator: (object: any) => ofTypeDeep(object, predicate)
 		});
 	}
 
