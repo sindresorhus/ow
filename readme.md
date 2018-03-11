@@ -1,9 +1,10 @@
-# ow [![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow)
+<p align="center">
+	<img src="media/logo.svg" width="166">
+</p>
+
+[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow)
 
 > Argument type validation
-
-<img src="header.gif" width="220" align="right">
-
 
 ## Install
 
