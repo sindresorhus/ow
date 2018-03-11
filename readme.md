@@ -1,5 +1,7 @@
 <p align="center">
-	<img src="media/logo.png" width="166">
+	<img src="media/logo.png" width="200">
+	<br>
+	<br>
 </p>
 
 [![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow)
