@@ -37,6 +37,8 @@ export interface Ow {
 	any<T1, T2, T3, T4, T5, T6>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>): Predicate<T1 | T2 | T3 | T4 | T5 | T6>;
 	any<T1, T2, T3, T4, T5, T6, T7>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7>;
 	any<T1, T2, T3, T4, T5, T6, T7, T8>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>, p8: Predicate<T8>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>, p8: Predicate<T8>, p9: Predicate<T9>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>, p8: Predicate<T8>, p9: Predicate<T9>, p10: Predicate<T10>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>;
 	any(...predicate: Predicate[]): Predicate;
 	/**
 	 * Test the value to be a string.
