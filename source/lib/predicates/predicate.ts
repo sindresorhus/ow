@@ -1,4 +1,7 @@
 import is from '@sindresorhus/is';
+import {Ow} from '../..';
+import {ArgumentError} from '../argument-error';
+import {BasePredicate, testSymbol} from './base-predicate';
 import {not} from '../operators/not';
 
 /**
@@ -24,7 +27,7 @@ export const validatorSymbol = Symbol('validators');
 /**
  * @hidden
  */
-export class Predicate<T = any> {
+export class Predicate<T = any> implements BasePredicate<T> {
 	constructor(
 		type: string,
 		private readonly context: Context = {
@@ -35,6 +38,20 @@ export class Predicate<T = any> {
 			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
 			validator: value => (is as any)[type](value)
 		});
+	}
+
+	/**
+	 * @hidden
+	 */
+	[testSymbol](value: T, main: Ow) {
+		for (const {validator, message} of this.context.validators) {
+			const result = validator(value);
+
+			if (typeof result !== 'boolean' || !result) {
+				// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
+				throw new ArgumentError(message(value, result), main);
+			}
+		}
 	}
 
 	/**
