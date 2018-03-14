@@ -27,7 +27,7 @@ export interface Ow {
 	 */
 	create<T>(predicate: Predicate<T>): (value: T) => void;
 	/**
-	 * Test the value for multiple predicates.
+	 * Test that the value matches at least one of the given predicates.
 	 */
 	any<T1>(p1: Predicate<T1>): Predicate<T1>;
 	any<T1, T2>(p1: Predicate<T1>, p2: Predicate<T2>): Predicate<T1 | T2>;
