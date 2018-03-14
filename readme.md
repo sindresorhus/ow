@@ -1,8 +1,12 @@
-# ow [![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow)
+<p align="center">
+	<img src="media/logo.png" width="300">
+	<br>
+	<br>
+</p>
+
+[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow)
 
 > Argument type validation
-
-<img src="header.gif" width="220" align="right">
 
 
 ## Install
@@ -38,6 +42,11 @@ unicorn('yo');
 
 - [Sindre Sorhus](https://github.com/sindresorhus)
 - [Sam Verschueren](https://github.com/SamVerschueren)
+
+
+## Logo
+
+Logo is based on [Comic Book Elements](https://creativemarket.com/swedishpoints/232087-Comic-Book-Elements) by Carl Eriksson.
 
 
 ## License
