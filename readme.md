@@ -34,7 +34,7 @@ unicorn(3);
 //=> ArgumentError: Expected argument to be of type `string` but received type `number`
 
 unicorn('yo');
-//=> ArgumentError: Expected string length to be minimum 10
+//=> ArgumentError: Expected string length to be minimum 5
 ```
 
 
