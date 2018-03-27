@@ -6,7 +6,7 @@ const createError = (...errors: string[]) => {
 		'Any predicate failed with the following errors:',
 		...errors.map(error => `- ${error}`)
 	].join('\n');
-}
+};
 
 test('any', t => {
 	t.notThrows(() => m(1, m.any(m.number)));

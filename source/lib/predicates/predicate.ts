@@ -43,6 +43,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	/**
 	 * @hidden
 	 */
+	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Ow) {
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);

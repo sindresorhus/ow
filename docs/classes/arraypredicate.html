@@ -936,6 +936,9 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="arraypredicate.html#includesany" class="tsd-kind-icon">includes<wbr>Any</a>
 				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="arraypredicate.html#is" class="tsd-kind-icon">is</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="arraypredicate.html#length" class="tsd-kind-icon">length</a>
 				</li>
@@ -963,12 +966,30 @@ img { max-width: 100%; }
 			<a href="errorpredicate.html" class="tsd-kind-icon">Error<wbr>Predicate</a>
 		</li>
 		<li class=" tsd-kind-class">
+			<a href="mappredicate.html" class="tsd-kind-icon">Map<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
 			<a href="numberpredicate.html" class="tsd-kind-icon">Number<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="objectpredicate.html" class="tsd-kind-icon">Object<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="setpredicate.html" class="tsd-kind-icon">Set<wbr>Predicate</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="stringpredicate.html" class="tsd-kind-icon">String<wbr>Predicate</a>
 		</li>
-		<li class=" tsd-kind-interface">
+		<li class=" tsd-kind-class">
+			<a href="weakmappredicate.html" class="tsd-kind-icon">Weak<wbr>Map<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="weaksetpredicate.html" class="tsd-kind-icon">Weak<wbr>Set<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
+			<a href="../interfaces/collectionlike.html" class="tsd-kind-icon">Collection<wbr>Like</a>
+		</li>
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
 			<a href="../interfaces/ow.html" class="tsd-kind-icon">Ow</a>
 		</li>
 	</ul>
@@ -986,6 +1007,12 @@ img { max-width: 100%; }
 						</li>
 					</ul>
 				</li>
+			</ul>
+		</section>
+		<section class="tsd-panel">
+			<h3>Implements</h3>
+			<ul class="tsd-hierarchy">
+				<li><span class="tsd-signature-type">BasePredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -1013,6 +1040,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="arraypredicate.html#endswith" class="tsd-kind-icon">ends<wbr>With</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="arraypredicate.html#includes" class="tsd-kind-icon">includes</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="arraypredicate.html#includesany" class="tsd-kind-icon">includes<wbr>Any</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="arraypredicate.html#is" class="tsd-kind-icon">is</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="arraypredicate.html#length" class="tsd-kind-icon">length</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="arraypredicate.html#maxlength" class="tsd-kind-icon">max<wbr>Length</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="arraypredicate.html#minlength" class="tsd-kind-icon">min<wbr>Length</a></li>
@@ -1036,7 +1064,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Overrides Predicate.__constructor</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L5">lib/predicates/array.ts:5</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L5">lib/predicates/array.ts:5</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1058,7 +1086,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">empty<span class="tsd-signature-symbol">:</span> </div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L97">lib/predicates/array.ts:97</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L97">lib/predicates/array.ts:97</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1073,7 +1101,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">non<wbr>Empty<span class="tsd-signature-symbol">:</span> </div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L107">lib/predicates/array.ts:107</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L107">lib/predicates/array.ts:107</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1089,7 +1117,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from Predicate.not</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/predicate.ts#L50">lib/predicates/predicate.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/predicate.ts#L68">lib/predicates/predicate.ts:68</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1111,7 +1139,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L119">lib/predicates/array.ts:119</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L119">lib/predicates/array.ts:119</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1142,7 +1170,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L63">lib/predicates/array.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L63">lib/predicates/array.ts:63</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1173,7 +1201,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L75">lib/predicates/array.ts:75</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L75">lib/predicates/array.ts:75</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1204,7 +1232,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L87">lib/predicates/array.ts:87</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L87">lib/predicates/array.ts:87</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1225,6 +1253,61 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="is" class="tsd-anchor"></a>
+				<h3>is</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">is<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from Predicate.is</p>
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/predicate.ts#L79">lib/predicates/predicate.ts:79</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Test if the value matches a custom validation function. The validation function should return <code>true</code> if the value
+									passes the function. If the function either returns <code>false</code> or a string, the function fails and the string will be
+								used as error message.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>fn: <span class="tsd-signature-type">function</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Validation function.</p>
+								</div>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-siganture">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>value: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span>
+													<span class="tsd-signature-symbol"> | </span>
+													<span class="tsd-signature-type">string</span>
+												</h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="length" class="tsd-anchor"></a>
 				<h3>length</h3>
@@ -1235,7 +1318,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L15">lib/predicates/array.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L15">lib/predicates/array.ts:15</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1266,7 +1349,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L39">lib/predicates/array.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L39">lib/predicates/array.ts:39</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1297,7 +1380,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L27">lib/predicates/array.ts:27</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L27">lib/predicates/array.ts:27</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1328,7 +1411,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L131">lib/predicates/array.ts:131</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L131">lib/predicates/array.ts:131</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1365,7 +1448,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/lib/predicates/array.ts#L51">lib/predicates/array.ts:51</a></li>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/lib/predicates/array.ts#L51">lib/predicates/array.ts:51</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

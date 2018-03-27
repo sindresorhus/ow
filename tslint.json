@@ -1,6 +1,20 @@
 {
 	"extends": "tslint-xo",
 	"rules": {
-		"completed-docs": [true, "methods"]
+		"completed-docs": [
+			true,
+			{
+				"methods": {
+					"privacies": [
+						"public"
+					]
+				},
+				"functions": {
+					"visibilities": [
+						"exported"
+					]
+				}
+			}
+		]
 	}
 }

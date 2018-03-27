@@ -4,6 +4,7 @@ const license = require('license-webpack-plugin');
 const AddModuleExportsPlugin = require('add-module-exports-webpack-plugin');
 
 module.exports = {
+	mode: 'production',
 	entry: './source/index.ts',
 	target: 'node',
 	node: false,
@@ -13,10 +14,12 @@ module.exports = {
 		libraryTarget: 'commonjs2'
 	},
 	resolve: {
-		extensions: ['.ts', '.js']
+		extensions: [
+			'.ts',
+			'.js'
+		]
 	},
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new AddModuleExportsPlugin(),
 		new license.LicenseWebpackPlugin({
 			pattern: /.*/,

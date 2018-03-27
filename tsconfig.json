@@ -20,7 +20,8 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
-		"alwaysStrict": true
+		"alwaysStrict": true,
+		"esModuleInterop": true
 	},
 	"exclude": [
 		"node_modules",
@@ -31,7 +32,7 @@
 		// Links to `ArrayPredicate` and others doesn't work when this is specified...
 		// "entryPoint": "Ow",
 		"mode": "file",
-		"target": "ES5",
+		"target": "ES6",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"exclude": "source/test",

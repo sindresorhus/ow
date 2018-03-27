@@ -922,12 +922,30 @@ img { max-width: 100%; }
 			<a href="../classes/errorpredicate.html" class="tsd-kind-icon">Error<wbr>Predicate</a>
 		</li>
 		<li class=" tsd-kind-class">
+			<a href="../classes/mappredicate.html" class="tsd-kind-icon">Map<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
 			<a href="../classes/numberpredicate.html" class="tsd-kind-icon">Number<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/objectpredicate.html" class="tsd-kind-icon">Object<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/setpredicate.html" class="tsd-kind-icon">Set<wbr>Predicate</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="../classes/stringpredicate.html" class="tsd-kind-icon">String<wbr>Predicate</a>
 		</li>
-		<li class="current tsd-kind-interface">
+		<li class=" tsd-kind-class">
+			<a href="../classes/weakmappredicate.html" class="tsd-kind-icon">Weak<wbr>Map<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="../classes/weaksetpredicate.html" class="tsd-kind-icon">Weak<wbr>Set<wbr>Predicate</a>
+		</li>
+		<li class=" tsd-kind-interface tsd-has-type-parameter">
+			<a href="collectionlike.html" class="tsd-kind-icon">Collection<wbr>Like</a>
+		</li>
+		<li class="current tsd-kind-interface tsd-has-type-parameter">
 			<a href="ow.html" class="tsd-kind-icon">Ow</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -941,6 +959,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#buffer" class="tsd-kind-icon">buffer</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#dataview" class="tsd-kind-icon">data<wbr>View</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#date" class="tsd-kind-icon">date</a>
@@ -970,16 +991,31 @@ img { max-width: 100%; }
 					<a href="ow.html#iterable" class="tsd-kind-icon">iterable</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#map" class="tsd-kind-icon">map</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#nan" class="tsd-kind-icon">nan</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#null" class="tsd-kind-icon">null</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#nullorundefined" class="tsd-kind-icon">null<wbr>OrUndefined</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#number" class="tsd-kind-icon">number</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#object" class="tsd-kind-icon">object</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#promise" class="tsd-kind-icon">promise</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#regexp" class="tsd-kind-icon">reg<wbr>Exp</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#set" class="tsd-kind-icon">set</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#string" class="tsd-kind-icon">string</a>
@@ -1005,6 +1041,18 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="ow.html#undefined" class="tsd-kind-icon">undefined</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#weakmap" class="tsd-kind-icon">weak<wbr>Map</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="ow.html#weakset" class="tsd-kind-icon">weak<wbr>Set</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="ow.html#any" class="tsd-kind-icon">any</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<a href="ow.html#create" class="tsd-kind-icon">create</a>
+				</li>
 			</ul>
 		</li>
 	</ul>
@@ -1021,23 +1069,29 @@ img { max-width: 100%; }
 		</section>
 		<section class="tsd-panel">
 			<h3 class="tsd-before-signature">Callable</h3>
-			<ul class="tsd-signatures tsd-kind-interface">
-				<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<ul class="tsd-signatures tsd-kind-interface tsd-has-type-parameter">
+				<li class="tsd-signature tsd-kind-icon">__call&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 			</ul>
 			<ul class="tsd-descriptions">
 				<li class="tsd-description">
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L15">index.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L21">index.ts:21</a></li>
 						</ul>
 					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>T</h4>
+						</li>
+					</ul>
 					<h4 class="tsd-parameters-title">Parameters</h4>
 					<ul class="tsd-parameters">
 						<li>
-							<h5>value: <span class="tsd-signature-type">any</span></h5>
+							<h5>value: <span class="tsd-signature-type">T</span></h5>
 						</li>
 						<li>
-							<h5>predicate: <span class="tsd-signature-type">Predicate</span></h5>
+							<h5>predicate: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 						</li>
 					</ul>
 					<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1055,6 +1109,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#arraybuffer" class="tsd-kind-icon">array<wbr>Buffer</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#boolean" class="tsd-kind-icon">boolean</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#buffer" class="tsd-kind-icon">buffer</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#dataview" class="tsd-kind-icon">data<wbr>View</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#date" class="tsd-kind-icon">date</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#error" class="tsd-kind-icon">error</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#float32array" class="tsd-kind-icon">float32<wbr>Array</a></li>
@@ -1064,10 +1119,15 @@ img { max-width: 100%; }
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#int32array" class="tsd-kind-icon">int32<wbr>Array</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#int8array" class="tsd-kind-icon">int8<wbr>Array</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#iterable" class="tsd-kind-icon">iterable</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#map" class="tsd-kind-icon">map</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#nan" class="tsd-kind-icon">nan</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#null" class="tsd-kind-icon">null</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#nullorundefined" class="tsd-kind-icon">null<wbr>OrUndefined</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#number" class="tsd-kind-icon">number</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#object" class="tsd-kind-icon">object</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#promise" class="tsd-kind-icon">promise</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#regexp" class="tsd-kind-icon">reg<wbr>Exp</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#set" class="tsd-kind-icon">set</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#string" class="tsd-kind-icon">string</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#symbol" class="tsd-kind-icon">symbol</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#typedarray" class="tsd-kind-icon">typed<wbr>Array</a></li>
@@ -1076,6 +1136,15 @@ img { max-width: 100%; }
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#uint8array" class="tsd-kind-icon">uint8<wbr>Array</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#uint8clampedarray" class="tsd-kind-icon">uint8<wbr>Clamped<wbr>Array</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#undefined" class="tsd-kind-icon">undefined</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#weakmap" class="tsd-kind-icon">weak<wbr>Map</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ow.html#weakset" class="tsd-kind-icon">weak<wbr>Set</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Methods</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="ow.html#any" class="tsd-kind-icon">any</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="ow.html#create" class="tsd-kind-icon">create</a></li>
 						</ul>
 					</section>
 				</div>
@@ -1089,7 +1158,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">array<span class="tsd-signature-symbol">:</span> <a href="../classes/arraypredicate.html" class="tsd-signature-type">ArrayPredicate</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L44">index.ts:44</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L78">index.ts:78</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1104,7 +1173,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">array<wbr>Buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L112">index.ts:112</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L166">index.ts:166</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1119,7 +1188,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">boolean<span class="tsd-signature-symbol">:</span> <a href="../classes/booleanpredicate.html" class="tsd-signature-type">BooleanPredicate</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L28">index.ts:28</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L54">index.ts:54</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1134,7 +1203,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L60">index.ts:60</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L114">index.ts:114</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1144,12 +1213,27 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="dataview" class="tsd-anchor"></a>
+				<h3>data<wbr>View</h3>
+				<div class="tsd-signature tsd-kind-icon">data<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L170">index.ts:170</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be a DataView.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="date" class="tsd-anchor"></a>
 				<h3>date</h3>
 				<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <a href="../classes/datepredicate.html" class="tsd-signature-type">DatePredicate</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L48">index.ts:48</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L86">index.ts:86</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1164,7 +1248,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <a href="../classes/errorpredicate.html" class="tsd-signature-type">ErrorPredicate</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L52">index.ts:52</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L90">index.ts:90</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1176,15 +1260,15 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="float32array" class="tsd-anchor"></a>
 				<h3>float32<wbr>Array</h3>
-				<div class="tsd-signature tsd-kind-icon">float32<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<div class="tsd-signature tsd-kind-icon">float32<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L104">index.ts:104</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L158">index.ts:158</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Test the value to be a Int32Array.</p>
+						<p>Test the value to be a Float32Array.</p>
 					</div>
 				</div>
 			</section>
@@ -1194,12 +1278,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">float64<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L108">index.ts:108</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L162">index.ts:162</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Test the value to be a Uint64Array.</p>
+						<p>Test the value to be a Float64Array.</p>
 					</div>
 				</div>
 			</section>
@@ -1209,7 +1293,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L56">index.ts:56</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L110">index.ts:110</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1224,7 +1308,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">int16<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L88">index.ts:88</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L142">index.ts:142</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1239,7 +1323,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">int32<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L96">index.ts:96</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L150">index.ts:150</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1254,7 +1338,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">int8<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L76">index.ts:76</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L130">index.ts:130</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1269,7 +1353,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">iterable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L116">index.ts:116</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L174">index.ts:174</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1279,12 +1363,42 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="map" class="tsd-anchor"></a>
+				<h3>map</h3>
+				<div class="tsd-signature tsd-kind-icon">map<span class="tsd-signature-symbol">:</span> <a href="../classes/mappredicate.html" class="tsd-signature-type">MapPredicate</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L94">index.ts:94</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be a Map.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="nan" class="tsd-anchor"></a>
+				<h3>nan</h3>
+				<div class="tsd-signature tsd-kind-icon">nan<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L70">index.ts:70</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be not a number.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="null" class="tsd-anchor"></a>
 				<h3>null</h3>
 				<div class="tsd-signature tsd-kind-icon">null<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L36">index.ts:36</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L62">index.ts:62</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1294,12 +1408,27 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="nullorundefined" class="tsd-anchor"></a>
+				<h3>null<wbr>OrUndefined</h3>
+				<div class="tsd-signature tsd-kind-icon">null<wbr>OrUndefined<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L66">index.ts:66</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be null or undefined.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="number" class="tsd-anchor"></a>
 				<h3>number</h3>
 				<div class="tsd-signature tsd-kind-icon">number<span class="tsd-signature-symbol">:</span> <a href="../classes/numberpredicate.html" class="tsd-signature-type">NumberPredicate</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L24">index.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L50">index.ts:50</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1309,12 +1438,27 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="object" class="tsd-anchor"></a>
+				<h3>object</h3>
+				<div class="tsd-signature tsd-kind-icon">object<span class="tsd-signature-symbol">:</span> <a href="../classes/objectpredicate.html" class="tsd-signature-type">ObjectPredicate</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L82">index.ts:82</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be an object.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="promise" class="tsd-anchor"></a>
 				<h3>promise</h3>
 				<div class="tsd-signature tsd-kind-icon">promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L68">index.ts:68</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L122">index.ts:122</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1329,7 +1473,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L64">index.ts:64</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L118">index.ts:118</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1339,12 +1483,27 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="set" class="tsd-anchor"></a>
+				<h3>set</h3>
+				<div class="tsd-signature tsd-kind-icon">set<span class="tsd-signature-symbol">:</span> <a href="../classes/setpredicate.html" class="tsd-signature-type">SetPredicate</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L102">index.ts:102</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be a Set.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="string" class="tsd-anchor"></a>
 				<h3>string</h3>
 				<div class="tsd-signature tsd-kind-icon">string<span class="tsd-signature-symbol">:</span> <a href="../classes/stringpredicate.html" class="tsd-signature-type">StringPredicate</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L20">index.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L46">index.ts:46</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1359,7 +1518,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">symbol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Symbol</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L40">index.ts:40</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L74">index.ts:74</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1374,7 +1533,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">typed<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TypedArray</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L72">index.ts:72</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L126">index.ts:126</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1389,7 +1548,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">uint16<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L92">index.ts:92</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L146">index.ts:146</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1404,7 +1563,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">uint32<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L100">index.ts:100</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L154">index.ts:154</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1419,7 +1578,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">uint8<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L80">index.ts:80</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L134">index.ts:134</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1434,7 +1593,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">uint8<wbr>Clamped<wbr>Array<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L84">index.ts:84</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L138">index.ts:138</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1449,7 +1608,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">undefined<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/45aa3cf/source/index.ts#L32">index.ts:32</a></li>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L58">index.ts:58</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1457,6 +1616,602 @@ img { max-width: 100%; }
 						<p>Test the value to be undefined.</p>
 					</div>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="weakmap" class="tsd-anchor"></a>
+				<h3>weak<wbr>Map</h3>
+				<div class="tsd-signature tsd-kind-icon">weak<wbr>Map<span class="tsd-signature-symbol">:</span> <a href="../classes/weakmappredicate.html" class="tsd-signature-type">WeakMapPredicate</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L98">index.ts:98</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be a WeakMap.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="weakset" class="tsd-anchor"></a>
+				<h3>weak<wbr>Set</h3>
+				<div class="tsd-signature tsd-kind-icon">weak<wbr>Set<span class="tsd-signature-symbol">:</span> <a href="../classes/weaksetpredicate.html" class="tsd-signature-type">WeakSetPredicate</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L106">index.ts:106</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Test the value to be a WeakSet.</p>
+					</div>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="any" class="tsd-anchor"></a>
+				<h3>any</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4, T5&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span>, p5<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4, T5, T6&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span>, p5<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span>, p6<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4, T5, T6, T7&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span>, p5<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span>, p6<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span>, p7<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span>, p5<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span>, p6<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span>, p7<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span>, p8<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span>, p5<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span>, p6<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span>, p7<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span>, p8<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span>, p9<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;<span class="tsd-signature-symbol">(</span>p1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span>, p2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span>, p3<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span>, p4<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span>, p5<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span>, p6<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span>, p7<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span>, p8<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span>, p9<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol">&gt;</span>, p10<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T10</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T10</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">any<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L32">index.ts:32</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Test that the value matches at least one of the given predicates.</p>
+							</div>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L33">index.ts:33</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L34">index.ts:34</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L35">index.ts:35</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L36">index.ts:36</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+							<li>
+								<h4>T5</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p5: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L37">index.ts:37</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+							<li>
+								<h4>T5</h4>
+							</li>
+							<li>
+								<h4>T6</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p5: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p6: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L38">index.ts:38</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+							<li>
+								<h4>T5</h4>
+							</li>
+							<li>
+								<h4>T6</h4>
+							</li>
+							<li>
+								<h4>T7</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p5: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p6: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p7: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L39">index.ts:39</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+							<li>
+								<h4>T5</h4>
+							</li>
+							<li>
+								<h4>T6</h4>
+							</li>
+							<li>
+								<h4>T7</h4>
+							</li>
+							<li>
+								<h4>T8</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p5: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p6: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p7: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p8: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L40">index.ts:40</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+							<li>
+								<h4>T5</h4>
+							</li>
+							<li>
+								<h4>T6</h4>
+							</li>
+							<li>
+								<h4>T7</h4>
+							</li>
+							<li>
+								<h4>T8</h4>
+							</li>
+							<li>
+								<h4>T9</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p5: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p6: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p7: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p8: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p9: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L41">index.ts:41</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T1</h4>
+							</li>
+							<li>
+								<h4>T2</h4>
+							</li>
+							<li>
+								<h4>T3</h4>
+							</li>
+							<li>
+								<h4>T4</h4>
+							</li>
+							<li>
+								<h4>T5</h4>
+							</li>
+							<li>
+								<h4>T6</h4>
+							</li>
+							<li>
+								<h4>T7</h4>
+							</li>
+							<li>
+								<h4>T8</h4>
+							</li>
+							<li>
+								<h4>T9</h4>
+							</li>
+							<li>
+								<h4>T10</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>p1: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p2: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p3: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p4: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p5: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p6: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p7: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p8: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p9: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li>
+								<h5>p10: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T10</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T3</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T5</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T6</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T7</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T8</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T9</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T10</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L42">index.ts:42</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>predicate: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Predicate</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+				<a name="create" class="tsd-anchor"></a>
+				<h3>create</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">create&lt;T&gt;<span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sindresorhus/ow/blob/766281c/source/index.ts#L28">index.ts:28</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Create a reusable validator.</p>
+							</div>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>predicate: <span class="tsd-signature-type">Predicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Predicate used in the validator function.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>value: <span class="tsd-signature-type">T</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</section>
 		</section>
 		<footer>
