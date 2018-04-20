@@ -48,8 +48,6 @@ Test if `value` matches the provided `predicate`.
 Create a reusable validator.
 
 ```ts
-import ow from 'ow';
-
 const checkPassword = ow.create(ow.string.minLength(6));
 
 checkPassword('foo');
@@ -61,8 +59,6 @@ checkPassword('foo');
 Returns a predicate that verifies if the value matches at least one of the given predicates.
 
 ```ts
-import ow from 'ow';
-
 ow('foo', ow.any(ow.string.maxLength(3), ow.number));
 ```
 
