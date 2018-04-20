@@ -3,6 +3,9 @@ import ow from '../..';
 import {Predicate, Context} from './predicate';
 
 export class ArrayPredicate extends Predicate<any[]> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('array', context);
 	}

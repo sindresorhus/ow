@@ -7,6 +7,9 @@ import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
 
 export class ObjectPredicate extends Predicate<object> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('object', context);
 	}

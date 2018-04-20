@@ -4,6 +4,9 @@ import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 
 export class MapPredicate extends Predicate<Map<any, any>> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('map', context);
 	}
