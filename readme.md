@@ -27,7 +27,7 @@ const unicorn = input => {
 	ow(input, ow.string.minLength(5));
 
 	…
-);
+};
 
 unicorn(3);
 //=> ArgumentError: Expected argument to be of type `string` but received type `number`
