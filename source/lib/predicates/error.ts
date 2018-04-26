@@ -1,6 +1,9 @@
 import {Predicate, Context} from './predicate';
 
 export class ErrorPredicate extends Predicate<Error> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('error', context);
 	}

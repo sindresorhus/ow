@@ -2,6 +2,9 @@ import valiDate from 'vali-date';
 import {Predicate, Context} from './predicate';
 
 export class StringPredicate extends Predicate<string> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('string', context);
 	}

@@ -2,6 +2,9 @@ import is from '@sindresorhus/is';
 import {Predicate, Context} from './predicate';
 
 export class NumberPredicate extends Predicate<number> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('number', context);
 	}

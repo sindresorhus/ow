@@ -4,6 +4,9 @@ import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 
 export class SetPredicate extends Predicate<Set<any>> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('set', context);
 	}

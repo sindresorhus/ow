@@ -2,6 +2,9 @@ import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
 
 export class WeakMapPredicate extends Predicate<WeakMap<any, any>> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('weakMap', context);
 	}

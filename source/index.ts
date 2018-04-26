@@ -19,6 +19,12 @@ import {WeakSetPredicate} from './lib/predicates/weak-set';
 export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 
 export interface Ow {
+	/**
+	 * Test if the value matches the predicate.
+	 *
+	 * @param value Value to test.
+	 * @param predicate Predicate to test against.
+	 */
 	<T>(value: T, predicate: Predicate<T>): void;
 	/**
 	 * Create a reusable validator.

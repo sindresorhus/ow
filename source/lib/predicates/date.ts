@@ -1,6 +1,9 @@
 import {Predicate, Context} from './predicate';
 
 export class DatePredicate extends Predicate<Date> {
+	/**
+	 * @hidden
+	 */
 	constructor(context?: Context) {
 		super('date', context);
 	}
