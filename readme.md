@@ -114,6 +114,43 @@ All the below types return a predicate. Every predicate has some extra operators
 - [`iterable`](https://sindresorhus.com/ow/interfaces/ow.html#iterable)
 - [`typedArray`](https://sindresorhus.com/ow/interfaces/ow.html#typedarray)
 
+### Predicates
+
+The following predicates are available on every type.
+
+#### not
+
+Inverts the following predicates.
+
+```ts
+m(1, m.number.not.infinite);
+
+m('', m.string.not.empty);
+//=> ArgumentError: [NOT] Expected string to be empty, got ``
+```
+
+#### is(fn)
+
+Use a custom validation function. Return `true` if the value matches the validation, return `false` if it doesn't.
+
+```ts
+m(1, m.number.is(x => x < 10));
+
+m(1, m.number.is(x => x > 10));
+//=> ArgumentError: Expected `1` to pass custom validation function
+```
+
+Instead of returning `false`, you can also return a custom error message which results in a failure.
+
+```ts
+const greaterThan = (max: number, x: number) => {
+	return x > max || `Expected \`${x}\` to be greater than \`${max}\``;
+};
+
+m(5, m.number.is(x => greaterThan(10, x)));
+//=> ArgumentError: Expected `5` to be greater than `10`
+```
+
 
 ## Maintainers
 
