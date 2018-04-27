@@ -26,7 +26,7 @@ import ow from 'ow';
 const unicorn = input => {
 	ow(input, ow.string.minLength(5));
 
-	…
+	// …
 };
 
 unicorn(3);
@@ -158,9 +158,9 @@ m(5, m.number.is(x => greaterThan(10, x)));
 - [Sam Verschueren](https://github.com/SamVerschueren)
 
 
-## Logo
+## Related
 
-Logo is based on [Comic Book Elements](https://creativemarket.com/swedishpoints/232087-Comic-Book-Elements) by Carl Eriksson.
+- [@sindresorhus/is](https://github.com/sindresorhus/is) - Type check values
 
 
 ## License
