@@ -4,11 +4,11 @@
 	<br>
 </p>
 
-[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow)
+[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow) [![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow)
 
 > Argument type validation
 
-[View documentation](https://sindresorhus.com/ow/interfaces/ow.html)
+[View documentation](https://sindresorhus.com/ow)
 
 
 ## Install
