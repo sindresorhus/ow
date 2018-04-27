@@ -47,7 +47,6 @@
 		"object"
 	],
 	"devDependencies": {
-		"@sindresorhus/is": "^0.8.0",
 		"@types/dot-prop": "^4.2.0",
 		"@types/highlight.js": "^9.12.2",
 		"@types/lodash.isequal": "^4.5.2",
@@ -58,15 +57,12 @@
 		"awesome-typescript-loader": "^5.0.0",
 		"codecov": "^3.0.0",
 		"del-cli": "^1.1.0",
-		"dot-prop": "^4.2.0",
 		"license-webpack-plugin": "^1.1.1",
-		"lodash.isequal": "^4.5.0",
 		"nyc": "^11.2.1",
 		"tslint": "^5.9.1",
 		"tslint-xo": "^0.7.0",
 		"typedoc": "^0.11.1",
 		"typescript": "^2.8.1",
-		"vali-date": "^1.0.0",
 		"webpack": "^4.3.0",
 		"webpack-cli": "^2.0.13"
 	},
@@ -75,5 +71,11 @@
 		"exclude": [
 			"dist/test"
 		]
+	},
+	"dependencies": {
+		"@sindresorhus/is": "^0.8.0",
+		"dot-prop": "^4.2.0",
+		"lodash.isequal": "^4.5.0",
+		"vali-date": "^1.0.0"
 	}
 }
