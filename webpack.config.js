@@ -1,4 +1,5 @@
 'use strict';
+const path = require('path');
 const webpack = require('webpack');
 const license = require('license-webpack-plugin');
 const AddModuleExportsPlugin = require('add-module-exports-webpack-plugin');
@@ -10,7 +11,8 @@ module.exports = {
 	node: false,
 	devtool: 'source-map',
 	output: {
-		filename: 'dist/index.js',
+		path: path.join(__dirname, 'dist'),
+		filename: 'index.js',
 		libraryTarget: 'commonjs2'
 	},
 	resolve: {
@@ -23,7 +25,7 @@ module.exports = {
 		new AddModuleExportsPlugin(),
 		new license.LicenseWebpackPlugin({
 			pattern: /.*/,
-			outputFilename: 'dist/licenses.txt'
+			outputFilename: 'licenses.txt'
 		})
 	],
 	module: {
