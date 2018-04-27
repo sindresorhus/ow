@@ -4,3 +4,12 @@ node_js:
   - '6'
 after_script:
   - './node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov'
+before_deploy:
+  - npm run docs
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    local_dir: docs/
+    github_token: $GITHUB_TOKEN
+    on:
+      tags: true
