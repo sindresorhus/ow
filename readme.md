@@ -123,9 +123,9 @@ The following predicates are available on every type.
 Inverts the following predicates.
 
 ```ts
-m(1, m.number.not.infinite);
+ow(1, ow.number.not.infinite);
 
-m('', m.string.not.empty);
+ow('', ow.string.not.empty);
 //=> ArgumentError: [NOT] Expected string to be empty, got ``
 ```
 
@@ -134,9 +134,9 @@ m('', m.string.not.empty);
 Use a custom validation function. Return `true` if the value matches the validation, return `false` if it doesn't.
 
 ```ts
-m(1, m.number.is(x => x < 10));
+ow(1, ow.number.is(x => x < 10));
 
-m(1, m.number.is(x => x > 10));
+ow(1, ow.number.is(x => x > 10));
 //=> ArgumentError: Expected `1` to pass custom validation function
 ```
 
@@ -147,7 +147,7 @@ const greaterThan = (max: number, x: number) => {
 	return x > max || `Expected \`${x}\` to be greater than \`${max}\``;
 };
 
-m(5, m.number.is(x => greaterThan(10, x)));
+ow(5, ow.number.is(x => greaterThan(10, x)));
 //=> ArgumentError: Expected `5` to be greater than `10`
 ```
 
