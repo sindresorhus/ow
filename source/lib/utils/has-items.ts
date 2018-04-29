@@ -13,8 +13,8 @@ export interface CollectionLike<T> {
  * @param items Items to search for.
  * @param maxValues Maximum number of values after the search process is stopped. (Default: 5)
  */
-export default (source: CollectionLike<any>, items: any[], maxValues = 5) => {
-	const missingValues: any[] = [];
+export default <T>(source: CollectionLike<T>, items: T[], maxValues = 5) => {
+	const missingValues: T[] = [];
 
 	for (const value of items) {
 		if (source.has(value)) {

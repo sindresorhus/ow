@@ -11,10 +11,10 @@ export const not = <T extends Predicate>(predicate: T) => {
 		const fn = validator.validator;
 		const message = validator.message;
 
-		validator.message = (x: any) => `[NOT] ${message(x)}`;
-		validator.validator = (x: any) => !fn(x);
+		validator.message = (x: T) => `[NOT] ${message(x)}`;
+		validator.validator = (x: T) => !fn(x);
 
-		(predicate as any)[validatorSymbol].push(validator);
+		predicate[validatorSymbol].push(validator);
 
 		return predicate;
 	};

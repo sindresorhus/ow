@@ -5,7 +5,7 @@ export class NumberPredicate extends Predicate<number> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<number>) {
 		super('number', context);
 	}
 

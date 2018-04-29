@@ -3,11 +3,11 @@ import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 
-export class SetPredicate extends Predicate<Set<any>> {
+export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<Set<T>>) {
 		super('set', context);
 	}
 
@@ -52,7 +52,7 @@ export class SetPredicate extends Predicate<Set<any>> {
 	 *
 	 * @param items The items that should be a item in the Set.
 	 */
-	has(...items: any[]) {
+	has(...items: T[]) {
 		return this.addValidator({
 			message: (_, missingItems) => `Expected Set to have items \`${JSON.stringify(missingItems)}\``,
 			validator: set => hasItems(set, items)
@@ -64,7 +64,7 @@ export class SetPredicate extends Predicate<Set<any>> {
 	 *
 	 * @param items The items that could be a item in the Set.
 	 */
-	hasAny(...items: any[]) {
+	hasAny(...items: T[]) {
 		return this.addValidator({
 			message: () => `Expected Set to have any item of \`${JSON.stringify(items)}\``,
 			validator: set => items.some(item => set.has(item))
@@ -76,7 +76,7 @@ export class SetPredicate extends Predicate<Set<any>> {
 	 *
 	 * @param predicate The predicate that should be applied against every item in the Set.
 	 */
-	ofType<T>(predicate: Predicate<T>) {
+	ofType(predicate: Predicate<T>) {
 		return this.addValidator({
 			message: (_, error) => error,
 			validator: set => ofType(set, predicate)
@@ -108,7 +108,7 @@ export class SetPredicate extends Predicate<Set<any>> {
 	 *
 	 * @param expected Expected Set to match.
 	 */
-	deepEqual(expected: Set<any>) {
+	deepEqual(expected: Set<T>) {
 		return this.addValidator({
 			message: set => `Expected Set to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(set))}\``,
 			validator: set => isEqual(set, expected)

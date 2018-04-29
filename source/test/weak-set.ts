@@ -1,9 +1,9 @@
 import test from 'ava';
 import m from '..';
 
-const unicorn: any = {unicorn: '🦄'};
-const rainbow: any = {rainbow: '🌈'};
-const rocket: any = {rocket: '🚀'};
+const unicorn = {unicorn: '🦄'};
+const rainbow = {rainbow: '🌈'};
+const rocket = {rocket: '🚀'};
 
 test('weakSet', t => {
 	t.notThrows(() => m(new WeakSet(), m.weakSet));

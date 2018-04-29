@@ -15,8 +15,8 @@ export interface Validator<T> {
 /**
  * @hidden
  */
-export interface Context {
-	validators: Validator<any>[];
+export interface Context<T> {
+	validators: Validator<T>[];
 }
 
 /**
@@ -30,7 +30,7 @@ export const validatorSymbol = Symbol('validators');
 export class Predicate<T = any> implements BasePredicate<T> {
 	constructor(
 		type: string,
-		private readonly context: Context = {
+		private readonly context: Context<T> = {
 			validators: []
 		}
 	) {

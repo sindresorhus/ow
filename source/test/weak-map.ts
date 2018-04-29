@@ -9,7 +9,7 @@ test('weakMap', t => {
 
 test('weakMap.hasKeys', t => {
 	const unicorn: any = {unicorn: true};
-	const rainbow: any = {rainbow: true};
+	const rainbow = {rainbow: true};
 	const keys = [{x: 1}, {x: 2}, {x: 3}, {x: 4}, {x: 5}, {x: 6}, {x: 7}, {x: 8}, {x: 9}, {x: 10}];
 
 	t.notThrows(() => m(new WeakMap([[unicorn, '🦄']]), m.weakMap.hasKeys(unicorn)));
@@ -20,8 +20,8 @@ test('weakMap.hasKeys', t => {
 
 test('weakMap.hasAnyKeys', t => {
 	const unicorn: any = {unicorn: true};
-	const rainbow: any = {rainbow: true};
-	const rocket: any = {rocket: true};
+	const rainbow = {rainbow: true};
+	const rocket = {rocket: true};
 
 	t.notThrows(() => m(new WeakMap([[unicorn, '🦄']]), m.weakMap.hasAnyKeys(unicorn, rainbow)));
 	t.notThrows(() => m(new WeakMap([[unicorn, '🦄'], [rainbow, '🌈']]), m.weakMap.hasAnyKeys(unicorn)));

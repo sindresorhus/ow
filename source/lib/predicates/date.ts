@@ -4,7 +4,7 @@ export class DatePredicate extends Predicate<Date> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<Date>) {
 		super('date', context);
 	}
 

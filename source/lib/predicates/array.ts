@@ -2,11 +2,11 @@ import isEqual = require('lodash.isequal'); // tslint:disable-line:no-require-im
 import ow from '../..';
 import {Predicate, Context} from './predicate';
 
-export class ArrayPredicate extends Predicate<any[]> {
+export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<T[]>) {
 		super('array', context);
 	}
 
@@ -51,7 +51,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 *
 	 * @param searchElement The value that should be the start of the array.
 	 */
-	startsWith(searchElement: any) {
+	startsWith(searchElement: T) {
 		return this.addValidator({
 			message: value => `Expected array to start with \`${searchElement}\`, got \`${value[0]}\``,
 			validator: value => value[0] === searchElement
@@ -63,7 +63,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 *
 	 * @param searchElement The value that should be the end of the array.
 	 */
-	endsWith(searchElement: any) {
+	endsWith(searchElement: T) {
 		return this.addValidator({
 			message: value => `Expected array to end with \`${searchElement}\`, got \`${value[value.length - 1]}\``,
 			validator: value => value[value.length - 1] === searchElement
@@ -75,7 +75,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 *
 	 * @param searchElements The values that should be included in the array.
 	 */
-	includes(...searchElements: any[]) {
+	includes(...searchElements: T[]) {
 		return this.addValidator({
 			message: value => `Expected array to include all elements of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => searchElements.every(el => value.indexOf(el) !== -1)
@@ -87,7 +87,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 *
 	 * @param searchElements The values that should be included in the array.
 	 */
-	includesAny(...searchElements: any[]) {
+	includesAny(...searchElements: T[]) {
 		return this.addValidator({
 			message: value => `Expected array to include any element of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => searchElements.some(el => value.indexOf(el) !== -1)
@@ -119,7 +119,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 *
 	 * @param expected Expected value to match.
 	 */
-	deepEqual(expected: any[]) {
+	deepEqual(expected: T[]) {
 		return this.addValidator({
 			message: value => `Expected array to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => isEqual(value, expected)
@@ -131,7 +131,7 @@ export class ArrayPredicate extends Predicate<any[]> {
 	 *
 	 * @param predicate The predicate that should be applied against every individual item.
 	 */
-	ofType<T>(predicate: Predicate<T>) {
+	ofType(predicate: Predicate<T>) {
 		let error: string;
 
 		return this.addValidator({
