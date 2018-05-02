@@ -6,15 +6,15 @@ import {Predicate, validatorSymbol} from '../predicates/predicate';
  * @hidden
  * @param predictate Predicate to wrap inside the operator.
  */
-export const not = <T extends Predicate>(predicate: T) => {
+export const not = <T, P extends Predicate<T>>(predicate: P) => {
 	predicate.addValidator = validator => {
 		const fn = validator.validator;
 		const message = validator.message;
 
-		validator.message = (x: any) => `[NOT] ${message(x)}`;
-		validator.validator = (x: any) => !fn(x);
+		validator.message = (x: T) => `[NOT] ${message(x)}`;
+		validator.validator = (x: T) => !fn(x);
 
-		(predicate as any)[validatorSymbol].push(validator);
+		predicate[validatorSymbol].push(validator);
 
 		return predicate;
 	};

@@ -4,7 +4,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<Error>) {
 		super('error', context);
 	}
 

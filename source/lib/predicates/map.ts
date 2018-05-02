@@ -3,11 +3,11 @@ import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 
-export class MapPredicate extends Predicate<Map<any, any>> {
+export class MapPredicate<T1 = any, T2 = any> extends Predicate<Map<T1, T2>> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<Map<T1, T2>>) {
 		super('map', context);
 	}
 
@@ -52,7 +52,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param keys The keys that should be a key in the Map.
 	 */
-	hasKeys(...keys: any[]) {
+	hasKeys(...keys: T1[]) {
 		return this.addValidator({
 			message: (_, missingKeys) => `Expected Map to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: map => hasItems(map, keys)
@@ -64,7 +64,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param keys The keys that could be a key in the Map.
 	 */
-	hasAnyKeys(...keys: any[]) {
+	hasAnyKeys(...keys: T1[]) {
 		return this.addValidator({
 			message: () => `Expected Map to have any key of \`${JSON.stringify(keys)}\``,
 			validator: map => keys.some(key => map.has(key))
@@ -76,7 +76,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param values The values that should be a value in the Map.
 	 */
-	hasValues(...values: any[]) {
+	hasValues(...values: T2[]) {
 		return this.addValidator({
 			message: (_, missingValues) => `Expected Map to have values \`${JSON.stringify(missingValues)}\``,
 			validator: map => hasItems(new Set(map.values()), values)
@@ -88,7 +88,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param values The values that could be a value in the Map.
 	 */
-	hasAnyValues(...values: any[]) {
+	hasAnyValues(...values: T2[]) {
 		return this.addValidator({
 			message: () => `Expected Map to have any value of \`${JSON.stringify(values)}\``,
 			validator: map => {
@@ -104,7 +104,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param predicate The predicate that should be applied against every key in the Map.
 	 */
-	keysOfType<T>(predicate: Predicate<T>) {
+	keysOfType(predicate: Predicate<T1>) {
 		return this.addValidator({
 			message: (_, error) => error,
 			validator: map => ofType(map.keys(), predicate)
@@ -116,7 +116,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param predicate The predicate that should be applied against every value in the Map.
 	 */
-	valuesOfType<T>(predicate: Predicate<T>) {
+	valuesOfType(predicate: Predicate<T2>) {
 		return this.addValidator({
 			message: (_, error) => error,
 			validator: map => ofType(map.values(), predicate)
@@ -148,7 +148,7 @@ export class MapPredicate extends Predicate<Map<any, any>> {
 	 *
 	 * @param expected Expected Map to match.
 	 */
-	deepEqual(expected: Map<any, any>) {
+	deepEqual(expected: Map<T1, T2>) {
 		return this.addValidator({
 			message: map => `Expected Map to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(map))}\``,
 			validator: map => isEqual(map, expected)

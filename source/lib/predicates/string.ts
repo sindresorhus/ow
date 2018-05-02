@@ -5,7 +5,7 @@ export class StringPredicate extends Predicate<string> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<string>) {
 		super('string', context);
 	}
 

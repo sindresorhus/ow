@@ -4,7 +4,7 @@ export class BooleanPredicate extends Predicate<boolean> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<boolean>) {
 		super('boolean', context);
 	}
 

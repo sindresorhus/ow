@@ -10,7 +10,7 @@ export class ObjectPredicate extends Predicate<object> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context) {
+	constructor(context?: Context<object>) {
 		super('object', context);
 	}
 

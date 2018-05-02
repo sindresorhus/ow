@@ -13,16 +13,11 @@
 		"pretty": true,
 		"newLine": "lf",
 		"stripInternal": true,
-		"noImplicitAny": true,
+		"strict": true,
 		"noImplicitReturns": true,
-		"noImplicitThis": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictPropertyInitialization": true,
-		"alwaysStrict": true,
 		"esModuleInterop": true
 	},
 	"exclude": [

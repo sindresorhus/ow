@@ -8,7 +8,7 @@ import {Predicate} from '../predicates/predicate';
  * @param source Source collection to test.
  * @param predicate Predicate to test every item in the source collection against.
  */
-export default (source: IterableIterator<any> | Set<any> | any[], predicate: Predicate): boolean | string => {
+export default <T>(source: IterableIterator<T> | Set<T> | T[], predicate: Predicate<T>): boolean | string => {
 	try {
 		for (const item of source) {
 			ow(item, predicate);
