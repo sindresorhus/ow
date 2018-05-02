@@ -6,9 +6,15 @@
 
 [![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow) [![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow)
 
-> Argument type validation
+> Function argument validation for humans
 
-[View documentation](https://sindresorhus.com/ow)
+
+## Highlights
+
+- Expressive chainable API
+- Lots of built-in validations
+- Supports custom validations
+- Written in TypeScript
 
 
 ## Install
@@ -38,6 +44,8 @@ unicorn('yo');
 
 
 ## API
+
+[Complete API documentation](https://sindresorhus.com/ow)
 
 ### ow(value, predicate)
 
