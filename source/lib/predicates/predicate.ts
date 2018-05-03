@@ -22,11 +22,6 @@ export interface Context<T> {
 /**
  * @hidden
  */
-export const validatorSymbol = Symbol('validators');
-
-/**
- * @hidden
- */
 export class Predicate<T = any> implements BasePredicate<T> {
 	constructor(
 		type: string,
@@ -53,13 +48,6 @@ export class Predicate<T = any> implements BasePredicate<T> {
 				throw new ArgumentError(message(value, result), main);
 			}
 		}
-	}
-
-	/**
-	 * @hidden
-	 */
-	get [validatorSymbol]() {
-		return this.context.validators;
 	}
 
 	/**

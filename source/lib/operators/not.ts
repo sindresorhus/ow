@@ -1,4 +1,15 @@
-import {Predicate, validatorSymbol} from '../predicates/predicate';
+import {Predicate} from '../predicates/predicate';
+
+/**
+ * @hidden
+ */
+const createMessage = (message: string) => {
+	if (message.startsWith('[NOT]')) {
+		return message.slice(6);
+	}
+
+	return `[NOT] ${message}`;
+};
 
 /**
  * Operator which inverts all the validations.
@@ -7,16 +18,16 @@ import {Predicate, validatorSymbol} from '../predicates/predicate';
  * @param predictate Predicate to wrap inside the operator.
  */
 export const not = <T, P extends Predicate<T>>(predicate: P) => {
+	const addValidator = predicate.addValidator.bind(predicate);
+
 	predicate.addValidator = validator => {
 		const fn = validator.validator;
 		const message = validator.message;
 
-		validator.message = (x: T) => `[NOT] ${message(x)}`;
+		validator.message = (x: T) => createMessage(message(x));
 		validator.validator = (x: T) => !fn(x);
 
-		predicate[validatorSymbol].push(validator);
-
-		return predicate;
+		return addValidator(validator);
 	};
 
 	return predicate;
