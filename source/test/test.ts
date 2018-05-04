@@ -5,7 +5,11 @@ test('not', t => {
 	t.notThrows(() => m(1, m.number.not.infinite));
 	t.notThrows(() => m(1, m.number.not.infinite.greaterThan(5)));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
+	t.notThrows(() => m('', m.string.not.not.empty));
+	t.notThrows(() => m('foo!', m.string.not.not.not.empty));
 	t.throws(() => m('', m.string.not.empty), '[NOT] Expected string to be empty, got ``');
+	t.throws(() => m('foo!', m.string.not.not.empty), 'Expected string to be empty, got `foo!`');
+	t.throws(() => m('', m.string.not.not.not.empty), '[NOT] Expected string to be empty, got ``');
 });
 
 test('is', t => {
