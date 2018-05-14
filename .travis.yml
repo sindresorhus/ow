@@ -14,3 +14,6 @@ deploy:
     github_token: $GITHUB_TOKEN
     on:
       tags: true
+cache:
+  directories:
+    - "$HOME/.npm"
