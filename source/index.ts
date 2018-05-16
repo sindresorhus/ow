@@ -1,4 +1,4 @@
-import {Predicate} from './lib/predicates/predicate';
+import {Predicate, Context} from './lib/predicates/predicate';
 import {AnyPredicate} from './lib/predicates/any';
 import {testSymbol} from './lib/predicates/base-predicate';
 import {StringPredicate} from './lib/predicates/string';
@@ -12,11 +12,19 @@ import {MapPredicate} from './lib/predicates/map';
 import {WeakMapPredicate} from './lib/predicates/weak-map';
 import {SetPredicate} from './lib/predicates/set';
 import {WeakSetPredicate} from './lib/predicates/weak-set';
+import {optional} from './lib/operators/optional';
 
 /**
  * @hidden
  */
 export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
+
+export interface Operators {
+	/**
+	 * Make the value optional.
+	 */
+	readonly optional: Ow;
+}
 
 export interface Ow {
 	/**
@@ -180,114 +188,121 @@ export interface Ow {
 	readonly iterable: Predicate<Iterable<any>>;
 }
 
-const main = <T>(value: T, predicate: Predicate<T> | AnyPredicate<T>) => (predicate as any)[testSymbol](value, main);
+const ow = (context?: Context<any>) => {
+	const main = <T>(value: T, predicate: Predicate<T> | AnyPredicate<T>) => (predicate as any)[testSymbol](value, main);
 
-Object.defineProperties(main, {
-	create: {
-		value: <T>(predicate: Predicate<T>) => (value: T) => main(value, predicate)
-	},
-	any: {
-		value: (...predicates: Predicate[]) => new AnyPredicate(predicates)
-	},
-	string: {
-		get: () => new StringPredicate()
-	},
-	number: {
-		get: () => new NumberPredicate()
-	},
-	boolean: {
-		get: () => new BooleanPredicate()
-	},
-	undefined: {
-		get: () => new Predicate('undefined')
-	},
-	null: {
-		get: () => new Predicate('null')
-	},
-	nullOrUndefined: {
-		get: () => new Predicate('nullOrUndefined')
-	},
-	nan: {
-		get: () => new Predicate('nan')
-	},
-	symbol: {
-		get: () => new Predicate('symbol')
-	},
-	array: {
-		get: () => new ArrayPredicate()
-	},
-	object: {
-		get: () => new ObjectPredicate()
-	},
-	date: {
-		get: () => new DatePredicate()
-	},
-	error: {
-		get: () => new ErrorPredicate()
-	},
-	map: {
-		get: () => new MapPredicate()
-	},
-	weakMap: {
-		get: () => new WeakMapPredicate()
-	},
-	set: {
-		get: () => new SetPredicate()
-	},
-	weakSet: {
-		get: () => new WeakSetPredicate()
-	},
-	function: {
-		get: () => new Predicate('function')
-	},
-	buffer: {
-		get: () => new Predicate('buffer')
-	},
-	regExp: {
-		get: () => new Predicate('regExp')
-	},
-	promise: {
-		get: () => new Predicate('promise')
-	},
-	typedArray: {
-		get: () => new Predicate('typedArray')
-	},
-	int8Array: {
-		get: () => new Predicate('int8Array')
-	},
-	uint8Array: {
-		get: () => new Predicate('uint8Array')
-	},
-	uint8ClampedArray: {
-		get: () => new Predicate('uint8ClampedArray')
-	},
-	int16Array: {
-		get: () => new Predicate('int16Array')
-	},
-	uint16Array: {
-		get: () => new Predicate('uint16Array')
-	},
-	int32Array: {
-		get: () => new Predicate('int32Array')
-	},
-	uint32Array: {
-		get: () => new Predicate('uint32Array')
-	},
-	float32Array: {
-		get: () => new Predicate('float32Array')
-	},
-	float64Array: {
-		get: () => new Predicate('float64Array')
-	},
-	arrayBuffer: {
-		get: () => new Predicate('arrayBuffer')
-	},
-	dataView: {
-		get: () => new Predicate('dataView')
-	},
-	iterable: {
-		get: () => new Predicate('iterable')
-	}
-});
+	Object.defineProperties(main, {
+		create: {
+			value: <T>(predicate: Predicate<T>) => (value: T) => main(value, predicate)
+		},
+		any: {
+			value: (...predicates: Predicate[]) => new AnyPredicate(predicates)
+		},
+		optional: {
+			get: () => optional(ow, context)
+		},
+		string: {
+			get: () => new StringPredicate(context)
+		},
+		number: {
+			get: () => new NumberPredicate(context)
+		},
+		boolean: {
+			get: () => new BooleanPredicate(context)
+		},
+		undefined: {
+			get: () => new Predicate('undefined', context)
+		},
+		null: {
+			get: () => new Predicate('null', context)
+		},
+		nullOrUndefined: {
+			get: () => new Predicate('nullOrUndefined', context)
+		},
+		nan: {
+			get: () => new Predicate('nan', context)
+		},
+		symbol: {
+			get: () => new Predicate('symbol', context)
+		},
+		array: {
+			get: () => new ArrayPredicate(context)
+		},
+		object: {
+			get: () => new ObjectPredicate(context)
+		},
+		date: {
+			get: () => new DatePredicate(context)
+		},
+		error: {
+			get: () => new ErrorPredicate(context)
+		},
+		map: {
+			get: () => new MapPredicate(context)
+		},
+		weakMap: {
+			get: () => new WeakMapPredicate(context)
+		},
+		set: {
+			get: () => new SetPredicate(context)
+		},
+		weakSet: {
+			get: () => new WeakSetPredicate(context)
+		},
+		function: {
+			get: () => new Predicate('function', context)
+		},
+		buffer: {
+			get: () => new Predicate('buffer', context)
+		},
+		regExp: {
+			get: () => new Predicate('regExp', context)
+		},
+		promise: {
+			get: () => new Predicate('promise', context)
+		},
+		typedArray: {
+			get: () => new Predicate('typedArray', context)
+		},
+		int8Array: {
+			get: () => new Predicate('int8Array', context)
+		},
+		uint8Array: {
+			get: () => new Predicate('uint8Array', context)
+		},
+		uint8ClampedArray: {
+			get: () => new Predicate('uint8ClampedArray', context)
+		},
+		int16Array: {
+			get: () => new Predicate('int16Array', context)
+		},
+		uint16Array: {
+			get: () => new Predicate('uint16Array', context)
+		},
+		int32Array: {
+			get: () => new Predicate('int32Array', context)
+		},
+		uint32Array: {
+			get: () => new Predicate('uint32Array', context)
+		},
+		float32Array: {
+			get: () => new Predicate('float32Array', context)
+		},
+		float64Array: {
+			get: () => new Predicate('float64Array', context)
+		},
+		arrayBuffer: {
+			get: () => new Predicate('arrayBuffer', context)
+		},
+		dataView: {
+			get: () => new Predicate('dataView', context)
+		},
+		iterable: {
+			get: () => new Predicate('iterable', context)
+		}
+	});
 
-export default main as Ow;
+	return main as Ow & Operators;
+};
+
+export default ow();

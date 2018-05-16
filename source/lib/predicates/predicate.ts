@@ -16,7 +16,8 @@ export interface Validator<T> {
  * @hidden
  */
 export interface Context<T> {
-	validators: Validator<T>[];
+	validators?: Validator<T>[];
+	optional?: boolean;
 }
 
 /**
@@ -28,12 +29,14 @@ export const validatorSymbol = Symbol('validators');
  * @hidden
  */
 export class Predicate<T = any> implements BasePredicate<T> {
-	constructor(
-		type: string,
-		private readonly context: Context<T> = {
+	private readonly context: Context<T> & {validators: Validator<T>[]};
+
+	constructor(type: string, context?: Context<T>) {
+		this.context = {
+			...context,
 			validators: []
-		}
-	) {
+		};
+
 		this.addValidator({
 			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
 			validator: value => (is as any)[type](value)
@@ -45,6 +48,10 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Ow) {
+		if (this.context.optional && value === undefined) {
+			return;
+		}
+
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);
 
