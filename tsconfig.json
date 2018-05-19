@@ -9,6 +9,9 @@
 		],
 		"module": "commonjs",
 		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
 		"declaration": true,
 		"pretty": true,
 		"newLine": "lf",
@@ -18,7 +21,8 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
-		"esModuleInterop": true
+		"noEmitOnError": true,
+		"forceConsistentCasingInFileNames": true
 	},
 	"exclude": [
 		"node_modules",

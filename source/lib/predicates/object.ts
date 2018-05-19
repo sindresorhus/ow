@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
-import * as dotProp from 'dot-prop';
-import isEqual = require('lodash.isequal'); // tslint:disable-line:no-require-imports
+import dotProp from 'dot-prop';
+import isEqual from 'lodash.isequal';
 import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
