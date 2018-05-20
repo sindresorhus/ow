@@ -38,6 +38,8 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	) {
 		this.addValidator({
 			message: value => {
+				// for base type checks, we do not include type in the label as we do for other messages,
+				// because it would be redundant with the message itself.
 				const label = this.context.label || 'argument';
 				return `Expected ${label} to be of type \`${type}\` but received type \`${is(value)}\``;
 			},
