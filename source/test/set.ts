@@ -4,13 +4,19 @@ import m from '..';
 test('set', t => {
 	t.notThrows(() => m(new Set(), m.set));
 	t.notThrows(() => m(new Set(['🦄']), m.set));
+	t.notThrows(() => m(new Set(['🦄']), m.set.label('foo')));
 	t.throws(() => m(12 as any, m.set), 'Expected argument to be of type `set` but received type `number`');
+	t.throws(() => m(12 as any, m.set.label('foo')), 'Expected `foo` to be of type `set` but received type `number`');
 });
 
 test('set.size', t => {
 	t.notThrows(() => m(new Set(), m.set.size(0)));
 	t.notThrows(() => m(new Set(['🦄']), m.set.size(1)));
+	t.notThrows(() => m(new Set(['🦄']), m.set.label('foo').size(1)));
+	t.notThrows(() => m(new Set(['🦄']), m.set.size(1).label('foo')));
 	t.throws(() => m(new Set(['🦄']), m.set.size(0)), 'Expected Set to have size `0`, got `1`');
+	t.throws(() => m(new Set(['🦄']), m.set.label('foo').size(0)), 'Expected Set `foo` to have size `0`, got `1`');
+	t.throws(() => m(new Set(['🦄']), m.set.size(0).label('foo')), 'Expected Set `foo` to have size `0`, got `1`');
 });
 
 test('set.minSize', t => {
@@ -45,7 +51,10 @@ test('set.ofType', t => {
 	t.notThrows(() => m(new Set(['unicorn']), m.set.ofType(m.string)));
 	t.notThrows(() => m(new Set(['unicorn', 'rainbow']), m.set.ofType(m.string.minLength(3))));
 	t.notThrows(() => m(new Set([1]), m.set.ofType(m.number)));
-	t.throws(() => m(new Set(['unicorn']), m.set.ofType(m.number)), 'Expected argument to be of type `number` but received type `string`');
+	t.notThrows(() => m(new Set([1]), m.set.label('foo').ofType(m.number)));
+	t.throws(() => m(new Set(['unicorn']), m.set.ofType(m.number)), '(Set) Expected argument to be of type `number` but received type `string`');
+	t.throws(() => m(new Set(['unicorn']), m.set.label('foo').ofType(m.number)), '(Set `foo`) Expected argument to be of type `number` but received type `string`');
+	t.throws(() => m(new Set(['unicorn']), m.set.label('foo').ofType(m.number.label('bar'))), '(Set `foo`) Expected `bar` to be of type `number` but received type `string`');
 });
 
 test('set.empty', t => {

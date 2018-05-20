@@ -4,13 +4,19 @@ import m from '..';
 test('map', t => {
 	t.notThrows(() => m(new Map(), m.map));
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map));
+	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo')));
 	t.throws(() => m(12 as any, m.map), 'Expected argument to be of type `map` but received type `number`');
+	t.throws(() => m(12 as any, m.map.label('foo')), 'Expected `foo` to be of type `map` but received type `number`');
 });
 
 test('map.size', t => {
 	t.notThrows(() => m(new Map(), m.map.size(0)));
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.size(1)));
+	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').size(1)));
+	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.size(1).label('foo')));
 	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.size(0)), 'Expected Map to have size `0`, got `1`');
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').size(0)), 'Expected Map `foo` to have size `0`, got `1`');
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.size(0).label('foo')), 'Expected Map `foo` to have size `0`, got `1`');
 });
 
 test('map.minSize', t => {
@@ -58,14 +64,20 @@ test('map.keysOfType', t => {
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.keysOfType(m.string)));
 	t.notThrows(() => m(new Map([['unicorn', '🦄'], ['rainbow', '🌈']]), m.map.keysOfType(m.string.minLength(3))));
 	t.notThrows(() => m(new Map([[1, '🦄']]), m.map.keysOfType(m.number)));
-	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.keysOfType(m.number)), 'Expected argument to be of type `number` but received type `string`');
+	t.notThrows(() => m(new Map([[1, '🦄']]), m.map.label('foo').keysOfType(m.number)));
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.keysOfType(m.number)), '(Map) Expected argument to be of type `number` but received type `string`');
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').keysOfType(m.number)), '(Map `foo`) Expected argument to be of type `number` but received type `string`');
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').keysOfType(m.number.label('bar'))), '(Map `foo`) Expected `bar` to be of type `number` but received type `string`');
 });
 
 test('map.valuesOfType', t => {
 	t.notThrows(() => m(new Map([['unicorn', 1]]), m.map.valuesOfType(m.number)));
 	t.notThrows(() => m(new Map([['unicorn', 10], ['rainbow', 11]]), m.map.valuesOfType(m.number.greaterThanOrEqual(10))));
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.valuesOfType(m.string)));
-	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.valuesOfType(m.number)), 'Expected argument to be of type `number` but received type `string`');
+	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').valuesOfType(m.string)));
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.valuesOfType(m.number)), '(Map) Expected argument to be of type `number` but received type `string`');
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').valuesOfType(m.number)), '(Map `foo`) Expected argument to be of type `number` but received type `string`');
+	t.throws(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo').valuesOfType(m.number.label('bar'))), '(Map `foo`) Expected `bar` to be of type `number` but received type `string`');
 });
 
 test('map.empty', t => {

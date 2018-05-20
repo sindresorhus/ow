@@ -19,7 +19,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	get plain() {
 		return this.addValidator({
-			message: () => 'Expected object to be a plain object',
+			message: (_, label) => `Expected ${label} to be a plain object`,
 			validator: object => is.plainObject(object)
 		});
 	}
@@ -29,7 +29,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	get empty() {
 		return this.addValidator({
-			message: object => `Expected object to be empty, got \`${JSON.stringify(object)}\``,
+			message: (object, label) => `Expected ${label} to be empty, got \`${JSON.stringify(object)}\``,
 			validator: object => Object.keys(object).length === 0
 		});
 	}
@@ -39,7 +39,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	get nonEmpty() {
 		return this.addValidator({
-			message: () => 'Expected object to not be empty',
+			message: (_, label) => `Expected ${label} to not be empty`,
 			validator: object => Object.keys(object).length > 0
 		});
 	}
@@ -51,7 +51,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	valuesOfType<T>(predicate: Predicate<T>) {
 		return this.addValidator({
-			message: (_, error) => error,
+			message: (_, label, error) => `(${label}) ${error}`,
 			validator: (object: any) => {
 				const values = Object.keys(object).map(key => object[key]);
 
@@ -67,7 +67,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	deepValuesOfType<T>(predicate: Predicate<T>) {
 		return this.addValidator({
-			message: (_, error) => error,
+			message: (_, label, error) => `(${label}) ${error}`,
 			validator: (object: any) => ofTypeDeep(object, predicate)
 		});
 	}
@@ -79,7 +79,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	deepEqual(expected: object) {
 		return this.addValidator({
-			message: object => `Expected object to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(object)}\``,
+			message: (object, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(object)}\``,
 			validator: object => isEqual(object, expected)
 		});
 	}
@@ -91,14 +91,14 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	instanceOf(instance: any) {
 		return this.addValidator({
-			message: (object: any) => {
+			message: (object: any, label: string) => {
 				let name = object.constructor.name;
 
 				if (!name || name === 'Object') {
 					name = JSON.stringify(object);
 				}
 
-				return `Expected \`${name}\` to be of type \`${instance.name}\``;
+				return `Expected ${label} \`${name}\` to be of type \`${instance.name}\``;
 			},
 			validator: object => object instanceof instance
 		});
@@ -111,7 +111,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	hasKeys(...keys: string[]) {
 		return this.addValidator({
-			message: (_, missingKeys) => `Expected object to have keys \`${JSON.stringify(missingKeys)}\``,
+			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: object => hasItems({
 				has: item => dotProp.has(object, item)
 			}, keys)
@@ -125,7 +125,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	hasAnyKeys(...keys: string[]) {
 		return this.addValidator({
-			message: () => `Expected object to have any key of \`${JSON.stringify(keys)}\``,
+			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: (object: any) => keys.some(key => dotProp.has(object, key))
 		});
 	}

@@ -6,7 +6,7 @@ export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<
 	 * @hidden
 	 */
 	constructor(context?: Context<WeakSet<T>>) {
-		super('weakSet', context);
+		super('weakSet', context, 'WeakSet');
 	}
 
 	/**
@@ -16,7 +16,7 @@ export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<
 	 */
 	has(...items: T[]) {
 		return this.addValidator({
-			message: (_, missingItems) => `Expected WeakSet to have items \`${JSON.stringify(missingItems)}\``,
+			message: (_, label, missingItems) => `Expected ${label} to have items \`${JSON.stringify(missingItems)}\``,
 			validator: set => hasItems(set, items)
 		});
 	}
@@ -28,7 +28,7 @@ export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<
 	 */
 	hasAny(...items: T[]) {
 		return this.addValidator({
-			message: () => `Expected WeakSet to have any item of \`${JSON.stringify(items)}\``,
+			message: (_, label) => `Expected ${label} to have any item of \`${JSON.stringify(items)}\``,
 			validator: set => items.some(item => set.has(item))
 		});
 	}

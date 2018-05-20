@@ -3,13 +3,19 @@ import m from '..';
 
 test('string', t => {
 	t.notThrows(() => m('foo', m.string));
+	t.notThrows(() => m('foo', m.string.label('foo')));
 	t.throws(() => m(12 as any, m.string), 'Expected argument to be of type `string` but received type `number`');
+	t.throws(() => m(12 as any, m.string.label('bar')), 'Expected `bar` to be of type `string` but received type `number`');
 });
 
 test('string.length', t => {
 	t.notThrows(() => m('foo', m.string.length(3)));
 	t.notThrows(() => m('foobar', m.string.length(6)));
+	t.notThrows(() => m('bar', m.string.label('bar').length(3)));
+	t.notThrows(() => m('bar', m.string.length(3).label('bar')));
 	t.throws(() => m('foo' as any, m.string.length(4)), 'Expected string to have length `4`, got `foo`');
+	t.throws(() => m('foo' as any, m.string.label('foo').length(4)), 'Expected string `foo` to have length `4`, got `foo`');
+	t.throws(() => m('foo' as any, m.string.length(4).label('foo')), 'Expected string `foo` to have length `4`, got `foo`');
 });
 
 test('string.minLength', t => {
@@ -78,5 +84,7 @@ test('string.numeric', t => {
 test('string.date', t => {
 	t.notThrows(() => m('2017-03-02', m.string.date));
 	t.notThrows(() => m('2017-03-02T10:00:00Z', m.string.date));
+	t.notThrows(() => m('2017-03-02T10:00:00Z', m.string.label('bar').date));
 	t.throws(() => m('foo' as any, m.string.date), 'Expected string to be a date, got `foo`');
+	t.throws(() => m('foo' as any, m.string.label('bar').date), 'Expected string `bar` to be a date, got `foo`');
 });

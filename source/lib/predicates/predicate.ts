@@ -8,7 +8,7 @@ import {not} from '../operators/not';
  * @hidden
  */
 export interface Validator<T> {
-	message(value: T, result?: any): string;
+	message(value: T, label?: string, result?: any): string;
 	validator(value: T): any;
 }
 
@@ -17,6 +17,7 @@ export interface Validator<T> {
  */
 export interface Context<T> {
 	validators: Validator<T>[];
+	label?: string;
 }
 
 /**
@@ -32,10 +33,14 @@ export class Predicate<T = any> implements BasePredicate<T> {
 		type: string,
 		private readonly context: Context<T> = {
 			validators: []
-		}
+		},
+		private readonly defaultLabel: string = type
 	) {
 		this.addValidator({
-			message: value => `Expected argument to be of type \`${type}\` but received type \`${is(value)}\``,
+			message: value => {
+				const label = this.context.label || 'argument';
+				return `Expected ${label} to be of type \`${type}\` but received type \`${is(value)}\``;
+			},
 			validator: value => (is as any)[type](value)
 		});
 	}
@@ -45,12 +50,16 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Ow) {
+		const label = this.context.label
+			? `${this.defaultLabel} ${this.context.label}`
+			: this.defaultLabel;
+
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);
 
 			if (typeof result !== 'boolean' || !result) {
 				// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-				throw new ArgumentError(message(value, result), main);
+				throw new ArgumentError(message(value, label, result), main);
 			}
 		}
 	}
@@ -70,6 +79,16 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	}
 
 	/**
+	 * Assigns a label to this predicate for use in error messages.
+	 *
+	 * @param value Label to assign.
+	 */
+	label(value: string) {
+		this.context.label = `\`${value}\``;
+		return this;
+	}
+
+	/**
 	 * Test if the value matches a custom validation function. The validation function should return `true` if the value
 	 * passes the function. If the function either returns `false` or a string, the function fails and the string will be
 	 * used as error message.
@@ -78,7 +97,10 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	is(fn: (value: T) => boolean | string) {
 		return this.addValidator({
-			message: (value, error) => error || `Expected \`${value}\` to pass custom validation function`,
+			message: (value, label, error) => (error
+				? `(${label}) ${error}`
+				: `Expected ${label} \`${value}\` to pass custom validation function`
+			),
 			validator: value => fn(value)
 		});
 	}

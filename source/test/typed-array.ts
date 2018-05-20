@@ -6,7 +6,9 @@ test('typedArray', t => {
 	t.notThrows(() => m(new Uint8Array(2), m.typedArray));
 	t.notThrows(() => m(new Int32Array(2), m.typedArray));
 	t.notThrows(() => m(new Float64Array(2), m.typedArray));
+	t.notThrows(() => m(new Float64Array(2), m.typedArray.label('foo')));
 	t.throws(() => m('foo' as any, m.typedArray), 'Expected argument to be of type `typedArray` but received type `string`');
+	t.throws(() => m('foo' as any, m.typedArray.label('foo')), 'Expected `foo` to be of type `typedArray` but received type `string`');
 	t.throws(() => m(12 as any, m.typedArray), 'Expected argument to be of type `typedArray` but received type `number`');
 });
 

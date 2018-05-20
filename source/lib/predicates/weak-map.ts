@@ -6,7 +6,7 @@ export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predica
 	 * @hidden
 	 */
 	constructor(context?: Context<WeakMap<T1, T2>>) {
-		super('weakMap', context);
+		super('weakMap', context, 'WeakMap');
 	}
 
 	/**
@@ -16,7 +16,7 @@ export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predica
 	 */
 	hasKeys(...keys: T1[]) {
 		return this.addValidator({
-			message: (_, missingKeys) => `Expected WeakMap to have keys \`${JSON.stringify(missingKeys)}\``,
+			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: map => hasItems(map, keys)
 		});
 	}
@@ -28,7 +28,7 @@ export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predica
 	 */
 	hasAnyKeys(...keys: T1[]) {
 		return this.addValidator({
-			message: () => `Expected WeakMap to have any key of \`${JSON.stringify(keys)}\``,
+			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: map => keys.some(key => map.has(key))
 		});
 	}
