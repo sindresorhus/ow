@@ -18,6 +18,14 @@ test('is', t => {
 	t.throws(() => m(5, m.number.is(x => greaterThan(10, x))), 'Expected `5` to be greater than `10`');
 });
 
+test('isValid', t => {
+	t.true(m.isValid(1, m.number));
+	t.true(m.isValid(1, m.number.equal(1)));
+	t.true(m.isValid('foo!', m.string.not.alphanumeric));
+	t.false(m.isValid(1 as any, m.string));
+	t.false(m.isValid(1 as any, m.number.greaterThan(2)));
+});
+
 test('reusable validator', t => {
 	const checkUsername = m.create(m.string.minLength(3));
 

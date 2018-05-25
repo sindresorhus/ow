@@ -20,12 +20,19 @@ export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array
 
 export interface Ow {
 	/**
-	 * Test if the value matches the predicate.
+	 * Test if the value matches the predicate. Throws an `ArgumentError` if the test fails..
 	 *
 	 * @param value Value to test.
 	 * @param predicate Predicate to test against.
 	 */
 	<T>(value: T, predicate: Predicate<T>): void;
+	/**
+	 * Returns `true` if the value matches the predicate, otherwise returns `false`.
+	 *
+	 * @param value Value to test.
+	 * @param predicate Predicate to test against.
+	 */
+	isValid<T>(value: T, predicate: Predicate<T>): value is T;
 	/**
 	 * Create a reusable validator.
 	 *
@@ -183,6 +190,16 @@ export interface Ow {
 const main = <T>(value: T, predicate: Predicate<T> | AnyPredicate<T>) => (predicate as any)[testSymbol](value, main);
 
 Object.defineProperties(main, {
+	isValid: {
+		value: <T>(value: T, predicate: Predicate<T>) => {
+			try {
+				main(value, predicate);
+				return true;
+			} catch {
+				return false;
+			}
+		}
+	},
 	create: {
 		value: <T>(predicate: Predicate<T>) => (value: T) => main(value, predicate)
 	},
