@@ -49,7 +49,11 @@ unicorn('yo');
 
 ### ow(value, predicate)
 
-Test if `value` matches the provided `predicate`.
+Test if `value` matches the provided `predicate`.  Throws an `ArgumentError` if the test fails.
+
+### ow.isValid(value, predicate)
+
+Returns `true` if the value matches the predicate, otherwise returns `false`.
 
 ### ow.create(predicate)
 
