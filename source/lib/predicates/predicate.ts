@@ -80,7 +80,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	}
 
 	/**
-	 * Assigns a label to this predicate for use in error messages.
+	 * Assign a label to this predicate for use in error messages.
 	 *
 	 * @param value Label to assign.
 	 */
