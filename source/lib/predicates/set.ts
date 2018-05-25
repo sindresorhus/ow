@@ -8,7 +8,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 * @hidden
 	 */
 	constructor(context?: Context<Set<T>>) {
-		super('set', context, 'Set');
+		super('Set', context);
 	}
 
 	/**

@@ -30,19 +30,20 @@ export const validatorSymbol = Symbol('validators');
  */
 export class Predicate<T = any> implements BasePredicate<T> {
 	constructor(
-		type: string,
+		private readonly type: string,
 		private readonly context: Context<T> = {
 			validators: []
-		},
-		private readonly defaultLabel: string = type
+		}
 	) {
+		const x = this.type[0].toLowerCase() + this.type.slice(1);
+
 		this.addValidator({
 			message: value => {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
 				const label = this.context.label || 'argument';
-				return `Expected ${label} to be of type \`${type}\` but received type \`${is(value)}\``;
+				return `Expected ${label} to be of type \`${x}\` but received type \`${is(value)}\``;
 			},
-			validator: value => (is as any)[type](value)
+			validator: value => (is as any)[x](value)
 		});
 	}
 
@@ -52,8 +53,8 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Ow) {
 		const label = this.context.label
-			? `${this.defaultLabel} ${this.context.label}`
-			: this.defaultLabel;
+			? `${this.type} ${this.context.label}`
+			: this.type;
 
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);

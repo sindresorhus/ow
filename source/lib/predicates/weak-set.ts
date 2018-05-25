@@ -6,7 +6,7 @@ export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<
 	 * @hidden
 	 */
 	constructor(context?: Context<WeakSet<T>>) {
-		super('weakSet', context, 'WeakSet');
+		super('WeakSet', context);
 	}
 
 	/**

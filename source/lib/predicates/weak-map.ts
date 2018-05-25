@@ -6,7 +6,7 @@ export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predica
 	 * @hidden
 	 */
 	constructor(context?: Context<WeakMap<T1, T2>>) {
-		super('weakMap', context, 'WeakMap');
+		super('WeakMap', context);
 	}
 
 	/**

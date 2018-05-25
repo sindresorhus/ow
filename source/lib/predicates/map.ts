@@ -8,7 +8,7 @@ export class MapPredicate<T1 = any, T2 = any> extends Predicate<Map<T1, T2>> {
 	 * @hidden
 	 */
 	constructor(context?: Context<Map<T1, T2>>) {
-		super('map', context, 'Map');
+		super('Map', context);
 	}
 
 	/**
