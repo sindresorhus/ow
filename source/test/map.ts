@@ -5,8 +5,8 @@ test('map', t => {
 	t.notThrows(() => m(new Map(), m.map));
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map));
 	t.notThrows(() => m(new Map([['unicorn', '🦄']]), m.map.label('foo')));
-	t.throws(() => m(12 as any, m.map), 'Expected argument to be of type `map` but received type `number`');
-	t.throws(() => m(12 as any, m.map.label('foo')), 'Expected `foo` to be of type `map` but received type `number`');
+	t.throws(() => m(12 as any, m.map), 'Expected argument to be of type `Map` but received type `number`');
+	t.throws(() => m(12 as any, m.map.label('foo')), 'Expected `foo` to be of type `Map` but received type `number`');
 });
 
 test('map.size', t => {

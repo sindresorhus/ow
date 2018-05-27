@@ -5,8 +5,8 @@ test('weakMap', t => {
 	t.notThrows(() => m(new WeakMap(), m.weakMap));
 	t.notThrows(() => m(new WeakMap([[{foo: 'bar'}, '🦄']]), m.weakMap));
 	t.notThrows(() => m(new WeakMap([[{foo: 'bar'}, '🦄']]), m.weakMap.label('foo')));
-	t.throws(() => m(12 as any, m.weakMap), 'Expected argument to be of type `weakMap` but received type `number`');
-	t.throws(() => m(12 as any, m.weakMap.label('foo')), 'Expected `foo` to be of type `weakMap` but received type `number`');
+	t.throws(() => m(12 as any, m.weakMap), 'Expected argument to be of type `WeakMap` but received type `number`');
+	t.throws(() => m(12 as any, m.weakMap.label('foo')), 'Expected `foo` to be of type `WeakMap` but received type `number`');
 });
 
 test('weakMap.hasKeys', t => {

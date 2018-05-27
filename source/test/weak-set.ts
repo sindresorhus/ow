@@ -10,8 +10,8 @@ test('weakSet', t => {
 	t.notThrows(() => m(new WeakSet([{unicorn: '🦄'}]), m.weakSet));
 	t.notThrows(() => m(new WeakSet([unicorn]), m.weakSet));
 	t.notThrows(() => m(new WeakSet([unicorn]), m.weakSet.label('foo')));
-	t.throws(() => m(12 as any, m.weakSet), 'Expected argument to be of type `weakSet` but received type `number`');
-	t.throws(() => m(12 as any, m.weakSet.label('foo')), 'Expected `foo` to be of type `weakSet` but received type `number`');
+	t.throws(() => m(12 as any, m.weakSet), 'Expected argument to be of type `WeakSet` but received type `number`');
+	t.throws(() => m(12 as any, m.weakSet.label('foo')), 'Expected `foo` to be of type `WeakSet` but received type `number`');
 });
 
 test('weakSet.has', t => {

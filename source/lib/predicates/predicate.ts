@@ -41,7 +41,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 			message: value => {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
 				const label = this.context.label || 'argument';
-				return `Expected ${label} to be of type \`${x}\` but received type \`${is(value)}\``;
+				return `Expected ${label} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
 			validator: value => (is as any)[x](value)
 		});

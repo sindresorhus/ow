@@ -5,8 +5,8 @@ test('set', t => {
 	t.notThrows(() => m(new Set(), m.set));
 	t.notThrows(() => m(new Set(['🦄']), m.set));
 	t.notThrows(() => m(new Set(['🦄']), m.set.label('foo')));
-	t.throws(() => m(12 as any, m.set), 'Expected argument to be of type `set` but received type `number`');
-	t.throws(() => m(12 as any, m.set.label('foo')), 'Expected `foo` to be of type `set` but received type `number`');
+	t.throws(() => m(12 as any, m.set), 'Expected argument to be of type `Set` but received type `number`');
+	t.throws(() => m(12 as any, m.set.label('foo')), 'Expected `foo` to be of type `Set` but received type `number`');
 });
 
 test('set.size', t => {
