@@ -94,6 +94,27 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
+	 * Test if the string is an element of the provided list.
+	 *
+	 * @param list List of possible values.
+	 */
+	oneOf(list: string[]) {
+		return this.addValidator({
+			message: (value, label) => {
+				let printedList = JSON.stringify(list);
+
+				if (list.length > 10) {
+					const overflow = list.length - 10;
+					printedList = JSON.stringify(list.slice(0, 10)).replace(/]$/, `,…+${overflow} more]`);
+				}
+
+				return `Expected ${label} to be one of \`${printedList}\`, got \`${value}\``;
+			},
+			validator: value => list.includes(value)
+		});
+	}
+
+	/**
 	 * Test a string to be empty.
 	 */
 	get empty() {
