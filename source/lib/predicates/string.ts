@@ -16,7 +16,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	length(length: number) {
 		return this.addValidator({
-			message: value => `Expected string to have length \`${length}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to have length \`${length}\`, got \`${value}\``,
 			validator: value => value.length === length
 		});
 	}
@@ -28,7 +28,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	minLength(length: number) {
 		return this.addValidator({
-			message: value => `Expected string to have a minimum length of \`${length}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value}\``,
 			validator: value => value.length >= length
 		});
 	}
@@ -40,7 +40,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	maxLength(length: number) {
 		return this.addValidator({
-			message: value => `Expected string to have a maximum length of \`${length}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value}\``,
 			validator: value => value.length <= length
 		});
 	}
@@ -52,7 +52,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	matches(regExp: RegExp) {
 		return this.addValidator({
-			message: value => `Expected string to match \`${regExp}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to match \`${regExp}\`, got \`${value}\``,
 			validator: value => regExp.test(value)
 		});
 	}
@@ -64,7 +64,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	startsWith(searchString: string) {
 		return this.addValidator({
-			message: value => `Expected string to start with \`${searchString}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to start with \`${searchString}\`, got \`${value}\``,
 			validator: value => value.startsWith(searchString)
 		});
 	}
@@ -76,7 +76,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	endsWith(searchString: string) {
 		return this.addValidator({
-			message: value => `Expected string to end with \`${searchString}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to end with \`${searchString}\`, got \`${value}\``,
 			validator: value => value.endsWith(searchString)
 		});
 	}
@@ -88,7 +88,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	includes(searchString: string) {
 		return this.addValidator({
-			message: value => `Expected string to include \`${searchString}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to include \`${searchString}\`, got \`${value}\``,
 			validator: value => value.includes(searchString)
 		});
 	}
@@ -98,7 +98,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	get empty() {
 		return this.addValidator({
-			message: value => `Expected string to be empty, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to be empty, got \`${value}\``,
 			validator: value => value === ''
 		});
 	}
@@ -108,7 +108,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	get nonEmpty() {
 		return this.addValidator({
-			message: () => 'Expected string to not be empty',
+			message: (_, label) => `Expected ${label} to not be empty`,
 			validator: value => value !== ''
 		});
 	}
@@ -120,7 +120,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	equals(expected: string) {
 		return this.addValidator({
-			message: value => `Expected string to be equal to \`${expected}\`, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to be equal to \`${expected}\`, got \`${value}\``,
 			validator: value => value === expected
 		});
 	}
@@ -130,7 +130,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	get alphanumeric() {
 		return this.addValidator({
-			message: value => `Expected string to be alphanumeric, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to be alphanumeric, got \`${value}\``,
 			validator: value => /^[a-z\d]+$/i.test(value)
 		});
 	}
@@ -140,7 +140,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	get numeric() {
 		return this.addValidator({
-			message: value => `Expected string to be numeric, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to be numeric, got \`${value}\``,
 			validator: value => /^\d+$/i.test(value)
 		});
 	}
@@ -150,7 +150,7 @@ export class StringPredicate extends Predicate<string> {
 	 */
 	get date() {
 		return this.addValidator({
-			message: value => `Expected string to be a date, got \`${value}\``,
+			message: (value, label) => `Expected ${label} to be a date, got \`${value}\``,
 			validator: value => valiDate(value)
 		});
 	}

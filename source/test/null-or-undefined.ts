@@ -9,5 +9,7 @@ test('nullOrUndefined', t => {
 	t.notThrows(() => m(undefined, m.nullOrUndefined));
 	t.notThrows(() => m(x, m.nullOrUndefined));
 	t.notThrows(() => m(y, m.nullOrUndefined));
+	t.notThrows(() => m(y, m.nullOrUndefined.label('foo')));
 	t.throws(() => m('foo', m.nullOrUndefined), 'Expected argument to be of type `nullOrUndefined` but received type `string`');
+	t.throws(() => m('foo', m.nullOrUndefined.label('foo')), 'Expected `foo` to be of type `nullOrUndefined` but received type `string`');
 });

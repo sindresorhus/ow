@@ -15,7 +15,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 */
 	name(expected: string) {
 		return this.addValidator({
-			message: error => `Expected error to have name \`${expected}\`, got \`${error.name}\``,
+			message: (error, label) => `Expected ${label} to have name \`${expected}\`, got \`${error.name}\``,
 			validator: error => error.name === expected
 		});
 	}
@@ -27,7 +27,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 */
 	message(expected: string) {
 		return this.addValidator({
-			message: error => `Expected error message to be \`${expected}\`, got \`${error.message}\``,
+			message: (error, label) => `Expected ${label} message to be \`${expected}\`, got \`${error.message}\``,
 			validator: error => error.message === expected
 		});
 	}
@@ -39,7 +39,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 */
 	messageIncludes(message: string) {
 		return this.addValidator({
-			message: error => `Expected error message to include \`${message}\`, got \`${error.message}\``,
+			message: (error, label) => `Expected ${label} message to include \`${message}\`, got \`${error.message}\``,
 			validator: error => error.message.includes(message)
 		});
 	}
@@ -51,7 +51,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 */
 	hasKeys(...keys: string[]) {
 		return this.addValidator({
-			message: () => `Expected error message to have keys \`${keys.join('`, `')}\``,
+			message: (_, label) => `Expected ${label} message to have keys \`${keys.join('`, `')}\``,
 			validator: error => keys.every(key => error.hasOwnProperty(key))
 		});
 	}
@@ -63,7 +63,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 */
 	instanceOf(instance: any) {
 		return this.addValidator({
-			message: error => `Expected \`${error.name}\` to be of type \`${instance.name}\``,
+			message: (error, label) => `Expected ${label} \`${error.name}\` to be of type \`${instance.name}\``,
 			validator: error => error instanceof instance
 		});
 	}
