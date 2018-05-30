@@ -56,6 +56,14 @@ test('string.includes', t => {
 	t.throws(() => m('foo' as any, m.string.includes('bar')), 'Expected string to include `bar`, got `foo`');
 });
 
+test('string.oneOf', t => {
+	t.notThrows(() => m('foo', m.string.oneOf(['foo', 'bar'])));
+	t.throws(() => m('foo', m.string.oneOf(['unicorn', 'rainbow'])), 'Expected string to be one of `["unicorn","rainbow"]`, got `foo`');
+	t.throws(() => m('foo', m.string.oneOf(['unicorn', 'rainbow']).label('hello')), 'Expected string `hello` to be one of `["unicorn","rainbow"]`, got `foo`');
+	t.throws(() => m('foo', m.string.oneOf(['a', 'b', 'c', 'd', 'e'])), 'Expected string to be one of `["a","b","c","d","e"]`, got `foo`');
+	t.throws(() => m('foo', m.string.oneOf(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'])), 'Expected string to be one of `["1","2","3","4","5","6","7","8","9","10",…+3 more]`, got `foo`');
+});
+
 test('string.empty', t => {
 	t.notThrows(() => m('', m.string.empty));
 	t.throws(() => m('foo' as any, m.string.empty), 'Expected string to be empty, got `foo`');
