@@ -4,11 +4,14 @@ import m from '..';
 test('not', t => {
 	t.notThrows(() => m(1, m.number.not.infinite));
 	t.notThrows(() => m(1, m.number.not.infinite.greaterThan(5)));
-	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
+	t.notThrows(() => m('foo!', m.string.not.alphabetical));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
 	t.notThrows(() => m('foo!', m.string.label('foo').not.alphanumeric));
 	t.notThrows(() => m('foo!', m.string.not.label('foo').alphanumeric));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric.label('foo')));
+	t.notThrows(() => m('foo', m.string.not.uppercase));
+	t.notThrows(() => m('FOO!', m.string.not.lowercase));
+	t.throws(() => m('FOO!', m.string.not.uppercase));
 	t.throws(() => m('', m.string.not.empty), '[NOT] Expected string to be empty, got ``');
 	t.throws(() => m('', m.string.label('foo').not.empty), '[NOT] Expected string `foo` to be empty, got ``');
 });

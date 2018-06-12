@@ -157,6 +157,16 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
+	 * Test a string to be alphabetical.
+	 */
+	get alphabetical() {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be alphabetical, got \`${value}\``,
+			validator: value => /^[a-z]+$/ig.test(value)
+		});
+	}
+
+	/**
 	 * Test a string to be numeric.
 	 */
 	get numeric() {
@@ -173,6 +183,26 @@ export class StringPredicate extends Predicate<string> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be a date, got \`${value}\``,
 			validator: value => valiDate(value)
+		});
+	}
+
+	/**
+	 * Test a string to be lowercase.
+	 */
+	get lowercase() {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be in lowercase, got \`${value}\``,
+			validator: value => value === value.toLowerCase()
+		});
+	}
+
+	/**
+	 * Test a string to be uppercase.
+	 */
+	get uppercase() {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be in uppercase, got \`${value}\``,
+			validator: value => value === value.toUpperCase()
 		});
 	}
 }
