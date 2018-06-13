@@ -192,7 +192,7 @@ export class StringPredicate extends Predicate<string> {
 	get lowercase() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be lowercase, got \`${value}\``,
-			validator: value => value === (value !== '' && value.toLowerCase())
+			validator: value => value.trim() !== '' && value === value.toLowerCase()
 		});
 	}
 
@@ -202,7 +202,7 @@ export class StringPredicate extends Predicate<string> {
 	get uppercase() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be uppercase, got \`${value}\``,
-			validator: value => value === (value !== '' && value.toUpperCase())
+			validator: value => value.trim() !== '' && value === value.toUpperCase()
 		});
 	}
 }
