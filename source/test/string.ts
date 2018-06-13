@@ -83,6 +83,7 @@ test('string.alphabetical', t => {
 	t.notThrows(() => m('foo', m.string.alphabetical));
 	t.notThrows(() => m('FOO', m.string.alphabetical));
 	t.throws(() => m('foo123' as any, m.string.alphabetical), 'Expected string to be alphabetical, got `foo123`');
+	t.throws(() => m('' as any, m.string.alphabetical), 'Expected string to be alphabetical, got ``');
 });
 
 test('string.alphanumeric', t => {
@@ -106,11 +107,15 @@ test('string.date', t => {
 test('string.lowercase', t => {
 	t.notThrows(() => m('foo', m.string.lowercase));
 	t.notThrows(() => m('foo123', m.string.lowercase));
-	t.throws(() => m('FOO' as any, m.string.lowercase), 'Expected string to be in lowercase, got `FOO`');
+	t.notThrows(() => m('123', m.string.lowercase));
+	t.throws(() => m('FOO' as any, m.string.lowercase), 'Expected string to be lowercase, got `FOO`');
+	t.throws(() => m('' as any, m.string.lowercase), 'Expected string to be lowercase, got ``');
 });
 
 test('string.uppercase', t => {
 	t.notThrows(() => m('FOO', m.string.uppercase));
 	t.notThrows(() => m('FOO123', m.string.uppercase));
-	t.throws(() => m('foo' as any, m.string.uppercase), 'Expected string to be in uppercase, got `foo`');
+	t.notThrows(() => m('123', m.string.uppercase));
+	t.throws(() => m('foo' as any, m.string.uppercase), 'Expected string to be uppercase, got `foo`');
+	t.throws(() => m('' as any, m.string.uppercase), 'Expected string to be uppercase, got ``');
 });

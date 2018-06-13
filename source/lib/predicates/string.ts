@@ -187,22 +187,22 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
-	 * Test a string to be lowercase.
+	 * Test a non-empty string to be lowercase. Matching both alphabetical & numbers.
 	 */
 	get lowercase() {
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be in lowercase, got \`${value}\``,
-			validator: value => value === value.toLowerCase()
+			message: (value, label) => `Expected ${label} to be lowercase, got \`${value}\``,
+			validator: value => value === (value !== '' && value.toLowerCase())
 		});
 	}
 
 	/**
-	 * Test a string to be uppercase.
+	 * Test a non-empty string to be uppercase. Matching both alphabetical & numbers.
 	 */
 	get uppercase() {
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be in uppercase, got \`${value}\``,
-			validator: value => value === value.toUpperCase()
+			message: (value, label) => `Expected ${label} to be uppercase, got \`${value}\``,
+			validator: value => value === (value !== '' && value.toUpperCase())
 		});
 	}
 }
