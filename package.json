@@ -70,6 +70,7 @@
 		"webpack-cli": "^2.0.13"
 	},
 	"typings": "dist/index.d.ts",
+	"sideEffects": false,
 	"nyc": {
 		"exclude": [
 			"dist/test"
