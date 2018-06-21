@@ -3,13 +3,19 @@ import m from '..';
 
 test('array', t => {
 	t.notThrows(() => m([], m.array));
+	t.notThrows(() => m([], m.array.label('foo')));
 	t.throws(() => m('12' as any, m.array), 'Expected argument to be of type `array` but received type `string`');
+	t.throws(() => m('12' as any, m.array.label('foo')), 'Expected `foo` to be of type `array` but received type `string`');
 });
 
 test('array.length', t => {
 	t.notThrows(() => m(['foo'], m.array.length(1)));
 	t.notThrows(() => m(['foo', 'bar'], m.array.length(2)));
+	t.notThrows(() => m(['foo', 'bar'], m.array.label('foo').length(2)));
+	t.notThrows(() => m(['foo', 'bar'], m.array.length(2).label('foo')));
 	t.throws(() => m(['foo'], m.array.length(2)), 'Expected array to have length `2`, got `1`');
+	t.throws(() => m(['foo'], m.array.label('foo').length(2)), 'Expected array `foo` to have length `2`, got `1`');
+	t.throws(() => m(['foo'], m.array.length(2).label('foo')), 'Expected array `foo` to have length `2`, got `1`');
 });
 
 test('array.minLength', t => {
@@ -65,5 +71,8 @@ test('array.deepEqual', t => {
 test('array.ofType', t => {
 	t.notThrows(() => m(['foo', 'bar'], m.array.ofType(m.string)));
 	t.notThrows(() => m(['foo', 'bar'], m.array.ofType(m.string.minLength(3))));
-	t.throws(() => m(['foo', 'b'], m.array.ofType(m.string.minLength(3))), 'Expected string to have a minimum length of `3`, got `b`');
+	t.notThrows(() => m(['foo', 'bar'], m.array.label('foo').ofType(m.string.minLength(3))));
+	t.throws(() => m(['foo', 'b'], m.array.ofType(m.string.minLength(3))), '(array) Expected string to have a minimum length of `3`, got `b`');
+	t.throws(() => m(['foo', 'b'], m.array.label('foo').ofType(m.string.minLength(3))), '(array `foo`) Expected string to have a minimum length of `3`, got `b`');
+	t.throws(() => m(['foo', 'b'], m.array.label('foo').ofType(m.string.label('bar').minLength(3))), '(array `foo`) Expected string `bar` to have a minimum length of `3`, got `b`');
 });

@@ -1,4 +1,4 @@
-import isEqual = require('lodash.isequal'); // tslint:disable-line:no-require-imports
+import isEqual from 'lodash.isequal';
 import {Predicate, Context} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
@@ -8,7 +8,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 * @hidden
 	 */
 	constructor(context?: Context<Set<T>>) {
-		super('set', context);
+		super('Set', context);
 	}
 
 	/**
@@ -18,7 +18,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	size(size: number) {
 		return this.addValidator({
-			message: set => `Expected Set to have size \`${size}\`, got \`${set.size}\``,
+			message: (set, label) => `Expected ${label} to have size \`${size}\`, got \`${set.size}\``,
 			validator: set => set.size === size
 		});
 	}
@@ -30,7 +30,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	minSize(size: number) {
 		return this.addValidator({
-			message: set => `Expected Set to have a minimum size of \`${size}\`, got \`${set.size}\``,
+			message: (set, label) => `Expected ${label} to have a minimum size of \`${size}\`, got \`${set.size}\``,
 			validator: set => set.size >= size
 		});
 	}
@@ -42,7 +42,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	maxSize(size: number) {
 		return this.addValidator({
-			message: set => `Expected Set to have a maximum size of \`${size}\`, got \`${set.size}\``,
+			message: (set, label) => `Expected ${label} to have a maximum size of \`${size}\`, got \`${set.size}\``,
 			validator: set => set.size <= size
 		});
 	}
@@ -54,7 +54,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	has(...items: T[]) {
 		return this.addValidator({
-			message: (_, missingItems) => `Expected Set to have items \`${JSON.stringify(missingItems)}\``,
+			message: (_, label, missingItems) => `Expected ${label} to have items \`${JSON.stringify(missingItems)}\``,
 			validator: set => hasItems(set, items)
 		});
 	}
@@ -66,7 +66,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	hasAny(...items: T[]) {
 		return this.addValidator({
-			message: () => `Expected Set to have any item of \`${JSON.stringify(items)}\``,
+			message: (_, label) => `Expected ${label} to have any item of \`${JSON.stringify(items)}\``,
 			validator: set => items.some(item => set.has(item))
 		});
 	}
@@ -78,7 +78,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	ofType(predicate: Predicate<T>) {
 		return this.addValidator({
-			message: (_, error) => error,
+			message: (_, label, error) => `(${label}) ${error}`,
 			validator: set => ofType(set, predicate)
 		});
 	}
@@ -88,7 +88,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	get empty() {
 		return this.addValidator({
-			message: set => `Expected Set to be empty, got \`${JSON.stringify(Array.from(set))}\``,
+			message: (set, label) => `Expected ${label} to be empty, got \`${JSON.stringify(Array.from(set))}\``,
 			validator: set => set.size === 0
 		});
 	}
@@ -98,7 +98,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	get nonEmpty() {
 		return this.addValidator({
-			message: () => 'Expected Set to not be empty',
+			message: (_, label) => `Expected ${label} to not be empty`,
 			validator: set => set.size > 0
 		});
 	}
@@ -110,7 +110,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	 */
 	deepEqual(expected: Set<T>) {
 		return this.addValidator({
-			message: set => `Expected Set to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(set))}\``,
+			message: (set, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(set))}\``,
 			validator: set => isEqual(set, expected)
 		});
 	}

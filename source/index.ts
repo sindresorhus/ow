@@ -20,12 +20,19 @@ export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array
 
 export interface Ow {
 	/**
-	 * Test if the value matches the predicate.
+	 * Test if the value matches the predicate. Throws an `ArgumentError` if the test fails..
 	 *
 	 * @param value Value to test.
 	 * @param predicate Predicate to test against.
 	 */
 	<T>(value: T, predicate: Predicate<T>): void;
+	/**
+	 * Returns `true` if the value matches the predicate, otherwise returns `false`.
+	 *
+	 * @param value Value to test.
+	 * @param predicate Predicate to test against.
+	 */
+	isValid<T>(value: T, predicate: Predicate<T>): value is T;
 	/**
 	 * Create a reusable validator.
 	 *
@@ -183,6 +190,16 @@ export interface Ow {
 const main = <T>(value: T, predicate: Predicate<T> | AnyPredicate<T>) => (predicate as any)[testSymbol](value, main);
 
 Object.defineProperties(main, {
+	isValid: {
+		value: <T>(value: T, predicate: Predicate<T>) => {
+			try {
+				main(value, predicate);
+				return true;
+			} catch {
+				return false;
+			}
+		}
+	},
 	create: {
 		value: <T>(predicate: Predicate<T>) => (value: T) => main(value, predicate)
 	},
@@ -238,55 +255,55 @@ Object.defineProperties(main, {
 		get: () => new WeakSetPredicate()
 	},
 	function: {
-		get: () => new Predicate('function')
+		get: () => new Predicate('Function')
 	},
 	buffer: {
-		get: () => new Predicate('buffer')
+		get: () => new Predicate('Buffer')
 	},
 	regExp: {
-		get: () => new Predicate('regExp')
+		get: () => new Predicate('RegExp')
 	},
 	promise: {
-		get: () => new Predicate('promise')
+		get: () => new Predicate('Promise')
 	},
 	typedArray: {
-		get: () => new Predicate('typedArray')
+		get: () => new Predicate('TypedArray')
 	},
 	int8Array: {
-		get: () => new Predicate('int8Array')
+		get: () => new Predicate('Int8Array')
 	},
 	uint8Array: {
-		get: () => new Predicate('uint8Array')
+		get: () => new Predicate('Uint8Array')
 	},
 	uint8ClampedArray: {
-		get: () => new Predicate('uint8ClampedArray')
+		get: () => new Predicate('Uint8ClampedArray')
 	},
 	int16Array: {
-		get: () => new Predicate('int16Array')
+		get: () => new Predicate('Int16Array')
 	},
 	uint16Array: {
-		get: () => new Predicate('uint16Array')
+		get: () => new Predicate('Uint16Array')
 	},
 	int32Array: {
-		get: () => new Predicate('int32Array')
+		get: () => new Predicate('Int32Array')
 	},
 	uint32Array: {
-		get: () => new Predicate('uint32Array')
+		get: () => new Predicate('Uint32Array')
 	},
 	float32Array: {
-		get: () => new Predicate('float32Array')
+		get: () => new Predicate('Float32Array')
 	},
 	float64Array: {
-		get: () => new Predicate('float64Array')
+		get: () => new Predicate('Float64Array')
 	},
 	arrayBuffer: {
-		get: () => new Predicate('arrayBuffer')
+		get: () => new Predicate('ArrayBuffer')
 	},
 	dataView: {
-		get: () => new Predicate('dataView')
+		get: () => new Predicate('DataView')
 	},
 	iterable: {
-		get: () => new Predicate('iterable')
+		get: () => new Predicate('Iterable')
 	}
 });
 

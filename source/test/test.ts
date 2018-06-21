@@ -7,7 +7,11 @@ test('not', t => {
 	t.notThrows(() => m(1, m.number.not.infinite.not.greaterThan(5)));
 	t.throws(() => m(6, m.number.not.infinite.not.greaterThan(5)));
 	t.throws(() => m(1, m.number.not.infinite.greaterThan(5)), 'Expected 1 to be greater than 5');
+	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
+	t.notThrows(() => m('foo!', m.string.label('foo').not.alphanumeric));
+	t.notThrows(() => m('foo!', m.string.not.alphanumeric.label('foo')));
 	t.throws(() => m('', m.string.not.empty), '[NOT] Expected string to be empty, got ``');
+	t.throws(() => m('', m.string.label('foo').not.empty), '[NOT] Expected string `foo` to be empty, got ``');
 });
 
 test('is', t => {
@@ -16,8 +20,19 @@ test('is', t => {
 	};
 
 	t.notThrows(() => m(1, m.number.is(x => x < 10)));
-	t.throws(() => m(1, m.number.is(x => x > 10)), 'Expected `1` to pass custom validation function');
-	t.throws(() => m(5, m.number.is(x => greaterThan(10, x))), 'Expected `5` to be greater than `10`');
+	t.notThrows(() => m(1, m.number.label('foo').is(x => x < 10)));
+	t.throws(() => m(1, m.number.is(x => x > 10)), 'Expected number `1` to pass custom validation function');
+	t.throws(() => m(1, m.number.label('foo').is(x => x > 10)), 'Expected number `foo` `1` to pass custom validation function');
+	t.throws(() => m(5, m.number.is(x => greaterThan(10, x))), '(number) Expected `5` to be greater than `10`');
+	t.throws(() => m(5, m.number.label('foo').is(x => greaterThan(10, x))), '(number `foo`) Expected `5` to be greater than `10`');
+});
+
+test('isValid', t => {
+	t.true(m.isValid(1, m.number));
+	t.true(m.isValid(1, m.number.equal(1)));
+	t.true(m.isValid('foo!', m.string.not.alphanumeric));
+	t.false(m.isValid(1 as any, m.string));
+	t.false(m.isValid(1 as any, m.number.greaterThan(2)));
 });
 
 test('reusable validator', t => {
@@ -27,4 +42,18 @@ test('reusable validator', t => {
 	t.notThrows(() => checkUsername('foobar'));
 	t.throws(() => checkUsername('fo'), 'Expected string to have a minimum length of `3`, got `fo`');
 	t.throws(() => checkUsername(5 as any), 'Expected argument to be of type `string` but received type `number`');
+});
+
+test('reusable validator with label', t => {
+	const checkUsername = m.create(m.string.label('foo').minLength(3));
+
+	t.notThrows(() => checkUsername('foo'));
+	t.notThrows(() => checkUsername('foobar'));
+	t.throws(() => checkUsername('fo'), 'Expected string `foo` to have a minimum length of `3`, got `fo`');
+	t.throws(() => checkUsername(5 as any), 'Expected `foo` to be of type `string` but received type `number`');
+});
+
+test('overwrite label', t => {
+	t.notThrows(() => m('foo', m.string.label('foo').label('bar')));
+	t.throws(() => m(12 as any, m.string.label('foo').label('bar')), 'Expected `bar` to be of type `string` but received type `number`');
 });

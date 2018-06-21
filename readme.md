@@ -4,7 +4,7 @@
 	<br>
 </p>
 
-[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow) [![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow)
+[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow) [![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow) [![gzip size](http://img.badgesize.io/https://cdn.jsdelivr.net/npm/ow/dist/index.js?compression=gzip)](https://cdn.jsdelivr.net/npm/ow/dist/index.js) [![install size](https://packagephobia.now.sh/badge?p=ow)](https://packagephobia.now.sh/result?p=ow)
 
 > Function argument validation for humans
 
@@ -49,7 +49,11 @@ unicorn('yo');
 
 ### ow(value, predicate)
 
-Test if `value` matches the provided `predicate`.
+Test if `value` matches the provided `predicate`.  Throws an `ArgumentError` if the test fails.
+
+### ow.isValid(value, predicate)
+
+Returns `true` if the value matches the predicate, otherwise returns `false`.
 
 ### ow.create(predicate)
 
@@ -157,6 +161,20 @@ const greaterThan = (max: number, x: number) => {
 
 ow(5, ow.number.is(x => greaterThan(10, x)));
 //=> ArgumentError: Expected `5` to be greater than `10`
+```
+
+#### label(string)
+
+This assigns a custom label to be used in any error messages. It is useful for making error messages more user-friendly by including the name of the variable which failed validation.
+
+This predicate does not add any additional validation.
+
+```ts
+ow('', ow.string.nonEmpty);
+//=> ArgumentError: Expected string to not be empty
+
+ow('', ow.string.label('foo').nonEmpty);
+//=> ArgumentError: Expected string `foo` to not be empty
 ```
 
 
