@@ -79,6 +79,13 @@ test('string.equals', t => {
 	t.throws(() => m('bar' as any, m.string.equals('foo')), 'Expected string to be equal to `foo`, got `bar`');
 });
 
+test('string.alphabetical', t => {
+	t.notThrows(() => m('foo', m.string.alphabetical));
+	t.notThrows(() => m('FOO', m.string.alphabetical));
+	t.throws(() => m('foo123', m.string.alphabetical), 'Expected string to be alphabetical, got `foo123`');
+	t.throws(() => m('', m.string.alphabetical), 'Expected string to be alphabetical, got ``');
+});
+
 test('string.alphanumeric', t => {
 	t.notThrows(() => m('Foo123', m.string.alphanumeric));
 	t.throws(() => m('Foo123!' as any, m.string.alphanumeric), 'Expected string to be alphanumeric, got `Foo123!`');
@@ -95,4 +102,20 @@ test('string.date', t => {
 	t.notThrows(() => m('2017-03-02T10:00:00Z', m.string.label('bar').date));
 	t.throws(() => m('foo' as any, m.string.date), 'Expected string to be a date, got `foo`');
 	t.throws(() => m('foo' as any, m.string.label('bar').date), 'Expected string `bar` to be a date, got `foo`');
+});
+
+test('string.lowercase', t => {
+	t.notThrows(() => m('foo', m.string.lowercase));
+	t.notThrows(() => m('foo123', m.string.lowercase));
+	t.notThrows(() => m('123', m.string.lowercase));
+	t.throws(() => m('FOO', m.string.lowercase), 'Expected string to be lowercase, got `FOO`');
+	t.throws(() => m('', m.string.lowercase), 'Expected string to be lowercase, got ``');
+});
+
+test('string.uppercase', t => {
+	t.notThrows(() => m('FOO', m.string.uppercase));
+	t.notThrows(() => m('FOO123', m.string.uppercase));
+	t.notThrows(() => m('123', m.string.uppercase));
+	t.throws(() => m('foo', m.string.uppercase), 'Expected string to be uppercase, got `foo`');
+	t.throws(() => m('', m.string.uppercase), 'Expected string to be uppercase, got ``');
 });
