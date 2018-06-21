@@ -132,7 +132,7 @@ The following predicates are available on every type.
 
 #### not
 
-Inverts the following predicates.
+Inverts the following predicate.
 
 ```ts
 ow(1, ow.number.not.infinite);

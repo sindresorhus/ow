@@ -2,12 +2,13 @@ import test from 'ava';
 import m from '..';
 
 test('not', t => {
+	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
 	t.notThrows(() => m(1, m.number.not.infinite));
-	t.notThrows(() => m(1, m.number.not.infinite.greaterThan(5)));
+	t.notThrows(() => m(1, m.number.not.infinite.not.greaterThan(5)));
+	t.throws(() => m(6, m.number.not.infinite.not.greaterThan(5)));
 	t.notThrows(() => m('foo!', m.string.not.alphabetical));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
 	t.notThrows(() => m('foo!', m.string.label('foo').not.alphanumeric));
-	t.notThrows(() => m('foo!', m.string.not.label('foo').alphanumeric));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric.label('foo')));
 	t.notThrows(() => m('FOO!', m.string.not.lowercase));
 	t.notThrows(() => m('foo!', m.string.not.uppercase));
