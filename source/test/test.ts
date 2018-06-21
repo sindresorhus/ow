@@ -6,7 +6,6 @@ test('not', t => {
 	t.notThrows(() => m(1, m.number.not.infinite));
 	t.notThrows(() => m(1, m.number.not.infinite.not.greaterThan(5)));
 	t.throws(() => m(6, m.number.not.infinite.not.greaterThan(5)));
-	t.throws(() => m(1, m.number.not.infinite.greaterThan(5)), 'Expected 1 to be greater than 5');
 	t.notThrows(() => m('foo!', m.string.not.alphabetical));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
 	t.notThrows(() => m('foo!', m.string.label('foo').not.alphanumeric));
