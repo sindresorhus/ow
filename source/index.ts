@@ -1,3 +1,5 @@
+import callsites from 'callsites';		// tslint:disable-line:no-require-imports
+import {extractLabel} from './lib/utils/extract-label';
 import {Predicate} from './lib/predicates/predicate';
 import {AnyPredicate} from './lib/predicates/any';
 import {testSymbol, BasePredicate} from './lib/predicates/base-predicate';
@@ -184,13 +186,15 @@ export interface Ow {
 	any(...predicate: BasePredicate[]): AnyPredicate;
 }
 
-const main = <T>(value: T, predicate: BasePredicate<T>) => (predicate as any)[testSymbol](value, main);
+const main = <T>(value: T, predicate: BasePredicate<T>, callsite: any = callsites()) => {
+	return (predicate as any)[testSymbol](value, main, extractLabel(callsite));
+};
 
 Object.defineProperties(main, {
 	isValid: {
 		value: <T>(value: T, predicate: BasePredicate<T>) => {
 			try {
-				main(value, predicate);
+				main(value, predicate, callsites());
 				return true;
 			} catch {
 				return false;
@@ -198,7 +202,7 @@ Object.defineProperties(main, {
 		}
 	},
 	create: {
-		value: <T>(predicate: BasePredicate<T>) => (value: T) => main(value, predicate)
+		value: <T>(predicate: BasePredicate<T>) => (value: T) => main(value, predicate, callsites())
 	},
 	any: {
 		value: (...predicates: BasePredicate[]) => new AnyPredicate(predicates)

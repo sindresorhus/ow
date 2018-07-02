@@ -1,6 +1,42 @@
-import test from 'ava';
+// tslint:disable
 import m from '..';
-import {createError} from './any';
+
+interface TestContext {
+	notThrows(cb: any): void;
+	throws(cb: any, message?: string): void;
+	true(value: any): void;
+	false(value: any): void;
+}
+
+const test = (title: string, fn: (t: TestContext) => void) => {
+	console.log(`Execute \`${title}\``);
+
+	const testContext: TestContext = {
+		notThrows: (cb: any) => cb(),
+		throws: (cb: any, message?: string) => {
+			try {
+				cb();
+				throw new Error(`Expected ${title} to throw, it did not`)
+			} catch (err) {
+				if (!message || err.message === message) {
+					return;
+				}
+
+				console.log(err.message, message);
+
+				throw err;
+			}
+		},
+		true: (_: any) => {},
+		false: (_: any) => {}
+	};
+
+	try {
+		fn(testContext);
+	} catch (err) {
+		console.log('>> ', err.message);
+	}
+};
 
 test('not', t => {
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
@@ -34,11 +70,8 @@ test('isValid', t => {
 	t.true(m.isValid(1, m.number));
 	t.true(m.isValid(1, m.number.equal(1)));
 	t.true(m.isValid('foo!', m.string.not.alphanumeric));
-	t.true(m.isValid('foo!', m.any(m.string, m.number)));
-	t.true(m.isValid(1, m.any(m.string, m.number)));
 	t.false(m.isValid(1 as any, m.string));
 	t.false(m.isValid(1 as any, m.number.greaterThan(2)));
-	t.false(m.isValid(true as any, m.any(m.string, m.number)));
 });
 
 test('reusable validator', t => {
@@ -57,21 +90,6 @@ test('reusable validator with label', t => {
 	t.notThrows(() => checkUsername('foobar'));
 	t.throws(() => checkUsername('fo'), 'Expected string `foo` to have a minimum length of `3`, got `fo`');
 	t.throws(() => checkUsername(5 as any), 'Expected `foo` to be of type `string` but received type `number`');
-});
-
-test('any-reusable validator', t => {
-	const checkUsername = m.create(m.any(m.string.includes('.'), m.string.minLength(3)));
-
-	t.notThrows(() => checkUsername('foo'));
-	t.notThrows(() => checkUsername('f.'));
-	t.throws(() => checkUsername('fo'), createError(
-		'Expected string to include `.`, got `fo`',
-		'Expected string to have a minimum length of `3`, got `fo`'
-	));
-	t.throws(() => checkUsername(5 as any), createError(
-		'Expected argument to be of type `string` but received type `number`',
-		'Expected argument to be of type `string` but received type `number`'
-	));
 });
 
 test('overwrite label', t => {

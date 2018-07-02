@@ -38,10 +38,15 @@ export class Predicate<T = any> implements BasePredicate<T> {
 		const x = this.type[0].toLowerCase() + this.type.slice(1);
 
 		this.addValidator({
-			message: value => {
+			message: (value, label) => {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
-				const label = this.context.label || 'argument';
-				return `Expected ${label} to be of type \`${this.type}\` but received type \`${is(value)}\``;
+				let lbl = this.context.label || label || 'argument';
+
+				if (lbl === this.type) {
+					lbl = 'argument';
+				}
+
+				return `Expected ${lbl} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
 			validator: value => (is as any)[x](value)
 		});
@@ -51,9 +56,11 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 * @hidden
 	 */
 	// tslint:disable completed-docs
-	[testSymbol](value: T, main: Ow) {
-		const label = this.context.label
-			? `${this.type} ${this.context.label}`
+	[testSymbol](value: T, main: Ow, label?: string) {
+		let lbl = this.context.label || (label && `\`${label}\``);
+
+		lbl = lbl
+			? `${this.type} ${lbl}`
 			: this.type;
 
 		for (const {validator, message} of this.context.validators) {
@@ -61,7 +68,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 
 			if (typeof result !== 'boolean' || !result) {
 				// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-				throw new ArgumentError(message(value, label, result), main);
+				throw new ArgumentError(message(value, lbl, result), main);
 			}
 		}
 	}
