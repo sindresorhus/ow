@@ -1,5 +1,6 @@
 import test from 'ava';
 import m from '..';
+import {createError} from './any';
 
 test('not', t => {
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
@@ -33,8 +34,11 @@ test('isValid', t => {
 	t.true(m.isValid(1, m.number));
 	t.true(m.isValid(1, m.number.equal(1)));
 	t.true(m.isValid('foo!', m.string.not.alphanumeric));
+	t.true(m.isValid('foo!', m.any(m.string, m.number)));
+	t.true(m.isValid(1, m.any(m.string, m.number)));
 	t.false(m.isValid(1 as any, m.string));
 	t.false(m.isValid(1 as any, m.number.greaterThan(2)));
+	t.false(m.isValid(true as any, m.any(m.string, m.number)));
 });
 
 test('reusable validator', t => {
@@ -53,6 +57,21 @@ test('reusable validator with label', t => {
 	t.notThrows(() => checkUsername('foobar'));
 	t.throws(() => checkUsername('fo'), 'Expected string `foo` to have a minimum length of `3`, got `fo`');
 	t.throws(() => checkUsername(5 as any), 'Expected `foo` to be of type `string` but received type `number`');
+});
+
+test('any-reusable validator', t => {
+	const checkUsername = m.create(m.any(m.string.includes('.'), m.string.minLength(3)));
+
+	t.notThrows(() => checkUsername('foo'));
+	t.notThrows(() => checkUsername('f.'));
+	t.throws(() => checkUsername('fo'), createError(
+		'Expected string to include `.`, got `fo`',
+		'Expected string to have a minimum length of `3`, got `fo`'
+	));
+	t.throws(() => checkUsername(5 as any), createError(
+		'Expected argument to be of type `string` but received type `number`',
+		'Expected argument to be of type `string` but received type `number`'
+	));
 });
 
 test('overwrite label', t => {

@@ -1,6 +1,6 @@
 import {Predicate} from './lib/predicates/predicate';
 import {AnyPredicate} from './lib/predicates/any';
-import {testSymbol} from './lib/predicates/base-predicate';
+import {testSymbol, BasePredicate} from './lib/predicates/base-predicate';
 import {StringPredicate} from './lib/predicates/string';
 import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
@@ -13,10 +13,7 @@ import {WeakMapPredicate} from './lib/predicates/weak-map';
 import {SetPredicate} from './lib/predicates/set';
 import {WeakSetPredicate} from './lib/predicates/weak-set';
 
-/**
- * @hidden
- */
-export type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
+type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 
 export interface Ow {
 	/**
@@ -25,34 +22,34 @@ export interface Ow {
 	 * @param value Value to test.
 	 * @param predicate Predicate to test against.
 	 */
-	<T>(value: T, predicate: Predicate<T>): void;
+	<T>(value: T, predicate: BasePredicate<T>): void;
 	/**
 	 * Returns `true` if the value matches the predicate, otherwise returns `false`.
 	 *
 	 * @param value Value to test.
 	 * @param predicate Predicate to test against.
 	 */
-	isValid<T>(value: T, predicate: Predicate<T>): value is T;
+	isValid<T>(value: T, predicate: BasePredicate<T>): value is T;
 	/**
 	 * Create a reusable validator.
 	 *
 	 * @param predicate Predicate used in the validator function.
 	 */
-	create<T>(predicate: Predicate<T>): (value: T) => void;
+	create<T>(predicate: BasePredicate<T>): (value: T) => void;
 	/**
 	 * Test that the value matches at least one of the given predicates.
 	 */
-	any<T1>(p1: Predicate<T1>): Predicate<T1>;
-	any<T1, T2>(p1: Predicate<T1>, p2: Predicate<T2>): Predicate<T1 | T2>;
-	any<T1, T2, T3>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>): Predicate<T1 | T2 | T3>;
-	any<T1, T2, T3, T4>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>): Predicate<T1 | T2 | T3 | T4>;
-	any<T1, T2, T3, T4, T5>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>): Predicate<T1 | T2 | T3 | T4 | T5>;
-	any<T1, T2, T3, T4, T5, T6>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>): Predicate<T1 | T2 | T3 | T4 | T5 | T6>;
-	any<T1, T2, T3, T4, T5, T6, T7>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7>;
-	any<T1, T2, T3, T4, T5, T6, T7, T8>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>, p8: Predicate<T8>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8>;
-	any<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>, p8: Predicate<T8>, p9: Predicate<T9>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>;
-	any<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: Predicate<T1>, p2: Predicate<T2>, p3: Predicate<T3>, p4: Predicate<T4>, p5: Predicate<T5>, p6: Predicate<T6>, p7: Predicate<T7>, p8: Predicate<T8>, p9: Predicate<T9>, p10: Predicate<T10>): Predicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>;
-	any(...predicate: Predicate[]): Predicate;
+	any<T1>(p1: BasePredicate<T1>): AnyPredicate<T1>;
+	any<T1, T2>(p1: BasePredicate<T1>, p2: BasePredicate<T2>): AnyPredicate<T1 | T2>;
+	any<T1, T2, T3>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>): AnyPredicate<T1 | T2 | T3>;
+	any<T1, T2, T3, T4>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>): AnyPredicate<T1 | T2 | T3 | T4>;
+	any<T1, T2, T3, T4, T5>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>): AnyPredicate<T1 | T2 | T3 | T4 | T5>;
+	any<T1, T2, T3, T4, T5, T6>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6>;
+	any<T1, T2, T3, T4, T5, T6, T7>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>, p10: BasePredicate<T10>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>;
+	any(...predicate: BasePredicate[]): AnyPredicate;
 	/**
 	 * Test the value to be a string.
 	 */
@@ -187,11 +184,11 @@ export interface Ow {
 	readonly iterable: Predicate<Iterable<any>>;
 }
 
-const main = <T>(value: T, predicate: Predicate<T> | AnyPredicate<T>) => (predicate as any)[testSymbol](value, main);
+const main = <T>(value: T, predicate: BasePredicate<T>) => (predicate as any)[testSymbol](value, main);
 
 Object.defineProperties(main, {
 	isValid: {
-		value: <T>(value: T, predicate: Predicate<T>) => {
+		value: <T>(value: T, predicate: BasePredicate<T>) => {
 			try {
 				main(value, predicate);
 				return true;
@@ -201,10 +198,10 @@ Object.defineProperties(main, {
 		}
 	},
 	create: {
-		value: <T>(predicate: Predicate<T>) => (value: T) => main(value, predicate)
+		value: <T>(predicate: BasePredicate<T>) => (value: T) => main(value, predicate)
 	},
 	any: {
-		value: (...predicates: Predicate[]) => new AnyPredicate(predicates)
+		value: (...predicates: BasePredicate[]) => new AnyPredicate(predicates)
 	},
 	string: {
 		get: () => new StringPredicate()
@@ -308,3 +305,19 @@ Object.defineProperties(main, {
 });
 
 export default main as Ow;
+export {
+	BasePredicate,
+	Predicate,
+	AnyPredicate,
+	StringPredicate,
+	NumberPredicate,
+	BooleanPredicate,
+	ArrayPredicate,
+	ObjectPredicate,
+	DatePredicate,
+	ErrorPredicate,
+	MapPredicate,
+	WeakMapPredicate,
+	SetPredicate,
+	WeakSetPredicate
+};
