@@ -24,7 +24,7 @@ module.exports = {
 	plugins: [
 		new AddModuleExportsPlugin(),
 		new license.LicenseWebpackPlugin({
-			pattern: /.*/,
+			excludedPackageTest: packageName => ['webpack'].includes(packageName),
 			outputFilename: 'licenses.txt'
 		})
 	],
