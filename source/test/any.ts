@@ -1,7 +1,7 @@
 import test from 'ava';
 import m from '..';
 
-const createError = (...errors: string[]) => {
+export const createError = (...errors: string[]) => {
 	return [
 		'Any predicate failed with the following errors:',
 		...errors.map(error => `- ${error}`)
@@ -18,4 +18,10 @@ test('any', t => {
 		'Expected argument to be of type `number` but received type `boolean`',
 		'Expected argument to be of type `string` but received type `boolean`'
 	));
+});
+
+test('any inception', t => {
+	t.notThrows(() => m(1, m.any(m.number, m.any(m.string, m.boolean))));
+	t.notThrows(() => m('1', m.any(m.number, m.any(m.string, m.boolean))));
+	t.notThrows(() => m(true, m.any(m.number, m.any(m.string, m.boolean))));
 });
