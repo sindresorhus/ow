@@ -187,6 +187,7 @@ ow('', ow.string.label('foo').nonEmpty);
 ## Related
 
 - [@sindresorhus/is](https://github.com/sindresorhus/is) - Type check values
+- [ngx-ow](https://github.com/SamVerschueren/ngx-ow) - Angular form validation on steroids
 
 
 ## License
