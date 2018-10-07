@@ -131,4 +131,11 @@ export class NumberPredicate extends Predicate<number> {
 			validator: value => value < 0
 		});
 	}
+
+	get integerOrInfinity() {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be integer or infinity, got ${value}`,
+			validator: value => value > 0 && (is.integer(value) || value === Infinity)
+		});
+	}
 }

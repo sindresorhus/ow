@@ -79,3 +79,10 @@ test('number.negative', t => {
 	t.notThrows(() => m(-1, m.number.negative));
 	t.throws(() => m(1 as any, m.number.negative), 'Expected number to be negative, got 1');
 });
+
+test('number.integerOrInfinity', t => {
+	t.notThrows(() => m(10, m.number.integerOrInfinity));
+	t.notThrows(() => m(Infinity, m.number.integerOrInfinity));
+	t.throws(() => m(-20, m.number.integerOrInfinity), 'Expected number to be integer or infinity, got -20');
+	t.throws(() => m(3.14, m.number.integerOrInfinity), 'Expected number to be integer or infinity, got 3.14');
+});
