@@ -84,5 +84,5 @@ test('number.integerOrInfinite', t => {
 	t.notThrows(() => m(10, m.number.integerOrInfinite));
 	t.notThrows(() => m(Infinity, m.number.integerOrInfinite));
 	t.notThrows(() => m(-10, m.number.integerOrInfinite));
-	t.throws(() => m(3.14, m.number.integerOrInfinite), 'Expected number to be integer or infinity, got 3.14');
+	t.throws(() => m(3.14, m.number.integerOrInfinite), 'Expected number to be an integer or infinite, got 3.14');
 });
