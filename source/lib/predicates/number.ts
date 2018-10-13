@@ -133,11 +133,11 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
-	 * Test a number to be an integer or infinite
+	 * Test a number to be an integer or infinite.
 	 */
 	get integerOrInfinite() {
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be integer or infinity, got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer or infinite, got ${value}`,
 			validator: value => is.integer(value) || is.infinite(value)
 		});
 	}
