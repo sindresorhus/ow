@@ -35,6 +35,13 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
+	 * @alias greaterThan
+	 */
+	get gt() {
+		return this.greaterThan;
+	}
+
+	/**
 	 * Test a number to be greater than or equal to the provided value.
 	 *
 	 * @param x Minimum value.
@@ -44,6 +51,13 @@ export class NumberPredicate extends Predicate<number> {
 			message: (value, label) => `Expected ${label} to be greater than or equal to ${x}, got ${value}`,
 			validator: value => value >= x
 		});
+	}
+
+	/**
+	 * @alias greaterThanOrEqual
+	 */
+	get gte() {
+		return this.greaterThanOrEqual;
 	}
 
 	/**
@@ -59,6 +73,13 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
+	 * @alias lessThan
+	 */
+	get lt() {
+		return this.lessThan;
+	}
+
+	/**
 	 * Test a number to be less than or equal to the provided value.
 	 *
 	 * @param x Minimum value.
@@ -71,6 +92,13 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
+	 * @alias lessThanOrEqual
+	 */
+	get lte() {
+		return this.lessThanOrEqual;
+	}
+
+	/**
 	 * Test a number to be equal to a specified number.
 	 *
 	 * @param expected Expected value to match.
@@ -80,6 +108,13 @@ export class NumberPredicate extends Predicate<number> {
 			message: (value, label) => `Expected ${label} to be equal to ${expected}, got ${value}`,
 			validator: value => value === expected
 		});
+	}
+
+	/**
+	 * @alias equal
+	 */
+	get eq() {
+		return this.equal
 	}
 
 	/**
