@@ -24,33 +24,6 @@ export interface Ow {
 	 */
 	<T>(value: T, predicate: BasePredicate<T>): void;
 	/**
-	 * Returns `true` if the value matches the predicate, otherwise returns `false`.
-	 *
-	 * @param value Value to test.
-	 * @param predicate Predicate to test against.
-	 */
-	isValid<T>(value: T, predicate: BasePredicate<T>): value is T;
-	/**
-	 * Create a reusable validator.
-	 *
-	 * @param predicate Predicate used in the validator function.
-	 */
-	create<T>(predicate: BasePredicate<T>): (value: T) => void;
-	/**
-	 * Test that the value matches at least one of the given predicates.
-	 */
-	any<T1>(p1: BasePredicate<T1>): AnyPredicate<T1>;
-	any<T1, T2>(p1: BasePredicate<T1>, p2: BasePredicate<T2>): AnyPredicate<T1 | T2>;
-	any<T1, T2, T3>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>): AnyPredicate<T1 | T2 | T3>;
-	any<T1, T2, T3, T4>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>): AnyPredicate<T1 | T2 | T3 | T4>;
-	any<T1, T2, T3, T4, T5>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>): AnyPredicate<T1 | T2 | T3 | T4 | T5>;
-	any<T1, T2, T3, T4, T5, T6>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6>;
-	any<T1, T2, T3, T4, T5, T6, T7>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7>;
-	any<T1, T2, T3, T4, T5, T6, T7, T8>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8>;
-	any<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>;
-	any<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>, p10: BasePredicate<T10>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>;
-	any(...predicate: BasePredicate[]): AnyPredicate;
-	/**
 	 * Test the value to be a string.
 	 */
 	readonly string: StringPredicate;
@@ -182,6 +155,33 @@ export interface Ow {
 	 * Test the value to be Iterable.
 	 */
 	readonly iterable: Predicate<Iterable<any>>;
+	/**
+	 * Returns `true` if the value matches the predicate, otherwise returns `false`.
+	 *
+	 * @param value Value to test.
+	 * @param predicate Predicate to test against.
+	 */
+	isValid<T>(value: T, predicate: BasePredicate<T>): value is T;
+	/**
+	 * Create a reusable validator.
+	 *
+	 * @param predicate Predicate used in the validator function.
+	 */
+	create<T>(predicate: BasePredicate<T>): (value: T) => void;
+	/**
+	 * Test that the value matches at least one of the given predicates.
+	 */
+	any<T1>(p1: BasePredicate<T1>): AnyPredicate<T1>;
+	any<T1, T2>(p1: BasePredicate<T1>, p2: BasePredicate<T2>): AnyPredicate<T1 | T2>;
+	any<T1, T2, T3>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>): AnyPredicate<T1 | T2 | T3>;
+	any<T1, T2, T3, T4>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>): AnyPredicate<T1 | T2 | T3 | T4>;
+	any<T1, T2, T3, T4, T5>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>): AnyPredicate<T1 | T2 | T3 | T4 | T5>;
+	any<T1, T2, T3, T4, T5, T6>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6>;
+	any<T1, T2, T3, T4, T5, T6, T7>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>;
+	any<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>, p10: BasePredicate<T10>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>;
+	any(...predicate: BasePredicate[]): AnyPredicate;
 }
 
 const main = <T>(value: T, predicate: BasePredicate<T>) => (predicate as any)[testSymbol](value, main);
