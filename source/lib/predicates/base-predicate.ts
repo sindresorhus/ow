@@ -8,6 +8,11 @@ export const testSymbol = Symbol('test');
 /**
  * @hidden
  */
+export const isPredicate = (value: any): value is BasePredicate => Boolean(value && value[testSymbol]);
+
+/**
+ * @hidden
+ */
 export interface BasePredicate<T = any> {
 	[testSymbol](value: T, main: Ow, label?: string): void;
 }

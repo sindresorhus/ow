@@ -36,10 +36,10 @@ const unicorn = input => {
 };
 
 unicorn(3);
-//=> ArgumentError: Expected argument to be of type `string` but received type `number`
+//=> ArgumentError: Expected `input` to be of type `string` but received type `number`
 
 unicorn('yo');
-//=> ArgumentError: Expected string to have a minimum length of `5`, got `yo`
+//=> ArgumentError: Expected string `input` to have a minimum length of `5`, got `yo`
 ```
 
 
@@ -49,7 +49,11 @@ unicorn('yo');
 
 ### ow(value, predicate)
 
-Test if `value` matches the provided `predicate`.  Throws an `ArgumentError` if the test fails.
+Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if the test fails.
+
+### ow(value, label, predicate)
+
+Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
 
 ### ow.isValid(value, predicate)
 
@@ -161,20 +165,6 @@ const greaterThan = (max: number, x: number) => {
 
 ow(5, ow.number.is(x => greaterThan(10, x)));
 //=> ArgumentError: Expected `5` to be greater than `10`
-```
-
-#### label(string)
-
-This assigns a custom label to be used in any error messages. It is useful for making error messages more user-friendly by including the name of the variable which failed validation.
-
-This predicate does not add any additional validation.
-
-```ts
-ow('', ow.string.nonEmpty);
-//=> ArgumentError: Expected string to not be empty
-
-ow('', ow.string.label('foo').nonEmpty);
-//=> ArgumentError: Expected string `foo` to not be empty
 ```
 
 

@@ -40,13 +40,9 @@ export class Predicate<T = any> implements BasePredicate<T> {
 		this.addValidator({
 			message: (value, label) => {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
-				let lbl = this.context.label || label || 'argument';
+				const lbl = label && label.substring(this.type.length + 1);
 
-				if (lbl === this.type) {
-					lbl = 'argument';
-				}
-
-				return `Expected ${lbl} to be of type \`${this.type}\` but received type \`${is(value)}\``;
+				return `Expected ${lbl || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
 			validator: value => (is as any)[x](value)
 		});
@@ -57,10 +53,8 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Ow, label?: string) {
-		let lbl = this.context.label || (label && `\`${label}\``);
-
-		lbl = lbl
-			? `${this.type} ${lbl}`
+		const lbl = label
+			? `${this.type} \`${label}\``
 			: this.type;
 
 		for (const {validator, message} of this.context.validators) {
@@ -85,16 +79,6 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	get not(): this {
 		return not(this);
-	}
-
-	/**
-	 * Assign a label to this predicate for use in error messages.
-	 *
-	 * @param value Label to assign.
-	 */
-	label(value: string) {
-		this.context.label = `\`${value}\``;
-		return this;
 	}
 
 	/**

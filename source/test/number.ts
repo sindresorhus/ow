@@ -3,20 +3,16 @@ import m from '..';
 
 test('number', t => {
 	t.notThrows(() => m(1, m.number));
-	t.notThrows(() => m(1, m.number.label('foo')));
 	t.throws(() => m('12' as any, m.number), 'Expected argument to be of type `number` but received type `string`');
-	t.throws(() => m('12' as any, m.number.label('foo')), 'Expected `foo` to be of type `number` but received type `string`');
+	t.throws(() => m('12' as any, 'foo', m.number), 'Expected `foo` to be of type `number` but received type `string`');
 });
 
 test('number.inRange', t => {
 	t.notThrows(() => m(10, m.number.inRange(0, 20)));
 	t.notThrows(() => m(10, m.number.inRange(10, 20)));
 	t.notThrows(() => m(10, m.number.inRange(0, 10)));
-	t.notThrows(() => m(10, m.number.label('foo').inRange(0, 10)));
-	t.notThrows(() => m(10, m.number.inRange(0, 10).label('foo')));
 	t.throws(() => m(10 as any, m.number.inRange(0, 9)), 'Expected number to be in range [0..9], got 10');
-	t.throws(() => m(10 as any, m.number.label('foo').inRange(0, 9)), 'Expected number `foo` to be in range [0..9], got 10');
-	t.throws(() => m(10 as any, m.number.inRange(0, 9).label('foo')), 'Expected number `foo` to be in range [0..9], got 10');
+	t.throws(() => m(10 as any, 'foo', m.number.inRange(0, 9)), 'Expected number `foo` to be in range [0..9], got 10');
 	t.throws(() => m(10 as any, m.number.inRange(11, 20)), 'Expected number to be in range [11..20], got 10');
 });
 

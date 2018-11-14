@@ -1,20 +1,22 @@
 import test from 'ava';
 import m from '..';
-import {createError} from './any';
+import {createAnyError} from './fixtures/create-error';
 
 test('not', t => {
+	const foo = '';
+
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
 	t.notThrows(() => m(1, m.number.not.infinite));
 	t.notThrows(() => m(1, m.number.not.infinite.not.greaterThan(5)));
 	t.throws(() => m(6, m.number.not.infinite.not.greaterThan(5)));
 	t.notThrows(() => m('foo!', m.string.not.alphabetical));
 	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
-	t.notThrows(() => m('foo!', m.string.label('foo').not.alphanumeric));
-	t.notThrows(() => m('foo!', m.string.not.alphanumeric.label('foo')));
+	t.notThrows(() => m('foo!', 'foo', m.string.not.alphanumeric));
 	t.notThrows(() => m('FOO!', m.string.not.lowercase));
 	t.notThrows(() => m('foo!', m.string.not.uppercase));
 	t.throws(() => m('', m.string.not.empty), '[NOT] Expected string to be empty, got ``');
-	t.throws(() => m('', m.string.label('foo').not.empty), '[NOT] Expected string `foo` to be empty, got ``');
+	t.throws(() => m('', 'foo', m.string.not.empty), '[NOT] Expected string `foo` to be empty, got ``');
+	t.throws(() => m(foo, m.string.not.empty), '[NOT] Expected string `foo` to be empty, got ``');
 });
 
 test('is', t => {
@@ -23,11 +25,10 @@ test('is', t => {
 	};
 
 	t.notThrows(() => m(1, m.number.is(x => x < 10)));
-	t.notThrows(() => m(1, m.number.label('foo').is(x => x < 10)));
 	t.throws(() => m(1, m.number.is(x => x > 10)), 'Expected number `1` to pass custom validation function');
-	t.throws(() => m(1, m.number.label('foo').is(x => x > 10)), 'Expected number `foo` `1` to pass custom validation function');
+	t.throws(() => m(1, 'foo', m.number.is(x => x > 10)), 'Expected number `foo` `1` to pass custom validation function');
 	t.throws(() => m(5, m.number.is(x => greaterThan(10, x))), '(number) Expected `5` to be greater than `10`');
-	t.throws(() => m(5, m.number.label('foo').is(x => greaterThan(10, x))), '(number `foo`) Expected `5` to be greater than `10`');
+	t.throws(() => m(5, 'foo', m.number.is(x => greaterThan(10, x))), '(number `foo`) Expected `5` to be greater than `10`');
 });
 
 test('isValid', t => {
@@ -51,7 +52,7 @@ test('reusable validator', t => {
 });
 
 test('reusable validator with label', t => {
-	const checkUsername = m.create(m.string.label('foo').minLength(3));
+	const checkUsername = m.create('foo', m.string.minLength(3));
 
 	t.notThrows(() => checkUsername('foo'));
 	t.notThrows(() => checkUsername('foobar'));
@@ -64,23 +65,12 @@ test('any-reusable validator', t => {
 
 	t.notThrows(() => checkUsername('foo'));
 	t.notThrows(() => checkUsername('f.'));
-	t.throws(() => checkUsername('fo'), createError(
+	t.throws(() => checkUsername('fo'), createAnyError(
 		'Expected string to include `.`, got `fo`',
 		'Expected string to have a minimum length of `3`, got `fo`'
 	));
-	t.throws(() => checkUsername(5 as any), createError(
+	t.throws(() => checkUsername(5 as any), createAnyError(
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected argument to be of type `string` but received type `number`'
 	));
-});
-
-test('overwrite label', t => {
-	t.notThrows(() => m('foo', m.string.label('foo').label('bar')));
-	t.throws(() => m(12 as any, m.string.label('foo').label('bar')), 'Expected `bar` to be of type `string` but received type `number`');
-});
-
-test('auto detect label', t => {
-	const x = 'f';
-
-	t.throws(() => m(x as any, m.string.minLength(2)), 'Expected string `x` to have a minimum length of `2`, got `f`');
 });

@@ -74,6 +74,10 @@
 	},
 	"typings": "dist/index.d.ts",
 	"sideEffects": false,
+	"ava": {
+		"babel": false,
+		"compileEnhancements": false
+	},
 	"nyc": {
 		"exclude": [
 			"dist/test"

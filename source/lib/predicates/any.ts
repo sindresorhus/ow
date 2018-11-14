@@ -11,14 +11,14 @@ export class AnyPredicate<T = any> implements BasePredicate<T> {
 	) {}
 
 	// tslint:disable completed-docs
-	[testSymbol](value: T, main: Ow) {
+	[testSymbol](value: T, main: Ow, label?: string) {
 		const errors = [
 			'Any predicate failed with the following errors:'
 		];
 
 		for (const predicate of this.predicates) {
 			try {
-				main(value, predicate);
+				main(value, label as string, predicate);
 
 				return;
 			} catch (err) {

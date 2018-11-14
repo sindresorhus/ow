@@ -1,8 +1,8 @@
-import callsites from 'callsites';		// tslint:disable-line:no-require-imports
+import callsites = require('callsites');		// tslint:disable-line:no-require-imports
 import {extractLabel} from './lib/utils/extract-label';
 import {Predicate} from './lib/predicates/predicate';
 import {AnyPredicate} from './lib/predicates/any';
-import {testSymbol, BasePredicate} from './lib/predicates/base-predicate';
+import {testSymbol, BasePredicate, isPredicate} from './lib/predicates/base-predicate';
 import {StringPredicate} from './lib/predicates/string';
 import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
@@ -19,12 +19,20 @@ type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint
 
 export interface Ow {
 	/**
-	 * Test if the value matches the predicate. Throws an `ArgumentError` if the test fails..
+	 * Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
 	 *
 	 * @param value Value to test.
 	 * @param predicate Predicate to test against.
 	 */
 	<T>(value: T, predicate: BasePredicate<T>): void;
+	/**
+	 * Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
+	 *
+	 * @param value Value to test.
+	 * @param label Label which should be used in error messages.
+	 * @param predicate Predicate to test against.
+	 */
+	<T>(value: T, label: string, predicate: BasePredicate<T>): void;
 	/**
 	 * Test the value to be a string.
 	 */
@@ -171,6 +179,13 @@ export interface Ow {
 	 */
 	create<T>(predicate: BasePredicate<T>): (value: T) => void;
 	/**
+	 * Create a reusable validator.
+	 *
+	 * @param label Label which should be used in error messages.
+	 * @param predicate Predicate used in the validator function.
+	 */
+	create<T>(label: string, predicate: BasePredicate<T>): (value: T) => void;
+	/**
 	 * Test that the value matches at least one of the given predicates.
 	 */
 	any<T1>(p1: BasePredicate<T1>): AnyPredicate<T1>;
@@ -186,15 +201,23 @@ export interface Ow {
 	any(...predicate: BasePredicate[]): AnyPredicate;
 }
 
-const main = <T>(value: T, predicate: BasePredicate<T>, callsite: any = callsites()) => {
-	return (predicate as any)[testSymbol](value, main, extractLabel(callsite));
+const main = <T>(value: T, labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => {
+	let label: any = labelOrPredicate;
+	let testPredicate: any = predicate;
+
+	if (isPredicate(labelOrPredicate)) {
+		label = extractLabel(callsites());
+		testPredicate = labelOrPredicate;
+	}
+
+	return testPredicate[testSymbol](value, main, label);
 };
 
 Object.defineProperties(main, {
 	isValid: {
 		value: <T>(value: T, predicate: BasePredicate<T>) => {
 			try {
-				main(value, predicate, callsites());
+				main(value, predicate);
 				return true;
 			} catch {
 				return false;
@@ -202,7 +225,13 @@ Object.defineProperties(main, {
 		}
 	},
 	create: {
-		value: <T>(predicate: BasePredicate<T>) => (value: T) => main(value, predicate, callsites())
+		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T) => {
+			if (isPredicate(labelOrPredicate)) {
+				return main(value, extractLabel(callsites()), labelOrPredicate);
+			}
+
+			return main(value, labelOrPredicate, predicate);
+		}
 	},
 	any: {
 		value: (...predicates: BasePredicate[]) => new AnyPredicate(predicates)
