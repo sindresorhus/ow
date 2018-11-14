@@ -1,4 +1,4 @@
-import callsites = require('callsites');		// tslint:disable-line:no-require-imports
+import callsites from 'callsites';
 import {extractLabel} from './lib/utils/extract-label';
 import {Predicate} from './lib/predicates/predicate';
 import {AnyPredicate} from './lib/predicates/any';
