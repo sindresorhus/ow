@@ -1,5 +1,5 @@
 import callsites from 'callsites';
-import {extractLabel} from './lib/utils/extract-label';
+import {inferLabel} from './lib/utils/infer-label';
 import {Predicate} from './lib/predicates/predicate';
 import {AnyPredicate} from './lib/predicates/any';
 import {testSymbol, BasePredicate, isPredicate} from './lib/predicates/base-predicate';
@@ -206,7 +206,7 @@ const main = <T>(value: T, labelOrPredicate: BasePredicate<T> | string | undefin
 	let testPredicate: any = predicate;
 
 	if (isPredicate(labelOrPredicate)) {
-		label = extractLabel(callsites());
+		label = inferLabel(callsites());
 		testPredicate = labelOrPredicate;
 	}
 
@@ -227,7 +227,7 @@ Object.defineProperties(main, {
 	create: {
 		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T) => {
 			if (isPredicate(labelOrPredicate)) {
-				return main(value, extractLabel(callsites()), labelOrPredicate);
+				return main(value, inferLabel(callsites()), labelOrPredicate);
 			}
 
 			return main(value, labelOrPredicate, predicate);
