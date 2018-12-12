@@ -93,7 +93,14 @@ test('string.alphanumeric', t => {
 
 test('string.numeric', t => {
 	t.notThrows(() => m('123', m.string.numeric));
-	t.throws(() => m('Foo123' as any, m.string.numeric), 'Expected string to be numeric, got `Foo123`');
+	t.notThrows(() => m('-123', m.string.numeric));
+	t.notThrows(() => m('+123', m.string.numeric));
+	t.throws(() => m('Foo123', m.string.numeric), 'Expected string to be numeric, got `Foo123`');
+	t.throws(() => m('++123', m.string.numeric), 'Expected string to be numeric, got `++123`');
+	t.throws(() => m('1+1', m.string.numeric), 'Expected string to be numeric, got `1+1`');
+	t.throws(() => m('11-', m.string.numeric), 'Expected string to be numeric, got `11-`');
+	t.throws(() => m('--123', m.string.numeric), 'Expected string to be numeric, got `--123`');
+	t.throws(() => m('+-123', m.string.numeric), 'Expected string to be numeric, got `+-123`');
 });
 
 test('string.date', t => {
