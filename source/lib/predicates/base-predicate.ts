@@ -14,6 +14,6 @@ export const isPredicate = (value: any): value is BasePredicate => Boolean(value
  * @hidden
  */
 export interface BasePredicate<T = any> {
-  // tslint:disable-next-line completed-docs
+	// tslint:disable-next-line completed-docs
 	[testSymbol](value: T, main: Ow, label?: string): void;
 }
