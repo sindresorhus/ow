@@ -8,7 +8,10 @@ import {not} from '../operators/not';
  * @hidden
  */
 export interface Validator<T> {
+	// tslint:disable-next-line completed-docs
 	message(value: T, label?: string, result?: any): string;
+
+	// tslint:disable-next-line completed-docs
 	validator(value: T): any;
 }
 
