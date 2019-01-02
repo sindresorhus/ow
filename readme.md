@@ -14,7 +14,7 @@
 - Expressive chainable API
 - Lots of built-in validations
 - Supports custom validations
-- Automatic label inference
+- Automatic label inference in Node.js
 - Written in TypeScript
 
 
