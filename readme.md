@@ -14,6 +14,7 @@
 - Expressive chainable API
 - Lots of built-in validations
 - Supports custom validations
+- Automatic label inference
 - Written in TypeScript
 
 
@@ -55,6 +56,8 @@ Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if t
 
 Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
 
+The `label` is automatically inferred in Node.js but you can override it by passing in a value for `label`. The automatic label inference doesn't work in the browser.
+
 ### ow.isValid(value, predicate)
 
 Returns `true` if the value matches the predicate, otherwise returns `false`.
@@ -66,8 +69,21 @@ Create a reusable validator.
 ```ts
 const checkPassword = ow.create(ow.string.minLength(6));
 
+const password = 'foo';
+
+checkPassword(password);
+//=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
+```
+
+### ow.create(label, predicate)
+
+Create a reusable validator with a specific `label`.
+
+```ts
+const checkPassword = ow.create('password', ow.string.minLength(6));
+
 checkPassword('foo');
-//=> ArgumentError: Expected string to have a minimum length of `6`, got `foo`
+//=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
 ```
 
 ### ow.any(...predicate[])

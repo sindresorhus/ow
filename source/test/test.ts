@@ -45,9 +45,12 @@ test('isValid', t => {
 test('reusable validator', t => {
 	const checkUsername = m.create(m.string.minLength(3));
 
+	const value = 'x';
+
 	t.notThrows(() => checkUsername('foo'));
 	t.notThrows(() => checkUsername('foobar'));
 	t.throws(() => checkUsername('fo'), 'Expected string to have a minimum length of `3`, got `fo`');
+	t.throws(() => checkUsername(value), 'Expected string `value` to have a minimum length of `3`, got `x`');
 	t.throws(() => checkUsername(5 as any), 'Expected argument to be of type `string` but received type `number`');
 });
 
