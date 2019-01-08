@@ -1,9 +1,10 @@
-import * as fs from 'fs';
+import fs from './node/fs';
 import {CallSite} from 'callsites';
 import * as isNode from 'is-node';
 import isValidIdentifier from 'is-valid-identifier';
 
-const regex = /^.*?\((.*?)[,)]/;
+// Regex to extract the label out of the `ow` function call
+const labelRegex = /^.*?\((.*?)[,)]/;
 
 /**
  * Infer the label of the caller.
@@ -16,30 +17,39 @@ export const inferLabel = (callsites: CallSite[]) => {
 		return;
 	}
 
-	const fileName = callsites[1].getFileName();
-	const lineNumber = callsites[1].getLineNumber();
-	const columnNumber = callsites[1].getColumnNumber();
+	// Grab the stackframe with the `ow` function call
+	const functionCallStackFrame = callsites[1];
+
+	const fileName = functionCallStackFrame.getFileName();
+	const lineNumber = functionCallStackFrame.getLineNumber();
+	const columnNumber = functionCallStackFrame.getColumnNumber();
 
 	if (!fileName || lineNumber === null || columnNumber === null) {
 		return;
 	}
 
-	const content = fs.readFileSync(fileName, 'utf8').split('\n');
+	const content = (fs.readFileSync(fileName, 'utf8') as string).split('\n');
 
 	let line = content[lineNumber - 1];
 
-	if (line) {
-		line = line.slice(columnNumber - 1);
+	if (!line) {
+		// Exit if the line number couldn't be found
+		return;
+	}
 
-		const match = regex.exec(line);
+	line = line.slice(columnNumber - 1);
 
-		if (match && match[1]) {
-			const token = match[1];
+	const match = labelRegex.exec(line);
 
-			if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop())) {
-				return token;
-			}
-		}
+	if (!match || !match[1]) {
+		// Exit if we didn't find a label
+		return;
+	}
+
+	const token = match[1];
+
+	if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop())) {
+		return token;
 	}
 
 	return;

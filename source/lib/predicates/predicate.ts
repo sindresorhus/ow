@@ -56,7 +56,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Ow, label?: string) {
-		const lbl = label
+		const label2 = label
 			? `${this.type} \`${label}\``
 			: this.type;
 
@@ -65,7 +65,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 
 			if (typeof result !== 'boolean' || !result) {
 				// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-				throw new ArgumentError(message(value, lbl, result), main);
+				throw new ArgumentError(message(value, label2, result), main);
 			}
 		}
 	}
