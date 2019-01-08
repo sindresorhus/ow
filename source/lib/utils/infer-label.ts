@@ -28,7 +28,13 @@ export const inferLabel = (callsites: CallSite[]) => {
 		return;
 	}
 
-	const content = (fs.readFileSync(fileName, 'utf8') as string).split('\n');
+	let content: string[] = [];
+
+	try {
+		content = (fs.readFileSync(fileName, 'utf8') as string).split('\n');
+	} catch {
+		return;
+	}
 
 	let line = content[lineNumber - 1];
 
