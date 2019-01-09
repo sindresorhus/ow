@@ -14,6 +14,7 @@
 - Expressive chainable API
 - Lots of built-in validations
 - Supports custom validations
+- Automatic label inference in Node.js
 - Written in TypeScript
 
 
@@ -36,10 +37,10 @@ const unicorn = input => {
 };
 
 unicorn(3);
-//=> ArgumentError: Expected argument to be of type `string` but received type `number`
+//=> ArgumentError: Expected `input` to be of type `string` but received type `number`
 
 unicorn('yo');
-//=> ArgumentError: Expected string to have a minimum length of `5`, got `yo`
+//=> ArgumentError: Expected string `input` to have a minimum length of `5`, got `yo`
 ```
 
 
@@ -49,7 +50,13 @@ unicorn('yo');
 
 ### ow(value, predicate)
 
-Test if `value` matches the provided `predicate`.  Throws an `ArgumentError` if the test fails.
+Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if the test fails.
+
+### ow(value, label, predicate)
+
+Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
+
+The `label` is automatically inferred in Node.js but you can override it by passing in a value for `label`. The automatic label inference doesn't work in the browser.
 
 ### ow.isValid(value, predicate)
 
@@ -62,8 +69,21 @@ Create a reusable validator.
 ```ts
 const checkPassword = ow.create(ow.string.minLength(6));
 
+const password = 'foo';
+
+checkPassword(password);
+//=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
+```
+
+### ow.create(label, predicate)
+
+Create a reusable validator with a specific `label`.
+
+```ts
+const checkPassword = ow.create('password', ow.string.minLength(6));
+
 checkPassword('foo');
-//=> ArgumentError: Expected string to have a minimum length of `6`, got `foo`
+//=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
 ```
 
 ### ow.any(...predicate[])
@@ -161,20 +181,6 @@ const greaterThan = (max: number, x: number) => {
 
 ow(5, ow.number.is(x => greaterThan(10, x)));
 //=> ArgumentError: Expected `5` to be greater than `10`
-```
-
-#### label(string)
-
-This assigns a custom label to be used in any error messages. It is useful for making error messages more user-friendly by including the name of the variable which failed validation.
-
-This predicate does not add any additional validation.
-
-```ts
-ow('', ow.string.nonEmpty);
-//=> ArgumentError: Expected string to not be empty
-
-ow('', ow.string.label('foo').nonEmpty);
-//=> ArgumentError: Expected string `foo` to not be empty
 ```
 
 
