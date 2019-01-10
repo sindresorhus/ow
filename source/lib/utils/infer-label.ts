@@ -1,4 +1,4 @@
-import fs from './node/fs';
+import lazyFS from './node/fs';
 import {CallSite} from 'callsites';
 import * as isNode from 'is-node';
 import isValidIdentifier from './is-valid-identifier';
@@ -16,6 +16,9 @@ export const inferLabel = (callsites: CallSite[]) => {
 		// Exit if we are not running in a Node.js environment
 		return;
 	}
+
+	// Load the lazy `fs` module
+	const fs = lazyFS();
 
 	// Grab the stackframe with the `ow` function call
 	const functionCallStackFrame = callsites[1];
