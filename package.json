@@ -82,5 +82,8 @@
 		"exclude": [
 			"dist/test"
 		]
+	},
+	"dependencies": {
+		"byte-range": "^1.0.0"
 	}
 }

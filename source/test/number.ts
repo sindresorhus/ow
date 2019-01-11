@@ -82,3 +82,11 @@ test('number.integerOrInfinite', t => {
 	t.notThrows(() => m(-10, m.number.integerOrInfinite));
 	t.throws(() => m(3.14, m.number.integerOrInfinite), 'Expected number to be an integer or infinite, got 3.14');
 });
+
+test('number.uint8', t => {
+	t.notThrows(() => m(0, m.number.uint8));
+	t.notThrows(() => m(255, m.number.uint8));
+	t.throws(() => m(-1, m.number.uint8), 'Expected number to be an integer in range [0..255], got -1');
+	t.throws(() => m(1.5, m.number.uint8), 'Expected number to be an integer in range [0..255], got 1.5');
+	t.throws(() => m(256, m.number.uint8), 'Expected number to be an integer in range [0..255], got 256');
+});
