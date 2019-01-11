@@ -201,12 +201,15 @@ export interface Ow {
 	any(...predicate: BasePredicate[]): AnyPredicate;
 }
 
-const main = <T>(value: T, labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => {
+const main = <T>(value: T, labelOrPredicate: BasePredicate<T> | string | Function | undefined, predicate?: BasePredicate<T>) => {
 	let label: any = labelOrPredicate;
 	let testPredicate: any = predicate;
 
 	if (isPredicate(labelOrPredicate)) {
-		label = inferLabel(callsites());
+		const stackFrames = callsites();
+
+		// Pass in a label function to only infer it when it fails
+		label = () => inferLabel(stackFrames);
 		testPredicate = labelOrPredicate;
 	}
 
@@ -227,7 +230,9 @@ Object.defineProperties(main, {
 	create: {
 		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T) => {
 			if (isPredicate(labelOrPredicate)) {
-				return main(value, inferLabel(callsites()), labelOrPredicate);
+				const stackFrames = callsites();
+
+				return main(value, () => inferLabel(stackFrames), labelOrPredicate);
 			}
 
 			return main(value, labelOrPredicate, predicate);

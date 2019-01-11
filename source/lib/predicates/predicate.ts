@@ -55,18 +55,26 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 * @hidden
 	 */
 	// tslint:disable completed-docs
-	[testSymbol](value: T, main: Ow, label?: string) {
-		const label2 = label
-			? `${this.type} \`${label}\``
-			: this.type;
-
+	[testSymbol](value: T, main: Ow, label?: string | Function) {
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);
 
-			if (typeof result !== 'boolean' || !result) {
-				// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-				throw new ArgumentError(message(value, label2, result), main);
+			if (result === true) {
+				continue;
 			}
+
+			let label2 = label;
+
+			if (typeof label === 'function') {
+				label2 = label();
+			}
+
+			label2 = label2
+				? `${this.type} \`${label2}\``
+				: this.type;
+
+			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
+			throw new ArgumentError(message(value, label2, result), main);
 		}
 	}
 
