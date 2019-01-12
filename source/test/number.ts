@@ -106,3 +106,27 @@ test('number.uint32', t => {
 	t.throws(() => m(1.5, m.number.uint32), 'Expected number to be an integer in range [0..4294967295], got 1.5');
 	t.throws(() => m(4294967296, m.number.uint32), 'Expected number to be an integer in range [0..4294967295], got 4294967296');
 });
+
+test('number.int8', t => {
+	t.notThrows(() => m(-128, m.number.int8));
+	t.notThrows(() => m(127, m.number.int8));
+	t.throws(() => m(-129, m.number.int8), 'Expected number to be an integer in range [-128..127], got -129');
+	t.throws(() => m(1.5, m.number.int8), 'Expected number to be an integer in range [-128..127], got 1.5');
+	t.throws(() => m(128, m.number.int8), 'Expected number to be an integer in range [-128..127], got 128');
+});
+
+test('number.int16', t => {
+	t.notThrows(() => m(-32768, m.number.int16));
+	t.notThrows(() => m(32767, m.number.int16));
+	t.throws(() => m(-32769, m.number.int16), 'Expected number to be an integer in range [-32768..32767], got -32769');
+	t.throws(() => m(1.5, m.number.int16), 'Expected number to be an integer in range [-32768..32767], got 1.5');
+	t.throws(() => m(32768, m.number.int16), 'Expected number to be an integer in range [-32768..32767], got 32768');
+});
+
+test('number.int32', t => {
+	t.notThrows(() => m(-2147483648, m.number.int32));
+	t.notThrows(() => m(2147483647, m.number.int32));
+	t.throws(() => m(-2147483649, m.number.int32), 'Expected number to be an integer in range [-2147483648..2147483647], got -2147483649');
+	t.throws(() => m(1.5, m.number.int32), 'Expected number to be an integer in range [-2147483648..2147483647], got 1.5');
+	t.throws(() => m(2147483648, m.number.int32), 'Expected number to be an integer in range [-2147483648..2147483647], got 2147483648');
+});

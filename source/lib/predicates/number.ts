@@ -180,4 +180,43 @@ export class NumberPredicate extends Predicate<number> {
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
+
+	/**
+	 * Test a number to be in a valid range for a int8.
+	 */
+	get int8() {
+		const start = -128;
+		const end = 127;
+
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			validator: value => is.integer(value) && is.inRange(value, [start, end])
+		});
+	}
+
+	/**
+	 * Test a number to be in a valid range for a int16.
+	 */
+	get int16() {
+		const start = -32768;
+		const end = 32767;
+
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			validator: value => is.integer(value) && is.inRange(value, [start, end])
+		});
+	}
+
+	/**
+	 * Test a number to be in a valid range for a int32.
+	 */
+	get int32() {
+		const start = -2147483648;
+		const end = 2147483647;
+
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			validator: value => is.integer(value) && is.inRange(value, [start, end])
+		});
+	}
 }
