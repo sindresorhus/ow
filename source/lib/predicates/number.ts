@@ -146,77 +146,41 @@ export class NumberPredicate extends Predicate<number> {
 	 * Test a number to be in a valid range for a uint8.
 	 */
 	get uint8() {
-		const start = 0;
-		const end = 255;
-
-		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [start, end])
-		});
+		return this.integer.inRange(0, 255);
 	}
 
 	/**
 	 * Test a number to be in a valid range for a uint16.
 	 */
 	get uint16() {
-		const start = 0;
-		const end = 65535;
-
-		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [start, end])
-		});
+		return this.integer.inRange(0, 65535);
 	}
 
 	/**
 	 * Test a number to be in a valid range for a uint32.
 	 */
 	get uint32() {
-		const start = 0;
-		const end = 4294967295;
-
-		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [start, end])
-		});
+		return this.integer.inRange(0, 4294967295);
 	}
 
 	/**
 	 * Test a number to be in a valid range for a int8.
 	 */
 	get int8() {
-		const start = -128;
-		const end = 127;
-
-		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [start, end])
-		});
+		return this.integer.inRange(-128, 127);
 	}
 
 	/**
 	 * Test a number to be in a valid range for a int16.
 	 */
 	get int16() {
-		const start = -32768;
-		const end = 32767;
-
-		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [start, end])
-		});
+		return this.integer.inRange(-32768, 32767);
 	}
 
 	/**
 	 * Test a number to be in a valid range for a int32.
 	 */
 	get int32() {
-		const start = -2147483648;
-		const end = 2147483647;
-
-		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [start, end])
-		});
+		return this.integer.inRange(-2147483648, 2147483647);
 	}
 }
