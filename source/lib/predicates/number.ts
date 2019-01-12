@@ -148,7 +148,20 @@ export class NumberPredicate extends Predicate<number> {
 	get uint8() {
 		const start = 0;
 		const end = 255;
-		
+
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			validator: value => is.integer(value) && is.inRange(value, [start, end])
+		});
+	}
+
+	/**
+	 * Test a number to be in a valid range for a uint16.
+	 */
+	get uint16() {
+		const start = 0;
+		const end = 65535;
+
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
