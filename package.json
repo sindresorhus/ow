@@ -82,6 +82,5 @@
 		"exclude": [
 			"dist/test"
 		]
-	},
-	"dependencies": {}
+	}
 }
