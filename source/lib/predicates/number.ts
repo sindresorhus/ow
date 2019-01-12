@@ -150,7 +150,7 @@ export class NumberPredicate extends Predicate<number> {
 		const end = 255;
 
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
@@ -163,7 +163,7 @@ export class NumberPredicate extends Predicate<number> {
 		const end = 65535;
 
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
@@ -176,7 +176,7 @@ export class NumberPredicate extends Predicate<number> {
 		const end = 4294967295;
 
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
@@ -189,7 +189,7 @@ export class NumberPredicate extends Predicate<number> {
 		const end = 127;
 
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
@@ -202,7 +202,7 @@ export class NumberPredicate extends Predicate<number> {
 		const end = 32767;
 
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
@@ -215,7 +215,7 @@ export class NumberPredicate extends Predicate<number> {
 		const end = 2147483647;
 
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			message: (value, label) => `Expected ${label} to be an integer in the range ${start}...${end}, got ${value}`,
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
