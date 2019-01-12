@@ -1,5 +1,4 @@
 import is from '@sindresorhus/is';
-import byteRange from 'byte-range';
 import {Predicate, Context} from './predicate';
 
 export class NumberPredicate extends Predicate<number> {
@@ -147,9 +146,12 @@ export class NumberPredicate extends Predicate<number> {
 	 * Test a number to be in a valid range for a uint8.
 	 */
 	get uint8() {
+		const start = 0;
+		const end = 255;
+		
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to be an integer in range [${byteRange.uint8[0]}..${byteRange.uint8[1]}], got ${value}`,
-			validator: value => is.integer(value) && is.inRange(value, [byteRange.uint8[0], byteRange.uint8[1]])
+			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
 }
