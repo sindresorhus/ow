@@ -167,4 +167,17 @@ export class NumberPredicate extends Predicate<number> {
 			validator: value => is.integer(value) && is.inRange(value, [start, end])
 		});
 	}
+
+	/**
+	 * Test a number to be in a valid range for a uint32.
+	 */
+	get uint32() {
+		const start = 0;
+		const end = 4294967295;
+
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be an integer in range [${start}..${end}], got ${value}`,
+			validator: value => is.integer(value) && is.inRange(value, [start, end])
+		});
+	}
 }

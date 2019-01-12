@@ -98,3 +98,11 @@ test('number.uint16', t => {
 	t.throws(() => m(1.5, m.number.uint16), 'Expected number to be an integer in range [0..65535], got 1.5');
 	t.throws(() => m(65536, m.number.uint16), 'Expected number to be an integer in range [0..65535], got 65536');
 });
+
+test('number.uint32', t => {
+	t.notThrows(() => m(0, m.number.uint32));
+	t.notThrows(() => m(4294967295, m.number.uint32));
+	t.throws(() => m(-1, m.number.uint32), 'Expected number to be an integer in range [0..4294967295], got -1');
+	t.throws(() => m(1.5, m.number.uint32), 'Expected number to be an integer in range [0..4294967295], got 1.5');
+	t.throws(() => m(4294967296, m.number.uint32), 'Expected number to be an integer in range [0..4294967295], got 4294967296');
+});
