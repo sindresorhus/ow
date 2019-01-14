@@ -1,5 +1,5 @@
 import is from '@sindresorhus/is';
-import {Ow} from '../..';
+import {Main} from '../..';
 import {ArgumentError} from '../argument-error';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {not} from '../operators/not';
@@ -55,7 +55,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 * @hidden
 	 */
 	// tslint:disable completed-docs
-	[testSymbol](value: T, main: Ow, label?: string | Function) {
+	[testSymbol](value: T, main: Main, label: string | Function) {
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);
 

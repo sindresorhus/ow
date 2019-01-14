@@ -1,6 +1,6 @@
 import {ArgumentError} from '../argument-error';
 import {BasePredicate, testSymbol} from './base-predicate';
-import {Ow} from '../..';
+import {Main} from '../..';
 
 /**
  * @hidden
@@ -11,14 +11,14 @@ export class AnyPredicate<T = any> implements BasePredicate<T> {
 	) {}
 
 	// tslint:disable completed-docs
-	[testSymbol](value: T, main: Ow, label?: string) {
+	[testSymbol](value: T, main: Main, label: string | Function) {
 		const errors = [
 			'Any predicate failed with the following errors:'
 		];
 
 		for (const predicate of this.predicates) {
 			try {
-				main(value, label as string, predicate);
+				main(value, label, predicate);
 
 				return;
 			} catch (err) {
