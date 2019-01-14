@@ -164,7 +164,7 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
-	 * Test a number to be in a valid range for a 8.-bit signed integer.
+	 * Test a number to be in a valid range for a 8-bit signed integer.
 	 */
 	get int8() {
 		return this.integer.inRange(-128, 127);
