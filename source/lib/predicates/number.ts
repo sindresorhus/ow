@@ -141,4 +141,46 @@ export class NumberPredicate extends Predicate<number> {
 			validator: value => is.integer(value) || is.infinite(value)
 		});
 	}
+
+	/**
+	 * Test a number to be in a valid range for a 8-bit unsigned integer.
+	 */
+	get uint8() {
+		return this.integer.inRange(0, 255);
+	}
+
+	/**
+	 * Test a number to be in a valid range for a 16-bit unsigned integer.
+	 */
+	get uint16() {
+		return this.integer.inRange(0, 65535);
+	}
+
+	/**
+	 * Test a number to be in a valid range for a 32-bit unsigned integer.
+	 */
+	get uint32() {
+		return this.integer.inRange(0, 4294967295);
+	}
+
+	/**
+	 * Test a number to be in a valid range for a 8-bit signed integer.
+	 */
+	get int8() {
+		return this.integer.inRange(-128, 127);
+	}
+
+	/**
+	 * Test a number to be in a valid range for a 16-bit signed integer.
+	 */
+	get int16() {
+		return this.integer.inRange(-32768, 32767);
+	}
+
+	/**
+	 * Test a number to be in a valid range for a 32-bit signed integer.
+	 */
+	get int32() {
+		return this.integer.inRange(-2147483648, 2147483647);
+	}
 }
