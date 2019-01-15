@@ -9,6 +9,7 @@ const labelRegex = /^.*?\((.*?)[,)]/;
 /**
  * Infer the label of the caller.
  *
+ * @hidden
  * @param callsites - List of stack frames.
  */
 export const inferLabel = (callsites: CallSite[]) => {
