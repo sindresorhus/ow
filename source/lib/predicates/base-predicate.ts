@@ -1,4 +1,4 @@
-import {Ow} from '../..';
+import {Main} from '../..';
 
 /**
  * @hidden
@@ -15,5 +15,5 @@ export const isPredicate = (value: any): value is BasePredicate => Boolean(value
  */
 export interface BasePredicate<T = any> {
 	// tslint:disable-next-line completed-docs
-	[testSymbol](value: T, main: Ow, label?: string): void;
+	[testSymbol](value: T, main: Main, label: string | Function): void;
 }

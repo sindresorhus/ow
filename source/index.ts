@@ -17,6 +17,11 @@ import {WeakSetPredicate} from './lib/predicates/weak-set';
 
 type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 
+/**
+ * @hidden
+ */
+export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
+
 export interface Ow {
 	/**
 	 * Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
@@ -201,23 +206,32 @@ export interface Ow {
 	any(...predicate: BasePredicate[]): AnyPredicate;
 }
 
-const main = <T>(value: T, labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => {
-	let label: any = labelOrPredicate;
-	let testPredicate: any = predicate;
-
-	if (isPredicate(labelOrPredicate)) {
-		label = inferLabel(callsites());
-		testPredicate = labelOrPredicate;
-	}
-
-	return testPredicate[testSymbol](value, main, label);
+const test = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => {
+	predicate[testSymbol](value, test, label);
 };
 
-Object.defineProperties(main, {
+const ow = <T>(value: T, labelOrPredicate: any, predicate?: BasePredicate<T>) => {
+	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
+		throw new TypeError(`Expected second argument to be a predicate or a string, got \`${typeof labelOrPredicate}\``);
+	}
+
+	if (isPredicate(labelOrPredicate)) {
+		// If the second argument is a predicate, infer the label
+		const stackFrames = callsites();
+
+		test(value, () => inferLabel(stackFrames), labelOrPredicate);
+
+		return;
+	}
+
+	test(value, labelOrPredicate, predicate as BasePredicate<T>);
+};
+
+Object.defineProperties(ow, {
 	isValid: {
 		value: <T>(value: T, predicate: BasePredicate<T>) => {
 			try {
-				main(value, predicate);
+				ow(value, predicate);
 				return true;
 			} catch {
 				return false;
@@ -227,10 +241,14 @@ Object.defineProperties(main, {
 	create: {
 		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T) => {
 			if (isPredicate(labelOrPredicate)) {
-				return main(value, inferLabel(callsites()), labelOrPredicate);
+				const stackFrames = callsites();
+
+				test(value, () => inferLabel(stackFrames), labelOrPredicate);
+
+				return;
 			}
 
-			return main(value, labelOrPredicate, predicate);
+			test(value, labelOrPredicate as string, predicate as BasePredicate<T>);
 		}
 	},
 	any: {
@@ -337,7 +355,7 @@ Object.defineProperties(main, {
 	}
 });
 
-export default main as Ow;
+export default ow as Ow;
 export {
 	BasePredicate,
 	Predicate,
