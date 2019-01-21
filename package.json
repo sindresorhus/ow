@@ -17,7 +17,7 @@
 		"prepublishOnly": "npm run build",
 		"pretest": "npm run compile -- --sourceMap",
 		"test": "npm run lint && nyc ava dist/test",
-		"lint": "tslint --fix --format stylish --project .",
+		"lint": "tslint --format stylish --project .",
 		"build": "npm run clean && webpack",
 		"compile": "npm run clean && tsc",
 		"clean": "del dist",
