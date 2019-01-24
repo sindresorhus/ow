@@ -1,4 +1,4 @@
-import {Predicates, default as predicates} from './predicates';
+import predicates, {Predicates} from './predicates';
 
 /**
  * @hidden
