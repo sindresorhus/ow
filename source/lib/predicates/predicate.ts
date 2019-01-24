@@ -18,9 +18,15 @@ export interface Validator<T> {
 /**
  * @hidden
  */
-export interface Context<T> {
+export interface PredicateOptions {
+	optional?: boolean;
+}
+
+/**
+ * @hidden
+ */
+export interface Context<T = unknown> extends PredicateOptions {
 	validators: Validator<T>[];
-	label?: string;
 }
 
 /**
@@ -32,12 +38,19 @@ export const validatorSymbol = Symbol('validators');
  * @hidden
  */
 export class Predicate<T = any> implements BasePredicate<T> {
+	private readonly context: Context<T> = {
+		validators: []
+	};
+
 	constructor(
 		private readonly type: string,
-		private readonly context: Context<T> = {
-			validators: []
-		}
+		private readonly options: PredicateOptions = {}
 	) {
+		this.context = {
+			...this.context,
+			...this.options
+		};
+
 		const x = this.type[0].toLowerCase() + this.type.slice(1);
 
 		this.addValidator({
@@ -59,7 +72,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 		for (const {validator, message} of this.context.validators) {
 			const result = validator(value);
 
-			if (result === true) {
+			if (result === true || (this.options.optional === true && value === undefined)) {
 				continue;
 			}
 

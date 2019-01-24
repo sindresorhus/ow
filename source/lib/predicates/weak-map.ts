@@ -1,12 +1,12 @@
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 
 export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predicate<WeakMap<T1, T2>> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<WeakMap<T1, T2>>) {
-		super('WeakMap', context);
+	constructor(options?: PredicateOptions) {
+		super('WeakMap', options);
 	}
 
 	/**

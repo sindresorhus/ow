@@ -1,11 +1,11 @@
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class ErrorPredicate extends Predicate<Error> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<Error>) {
-		super('error', context);
+	constructor(options?: PredicateOptions) {
+		super('error', options);
 	}
 
 	/**

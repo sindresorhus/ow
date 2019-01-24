@@ -1,13 +1,15 @@
 import {ArgumentError} from '../argument-error';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '../..';
+import {PredicateOptions} from './predicate';
 
 /**
  * @hidden
  */
 export class AnyPredicate<T = any> implements BasePredicate<T> {
 	constructor(
-		private readonly predicates: BasePredicate[]
+		private readonly predicates: BasePredicate[],
+		private readonly options: PredicateOptions = {}
 	) {}
 
 	// tslint:disable completed-docs
@@ -22,6 +24,10 @@ export class AnyPredicate<T = any> implements BasePredicate<T> {
 
 				return;
 			} catch (err) {
+				if (value === undefined && this.options.optional === true) {
+					return;
+				}
+
 				errors.push(`- ${err.message}`);
 			}
 		}
