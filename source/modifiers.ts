@@ -1,8 +1,5 @@
 import predicates, {Predicates} from './predicates';
 
-/**
- * @hidden
- */
 export interface Modifiers {
 	/**
 	 * Make the following predicate optional so it doesn't fail when the value is `undefined`.

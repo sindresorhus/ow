@@ -15,9 +15,6 @@ import {AnyPredicate} from './lib/predicates/any';
 
 type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 
-/**
- * @hidden
- */
 export interface Predicates {
 	/**
 	 * Test the value to be a string.
