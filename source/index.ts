@@ -10,6 +10,7 @@ import predicates, {Predicates} from './predicates';
  */
 export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
 
+// Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
 	/**
 	 * Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
