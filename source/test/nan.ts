@@ -1,11 +1,11 @@
 import test from 'ava';
-import m from '..';
+import ow from '..';
 
 test('nan', t => {
-	t.notThrows(() => m(NaN, m.nan));
-	t.notThrows(() => m(Number.NaN, m.nan));
-	t.notThrows(() => m(0 / 0, m.nan));
-	t.throws(() => m(12, m.nan), 'Expected argument to be of type `nan` but received type `number`');
-	t.throws(() => m(12, 'foo', m.nan), 'Expected `foo` to be of type `nan` but received type `number`');
-	t.throws(() => m('12' as any, m.nan), 'Expected argument to be of type `nan` but received type `string`');
+	t.notThrows(() => ow(NaN, ow.nan));
+	t.notThrows(() => ow(Number.NaN, ow.nan));
+	t.notThrows(() => ow(0 / 0, ow.nan));
+	t.throws(() => ow(12, ow.nan), 'Expected argument to be of type `nan` but received type `number`');
+	t.throws(() => ow(12, 'foo', ow.nan), 'Expected `foo` to be of type `nan` but received type `number`');
+	t.throws(() => ow('12' as any, ow.nan), 'Expected argument to be of type `nan` but received type `string`');
 });

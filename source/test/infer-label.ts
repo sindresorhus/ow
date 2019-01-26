@@ -1,12 +1,12 @@
 import test from 'ava';
-import m from '..';
+import ow from '..';
 import {createAnyError} from './fixtures/create-error';
 
 test('infer label', t => {
 	const foo = 'f';
 
-	t.throws(() => m(foo, m.string.minLength(2)), 'Expected string `foo` to have a minimum length of `2`, got `f`');
-	t.throws(() => m(foo as any, m.number), 'Expected `foo` to be of type `number` but received type `string`');
+	t.throws(() => ow(foo, ow.string.minLength(2)), 'Expected string `foo` to have a minimum length of `2`, got `f`');
+	t.throws(() => ow(foo as any, ow.number), 'Expected `foo` to be of type `number` but received type `string`');
 });
 
 test('infer object property label', t => {
@@ -14,19 +14,19 @@ test('infer object property label', t => {
 		world: 'f'
 	};
 
-	t.throws(() => m(hello.world, m.string.minLength(2)), 'Expected string `hello.world` to have a minimum length of `2`, got `f`');
+	t.throws(() => ow(hello.world, ow.string.minLength(2)), 'Expected string `hello.world` to have a minimum length of `2`, got `f`');
 });
 
 test('overwrite inferred label', t => {
 	const foo = 'f';
 
-	t.throws(() => m(foo, '🦄', m.string.minLength(2)), 'Expected string `🦄` to have a minimum length of `2`, got `f`');
+	t.throws(() => ow(foo, '🦄', ow.string.minLength(2)), 'Expected string `🦄` to have a minimum length of `2`, got `f`');
 });
 
 test('infer label in `any` predicate', t => {
 	const foo = 'f';
 
-	t.throws(() => m(foo, m.any(m.string.minLength(2), m.number)), createAnyError(
+	t.throws(() => ow(foo, ow.any(ow.string.minLength(2), ow.number)), createAnyError(
 		'Expected string `foo` to have a minimum length of `2`, got `f`',
 		'Expected `foo` to be of type `number` but received type `string`'
 	));
@@ -35,7 +35,7 @@ test('infer label in `any` predicate', t => {
 test('overwrite inferred label in `any` predicate', t => {
 	const foo = 'f';
 
-	t.throws(() => m(foo, '🦄', m.any(m.string.minLength(2), m.number)), createAnyError(
+	t.throws(() => ow(foo, '🦄', ow.any(ow.string.minLength(2), ow.number)), createAnyError(
 		'Expected string `🦄` to have a minimum length of `2`, got `f`',
 		'Expected `🦄` to be of type `number` but received type `string`'
 	));

@@ -1,14 +1,14 @@
 import test from 'ava';
-import m from '..';
+import ow from '..';
 
 test('nullOrUndefined', t => {
 	const x = null;
 	const y = undefined;
 
-	t.notThrows(() => m(null, m.nullOrUndefined));
-	t.notThrows(() => m(undefined, m.nullOrUndefined));
-	t.notThrows(() => m(x, m.nullOrUndefined));
-	t.notThrows(() => m(y, m.nullOrUndefined));
-	t.throws(() => m('foo' as any, m.nullOrUndefined), 'Expected argument to be of type `nullOrUndefined` but received type `string`');
-	t.throws(() => m('foo' as any, 'foo', m.nullOrUndefined), 'Expected `foo` to be of type `nullOrUndefined` but received type `string`');
+	t.notThrows(() => ow(null, ow.nullOrUndefined));
+	t.notThrows(() => ow(undefined, ow.nullOrUndefined));
+	t.notThrows(() => ow(x, ow.nullOrUndefined));
+	t.notThrows(() => ow(y, ow.nullOrUndefined));
+	t.throws(() => ow('foo' as any, ow.nullOrUndefined), 'Expected argument to be of type `nullOrUndefined` but received type `string`');
+	t.throws(() => ow('foo' as any, 'foo', ow.nullOrUndefined), 'Expected `foo` to be of type `nullOrUndefined` but received type `string`');
 });

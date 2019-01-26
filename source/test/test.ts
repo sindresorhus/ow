@@ -1,22 +1,22 @@
 import test from 'ava';
-import m from '..';
+import ow from '..';
 import {createAnyError} from './fixtures/create-error';
 
 test('not', t => {
 	const foo = '';
 
-	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
-	t.notThrows(() => m(1, m.number.not.infinite));
-	t.notThrows(() => m(1, m.number.not.infinite.not.greaterThan(5)));
-	t.throws(() => m(6, m.number.not.infinite.not.greaterThan(5)));
-	t.notThrows(() => m('foo!', m.string.not.alphabetical));
-	t.notThrows(() => m('foo!', m.string.not.alphanumeric));
-	t.notThrows(() => m('foo!', 'foo', m.string.not.alphanumeric));
-	t.notThrows(() => m('FOO!', m.string.not.lowercase));
-	t.notThrows(() => m('foo!', m.string.not.uppercase));
-	t.throws(() => m('', m.string.not.empty), '[NOT] Expected string to be empty, got ``');
-	t.throws(() => m('', 'foo', m.string.not.empty), '[NOT] Expected string `foo` to be empty, got ``');
-	t.throws(() => m(foo, m.string.not.empty), '[NOT] Expected string `foo` to be empty, got ``');
+	t.notThrows(() => ow('foo!', ow.string.not.alphanumeric));
+	t.notThrows(() => ow(1, ow.number.not.infinite));
+	t.notThrows(() => ow(1, ow.number.not.infinite.not.greaterThan(5)));
+	t.throws(() => ow(6, ow.number.not.infinite.not.greaterThan(5)));
+	t.notThrows(() => ow('foo!', ow.string.not.alphabetical));
+	t.notThrows(() => ow('foo!', ow.string.not.alphanumeric));
+	t.notThrows(() => ow('foo!', 'foo', ow.string.not.alphanumeric));
+	t.notThrows(() => ow('FOO!', ow.string.not.lowercase));
+	t.notThrows(() => ow('foo!', ow.string.not.uppercase));
+	t.throws(() => ow('', ow.string.not.empty), '[NOT] Expected string to be empty, got ``');
+	t.throws(() => ow('', 'foo', ow.string.not.empty), '[NOT] Expected string `foo` to be empty, got ``');
+	t.throws(() => ow(foo, ow.string.not.empty), '[NOT] Expected string `foo` to be empty, got ``');
 });
 
 test('is', t => {
@@ -24,26 +24,26 @@ test('is', t => {
 		return x > max || `Expected \`${x}\` to be greater than \`${max}\``;
 	};
 
-	t.notThrows(() => m(1, m.number.is(x => x < 10)));
-	t.throws(() => m(1, m.number.is(x => x > 10)), 'Expected number `1` to pass custom validation function');
-	t.throws(() => m(1, 'foo', m.number.is(x => x > 10)), 'Expected number `foo` `1` to pass custom validation function');
-	t.throws(() => m(5, m.number.is(x => greaterThan(10, x))), '(number) Expected `5` to be greater than `10`');
-	t.throws(() => m(5, 'foo', m.number.is(x => greaterThan(10, x))), '(number `foo`) Expected `5` to be greater than `10`');
+	t.notThrows(() => ow(1, ow.number.is(x => x < 10)));
+	t.throws(() => ow(1, ow.number.is(x => x > 10)), 'Expected number `1` to pass custom validation function');
+	t.throws(() => ow(1, 'foo', ow.number.is(x => x > 10)), 'Expected number `foo` `1` to pass custom validation function');
+	t.throws(() => ow(5, ow.number.is(x => greaterThan(10, x))), '(number) Expected `5` to be greater than `10`');
+	t.throws(() => ow(5, 'foo', ow.number.is(x => greaterThan(10, x))), '(number `foo`) Expected `5` to be greater than `10`');
 });
 
 test('isValid', t => {
-	t.true(m.isValid(1, m.number));
-	t.true(m.isValid(1, m.number.equal(1)));
-	t.true(m.isValid('foo!', m.string.not.alphanumeric));
-	t.true(m.isValid('foo!', m.any(m.string, m.number)));
-	t.true(m.isValid(1, m.any(m.string, m.number)));
-	t.false(m.isValid(1 as any, m.string));
-	t.false(m.isValid(1 as any, m.number.greaterThan(2)));
-	t.false(m.isValid(true as any, m.any(m.string, m.number)));
+	t.true(ow.isValid(1, ow.number));
+	t.true(ow.isValid(1, ow.number.equal(1)));
+	t.true(ow.isValid('foo!', ow.string.not.alphanumeric));
+	t.true(ow.isValid('foo!', ow.any(ow.string, ow.number)));
+	t.true(ow.isValid(1, ow.any(ow.string, ow.number)));
+	t.false(ow.isValid(1 as any, ow.string));
+	t.false(ow.isValid(1 as any, ow.number.greaterThan(2)));
+	t.false(ow.isValid(true as any, ow.any(ow.string, ow.number)));
 });
 
 test('reusable validator', t => {
-	const checkUsername = m.create(m.string.minLength(3));
+	const checkUsername = ow.create(ow.string.minLength(3));
 
 	const value = 'x';
 
@@ -55,7 +55,7 @@ test('reusable validator', t => {
 });
 
 test('reusable validator with label', t => {
-	const checkUsername = m.create('foo', m.string.minLength(3));
+	const checkUsername = ow.create('foo', ow.string.minLength(3));
 
 	t.notThrows(() => checkUsername('foo'));
 	t.notThrows(() => checkUsername('foobar'));
@@ -64,7 +64,7 @@ test('reusable validator with label', t => {
 });
 
 test('any-reusable validator', t => {
-	const checkUsername = m.create(m.any(m.string.includes('.'), m.string.minLength(3)));
+	const checkUsername = ow.create(ow.any(ow.string.includes('.'), ow.string.minLength(3)));
 
 	t.notThrows(() => checkUsername('foo'));
 	t.notThrows(() => checkUsername('f.'));

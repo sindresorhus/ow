@@ -1,9 +1,9 @@
 import test from 'ava';
-import m from '..';
+import ow from '..';
 
 test('function', t => {
-	t.notThrows(() => m(() => {}, m.function));		// tslint:disable-line:no-empty
-	t.throws(() => m('foo' as any, m.function), 'Expected argument to be of type `Function` but received type `string`');
-	t.throws(() => m('foo' as any, 'foo', m.function), 'Expected `foo` to be of type `Function` but received type `string`');
-	t.throws(() => m(12 as any, m.function), 'Expected argument to be of type `Function` but received type `number`');
+	t.notThrows(() => ow(() => {}, ow.function));		// tslint:disable-line:no-empty
+	t.throws(() => ow('foo' as any, ow.function), 'Expected argument to be of type `Function` but received type `string`');
+	t.throws(() => ow('foo' as any, 'foo', ow.function), 'Expected `foo` to be of type `Function` but received type `string`');
+	t.throws(() => ow(12 as any, ow.function), 'Expected argument to be of type `Function` but received type `number`');
 });
