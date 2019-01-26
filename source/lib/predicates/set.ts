@@ -1,5 +1,5 @@
 import isEqual from 'lodash.isequal';
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 
@@ -7,8 +7,8 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<Set<T>>) {
-		super('Set', context);
+	constructor(options?: PredicateOptions) {
+		super('Set', options);
 	}
 
 	/**

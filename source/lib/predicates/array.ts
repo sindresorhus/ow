@@ -1,13 +1,13 @@
 import isEqual from 'lodash.isequal';
 import ow from '../..';
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<T[]>) {
-		super('array', context);
+	constructor(options?: PredicateOptions) {
+		super('array', options);
 	}
 
 	/**

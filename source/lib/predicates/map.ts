@@ -1,5 +1,5 @@
 import isEqual from 'lodash.isequal';
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 
@@ -7,8 +7,8 @@ export class MapPredicate<T1 = any, T2 = any> extends Predicate<Map<T1, T2>> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<Map<T1, T2>>) {
-		super('Map', context);
+	constructor(options?: PredicateOptions) {
+		super('Map', options);
 	}
 
 	/**

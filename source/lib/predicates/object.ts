@@ -1,7 +1,7 @@
 import is from '@sindresorhus/is';
 import dotProp from 'dot-prop';
 import isEqual from 'lodash.isequal';
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
@@ -10,8 +10,8 @@ export class ObjectPredicate extends Predicate<object> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<object>) {
-		super('object', context);
+	constructor(options?: PredicateOptions) {
+		super('object', options);
 	}
 
 	/**

@@ -1,11 +1,11 @@
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class BooleanPredicate extends Predicate<boolean> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<boolean>) {
-		super('boolean', context);
+	constructor(options?: PredicateOptions) {
+		super('boolean', options);
 	}
 
 	/**

@@ -94,6 +94,16 @@ Returns a predicate that verifies if the value matches at least one of the given
 ow('foo', ow.any(ow.string.maxLength(3), ow.number));
 ```
 
+### ow.optional.{type}
+
+Makes the predicate optional. An optional predicate means that it doesn't fail if the value is `undefined`.
+
+```ts
+ow(1, ow.optional.number);
+
+ow(undefined, ow.optional.number);
+```
+
 ### ow.{type}
 
 All the below types return a predicate. Every predicate has some extra operators that you can use to test the value even more fine-grained.

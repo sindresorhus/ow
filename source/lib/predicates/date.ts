@@ -1,11 +1,11 @@
-import {Predicate, Context} from './predicate';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class DatePredicate extends Predicate<Date> {
 	/**
 	 * @hidden
 	 */
-	constructor(context?: Context<Date>) {
-		super('date', context);
+	constructor(options?: PredicateOptions) {
+		super('date', options);
 	}
 
 	/**
