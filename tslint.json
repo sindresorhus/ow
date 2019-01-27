@@ -1,6 +1,10 @@
 {
 	"extends": "tslint-xo",
 	"rules": {
+		"align": false,
+		"typedef": false,
+		"ban-types": false,
+		"no-unsafe-any": false,
 		"completed-docs": [
 			true,
 			{

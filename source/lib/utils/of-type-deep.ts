@@ -22,7 +22,7 @@ const ofTypeDeep = (input: any, predicate: Predicate): boolean => {
 export default (input: any, predicate: Predicate): boolean | string => {
 	try {
 		return ofTypeDeep(input, predicate);
-	} catch (err) {
-		return err.message;
+	} catch (error) {
+		return error.message;
 	}
 };

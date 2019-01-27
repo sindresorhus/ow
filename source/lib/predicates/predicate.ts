@@ -122,7 +122,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 				? `(${label}) ${error}`
 				: `Expected ${label} \`${value}\` to pass custom validation function`
 			),
-			validator: value => fn(value)
+			validator: fn
 		});
 	}
 

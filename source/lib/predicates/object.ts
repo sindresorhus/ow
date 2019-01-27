@@ -112,9 +112,12 @@ export class ObjectPredicate extends Predicate<object> {
 	hasKeys(...keys: string[]) {
 		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
-			validator: object => hasItems({
-				has: item => dotProp.has(object, item)
-			}, keys)
+			validator: object => hasItems(
+				{
+					has: item => dotProp.has(object, item)
+				},
+				keys
+			)
 		});
 	}
 

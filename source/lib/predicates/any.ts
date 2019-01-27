@@ -23,12 +23,12 @@ export class AnyPredicate<T = any> implements BasePredicate<T> {
 				main(value, label, predicate);
 
 				return;
-			} catch (err) {
+			} catch (error) {
 				if (value === undefined && this.options.optional === true) {
 					return;
 				}
 
-				errors.push(`- ${err.message}`);
+				errors.push(`- ${error.message}`);
 			}
 		}
 

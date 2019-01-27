@@ -15,7 +15,7 @@ export default <T>(source: IterableIterator<T> | Set<T> | T[], predicate: Predic
 		}
 
 		return true;
-	} catch (err) {
-		return err.message;
+	} catch (error) {
+		return error.message;
 	}
 };

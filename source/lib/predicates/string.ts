@@ -182,7 +182,7 @@ export class StringPredicate extends Predicate<string> {
 	get date() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be a date, got \`${value}\``,
-			validator: value => valiDate(value)
+			validator: valiDate
 		});
 	}
 
