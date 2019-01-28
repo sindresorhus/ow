@@ -70,9 +70,13 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Main, label: string | Function) {
 		for (const {validator, message} of this.context.validators) {
+			if (this.options.optional === true && value === undefined) {
+				continue;
+			}
+
 			const result = validator(value);
 
-			if (result === true || (this.options.optional === true && value === undefined)) {
+			if (result === true) {
 				continue;
 			}
 
