@@ -61,7 +61,6 @@
 		"del-cli": "^1.1.0",
 		"dot-prop": "^4.2.0",
 		"is-node": "^1.0.2",
-		"is-plain-obj": "^1.1.0",
 		"license-webpack-plugin": "^2.0.2",
 		"lodash.isequal": "^4.5.0",
 		"nyc": "^13.1.0",

@@ -1,4 +1,4 @@
-import isPlainObject from 'is-plain-obj';
+import is from '@sindresorhus/is';
 import {BasePredicate} from '../..';
 import test from '../test';
 import {isPredicate} from '../predicates/base-predicate';
@@ -22,7 +22,7 @@ export function partial(object: {[key: string]: any; }, shape: Shape, parent?: s
 
 			if (isPredicate(shape[key])) {
 				test(object[key], label, shape[key] as BasePredicate);
-			} else if (isPlainObject(shape[key])) {
+			} else if (is.plainObject(shape[key])) {
 				const result = partial(object[key], shape[key] as Shape, label);
 
 				if (result !== true) {
@@ -56,7 +56,7 @@ export function exact(object: {[key: string]: any; }, shape: Shape, parent?: str
 
 			if (isPredicate(shape[key])) {
 				test(object[key], label, shape[key] as BasePredicate);
-			} else if (isPlainObject(shape[key])) {
+			} else if (is.plainObject(shape[key])) {
 				const result = exact(object[key], shape[key] as Shape, label);
 
 				if (result !== true) {
