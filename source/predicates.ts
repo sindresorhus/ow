@@ -3,7 +3,7 @@ import {NumberPredicate} from './lib/predicates/number';
 import {BooleanPredicate} from './lib/predicates/boolean';
 import {Predicate, PredicateOptions} from './lib/predicates/predicate';
 import {ArrayPredicate} from './lib/predicates/array';
-import {ObjectPredicate} from './lib/predicates/object';
+import {ObjectPredicate, Shape} from './lib/predicates/object';
 import {DatePredicate} from './lib/predicates/date';
 import {ErrorPredicate} from './lib/predicates/error';
 import {MapPredicate} from './lib/predicates/map';
@@ -285,5 +285,6 @@ export {
 	WeakMapPredicate,
 	SetPredicate,
 	WeakSetPredicate,
-	AnyPredicate
+	AnyPredicate,
+	Shape
 };

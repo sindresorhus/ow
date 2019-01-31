@@ -5,6 +5,9 @@ import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
+import {partial, exact, Shape} from '../utils/match-shape';
+
+export {Shape};
 
 export class ObjectPredicate extends Predicate<object> {
 	/**
@@ -127,6 +130,30 @@ export class ObjectPredicate extends Predicate<object> {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: (object: any) => keys.some(key => dotProp.has(object, key))
+		});
+	}
+
+	/**
+	 * Test an object to match the `shape` partially.
+	 *
+	 * @param shape Shape to test the object against.
+	 */
+	partialShape(shape: Shape) {
+		return this.addValidator({
+			message: (_, label, message) => `${message} in ${label}`,
+			validator: object => partial(object, shape)
+		});
+	}
+
+	/**
+	 * Test an object to match the `shape` exactly.
+	 *
+	 * @param shape Shape to test the object against.
+	 */
+	exactShape(shape: Shape) {
+		return this.addValidator({
+			message: (_, label, message) => `${message} in ${label}`,
+			validator: object => exact(object, shape)
 		});
 	}
 }
