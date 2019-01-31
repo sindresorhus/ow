@@ -1,7 +1,7 @@
-import lazyFS from './node/fs';
 import {CallSite} from 'callsites';
-import * as isNode from 'is-node';
+import lazyFS from './node/fs';
 import isValidIdentifier from './is-valid-identifier';
+import isNode from './node/is-node';
 
 // Regex to extract the label out of the `ow` function call
 const labelRegex = /^.*?\((.*?)[,)]/;
