@@ -1,8 +1,6 @@
 'use strict';
 const ow = require('./main');
 
-console.log(ow);
-
 const logError = fn => {
 	try {
 		fn();
