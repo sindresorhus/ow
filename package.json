@@ -9,7 +9,7 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "sindresorhus.com"
 	},
-	"main": "dist/index.js",
+	"main": "main.js",
 	"engines": {
 		"node": ">=6"
 	},
