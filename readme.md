@@ -43,6 +43,27 @@ unicorn('yo');
 //=> ArgumentError: Expected string `input` to have a minimum length of `5`, got `yo`
 ```
 
+We can also match the shape of an object.
+
+```ts
+import ow from 'ow';
+
+const unicorn = {
+	rainbow: '🌈',
+	stars: {
+		value: '🌟'
+	}
+};
+
+ow(unicorn, ow.object.exactShape({
+	rainbow: ow.string,
+	stars: {
+		value: ow.number
+	}
+}));
+//=> ArgumentError: Expected property `stars.value` to be of type `number` but received type `string` in object `unicorn`
+```
+
 
 ## API
 

@@ -100,7 +100,7 @@ test('object.exactShape', t => {
 		rainbow: {
 			foo: ow.string
 		}
-	})), 'Expected `rainbow.foo` to be of type `string` but received type `undefined` in object');
+	})), 'Expected property `rainbow.foo` to be of type `string` but received type `undefined` in object');
 
 	t.throws(() => ow({unicorn: '🦄', rainbow: '🌈'}, ow.object.exactShape({
 		unicorn: ow.string
@@ -123,14 +123,14 @@ test('object.partialShape', t => {
 
 	t.throws(() => ow({unicorn: '🦄'}, ow.object.partialShape({
 		unicorn: ow.number
-	})), 'Expected `unicorn` to be of type `number` but received type `string` in object');
+	})), 'Expected property `unicorn` to be of type `number` but received type `string` in object');
 
 	t.throws(() => ow({unicorn: '🦄', rainbow: {value: '🌈'}}, ow.object.partialShape({
 		unicorn: ow.string,
 		rainbow: {
 			value: ow.number
 		}
-	})), 'Expected `rainbow.value` to be of type `number` but received type `string` in object');
+	})), 'Expected property `rainbow.value` to be of type `number` but received type `string` in object');
 
 	t.throws(() => ow({unicorn: '🦄', rainbow: {rocket: {value: '🌈'}}}, ow.object.partialShape({
 		unicorn: ow.string,
@@ -139,11 +139,11 @@ test('object.partialShape', t => {
 				value: ow.number
 			}
 		}
-	})), 'Expected `rainbow.rocket.value` to be of type `number` but received type `string` in object');
+	})), 'Expected property `rainbow.rocket.value` to be of type `number` but received type `string` in object');
 
 	const foo = {unicorn: '🦄'};
 
 	t.throws(() => ow(foo, ow.object.partialShape({
 		unicorn: ow.number
-	})), 'Expected `unicorn` to be of type `number` but received type `string` in object `foo`');
+	})), 'Expected property `unicorn` to be of type `number` but received type `string` in object `foo`');
 });
