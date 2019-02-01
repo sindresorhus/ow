@@ -155,7 +155,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	partialShape(shape: Shape) {
 		return this.addValidator({
-			// TODO Improve when message handling becomes smarter
+			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => partial(object, shape)
 		});
@@ -178,7 +178,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 */
 	exactShape(shape: Shape) {
 		return this.addValidator({
-			// TODO Improve when message handling becomes smarter
+			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => exact(object, shape)
 		});
