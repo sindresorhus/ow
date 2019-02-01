@@ -5,6 +5,9 @@ import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
+import {partial, exact, Shape} from '../utils/match-shape';
+
+export {Shape};
 
 export class ObjectPredicate extends Predicate<object> {
 	/**
@@ -130,6 +133,57 @@ export class ObjectPredicate extends Predicate<object> {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: (object: any) => keys.some(key => dotProp.has(object, key))
+		});
+	}
+
+	/**
+	 * Test an object to match the `shape` partially. This means that it ignores unexpected properties. The shape comparison is deep.
+	 *
+	 * The shape is an object which describes how the tested object should look like. The keys are the same as the source object and the values are predicates.
+	 *
+	 * @param shape Shape to test the object against.
+	 *
+	 * @example
+	 *
+	 * import ow from 'ow';
+	 *
+	 * const object = {
+	 * 	unicorn: '🦄',
+	 * 	rainbow: '🌈'
+	 * };
+	 *
+	 * ow(object, ow.object.partialShape({
+	 * 	unicorn: ow.string
+	 * }));
+	 */
+	partialShape(shape: Shape) {
+		return this.addValidator({
+			// TODO: Improve this when message handling becomes smarter
+			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
+			validator: object => partial(object, shape)
+		});
+	}
+
+	/**
+	 * Test an object to match the `shape` exactly. This means that will fail if it comes across unexpected properties. The shape comparison is deep.
+	 *
+	 * The shape is an object which describes how the tested object should look like. The keys are the same as the source object and the values are predicates.
+	 *
+	 * @param shape Shape to test the object against.
+	 *
+	 * @example
+	 *
+	 * import ow from 'ow';
+	 *
+	 * ow({unicorn: '🦄'}, ow.object.exactShape({
+	 * 	unicorn: ow.string
+	 * }));
+	 */
+	exactShape(shape: Shape) {
+		return this.addValidator({
+			// TODO: Improve this when message handling becomes smarter
+			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
+			validator: object => exact(object, shape)
 		});
 	}
 }

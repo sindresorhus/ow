@@ -1,9 +1,10 @@
 import callsites from 'callsites';
 import {inferLabel} from './lib/utils/infer-label';
 import {Predicate} from './lib/predicates/predicate';
-import {testSymbol, BasePredicate, isPredicate} from './lib/predicates/base-predicate';
+import {BasePredicate, isPredicate} from './lib/predicates/base-predicate';
 import modifiers, {Modifiers} from './modifiers';
 import predicates, {Predicates} from './predicates';
+import test from './lib/test';
 
 /**
  * @hidden
@@ -48,10 +49,6 @@ export interface Ow extends Modifiers, Predicates {
 	 */
 	create<T>(label: string, predicate: BasePredicate<T>): (value: T) => void;
 }
-
-const test = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => {
-	predicate[testSymbol](value, test, label);
-};
 
 const ow = <T>(value: T, labelOrPredicate: any, predicate?: BasePredicate<T>) => {
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
@@ -110,5 +107,6 @@ export {
 	WeakMapPredicate,
 	SetPredicate,
 	WeakSetPredicate,
-	AnyPredicate
+	AnyPredicate,
+	Shape
 } from './predicates';
