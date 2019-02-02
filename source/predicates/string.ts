@@ -31,7 +31,8 @@ export class StringPredicate extends Predicate<string> {
 	minLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value}\``,
-			validator: value => value.length >= length
+			validator: value => value.length >= length,
+			invertedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value}\``
 		});
 	}
 
@@ -43,7 +44,8 @@ export class StringPredicate extends Predicate<string> {
 	maxLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value}\``,
-			validator: value => value.length <= length
+			validator: value => value.length <= length,
+			invertedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value}\``
 		});
 	}
 
@@ -137,10 +139,10 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
-	Test a string to be equal to a specified string.
-
-	@param expected - Expected value to match.
-	*/
+	 * Test a string to be equal to a specified string.
+	 *
+	 * @param expected Expected value to match.
+	 */
 	equals(expected: string) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be equal to \`${expected}\`, got \`${value}\``,

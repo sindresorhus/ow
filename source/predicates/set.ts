@@ -31,7 +31,8 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	minSize(size: number) {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to have a minimum size of \`${size}\`, got \`${set.size}\``,
-			validator: set => set.size >= size
+			validator: set => set.size >= size,
+			invertedMessage: (set, label) => `Expected ${label} to have a maximum size of \`${size - 1}\`, got \`${set.size}\``
 		});
 	}
 
@@ -43,7 +44,8 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	maxSize(size: number) {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to have a maximum size of \`${size}\`, got \`${set.size}\``,
-			validator: set => set.size <= size
+			validator: set => set.size <= size,
+			invertedMessage: (set, label) => `Expected ${label} to have a minimum size of \`${size + 1}\`, got \`${set.size}\``
 		});
 	}
 
