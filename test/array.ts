@@ -123,16 +123,6 @@ test('array.empty', t => {
 	}, 'Expected array to be empty, got `["foo"]`');
 });
 
-test('array.nonEmpty', t => {
-	t.notThrows(() => {
-		ow(['foo'], ow.array.nonEmpty);
-	});
-
-	t.throws(() => {
-		ow([], ow.array.nonEmpty);
-	}, 'Expected array to not be empty');
-});
-
 test('array.deepEqual', t => {
 	t.notThrows(() => {
 		ow(['foo'], ow.array.deepEqual(['foo']));
