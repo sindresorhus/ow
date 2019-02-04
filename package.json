@@ -24,7 +24,7 @@
 		"docs": "typedoc source"
 	},
 	"files": [
-		"dist"
+		"dist/source"
 	],
 	"keywords": [
 		"type",
