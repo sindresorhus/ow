@@ -8,8 +8,7 @@
 		]
 	},
 	"include": [
-		"source",
-		"test"
+		"source"
 	],
 	"typedocOptions": {
 		"out": "docs",
@@ -17,7 +16,6 @@
 		"target": "ES6",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"exclude": "source/test",
 		"ignoreCompilerErrors": true,
 		"excludePrivate": true,
 		"excludeNotExported": true,

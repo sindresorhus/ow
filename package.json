@@ -9,14 +9,14 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "sindresorhus.com"
 	},
-	"main": "dist/source",
+	"main": "dist",
 	"engines": {
 		"node": ">=8"
 	},
 	"scripts": {
 		"prepublishOnly": "npm run build",
 		"pretest": "npm run compile -- --sourceMap",
-		"test": "xo && nyc ava",
+		"test": "xo && ava",
 		"build": "npm run clean && webpack",
 		"compile": "npm run clean && tsc",
 		"clean": "del-cli dist",
@@ -66,6 +66,7 @@
 		"license-webpack-plugin": "^2.0.2",
 		"lodash.isequal": "^4.5.0",
 		"nyc": "^14.1.1",
+		"ts-node": "^8.2.0",
 		"typedoc": "^0.14.2",
 		"typescript": "~3.5.1",
 		"vali-date": "^1.0.0",
@@ -103,13 +104,19 @@
 		"babel": false,
 		"compileEnhancements": false,
 		"files": [
-			"dist/test/**",
-			"!dist/test/fixtures/**"
+			"test/**",
+			"!test/fixtures/**"
+		],
+		"extensions": [
+			"ts"
+		],
+		"require": [
+			"ts-node/register"
 		]
 	},
 	"nyc": {
-		"exclude": [
-			"dist/test"
+		"extension": [
+			".ts"
 		]
 	}
 }
