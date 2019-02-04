@@ -13,8 +13,6 @@
 	],
 	"typedocOptions": {
 		"out": "docs",
-		// Links to `ArrayPredicate` and others doesn't work when this is specified...
-		// "entryPoint": "Ow",
 		"mode": "file",
 		"target": "ES6",
 		"module": "commonjs",
@@ -28,6 +26,6 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"theme": "minimal",
 		"hideGenerator": true,
-		"readme": "none"
+		"readme": "readme.md"
 	}
 }
