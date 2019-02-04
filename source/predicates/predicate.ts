@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
-import {Main} from '../..';
 import {ArgumentError} from '../argument-error';
+import {Main} from '..';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {not} from '../operators/not';
 

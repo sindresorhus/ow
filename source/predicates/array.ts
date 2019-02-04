@@ -1,5 +1,5 @@
 import isEqual from 'lodash.isequal';
-import ow from '../..';
+import ow from '..';
 import {Predicate, PredicateOptions} from './predicate';
 
 export class ArrayPredicate<T = any> extends Predicate<T[]> {

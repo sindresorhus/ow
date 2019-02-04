@@ -1,17 +1,17 @@
-import {StringPredicate} from './lib/predicates/string';
-import {NumberPredicate} from './lib/predicates/number';
-import {BooleanPredicate} from './lib/predicates/boolean';
-import {Predicate, PredicateOptions} from './lib/predicates/predicate';
-import {ArrayPredicate} from './lib/predicates/array';
-import {ObjectPredicate, Shape} from './lib/predicates/object';
-import {DatePredicate} from './lib/predicates/date';
-import {ErrorPredicate} from './lib/predicates/error';
-import {MapPredicate} from './lib/predicates/map';
-import {WeakMapPredicate} from './lib/predicates/weak-map';
-import {SetPredicate} from './lib/predicates/set';
-import {WeakSetPredicate} from './lib/predicates/weak-set';
-import {BasePredicate} from './lib/predicates/base-predicate';
-import {AnyPredicate} from './lib/predicates/any';
+import {StringPredicate} from './predicates/string';
+import {NumberPredicate} from './predicates/number';
+import {BooleanPredicate} from './predicates/boolean';
+import {Predicate, PredicateOptions} from './predicates/predicate';
+import {ArrayPredicate} from './predicates/array';
+import {ObjectPredicate, Shape} from './predicates/object';
+import {DatePredicate} from './predicates/date';
+import {ErrorPredicate} from './predicates/error';
+import {MapPredicate} from './predicates/map';
+import {WeakMapPredicate} from './predicates/weak-map';
+import {SetPredicate} from './predicates/set';
+import {WeakSetPredicate} from './predicates/weak-set';
+import {BasePredicate} from './predicates/base-predicate';
+import {AnyPredicate} from './predicates/any';
 
 type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 

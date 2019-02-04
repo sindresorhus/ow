@@ -1,10 +1,10 @@
 import callsites from 'callsites';
-import {inferLabel} from './lib/utils/infer-label';
-import {Predicate} from './lib/predicates/predicate';
-import {BasePredicate, isPredicate} from './lib/predicates/base-predicate';
+import {inferLabel} from './utils/infer-label';
+import {Predicate} from './predicates/predicate';
+import {BasePredicate, isPredicate} from './predicates/base-predicate';
 import modifiers, {Modifiers} from './modifiers';
 import predicates, {Predicates} from './predicates';
-import test from './lib/test';
+import test from './test';
 
 /**
  * @hidden

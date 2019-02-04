@@ -1,5 +1,5 @@
 import is from '@sindresorhus/is';
-import ow from '../..';
+import ow from '..';
 import {Predicate} from '../predicates/predicate';
 
 const ofTypeDeep = (input: any, predicate: Predicate): boolean => {

@@ -1,4 +1,4 @@
-import {Main} from '../..';
+import {Main} from '..';
 
 /**
  * @hidden

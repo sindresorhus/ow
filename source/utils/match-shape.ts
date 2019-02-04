@@ -1,5 +1,5 @@
 import is from '@sindresorhus/is';
-import {BasePredicate} from '../..';
+import {BasePredicate} from '..';
 import test from '../test';
 import {isPredicate} from '../predicates/base-predicate';
 

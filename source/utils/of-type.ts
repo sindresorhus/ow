@@ -1,4 +1,4 @@
-import ow from '../..';
+import ow from '..';
 import {Predicate} from '../predicates/predicate';
 
 /**
