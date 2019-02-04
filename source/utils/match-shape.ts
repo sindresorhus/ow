@@ -15,7 +15,7 @@ export interface Shape {
  * @param shape Shape to test the object against.
  * @param parent Name of the parent property.
  */
-export function partial(object: {[key: string]: any; }, shape: Shape, parent?: string): boolean | string {
+export function partial(object: {[key: string]: any}, shape: Shape, parent?: string): boolean | string {
 	try {
 		for (const key of Object.keys(shape)) {
 			const label = parent ? `${parent}.${key}` : key;
@@ -45,7 +45,7 @@ export function partial(object: {[key: string]: any; }, shape: Shape, parent?: s
  * @param shape Shape to test the object against.
  * @param parent Name of the parent property.
  */
-export function exact(object: {[key: string]: any; }, shape: Shape, parent?: string): boolean | string {
+export function exact(object: {[key: string]: any}, shape: Shape, parent?: string): boolean | string {
 	try {
 		const objectKeys = new Set<string>(Object.keys(object));
 
