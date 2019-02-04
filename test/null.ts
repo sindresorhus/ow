@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow from '..';
+import ow from '../source';
 
 test('null', t => {
 	// tslint:disable-next-line no-null-keyword

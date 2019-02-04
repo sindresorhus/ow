@@ -7,6 +7,10 @@
 			"es2016"
 		]
 	},
+	"include": [
+		"source",
+		"test"
+	],
 	"typedocOptions": {
 		"out": "docs",
 		// Links to `ArrayPredicate` and others doesn't work when this is specified...

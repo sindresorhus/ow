@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow from '..';
+import ow from '../source';
 
 class CustomError extends Error {
 	constructor(message: string) {
