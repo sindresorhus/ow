@@ -130,6 +130,28 @@ test('number.equal', t => {
 	}, 'Expected number to be equal to 5, got 10');
 });
 
+test('number.oneOf', t => {
+	t.notThrows(() => {
+		ow(10, ow.number.oneOf([5, 10]));
+	});
+
+	t.throws(() => {
+		ow(10, ow.number.oneOf([5, 6]));
+	}, 'Expected number to be one of `[5,6]`, got 10');
+
+	t.throws(() => {
+		ow(10, 'hello', ow.number.oneOf([5, 6]));
+	}, 'Expected number `hello` to be one of `[5,6]`, got 10');
+
+	t.throws(() => {
+		ow(10, ow.number.oneOf([5, 6, 7, 8, 9]));
+	}, 'Expected number to be one of `[5,6,7,8,9]`, got 10');
+
+	t.throws(() => {
+		ow(10, ow.number.oneOf([5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18]));
+	}, 'Expected number to be one of `[5,6,7,8,9,11,12,13,14,15,…+3 more]`, got 10');
+});
+
 test('number.integer', t => {
 	t.notThrows(() => {
 		ow(10, ow.number.integer);
