@@ -114,7 +114,7 @@ test('reusable validator', t => {
 
 	t.throws(() => {
 		checkUsername(5 as any);
-	}, 'Expected argument to be of type `string` but received type `number`');
+	}, 'Expected argument to be of type `string` but received type `number`\nExpected string to have a minimum length of `3`, got `5`');
 });
 
 test('reusable validator with label', t => {
@@ -134,7 +134,7 @@ test('reusable validator with label', t => {
 
 	t.throws(() => {
 		checkUsername(5 as any);
-	}, 'Expected `foo` to be of type `string` but received type `number`');
+	}, 'Expected `foo` to be of type `string` but received type `number`\nExpected string `foo` to have a minimum length of `3`, got `5`');
 });
 
 test('any-reusable validator', t => {
@@ -158,7 +158,7 @@ test('any-reusable validator', t => {
 	t.throws(() => {
 		checkUsername(5 as any);
 	}, createAnyError(
-		'Expected argument to be of type `string` but received type `number`',
+		'value.includes is not a function',
 		'Expected argument to be of type `string` but received type `number`'
-	));
+	).concat('\nExpected string to have a minimum length of `3`, got `5`'));
 });

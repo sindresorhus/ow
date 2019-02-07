@@ -69,6 +69,8 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Main, label: string | Function) {
+		const errors = [];
+
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
 				continue;
@@ -90,8 +92,13 @@ export class Predicate<T = any> implements BasePredicate<T> {
 				? `${this.type} \`${label2}\``
 				: this.type;
 
+			errors.push(message(value, label2, result));
+		}
+
+		if (errors.length) {
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-			throw new ArgumentError(message(value, label2, result), main);
+			// We throw with all the error messages joined
+			throw new ArgumentError(errors.join('\n'), main);
 		}
 	}
 
