@@ -43,6 +43,27 @@ unicorn('yo');
 //=> ArgumentError: Expected string `input` to have a minimum length of `5`, got `yo`
 ```
 
+We can also match the shape of an object.
+
+```ts
+import ow from 'ow';
+
+const unicorn = {
+	rainbow: '🌈',
+	stars: {
+		value: '🌟'
+	}
+};
+
+ow(unicorn, ow.object.exactShape({
+	rainbow: ow.string,
+	stars: {
+		value: ow.number
+	}
+}));
+//=> ArgumentError: Expected property `stars.value` to be of type `number` but received type `string` in object `unicorn`
+```
+
 
 ## API
 
@@ -192,6 +213,30 @@ const greaterThan = (max: number, x: number) => {
 ow(5, ow.number.is(x => greaterThan(10, x)));
 //=> ArgumentError: Expected `5` to be greater than `10`
 ```
+
+#### validate(fn)
+
+Use a custom validation object. The difference with `is` is that the function should return a validation object, which allows more flexibility.
+
+```ts
+ow(1, ow.number.validate(value => ({
+	validator: value > 10,
+	message: `Expected value to be greater than 10, got ${x}`
+})));
+//=> ArgumentError: (number) Expected value to be greater than 10, got 1
+```
+
+You can also pass in a function as `message` value which accepts the label as argument.
+
+```ts
+ow(1, 'input', ow.number.validate(value => ({
+	validator: x > 10,
+	message: label => `Expected ${label} to be greater than 10, got ${x}`
+})));
+//=> ArgumentError: Expected number `input` to be greater than 10, got 1
+```
+
+This can be useful for creating your own reusable validators which can be extracted to a separate npm package.
 
 
 ## Maintainers

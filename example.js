@@ -4,8 +4,8 @@ const ow = require('./main');
 const logError = fn => {
 	try {
 		fn();
-	} catch (err) {
-		console.log(err.message);
+	} catch (error) {
+		console.log(error.message);
 	}
 };
 
