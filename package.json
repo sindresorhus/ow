@@ -71,7 +71,7 @@
 		"webpack": "^4.29.0",
 		"webpack-cli": "^3.1.2"
 	},
-	"typings": "dist",
+	"types": "dist",
 	"sideEffects": false,
 	"ava": {
 		"babel": false,
