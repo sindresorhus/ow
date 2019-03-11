@@ -83,6 +83,27 @@ export class NumberPredicate extends Predicate<number> {
 	}
 
 	/**
+	 * Test if a number is an element of the provided list.
+	 *
+	 * @param list List of possible values.
+	 */
+	oneOf(list: number[]) {
+		return this.addValidator({
+			message: (value, label) => {
+				let printedList = JSON.stringify(list);
+
+				if (list.length > 10) {
+					const overflow = list.length - 10;
+					printedList = JSON.stringify(list.slice(0, 10)).replace(/]$/, `,…+${overflow} more]`);
+				}
+
+				return `Expected ${label} to be one of \`${printedList}\`, got ${value}`;
+			},
+			validator: value => list.includes(value)
+		});
+	}
+
+	/**
 	 * Test a number to be an integer.
 	 */
 	get integer() {
