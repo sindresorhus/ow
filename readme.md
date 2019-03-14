@@ -214,6 +214,28 @@ ow(5, ow.number.is(x => greaterThan(10, x)));
 //=> ArgumentError: Expected `5` to be greater than `10`
 ```
 
+#### validate(fn)
+
+Use a custom validation object. The difference with `is` is that the function should return a validation object which allows more flexibility.
+
+```ts
+ow(1, ow.number.validate(x => ({
+	validator: x > 10,
+	message: `Expected value to be greater than 10, got ${x}`
+})));
+//=> ArgumentError: (string) Expected value to be greater than 10, got 1
+```
+
+You can also pass in a function as `message` value which accepts the label as argument.
+
+```ts
+ow(1, 'input' ow.number.validate(x => ({
+	validator: x > 10,
+	message: label => `Expected ${label} to be greater than 10, got ${x}`
+})));
+//=> ArgumentError: Expected number `input` to be greater than 10, got 1
+```
+
 
 ## Maintainers
 
