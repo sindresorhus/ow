@@ -166,7 +166,7 @@ test('any-reusable validator', t => {
 test('custom validation function', t => {
 	t.throws(() => {
 		ow('🦄', 'unicorn', ow.string.validate(value => ({
-			message: (label: string) => `Expected ${label} to be \`🌈\`, got \`${value}\``,
+			message: label => `Expected ${label} to be \`🌈\`, got \`${value}\``,
 			validator: value === '🌈'
 		})));
 	}, 'Expected string `unicorn` to be `🌈`, got `🦄`');
