@@ -34,6 +34,19 @@ export interface Context<T = unknown> extends PredicateOptions {
  */
 export const validatorSymbol = Symbol('validators');
 
+export type CustomValidator<T> = (value: T) => {
+	/**
+	 * Should be `true` if the validation is correct.
+	 */
+	validator: boolean;
+
+	/**
+	 * The error message which should be shown if the `validator` is `false`. Or a error function which returns the
+	 * error message and accepts the label as first argument.
+	 */
+	message: string | ((label: string) => string);
+};
+
 /**
  * @hidden
  */
@@ -107,6 +120,30 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 */
 	get not(): this {
 		return not(this);
+	}
+
+	/**
+	 * Test if the value matches a custom validation function. The validation function should return an object containing a
+	 * `validator` and `message`. If the `validator` is `false`, the validation fails and the `message` will be used as error message.
+	 * If the `message` is a function, the function is invoked with the `label` as argument to let you further customize the error message.
+	 *
+	 * @param fn Custom validation function.
+	 */
+	validate(fn: CustomValidator<T>) {
+		return this.addValidator({
+			message: (_, label, error) => typeof error === 'string'
+				? `(${label}) ${error}`
+				: error(label),
+			validator: value => {
+				const {message, validator} = fn(value);
+
+				if (validator) {
+					return true;
+				}
+
+				return message;
+			}
+		});
 	}
 
 	/**
