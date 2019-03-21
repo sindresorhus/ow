@@ -1,3 +1,4 @@
+import {TypedArray} from 'type-fest';
 import {StringPredicate} from './predicates/string';
 import {NumberPredicate} from './predicates/number';
 import {BooleanPredicate} from './predicates/boolean';
@@ -12,8 +13,6 @@ import {SetPredicate} from './predicates/set';
 import {WeakSetPredicate} from './predicates/weak-set';
 import {BasePredicate} from './predicates/base-predicate';
 import {AnyPredicate} from './predicates/any';
-
-type TypedArray = Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array;
 
 export interface Predicates {
 	/**
