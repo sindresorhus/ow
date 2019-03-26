@@ -1,3 +1,4 @@
+import is from '@sindresorhus/is';
 import valiDate from 'vali-date';
 import {Predicate, PredicateOptions} from './predicate';
 
@@ -203,6 +204,16 @@ export class StringPredicate extends Predicate<string> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be uppercase, got \`${value}\``,
 			validator: value => value.trim() !== '' && value === value.toUpperCase()
+		});
+	}
+
+	/**
+	 * Test a string to be a valid URL.
+	 */
+	get url() {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be a URL, got \`${value}\``,
+			validator: is.urlString
 		});
 	}
 }
