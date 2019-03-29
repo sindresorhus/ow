@@ -7,7 +7,7 @@ class CustomPredicate extends Predicate<string> {
 	}
 
 	get unicorn() {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (value, label) => `Expected ${label} to be \`🦄\`, got \`${value}\``,
 			validator: value => value === '🦄'
 		});

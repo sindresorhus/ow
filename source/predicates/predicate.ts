@@ -3,6 +3,7 @@ import {ArgumentError} from '../argument-error';
 import {Main} from '..';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {not} from '../operators/not';
+import addValidator from '../utils/add-validator';
 
 /**
  * @hidden
@@ -66,7 +67,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 
 		const x = this.type[0].toLowerCase() + this.type.slice(1);
 
-		this.addValidator({
+		addValidator(this, {
 			message: (value, label) => {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
 				const lbl = label && label.substring(this.type.length + 1);
@@ -130,7 +131,7 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 * @param fn Custom validation function.
 	 */
 	validate(fn: CustomValidator<T>) {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (_, label, error) => typeof error === 'string'
 				? `(${label}) ${error}`
 				: error(label),
@@ -154,13 +155,15 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 * @param fn Validation function.
 	 */
 	is(fn: (value: T) => boolean | string) {
-		return this.addValidator({
+		addValidator(this, {
 			message: (value, label, error) => (error
 				? `(${label}) ${error}`
 				: `Expected ${label} \`${value}\` to pass custom validation function`
 			),
 			validator: fn
 		});
+
+		return this;
 	}
 
 	/**

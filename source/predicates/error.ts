@@ -1,4 +1,5 @@
 import {Predicate, PredicateOptions} from './predicate';
+import addValidator from '../utils/add-validator';
 
 export class ErrorPredicate extends Predicate<Error> {
 	/**
@@ -14,7 +15,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 * @param expected Expected name of the Error.
 	 */
 	name(expected: string) {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (error, label) => `Expected ${label} to have name \`${expected}\`, got \`${error.name}\``,
 			validator: error => error.name === expected
 		});
@@ -26,7 +27,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 * @param expected Expected message of the Error.
 	 */
 	message(expected: string) {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (error, label) => `Expected ${label} message to be \`${expected}\`, got \`${error.message}\``,
 			validator: error => error.message === expected
 		});
@@ -38,7 +39,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 * @param message Message that should be included in the error.
 	 */
 	messageIncludes(message: string) {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (error, label) => `Expected ${label} message to include \`${message}\`, got \`${error.message}\``,
 			validator: error => error.message.includes(message)
 		});
@@ -50,7 +51,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 * @param keys One or more keys which should be part of the error object.
 	 */
 	hasKeys(...keys: string[]) {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (_, label) => `Expected ${label} message to have keys \`${keys.join('`, `')}\``,
 			validator: error => keys.every(key => error.hasOwnProperty(key))
 		});
@@ -62,7 +63,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	 * @param instance The expected instance type of the error.
 	 */
 	instanceOf(instance: any) {
-		return this.addValidator({
+		return addValidator(this, {
 			message: (error, label) => `Expected ${label} \`${error.name}\` to be of type \`${instance.name}\``,
 			validator: error => error instanceof instance
 		});
