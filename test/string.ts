@@ -310,3 +310,21 @@ test('string.uppercase', t => {
 		ow('', ow.string.uppercase);
 	}, 'Expected string to be uppercase, got ``');
 });
+
+test('string.url', t => {
+	t.notThrows(() => {
+		ow('https://sindresorhus.com', ow.string.url);
+	});
+
+	t.notThrows(() => {
+		ow('file:///path/to/an/awesome/file', ow.string.url);
+	});
+
+	t.throws(() => {
+		ow('foo' as any, ow.string.url);
+	}, 'Expected string to be a URL, got `foo`');
+
+	t.throws(() => {
+		ow('foo' as any, 'bar', ow.string.url);
+	}, 'Expected string `bar` to be a URL, got `foo`');
+});
