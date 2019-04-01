@@ -50,7 +50,7 @@ export interface Ow extends Modifiers, Predicates {
 	create<T>(label: string, predicate: BasePredicate<T>): (value: T) => void;
 }
 
-const ow = <T>(value: T, labelOrPredicate: any, predicate?: BasePredicate<T>) => {
+const ow: any = <T>(value: T, labelOrPredicate: any, predicate?: BasePredicate<T>) => {
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
 		throw new TypeError(`Expected second argument to be a predicate or a string, got \`${typeof labelOrPredicate}\``);
 	}
