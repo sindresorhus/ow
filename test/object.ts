@@ -253,6 +253,15 @@ test('object.exactShape', t => {
 			}
 		}));
 	}, 'Did not expect property `rainbow.value` to exist, got `🌈` in object `foo`');
+
+	t.throws(() => {
+		ow({unicorn: '🦄'}, ow.object.exactShape({
+			unicorn: ow.string,
+			rainbow: {
+				valid: ow.boolean
+			}
+		}));
+	}, 'Expected property `rainbow` to exist in object');
 });
 
 test('object.partialShape', t => {
