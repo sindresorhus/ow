@@ -216,7 +216,7 @@ ow(5, ow.number.is(x => greaterThan(10, x)));
 
 #### validate(fn)
 
-Use a custom validation object. The difference with `is` is that the function should return a validation object which allows more flexibility.
+Use a custom validation object. The difference with `is` is that the function should return a validation object, which allows more flexibility.
 
 ```ts
 ow(1, ow.number.validate(value => ({
