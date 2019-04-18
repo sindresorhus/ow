@@ -6,7 +6,6 @@ import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
 import {partial, exact, Shape} from '../utils/match-shape';
-import addValidator from '../utils/add-validator';
 
 export {Shape};
 
@@ -22,7 +21,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * Test if an Object is a plain object.
 	 */
 	get plain() {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label) => `Expected ${label} to be a plain object`,
 			validator: object => is.plainObject(object)
 		});
@@ -32,7 +31,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * Test an object to be empty.
 	 */
 	get empty() {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (object, label) => `Expected ${label} to be empty, got \`${JSON.stringify(object)}\``,
 			validator: object => Object.keys(object).length === 0
 		});
@@ -42,7 +41,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * Test an object to be not empty.
 	 */
 	get nonEmpty() {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
 			validator: object => Object.keys(object).length > 0
 		});
@@ -54,7 +53,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * @param predicate The predicate that should be applied against every value in the object.
 	 */
 	valuesOfType<T>(predicate: Predicate<T>) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: (object: any) => {
 				const values = Object.keys(object).map(key => object[key]);
@@ -70,7 +69,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * @param predicate The predicate that should be applied against every value in the object.
 	 */
 	deepValuesOfType<T>(predicate: Predicate<T>) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: (object: any) => ofTypeDeep(object, predicate)
 		});
@@ -82,7 +81,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * @param expected Expected object to match.
 	 */
 	deepEqual(expected: object) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (object, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(object)}\``,
 			validator: object => isEqual(object, expected)
 		});
@@ -94,7 +93,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * @param instance The expected instance type of the object.
 	 */
 	instanceOf(instance: any) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (object: any, label: string) => {
 				let name = object.constructor.name;
 
@@ -114,7 +113,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * @param keys The keys that should be present in the object.
 	 */
 	hasKeys(...keys: string[]) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: object => hasItems(
 				{
@@ -131,7 +130,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * @param keys The keys that could be a key in the object.
 	 */
 	hasAnyKeys(...keys: string[]) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: (object: any) => keys.some(key => dotProp.has(object, key))
 		});
@@ -158,7 +157,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * }));
 	 */
 	partialShape(shape: Shape) {
-		return addValidator(this, {
+		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => partial(object, shape)
@@ -181,7 +180,7 @@ export class ObjectPredicate extends Predicate<object> {
 	 * }));
 	 */
 	exactShape(shape: Shape) {
-		return addValidator(this, {
+		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => exact(object, shape)

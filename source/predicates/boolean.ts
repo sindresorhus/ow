@@ -1,5 +1,4 @@
 import {Predicate, PredicateOptions} from './predicate';
-import addValidator from '../utils/add-validator';
 
 export class BooleanPredicate extends Predicate<boolean> {
 	/**
@@ -13,7 +12,7 @@ export class BooleanPredicate extends Predicate<boolean> {
 	 * Test a boolean to be true.
 	 */
 	get true() {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be true, got ${value}`,
 			validator: value => value === true
 		});
@@ -23,7 +22,7 @@ export class BooleanPredicate extends Predicate<boolean> {
 	 * Test a boolean to be false.
 	 */
 	get false() {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be false, got ${value}`,
 			validator: value => value === false
 		});

@@ -1,6 +1,5 @@
 import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
-import addValidator from '../utils/add-validator';
 
 export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<T>> {
 	/**
@@ -16,7 +15,7 @@ export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<
 	 * @param items The items that should be a item in the WeakSet.
 	 */
 	has(...items: T[]) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label, missingItems) => `Expected ${label} to have items \`${JSON.stringify(missingItems)}\``,
 			validator: set => hasItems(set, items)
 		});
@@ -28,7 +27,7 @@ export class WeakSetPredicate<T extends object = any> extends Predicate<WeakSet<
 	 * @param items The items that could be a item in the WeakSet.
 	 */
 	hasAny(...items: T[]) {
-		return addValidator(this, {
+		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any item of \`${JSON.stringify(items)}\``,
 			validator: set => items.some(item => set.has(item))
 		});
