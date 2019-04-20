@@ -236,6 +236,8 @@ ow(1, 'input', ow.number.validate(value => ({
 //=> ArgumentError: Expected number `input` to be greater than 10, got 1
 ```
 
+This can be useful for creating your own reusable validators which can be extracted to a separate npm package.
+
 
 ## Maintainers
 
