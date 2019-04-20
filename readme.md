@@ -229,7 +229,7 @@ ow(1, ow.number.validate(value => ({
 You can also pass in a function as `message` value which accepts the label as argument.
 
 ```ts
-ow(1, 'input' ow.number.validate(x => ({
+ow(1, 'input', ow.number.validate(value => ({
 	validator: x > 10,
 	message: label => `Expected ${label} to be greater than 10, got ${x}`
 })));
