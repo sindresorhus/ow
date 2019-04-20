@@ -154,15 +154,13 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	 * @param fn Validation function.
 	 */
 	is(fn: (value: T) => boolean | string) {
-		this.addValidator({
+		return this.addValidator({
 			message: (value, label, error) => (error
 				? `(${label}) ${error}`
 				: `Expected ${label} \`${value}\` to pass custom validation function`
 			),
 			validator: fn
 		});
-
-		return this;
 	}
 
 	/**
