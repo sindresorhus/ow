@@ -60,6 +60,7 @@ export function exact(object: {[key: string]: any}, shape: Shape, parent?: strin
 				if (!Object.prototype.hasOwnProperty.call(object, key)) {
 					return `Expected \`${label}\` to exist`;
 				}
+
 				const result = exact(object[key], shape[key] as Shape, label);
 
 				if (result !== true) {
