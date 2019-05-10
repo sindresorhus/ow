@@ -26,6 +26,9 @@
 	"files": [
 		"dist/source"
 	],
+	"browser": {
+		"./dist/source/utils/infer-label.js": "./dist/source/utils/infer-label.browser.js"
+	},
 	"keywords": [
 		"type",
 		"types",
