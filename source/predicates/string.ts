@@ -59,6 +59,26 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
+	 * Test a string against a character set.
+	 *
+	 * @param string The string of allowed charaters.
+	 */
+	allowedCharacters(charset: string) {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to only contain the characters \`${charset}\`, got \`${value}\``,
+			validator: value => {
+				for (const char of value) {
+					if (!charset.includes(char)) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+		});
+	}
+
+	/**
 	 * Test a string to start with a specific value.
 	 *
 	 * @param searchString The value that should be the start of the string.

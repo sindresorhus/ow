@@ -85,6 +85,24 @@ test('string.matches', t => {
 	}, 'Expected string to match `/^f.o$/i`, got `bar`');
 });
 
+test('string.allowedCharacters', t => {
+	t.notThrows(() => {
+		ow('foo', ow.string.allowedCharacters('fo'));
+	});
+
+	t.notThrows(() => {
+		ow('foo', ow.string.allowedCharacters('foabc'));
+	});
+
+	t.throws(() => {
+		ow('foo' as any, ow.string.allowedCharacters('abc'));
+	}, 'Expected string to only contain the characters `abc`, got `foo`');
+
+	t.throws(() => {
+		ow('foo' as any, ow.string.allowedCharacters('fabc'));
+	}, 'Expected string to only contain the characters `fabc`, got `foo`');
+});
+
 test('string.startsWith', t => {
 	t.notThrows(() => {
 		ow('foo', ow.string.startsWith('fo'));
