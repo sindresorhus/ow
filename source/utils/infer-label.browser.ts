@@ -1,4 +1,2 @@
 // Dummy in the browser.
-export const inferLabel = () => {
-	return;
-};
+export const inferLabel = () => {};
