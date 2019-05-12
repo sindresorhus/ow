@@ -72,6 +72,9 @@
 		"webpack": "^4.29.0",
 		"webpack-cli": "^3.1.2"
 	},
+	"browser": {
+		"./dist/source/utils/infer-label.js": "./dist/source/utils/infer-label.browser.js"
+	},
 	"types": "dist",
 	"sideEffects": false,
 	"ava": {

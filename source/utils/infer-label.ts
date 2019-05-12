@@ -1,5 +1,5 @@
 import {CallSite} from 'callsites';
-import lazyFS from './node/fs';
+import * as fs from 'fs';
 import isValidIdentifier from './is-valid-identifier';
 import isNode from './node/is-node';
 
@@ -18,9 +18,6 @@ export const inferLabel = (callsites: CallSite[]) => {
 		return;
 	}
 
-	// Load the lazy `fs` module
-	const fs = lazyFS();
-
 	// Grab the stackframe with the `ow` function call
 	const functionCallStackFrame = callsites[1];
 
@@ -35,7 +32,7 @@ export const inferLabel = (callsites: CallSite[]) => {
 	let content: string[] = [];
 
 	try {
-		content = (fs.readFileSync(fileName, 'utf8') as string).split('\n');
+		content = fs.readFileSync(fileName, 'utf8').split('\n');
 	} catch {
 		return;
 	}
