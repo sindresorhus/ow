@@ -2,19 +2,19 @@ import isEqual from 'lodash.isequal';
 import ow from '..';
 import {Predicate, PredicateOptions} from './predicate';
 
-export class ArrayPredicate<T = any> extends Predicate<T[]> {
+export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
-	 * @hidden
-	 */
+	@hidden
+	*/
 	constructor(options?: PredicateOptions) {
 		super('array', options);
 	}
 
 	/**
-	 * Test an array to have a specific length.
-	 *
-	 * @param length The length of the array.
-	 */
+	Test an array to have a specific length.
+
+	@param length - The length of the array.
+	*/
 	length(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have length \`${length}\`, got \`${value.length}\``,
@@ -23,10 +23,10 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to have a minimum length.
-	 *
-	 * @param length The minimum length of the array.
-	 */
+	Test an array to have a minimum length.
+
+	@param length - The minimum length of the array.
+	*/
 	minLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value.length}\``,
@@ -35,10 +35,10 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to have a maximum length.
-	 *
-	 * @param length The maximum length of the array.
-	 */
+	Test an array to have a maximum length.
+
+	@param length - The maximum length of the array.
+	*/
 	maxLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value.length}\``,
@@ -47,10 +47,10 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to start with a specific value. The value is tested by identity, not structure.
-	 *
-	 * @param searchElement The value that should be the start of the array.
-	 */
+	Test an array to start with a specific value. The value is tested by identity, not structure.
+
+	@param searchElement - The value that should be the start of the array.
+	*/
 	startsWith(searchElement: T) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to start with \`${searchElement}\`, got \`${value[0]}\``,
@@ -59,10 +59,10 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to end with a specific value. The value is tested by identity, not structure.
-	 *
-	 * @param searchElement The value that should be the end of the array.
-	 */
+	Test an array to end with a specific value. The value is tested by identity, not structure.
+
+	@param searchElement - The value that should be the end of the array.
+	*/
 	endsWith(searchElement: T) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to end with \`${searchElement}\`, got \`${value[value.length - 1]}\``,
@@ -71,11 +71,11 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to include all the provided elements. The values are tested by identity, not structure.
-	 *
-	 * @param searchElements The values that should be included in the array.
-	 */
-	includes(...searchElements: T[]) {
+	Test an array to include all the provided elements. The values are tested by identity, not structure.
+
+	@param searchElements - The values that should be included in the array.
+	*/
+	includes(...searchElements: readonly T[]) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include all elements of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => searchElements.every(el => value.indexOf(el) !== -1)
@@ -83,11 +83,11 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to include any of the provided elements. The values are tested by identity, not structure.
-	 *
-	 * @param searchElements The values that should be included in the array.
-	 */
-	includesAny(...searchElements: T[]) {
+	Test an array to include any of the provided elements. The values are tested by identity, not structure.
+
+	@param searchElements - The values that should be included in the array.
+	*/
+	includesAny(...searchElements: readonly T[]) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include any element of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => searchElements.some(el => value.indexOf(el) !== -1)
@@ -95,8 +95,8 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to be empty.
-	 */
+	Test an array to be empty.
+	*/
 	get empty() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be empty, got \`${JSON.stringify(value)}\``,
@@ -105,8 +105,8 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to be not empty.
-	 */
+	Test an array to be not empty.
+	*/
 	get nonEmpty() {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
@@ -115,11 +115,11 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test an array to be deeply equal to the provided array.
-	 *
-	 * @param expected Expected value to match.
-	 */
-	deepEqual(expected: T[]) {
+	Test an array to be deeply equal to the provided array.
+
+	@param expected - Expected value to match.
+	*/
+	deepEqual(expected: readonly T[]) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => isEqual(value, expected)
@@ -127,10 +127,10 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 	}
 
 	/**
-	 * Test all elements in the array to match to provided predicate.
-	 *
-	 * @param predicate The predicate that should be applied against every individual item.
-	 */
+	Test all elements in the array to match to provided predicate.
+
+	@param predicate - The predicate that should be applied against every individual item.
+	*/
 	ofType(predicate: Predicate<T>) {
 		let error: string;
 
@@ -143,9 +143,8 @@ export class ArrayPredicate<T = any> extends Predicate<T[]> {
 					}
 
 					return true;
-				} catch (err) {
-					error = err.message;
-
+				} catch (error2) {
+					error = error2.message;
 					return false;
 				}
 			}

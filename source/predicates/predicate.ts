@@ -5,52 +5,51 @@ import {BasePredicate, testSymbol} from './base-predicate';
 import {not} from '../operators/not';
 
 /**
- * @hidden
- */
+@hidden
+*/
 export interface Validator<T> {
 	// tslint:disable-next-line completed-docs
 	message(value: T, label?: string, result?: any): string;
 
 	// tslint:disable-next-line completed-docs
-	validator(value: T): any;
+	validator(value: T): unknown;
 }
 
 /**
- * @hidden
- */
+@hidden
+*/
 export interface PredicateOptions {
 	optional?: boolean;
 }
 
 /**
- * @hidden
- */
+@hidden
+*/
 export interface Context<T = unknown> extends PredicateOptions {
 	validators: Validator<T>[];
 }
 
 /**
- * @hidden
- */
+@hidden
+*/
 export const validatorSymbol = Symbol('validators');
 
 export type CustomValidator<T> = (value: T) => {
 	/**
-	 * Should be `true` if the validation is correct.
-	 */
+	Should be `true` if the validation is correct.
+	*/
 	validator: boolean;
 
 	/**
-	 * The error message which should be shown if the `validator` is `false`. Or a error function which returns the
-	 * error message and accepts the label as first argument.
-	 */
+	The error message which should be shown if the `validator` is `false`. Or a error function which returns the error message and accepts the label as first argument.
+	*/
 	message: string | ((label: string) => string);
 };
 
 /**
- * @hidden
- */
-export class Predicate<T = any> implements BasePredicate<T> {
+@hidden
+*/
+export class Predicate<T = unknown> implements BasePredicate<T> {
 	private readonly context: Context<T> = {
 		validators: []
 	};
@@ -78,8 +77,8 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	}
 
 	/**
-	 * @hidden
-	 */
+	@hidden
+	*/
 	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Main, label: string | Function) {
 		for (const {validator, message} of this.context.validators) {
@@ -109,33 +108,31 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	}
 
 	/**
-	 * @hidden
-	 */
+	@hidden
+	*/
 	get [validatorSymbol]() {
 		return this.context.validators;
 	}
 
 	/**
-	 * Invert the following validators.
-	 */
+	Invert the following validators.
+	*/
 	get not(): this {
 		return not(this);
 	}
 
 	/**
-	 * Test if the value matches a custom validation function. The validation function should return an object containing a
-	 * `validator` and `message`. If the `validator` is `false`, the validation fails and the `message` will be used as error message.
-	 * If the `message` is a function, the function is invoked with the `label` as argument to let you further customize the error message.
-	 *
-	 * @param fn Custom validation function.
-	 */
-	validate(fn: CustomValidator<T>) {
+	Test if the value matches a custom validation function. The validation function should return an object containing a `validator` and `message`. If the `validator` is `false`, the validation fails and the `message` will be used as error message. If the `message` is a function, the function is invoked with the `label` as argument to let you further customize the error message.
+
+	@param customValidator - Custom validation function.
+	*/
+	validate(customValidator: CustomValidator<T>) {
 		return this.addValidator({
 			message: (_, label, error) => typeof error === 'string'
 				? `(${label}) ${error}`
 				: error(label),
 			validator: value => {
-				const {message, validator} = fn(value);
+				const {message, validator} = customValidator(value);
 
 				if (validator) {
 					return true;
@@ -147,30 +144,27 @@ export class Predicate<T = any> implements BasePredicate<T> {
 	}
 
 	/**
-	 * Test if the value matches a custom validation function. The validation function should return `true` if the value
-	 * passes the function. If the function either returns `false` or a string, the function fails and the string will be
-	 * used as error message.
-	 *
-	 * @param fn Validation function.
-	 */
-	is(fn: (value: T) => boolean | string) {
+	Test if the value matches a custom validation function. The validation function should return `true` if the value passes the function. If the function either returns `false` or a string, the function fails and the string will be used as error message.
+
+	@param validator - Validation function.
+	*/
+	is(validator: (value: T) => boolean | string) {
 		return this.addValidator({
 			message: (value, label, error) => (error
 				? `(${label}) ${error}`
 				: `Expected ${label} \`${value}\` to pass custom validation function`
 			),
-			validator: fn
+			validator
 		});
 	}
 
 	/**
-	 * Register a new validator.
-	 *
-	 * @param validator Validator to register.
-	 */
+	Register a new validator.
+
+	@param validator - Validator to register.
+	*/
 	protected addValidator(validator: Validator<T>) {
 		this.context.validators.push(validator);
-
 		return this;
 	}
 }

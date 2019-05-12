@@ -2,17 +2,17 @@ import {Predicate, PredicateOptions} from './predicate';
 
 export class ErrorPredicate extends Predicate<Error> {
 	/**
-	 * @hidden
-	 */
+	@hidden
+	*/
 	constructor(options?: PredicateOptions) {
 		super('error', options);
 	}
 
 	/**
-	 * Test an error to have a specific name.
-	 *
-	 * @param expected Expected name of the Error.
-	 */
+	Test an error to have a specific name.
+
+	@param expected - Expected name of the Error.
+	*/
 	name(expected: string) {
 		return this.addValidator({
 			message: (error, label) => `Expected ${label} to have name \`${expected}\`, got \`${error.name}\``,
@@ -21,10 +21,10 @@ export class ErrorPredicate extends Predicate<Error> {
 	}
 
 	/**
-	 * Test an error to have a specific message.
-	 *
-	 * @param expected Expected message of the Error.
-	 */
+	Test an error to have a specific message.
+
+	@param expected - Expected message of the Error.
+	*/
 	message(expected: string) {
 		return this.addValidator({
 			message: (error, label) => `Expected ${label} message to be \`${expected}\`, got \`${error.message}\``,
@@ -33,10 +33,10 @@ export class ErrorPredicate extends Predicate<Error> {
 	}
 
 	/**
-	 * Test the error message to include a specific message.
-	 *
-	 * @param message Message that should be included in the error.
-	 */
+	Test the error message to include a specific message.
+
+	@param message - Message that should be included in the error.
+	*/
 	messageIncludes(message: string) {
 		return this.addValidator({
 			message: (error, label) => `Expected ${label} message to include \`${message}\`, got \`${error.message}\``,
@@ -45,11 +45,11 @@ export class ErrorPredicate extends Predicate<Error> {
 	}
 
 	/**
-	 * Test the error object to have specific keys.
-	 *
-	 * @param keys One or more keys which should be part of the error object.
-	 */
-	hasKeys(...keys: string[]) {
+	Test the error object to have specific keys.
+
+	@param keys - One or more keys which should be part of the error object.
+	*/
+	hasKeys(...keys: readonly string[]) {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} message to have keys \`${keys.join('`, `')}\``,
 			validator: error => keys.every(key => error.hasOwnProperty(key))
@@ -57,11 +57,11 @@ export class ErrorPredicate extends Predicate<Error> {
 	}
 
 	/**
-	 * Test an error to be of a specific instance type.
-	 *
-	 * @param instance The expected instance type of the error.
-	 */
-	instanceOf(instance: any) {
+	Test an error to be of a specific instance type.
+
+	@param instance - The expected instance type of the error.
+	*/
+	instanceOf(instance: Function) {
 		return this.addValidator({
 			message: (error, label) => `Expected ${label} \`${error.name}\` to be of type \`${instance.name}\``,
 			validator: error => error instanceof instance
@@ -69,43 +69,43 @@ export class ErrorPredicate extends Predicate<Error> {
 	}
 
 	/**
-	 * Test an Error to be a TypeError.
-	 */
+	Test an Error to be a TypeError.
+	*/
 	get typeError() {
 		return this.instanceOf(TypeError);
 	}
 
 	/**
-	 * Test an Error to be an EvalError.
-	 */
+	Test an Error to be an EvalError.
+	*/
 	get evalError() {
 		return this.instanceOf(EvalError);
 	}
 
 	/**
-	 * Test an Error to be a RangeError.
-	 */
+	Test an Error to be a RangeError.
+	*/
 	get rangeError() {
 		return this.instanceOf(RangeError);
 	}
 
 	/**
-	 * Test an Error to be a ReferenceError.
-	 */
+	Test an Error to be a ReferenceError.
+	*/
 	get referenceError() {
 		return this.instanceOf(ReferenceError);
 	}
 
 	/**
-	 * Test an Error to be a SyntaxError.
-	 */
+	Test an Error to be a SyntaxError.
+	*/
 	get syntaxError() {
 		return this.instanceOf(SyntaxError);
 	}
 
 	/**
-	 * Test an Error to be a URIError.
-	 */
+	Test an Error to be a URIError.
+	*/
 	get uriError() {
 		return this.instanceOf(URIError);
 	}

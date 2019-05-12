@@ -5,17 +5,17 @@ import ofType from '../utils/of-type';
 
 export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	/**
-	 * @hidden
-	 */
+	@hidden
+	*/
 	constructor(options?: PredicateOptions) {
 		super('Set', options);
 	}
 
 	/**
-	 * Test a Set to have a specific size.
-	 *
-	 * @param size The size of the Set.
-	 */
+	Test a Set to have a specific size.
+
+	@param size - The size of the Set.
+	*/
 	size(size: number) {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to have size \`${size}\`, got \`${set.size}\``,
@@ -24,10 +24,10 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test an Size to have a minimum size.
-	 *
-	 * @param size The minimum size of the Set.
-	 */
+	Test a Set to have a minimum size.
+
+	@param size - The minimum size of the Set.
+	*/
 	minSize(size: number) {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to have a minimum size of \`${size}\`, got \`${set.size}\``,
@@ -36,10 +36,10 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test an Set to have a maximum size.
-	 *
-	 * @param size The maximum size of the Set.
-	 */
+	Test a Set to have a maximum size.
+
+	@param size - The maximum size of the Set.
+	*/
 	maxSize(size: number) {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to have a maximum size of \`${size}\`, got \`${set.size}\``,
@@ -48,11 +48,11 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test a Set to include all the provided items. The items are tested by identity, not structure.
-	 *
-	 * @param items The items that should be a item in the Set.
-	 */
-	has(...items: T[]) {
+	Test a Set to include all the provided items. The items are tested by identity, not structure.
+
+	@param items - The items that should be a item in the Set.
+	*/
+	has(...items: readonly T[]) {
 		return this.addValidator({
 			message: (_, label, missingItems) => `Expected ${label} to have items \`${JSON.stringify(missingItems)}\``,
 			validator: set => hasItems(set, items)
@@ -60,11 +60,11 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test a Set to include any of the provided items. The items are tested by identity, not structure.
-	 *
-	 * @param items The items that could be a item in the Set.
-	 */
-	hasAny(...items: T[]) {
+	Test a Set to include any of the provided items. The items are tested by identity, not structure.
+
+	@param items - The items that could be a item in the Set.
+	*/
+	hasAny(...items: readonly T[]) {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any item of \`${JSON.stringify(items)}\``,
 			validator: set => items.some(item => set.has(item))
@@ -72,10 +72,10 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test all the items in the Set to match the provided predicate.
-	 *
-	 * @param predicate The predicate that should be applied against every item in the Set.
-	 */
+	Test all the items in the Set to match the provided predicate.
+
+	@param predicate - The predicate that should be applied against every item in the Set.
+	*/
 	ofType(predicate: Predicate<T>) {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
@@ -84,8 +84,8 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test a Set to be empty.
-	 */
+	Test a Set to be empty.
+	*/
 	get empty() {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to be empty, got \`${JSON.stringify(Array.from(set))}\``,
@@ -94,8 +94,8 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test a Set to be not empty.
-	 */
+	Test a Set to be not empty.
+	*/
 	get nonEmpty() {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
@@ -104,10 +104,10 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	}
 
 	/**
-	 * Test a Set to be deeply equal to the provided Set.
-	 *
-	 * @param expected Expected Set to match.
-	 */
+	Test a Set to be deeply equal to the provided Set.
+
+	@param expected - Expected Set to match.
+	*/
 	deepEqual(expected: Set<T>) {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(set))}\``,

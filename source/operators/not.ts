@@ -1,11 +1,12 @@
 import {validatorSymbol} from '../predicates/predicate';
 
 /**
- * Operator which inverts the following validation.
- *
- * @hidden
- * @param predictate Predicate to wrap inside the operator.
- */
+Operator which inverts the following validation.
+
+@hidden
+
+@param predictate - Predicate to wrap inside the operator.
+*/
 export const not = (predicate: any) => {
 	const originalAddValidator = predicate.addValidator;
 
@@ -13,8 +14,8 @@ export const not = (predicate: any) => {
 		const fn = validator.validator;
 		const message = validator.message;
 
-		validator.message = (x: any, label: string) => `[NOT] ${message(x, label)}`;
-		validator.validator = (x: any) => !fn(x);
+		validator.message = (value: unknown, label: string) => `[NOT] ${message(value, label)}`;
+		validator.validator = (value: unknown) => !fn(value);
 
 		predicate[validatorSymbol].push(validator);
 
