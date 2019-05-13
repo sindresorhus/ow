@@ -16,141 +16,174 @@ import {AnyPredicate} from './predicates/any';
 
 export interface Predicates {
 	/**
-	 * Test the value to be a string.
-	 */
+	Test the value to be a string.
+	*/
 	readonly string: StringPredicate;
+
 	/**
-	 * Test the value to be a number.
-	 */
+	Test the value to be a number.
+	*/
 	readonly number: NumberPredicate;
+
 	/**
-	 * Test the value to be a boolean.
-	 */
+	Test the value to be a boolean.
+	*/
 	readonly boolean: BooleanPredicate;
+
 	/**
-	 * Test the value to be undefined.
-	 */
+	Test the value to be undefined.
+	*/
 	readonly undefined: Predicate<undefined>;
+
 	/**
-	 * Test the value to be null.
-	 */
+	Test the value to be null.
+	*/
 	readonly null: Predicate<null>;
+
 	/**
-	 * Test the value to be null or undefined.
-	 */
+	Test the value to be null or undefined.
+	*/
 	readonly nullOrUndefined: Predicate<null | undefined>;
+
 	/**
-	 * Test the value to be not a number.
-	 */
+	Test the value to be not a number.
+	*/
 	readonly nan: Predicate<number>;
+
 	/**
-	 * Test the value to be a Symbol.
-	 */
+	Test the value to be a Symbol.
+	*/
 	readonly symbol: Predicate<Symbol>;
+
 	/**
-	 * Test the value to be an array.
-	 */
+	Test the value to be an array.
+	*/
 	readonly array: ArrayPredicate;
+
 	/**
-	 * Test the value to be an object.
-	 */
+	Test the value to be an object.
+	*/
 	readonly object: ObjectPredicate;
+
 	/**
-	 * Test the value to be a Date.
-	 */
+	Test the value to be a Date.
+	*/
 	readonly date: DatePredicate;
+
 	/**
-	 * Test the value to be an Error.
-	 */
+	Test the value to be an Error.
+	*/
 	readonly error: ErrorPredicate;
+
 	/**
-	 * Test the value to be a Map.
-	 */
+	Test the value to be a Map.
+	*/
 	readonly map: MapPredicate;
+
 	/**
-	 * Test the value to be a WeakMap.
-	 */
+	Test the value to be a WeakMap.
+	*/
 	readonly weakMap: WeakMapPredicate;
+
 	/**
-	 * Test the value to be a Set.
-	 */
+	Test the value to be a Set.
+	*/
 	readonly set: SetPredicate;
+
 	/**
-	 * Test the value to be a WeakSet.
-	 */
+	Test the value to be a WeakSet.
+	*/
 	readonly weakSet: WeakSetPredicate;
+
 	/**
-	 * Test the value to be a Function.
-	 */
+	Test the value to be a Function.
+	*/
 	readonly function: Predicate<Function>;
+
 	/**
-	 * Test the value to be a Buffer.
-	 */
+	Test the value to be a Buffer.
+	*/
 	readonly buffer: Predicate<Buffer>;
+
 	/**
-	 * Test the value to be a RegExp.
-	 */
+	Test the value to be a RegExp.
+	*/
 	readonly regExp: Predicate<RegExp>;
+
 	/**
-	 * Test the value to be a Promise.
-	 */
-	readonly promise: Predicate<Promise<any>>;
+	Test the value to be a Promise.
+	*/
+	readonly promise: Predicate<Promise<unknown>>;
+
 	/**
-	 * Test the value to be a typed array.
-	 */
+	Test the value to be a typed array.
+	*/
 	readonly typedArray: Predicate<TypedArray>;
+
 	/**
-	 * Test the value to be a Int8Array.
-	 */
+	Test the value to be a Int8Array.
+	*/
 	readonly int8Array: Predicate<Int8Array>;
+
 	/**
-	 * Test the value to be a Uint8Array.
-	 */
+	Test the value to be a Uint8Array.
+	*/
 	readonly uint8Array: Predicate<Uint8Array>;
+
 	/**
-	 * Test the value to be a Uint8ClampedArray.
-	 */
+	Test the value to be a Uint8ClampedArray.
+	*/
 	readonly uint8ClampedArray: Predicate<Uint8ClampedArray>;
+
 	/**
-	 * Test the value to be a Int16Array.
-	 */
+	Test the value to be a Int16Array.
+	*/
 	readonly int16Array: Predicate<Int16Array>;
+
 	/**
-	 * Test the value to be a Uint16Array.
-	 */
+	Test the value to be a Uint16Array.
+	*/
 	readonly uint16Array: Predicate<Uint16Array>;
+
 	/**
-	 * Test the value to be a Int32Array.
-	 */
+	Test the value to be a Int32Array.
+	*/
 	readonly int32Array: Predicate<Int32Array>;
+
 	/**
-	 * Test the value to be a Uint32Array.
-	 */
+	Test the value to be a Uint32Array.
+	*/
 	readonly uint32Array: Predicate<Uint32Array>;
+
 	/**
-	 * Test the value to be a Float32Array.
-	 */
+	Test the value to be a Float32Array.
+	*/
 	readonly float32Array: Predicate<Float32Array>;
+
 	/**
-	 * Test the value to be a Float64Array.
-	 */
+	Test the value to be a Float64Array.
+	*/
 	readonly float64Array: Predicate<Float64Array>;
+
 	/**
-	 * Test the value to be a ArrayBuffer.
-	 */
+	Test the value to be a ArrayBuffer.
+	*/
 	readonly arrayBuffer: Predicate<ArrayBuffer>;
+
 	/**
-	 * Test the value to be a DataView.
-	 */
+	Test the value to be a DataView.
+	*/
 	readonly dataView: Predicate<DataView>;
+
 	/**
-	 * Test the value to be Iterable.
-	 */
-	readonly iterable: Predicate<Iterable<any>>;
+	Test the value to be Iterable.
+	*/
+	readonly iterable: Predicate<Iterable<unknown>>;
+
 	// tslint:disable completed-docs
 	/**
-	 * Test that the value matches at least one of the given predicates.
-	 */
+	Test that the value matches at least one of the given predicates.
+	*/
 	any<T1>(p1: BasePredicate<T1>): AnyPredicate<T1>;
 	any<T1, T2>(p1: BasePredicate<T1>, p2: BasePredicate<T2>): AnyPredicate<T1 | T2>;
 	any<T1, T2, T3>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>): AnyPredicate<T1 | T2 | T3>;

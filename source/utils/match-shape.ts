@@ -8,13 +8,14 @@ export interface Shape {
 }
 
 /**
- * Test if the `object` matches the `shape` partially.
- *
- * @hidden
- * @param object Object to test against the provided shape.
- * @param shape Shape to test the object against.
- * @param parent Name of the parent property.
- */
+Test if the `object` matches the `shape` partially.
+
+@hidden
+
+@param object - Object to test against the provided shape.
+@param shape - Shape to test the object against.
+@param parent - Name of the parent property.
+*/
 export function partial(object: {[key: string]: any}, shape: Shape, parent?: string): boolean | string {
 	try {
 		for (const key of Object.keys(shape)) {
@@ -38,13 +39,14 @@ export function partial(object: {[key: string]: any}, shape: Shape, parent?: str
 }
 
 /**
- * Test if the `object` matches the `shape` exactly.
- *
- * @hidden
- * @param object Object to test against the provided shape.
- * @param shape Shape to test the object against.
- * @param parent Name of the parent property.
- */
+Test if the `object` matches the `shape` exactly.
+
+@hidden
+
+@param object - Object to test against the provided shape.
+@param shape - Shape to test the object against.
+@param parent - Name of the parent property.
+*/
 export function exact(object: {[key: string]: any}, shape: Shape, parent?: string): boolean | string {
 	try {
 		const objectKeys = new Set<string>(Object.keys(object));
@@ -57,6 +59,10 @@ export function exact(object: {[key: string]: any}, shape: Shape, parent?: strin
 			if (isPredicate(shape[key])) {
 				test(object[key], label, shape[key] as BasePredicate);
 			} else if (is.plainObject(shape[key])) {
+				if (!Object.prototype.hasOwnProperty.call(object, key)) {
+					return `Expected \`${label}\` to exist`;
+				}
+
 				const result = exact(object[key], shape[key] as Shape, label);
 
 				if (result !== true) {

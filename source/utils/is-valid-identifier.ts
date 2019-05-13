@@ -12,8 +12,8 @@ const reservedSet = new Set([
 ]);
 
 /**
- * Test if the string is a valid JavaScript identifier.
- *
- * @param input String to test.
- */
-export default (input: string | undefined) => input && !reservedSet.has(input) && identifierRegex.test(input);
+Test if the string is a valid JavaScript identifier.
+
+@param string - String to test.
+*/
+export default (string: string | undefined) => string && !reservedSet.has(string) && identifierRegex.test(string);

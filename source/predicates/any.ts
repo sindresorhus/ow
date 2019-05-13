@@ -4,9 +4,9 @@ import {Main} from '..';
 import {PredicateOptions} from './predicate';
 
 /**
- * @hidden
- */
-export class AnyPredicate<T = any> implements BasePredicate<T> {
+@hidden
+*/
+export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 	constructor(
 		private readonly predicates: BasePredicate[],
 		private readonly options: PredicateOptions = {}
@@ -21,7 +21,6 @@ export class AnyPredicate<T = any> implements BasePredicate<T> {
 		for (const predicate of this.predicates) {
 			try {
 				main(value, label, predicate);
-
 				return;
 			} catch (error) {
 				if (value === undefined && this.options.optional === true) {

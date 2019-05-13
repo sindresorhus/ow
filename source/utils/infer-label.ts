@@ -1,5 +1,5 @@
 import {CallSite} from 'callsites';
-import lazyFS from './node/fs';
+import * as fs from 'fs';
 import isValidIdentifier from './is-valid-identifier';
 import isNode from './node/is-node';
 
@@ -7,19 +7,17 @@ import isNode from './node/is-node';
 const labelRegex = /^.*?\((.*?)[,)]/;
 
 /**
- * Infer the label of the caller.
- *
- * @hidden
- * @param callsites - List of stack frames.
- */
-export const inferLabel = (callsites: CallSite[]) => {
+Infer the label of the caller.
+
+@hidden
+
+@param callsites - List of stack frames.
+*/
+export const inferLabel = (callsites: readonly CallSite[]) => {
 	if (!isNode) {
 		// Exit if we are not running in a Node.js environment
 		return;
 	}
-
-	// Load the lazy `fs` module
-	const fs = lazyFS();
 
 	// Grab the stackframe with the `ow` function call
 	const functionCallStackFrame = callsites[1];
@@ -35,7 +33,7 @@ export const inferLabel = (callsites: CallSite[]) => {
 	let content: string[] = [];
 
 	try {
-		content = (fs.readFileSync(fileName, 'utf8') as string).split('\n');
+		content = fs.readFileSync(fileName, 'utf8').split('\n');
 	} catch {
 		return;
 	}
