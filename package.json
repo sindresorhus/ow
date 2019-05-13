@@ -74,7 +74,7 @@
 	"browser": {
 		"./dist/source/utils/infer-label.js": "./dist/source/utils/infer-label.browser.js"
 	},
-	"types": "dist",
+	"types": "dist/source",
 	"sideEffects": false,
 	"ava": {
 		"babel": false,
