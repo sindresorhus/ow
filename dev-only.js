@@ -1,7 +1,6 @@
 'use strict';
-const isNode = require('is-node');
 
-if (process.env.NODE_ENV === 'production' && !isNode) {
+if (process.env.NODE_ENV === 'production') {
 	const shim = new Proxy((() => {}), {
 		get: () => shim,
 		apply: () => shim
@@ -9,5 +8,5 @@ if (process.env.NODE_ENV === 'production' && !isNode) {
 
 	module.exports = shim;
 } else {
-	module.exports = require('./dist');
+	module.exports = require('./dist/source');
 }
