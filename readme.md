@@ -67,7 +67,6 @@ ow(unicorn, ow.object.exactShape({
 ***Note:*** If you intend on using `ow` for development purposes only, use `require('ow/dev-only')` instead of the usual `import 'ow'`, and run the bundler with `NODE_ENV` set to `production` (e.g. `$ NODE_ENV="production" parcel build index.js`). This will make `ow` automatically export a shim when running in production, which should result in a significantly lower bundle size.
 
 
-
 ## API
 
 [Complete API documentation](https://sindresorhus.com/ow)
