@@ -1,5 +1,5 @@
 'use strict';
-const ow = require('./dist');
+const ow = require('./main');
 
 const logError = fn => {
 	try {
