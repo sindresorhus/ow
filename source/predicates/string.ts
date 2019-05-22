@@ -59,16 +59,17 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
-	 Test a string against a character set.
+	Test a string against a character set.
 
-	 @param charset - The string of allowed charaters.
-	 */
-	allowedCharacters(charset: string) {
+	@param characters - String of allowed characters.
+	*/
+	allowedCharacters(characters: string) {
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to only contain the characters \`${charset}\`, got \`${value}\``,
-			validator: value => {
-				for (const char of value) {
-					if (!charset.includes(char)) {
+			message: (value, label) => `Expected ${label} to only contain the characters \`${characters}\`, got \`${value}\``,
+			validator: string => {
+				const characterSet = new Set(characters);
+				for (const character of string) {
+					if (!characterSet.has(character)) {
 						return false;
 					}
 				}
