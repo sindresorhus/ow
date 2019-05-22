@@ -94,6 +94,12 @@ Object.defineProperties(ow, {
 
 			test(value, labelOrPredicate as string, predicate as BasePredicate<T>);
 		}
+	},
+	characterSet: {
+		value: {
+			base64: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+			base58: '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+		}
 	}
 });
 
