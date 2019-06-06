@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal';
+import isEqual = require('lodash.isequal');
 import ow from '..';
 import {Predicate, PredicateOptions} from './predicate';
 
