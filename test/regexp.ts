@@ -7,7 +7,7 @@ test('regExp', t => {
 	});
 
 	t.notThrows(() => {
-		ow(new RegExp('\d'), ow.regExp);
+		ow(new RegExp('\\d'), ow.regExp);
 	});
 
 	t.throws(() => {

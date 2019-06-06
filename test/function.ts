@@ -3,7 +3,6 @@ import ow from '../source';
 
 test('function', t => {
 	t.notThrows(() => {
-		// tslint:disable-next-line no-empty
 		ow(() => {}, ow.function);
 	});
 

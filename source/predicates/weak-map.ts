@@ -1,5 +1,5 @@
-import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predicate<WeakMap<T1, T2>> {
 	/**

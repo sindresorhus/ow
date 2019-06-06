@@ -1,17 +1,15 @@
 import is from '@sindresorhus/is';
 import {ArgumentError} from '../argument-error';
 import {Main} from '..';
-import {BasePredicate, testSymbol} from './base-predicate';
 import {not} from '../operators/not';
+import {BasePredicate, testSymbol} from './base-predicate';
 
 /**
 @hidden
 */
 export interface Validator<T> {
-	// tslint:disable-next-line completed-docs
 	message(value: T, label?: string, result?: any): string;
 
-	// tslint:disable-next-line completed-docs
 	validator(value: T): unknown;
 }
 
@@ -26,7 +24,7 @@ export interface PredicateOptions {
 @hidden
 */
 export interface Context<T = unknown> extends PredicateOptions {
-	validators: Validator<T>[];
+	validators: Array<Validator<T>>;
 }
 
 /**
@@ -79,7 +77,6 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Main, label: string | Function) {
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
@@ -98,9 +95,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				label2 = label();
 			}
 
-			label2 = label2
-				? `${this.type} \`${label2}\``
-				: this.type;
+			label2 = label2 ?
+				`${this.type} \`${label2}\`` :
+				this.type;
 
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
 			throw new ArgumentError(message(value, label2, result), main);
@@ -128,9 +125,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	validate(customValidator: CustomValidator<T>) {
 		return this.addValidator({
-			message: (_, label, error) => typeof error === 'string'
-				? `(${label}) ${error}`
-				: error(label),
+			message: (_, label, error) => typeof error === 'string' ?
+				`(${label}) ${error}` :
+				error(label),
 			validator: value => {
 				const {message, validator} = customValidator(value);
 
@@ -150,9 +147,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	is(validator: (value: T) => boolean | string) {
 		return this.addValidator({
-			message: (value, label, error) => (error
-				? `(${label}) ${error}`
-				: `Expected ${label} \`${value}\` to pass custom validation function`
+			message: (value, label, error) => (error ?
+				`(${label}) ${error}` :
+				`Expected ${label} \`${value}\` to pass custom validation function`
 			),
 			validator
 		});

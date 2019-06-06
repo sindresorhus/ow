@@ -1,7 +1,7 @@
 import isEqual = require('lodash.isequal');
-import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, T2>> {
 	/**
@@ -127,7 +127,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	*/
 	get empty() {
 		return this.addValidator({
-			message: (map, label) => `Expected ${label} to be empty, got \`${JSON.stringify(Array.from(map))}\``,
+			message: (map, label) => `Expected ${label} to be empty, got \`${JSON.stringify([...map])}\``,
 			validator: map => map.size === 0
 		});
 	}
@@ -149,7 +149,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	*/
 	deepEqual(expected: Map<T1, T2>) {
 		return this.addValidator({
-			message: (map, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(map))}\``,
+			message: (map, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify([...expected])}\`, got \`${JSON.stringify([...map])}\``,
 			validator: map => isEqual(map, expected)
 		});
 	}

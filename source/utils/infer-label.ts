@@ -1,5 +1,5 @@
-import {CallSite} from 'callsites';
 import * as fs from 'fs';
+import {CallSite} from 'callsites';
 import isValidIdentifier from './is-valid-identifier';
 import isNode from './node/is-node';
 

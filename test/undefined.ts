@@ -26,7 +26,6 @@ test('undefined', t => {
 	}, 'Expected `foo` to be of type `undefined` but received type `number`');
 
 	t.throws(() => {
-		// tslint:disable:next-line no-null-keyword
 		ow(null as any, ow.undefined);
 	}, 'Expected argument to be of type `undefined` but received type `null`');
 

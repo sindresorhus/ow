@@ -53,7 +53,7 @@ export interface Predicates {
 	/**
 	Test the value to be a Symbol.
 	*/
-	readonly symbol: Predicate<Symbol>;
+	readonly symbol: Predicate<symbol>;
 
 	/**
 	Test the value to be an array.
@@ -180,7 +180,6 @@ export interface Predicates {
 	*/
 	readonly iterable: Predicate<Iterable<unknown>>;
 
-	// tslint:disable completed-docs
 	/**
 	Test that the value matches at least one of the given predicates.
 	*/
@@ -195,7 +194,6 @@ export interface Predicates {
 	any<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>;
 	any<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>, p10: BasePredicate<T10>): AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>;
 	any(...predicate: BasePredicate[]): AnyPredicate;
-	// tslint:enable completed-docs
 }
 
 export default <T>(object: T, options?: PredicateOptions): T & Predicates => {

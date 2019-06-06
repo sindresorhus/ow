@@ -2,7 +2,6 @@
 @hidden
 */
 export interface CollectionLike<T> {
-	// tslint:disable-next-line completed-docs
 	has(item: T): boolean;
 }
 

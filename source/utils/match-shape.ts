@@ -72,7 +72,7 @@ export function exact(object: {[key: string]: any}, shape: Shape, parent?: strin
 		}
 
 		if (objectKeys.size > 0) {
-			const key = Array.from(objectKeys.keys())[0];
+			const key = [...objectKeys.keys()][0];
 
 			const label = parent ? `${parent}.${key}` : key;
 

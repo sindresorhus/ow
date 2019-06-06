@@ -1,11 +1,12 @@
 import is from '@sindresorhus/is';
+
 import dotProp = require('dot-prop');
 import isEqual = require('lodash.isequal');
-import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
 import {partial, exact, Shape} from '../utils/match-shape';
+import {Predicate, PredicateOptions} from './predicate';
 
 export {Shape};
 
@@ -95,7 +96,7 @@ export class ObjectPredicate extends Predicate<object> {
 	instanceOf(instance: Function) {
 		return this.addValidator({
 			message: (object: object, label: string) => {
-				let name = object.constructor.name;
+				let {name} = object.constructor;
 
 				if (!name || name === 'Object') {
 					name = JSON.stringify(object);

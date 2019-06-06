@@ -78,7 +78,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	includes(...searchElements: readonly T[]) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include all elements of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => searchElements.every(el => value.indexOf(el) !== -1)
+			validator: value => searchElements.every(el => value.includes(el))
 		});
 	}
 
@@ -90,7 +90,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	includesAny(...searchElements: readonly T[]) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include any element of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => searchElements.some(el => value.indexOf(el) !== -1)
+			validator: value => searchElements.some(el => value.includes(el))
 		});
 	}
 

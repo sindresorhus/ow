@@ -1,7 +1,7 @@
 import test from 'ava';
 import ow from '../source';
 
-class Unicorn {} // tslint:disable-line
+class Unicorn {} // eslint-disable-line @typescript-eslint/no-extraneous-class
 
 test('object', t => {
 	t.notThrows(() => {

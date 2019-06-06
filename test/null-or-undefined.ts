@@ -2,12 +2,10 @@ import test from 'ava';
 import ow from '../source';
 
 test('nullOrUndefined', t => {
-	// tslint:disable-next-line no-null-keyword
 	const x = null;
 	const y = undefined;
 
 	t.notThrows(() => {
-		// tslint:disable-next-line no-null-keyword
 		ow(null, ow.nullOrUndefined);
 	});
 

@@ -1,7 +1,7 @@
 import isEqual = require('lodash.isequal');
-import {Predicate, PredicateOptions} from './predicate';
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
+import {Predicate, PredicateOptions} from './predicate';
 
 export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	/**
@@ -88,7 +88,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	*/
 	get empty() {
 		return this.addValidator({
-			message: (set, label) => `Expected ${label} to be empty, got \`${JSON.stringify(Array.from(set))}\``,
+			message: (set, label) => `Expected ${label} to be empty, got \`${JSON.stringify([...set])}\``,
 			validator: set => set.size === 0
 		});
 	}
@@ -110,7 +110,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	*/
 	deepEqual(expected: Set<T>) {
 		return this.addValidator({
-			message: (set, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(Array.from(expected))}\`, got \`${JSON.stringify(Array.from(set))}\``,
+			message: (set, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify([...expected])}\`, got \`${JSON.stringify([...set])}\``,
 			validator: set => isEqual(set, expected)
 		});
 	}

@@ -12,7 +12,6 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 		private readonly options: PredicateOptions = {}
 	) {}
 
-	// tslint:disable completed-docs
 	[testSymbol](value: T, main: Main, label: string | Function) {
 		const errors = [
 			'Any predicate failed with the following errors:'

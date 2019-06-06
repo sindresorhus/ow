@@ -1,8 +1,8 @@
 language: node_js
 node_js:
+  - '12'
   - '10'
   - '8'
-  - '6'
 after_success:
   - './node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov'
 before_deploy:

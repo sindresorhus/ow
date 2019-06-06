@@ -12,7 +12,7 @@ export const not = (predicate: any) => {
 
 	predicate.addValidator = (validator: any) => {
 		const fn = validator.validator;
-		const message = validator.message;
+		const {message} = validator;
 
 		validator.message = (value: unknown, label: string) => `[NOT] ${message(value, label)}`;
 		validator.validator = (value: unknown) => !fn(value);

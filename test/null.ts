@@ -2,11 +2,9 @@ import test from 'ava';
 import ow from '../source';
 
 test('null', t => {
-	// tslint:disable-next-line no-null-keyword
 	const x = null;
 
 	t.notThrows(() => {
-		// tslint:disable-next-line no-null-keyword
 		ow(null, ow.null);
 	});
 

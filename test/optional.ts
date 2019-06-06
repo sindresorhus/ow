@@ -19,7 +19,6 @@ test('optional', t => {
 	});
 
 	t.throws(() => {
-		// tslint:disable-next-line
 		ow(null, ow.optional.number);
 	}, 'Expected argument to be of type `number` but received type `null`');
 
