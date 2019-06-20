@@ -9,6 +9,6 @@ Validate the value against the provided predicate.
 @param label - Label which should be used in error messages.
 @param predicate - Predicate to test to value against.
 */
-export default function test<T>(value: T, label: string | Function, predicate: BasePredicate<T>) {
-	predicate[testSymbol](value, test, label);
+export default function test<T>(value: T, label: string | Function, predicate: BasePredicate<T>, customError?: Error) {
+	predicate[testSymbol](value, test, label, customError);
 }

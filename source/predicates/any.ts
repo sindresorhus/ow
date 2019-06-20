@@ -12,7 +12,7 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 		private readonly options: PredicateOptions = {}
 	) {}
 
-	[testSymbol](value: T, main: Main, label: string | Function) {
+	[testSymbol](value: T, main: Main, label: string | Function, customError?: Error) {
 		const errors = [
 			'Any predicate failed with the following errors:'
 		];
@@ -30,6 +30,10 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 			}
 		}
 
-		throw new ArgumentError(errors.join('\n'), main);
+		if (customError === undefined) {
+			throw new ArgumentError(errors.join('\n'), main);
+		} else {
+			throw customError;
+		}
 	}
 }

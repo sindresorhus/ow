@@ -9,7 +9,7 @@ import test from './test';
 /**
 @hidden
 */
-export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
+export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>, customError?: Error) => void;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
@@ -19,7 +19,7 @@ export interface Ow extends Modifiers, Predicates {
 	@param value - Value to test.
 	@param predicate - Predicate to test against.
 	*/
-	<T>(value: T, predicate: BasePredicate<T>): void;
+	<T>(value: T, predicate: BasePredicate<T>, customError?: Error): void;
 
 	/**
 	Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
@@ -28,7 +28,7 @@ export interface Ow extends Modifiers, Predicates {
 	@param label - Label which should be used in error messages.
 	@param predicate - Predicate to test against.
 	*/
-	<T>(value: T, label: string, predicate: BasePredicate<T>): void;
+	<T>(value: T, label: string, predicate: BasePredicate<T>, customError?: Error): void;
 
 	/**
 	Returns `true` if the value matches the predicate, otherwise returns `false`.
@@ -43,7 +43,7 @@ export interface Ow extends Modifiers, Predicates {
 
 	@param predicate - Predicate used in the validator function.
 	*/
-	create<T>(predicate: BasePredicate<T>): (value: T) => void;
+	create<T>(predicate: BasePredicate<T>, customError?: Error): (value: T) => void;
 
 	/**
 	Create a reusable validator.
@@ -51,10 +51,10 @@ export interface Ow extends Modifiers, Predicates {
 	@param label - Label which should be used in error messages.
 	@param predicate - Predicate used in the validator function.
 	*/
-	create<T>(label: string, predicate: BasePredicate<T>): (value: T) => void;
+	create<T>(label: string, predicate: BasePredicate<T>, customError?: Error): (value: T) => void;
 }
 
-const ow: any = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
+const ow: any = <T>(value: T, labelOrPredicate: unknown, predicateOrError?: unknown, customError?: Error) => {
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
 		throw new TypeError(`Expected second argument to be a predicate or a string, got \`${typeof labelOrPredicate}\``);
 	}
@@ -63,12 +63,12 @@ const ow: any = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredica
 		// If the second argument is a predicate, infer the label
 		const stackFrames = callsites();
 
-		test(value, () => inferLabel(stackFrames), labelOrPredicate);
+		test(value, () => inferLabel(stackFrames), labelOrPredicate, predicateOrError as Error);
 
 		return;
 	}
 
-	test(value, labelOrPredicate, predicate as BasePredicate<T>);
+	test(value, labelOrPredicate, predicateOrError as BasePredicate<T>, customError);
 };
 
 Object.defineProperties(ow, {
@@ -83,16 +83,16 @@ Object.defineProperties(ow, {
 		}
 	},
 	create: {
-		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T) => {
+		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicateOrError?: BasePredicate<T> | Error, customError?: Error) => (value: T) => {
 			if (isPredicate(labelOrPredicate)) {
 				const stackFrames = callsites();
 
-				test(value, () => inferLabel(stackFrames), labelOrPredicate);
+				test(value, () => inferLabel(stackFrames), labelOrPredicate, predicateOrError as Error);
 
 				return;
 			}
 
-			test(value, labelOrPredicate as string, predicate as BasePredicate<T>);
+			test(value, labelOrPredicate as string, predicateOrError as BasePredicate<T>, customError);
 		}
 	}
 });

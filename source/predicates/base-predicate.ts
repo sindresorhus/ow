@@ -14,5 +14,5 @@ export const isPredicate = (value: any): value is BasePredicate => Boolean(value
 @hidden
 */
 export interface BasePredicate<T = unknown> {
-	[testSymbol](value: T, main: Main, label: string | Function): void;
+	[testSymbol](value: T, main: Main, label: string | Function, customError?: Error): void;
 }

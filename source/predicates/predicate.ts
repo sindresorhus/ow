@@ -77,7 +77,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function) {
+	[testSymbol](value: T, main: Main, label: string | Function, customError?: Error) {
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
 				continue;
@@ -87,6 +87,10 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 
 			if (result === true) {
 				continue;
+			}
+
+			if (customError) {
+				throw customError;
 			}
 
 			let label2 = label;

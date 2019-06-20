@@ -178,3 +178,31 @@ test('custom validation function', t => {
 		})));
 	}, '(string `unicorn`) Should be `🌈`');
 });
+
+test('validation with custom error', t => {
+	t.throws(() => {
+		ow('foo' as any, ow.number, new Error('custom_error'));
+	}, 'custom_error');
+
+	t.throws(() => {
+		ow('foo' as any, 'custom_label', ow.number, new Error('custom_error'));
+	}, 'custom_error');
+
+	t.throws(() => {
+		const validator = ow.create(ow.number, new Error('custom_error'));
+		validator('foo' as any);
+	}, 'custom_error');
+
+	t.throws(() => {
+		const validator = ow.create('custom_label', ow.number, new Error('custom_error'));
+		validator('foo' as any);
+	}, 'custom_error');
+
+	t.throws(() => {
+		ow('foo', ow.any(ow.string.minLength(4), ow.number), new Error('custom_error'));
+	}, 'custom_error');
+
+	t.throws(() => {
+		ow('foo', 'custom_label', ow.any(ow.string.minLength(4), ow.number), new Error('custom_error'));
+	}, 'custom_error');
+});
