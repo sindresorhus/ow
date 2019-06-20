@@ -71,13 +71,13 @@ ow(unicorn, ow.object.exactShape({
 
 [Complete API documentation](https://sindresorhus.com/ow)
 
-### ow(value, predicate)
+### ow(value, predicate, [customError])
 
-Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if the test fails.
+Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if the test fails or `customError` if it's specified.
 
-### ow(value, label, predicate)
+### ow(value, label, predicate, [customError])
 
-Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
+Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails or `customError` if it's specified.
 
 The `label` is automatically inferred in Node.js but you can override it by passing in a value for `label`. The automatic label inference doesn't work in the browser.
 
@@ -85,9 +85,9 @@ The `label` is automatically inferred in Node.js but you can override it by pass
 
 Returns `true` if the value matches the predicate, otherwise returns `false`.
 
-### ow.create(predicate)
+### ow.create(predicate, [customError])
 
-Create a reusable validator.
+Create a reusable validator, that throws the `customError` if the test fails.
 
 ```ts
 const checkPassword = ow.create(ow.string.minLength(6));
@@ -98,9 +98,9 @@ checkPassword(password);
 //=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
 ```
 
-### ow.create(label, predicate)
+### ow.create(label, predicate, [customError])
 
-Create a reusable validator with a specific `label`.
+Create a reusable validator with a specific `label`, that throws the `customError` if the test fails.
 
 ```ts
 const checkPassword = ow.create('password', ow.string.minLength(6));
