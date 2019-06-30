@@ -1,5 +1,7 @@
 import {Main} from '..';
 
+type Narrow<T> = T extends undefined ? never : T;
+
 /**
 @hidden
 */
@@ -14,5 +16,5 @@ export const isPredicate = (value: any): value is BasePredicate => Boolean(value
 @hidden
 */
 export interface BasePredicate<T = unknown> {
-	[testSymbol](value: T, main: Main, label: string | Function): void;
+	[testSymbol](value: Narrow<T>, main: Main, label: string | Function): void;
 }
