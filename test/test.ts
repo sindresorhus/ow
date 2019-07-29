@@ -82,7 +82,9 @@ test('is', t => {
 
 test('catching', t => {
 	t.throws(() => {
-		ow('1', ow.string.catching(() => { throw new Error('Error in a throwing validator'); }));
+		ow('1', ow.string.catching(() => {
+			throw new Error('Error in a throwing validator');
+		}));
 	}, '(string) Error in a throwing validator');
 
 	t.throws(() => {
@@ -94,8 +96,8 @@ test('catching', t => {
 		};
 
 		const arrayOfNumbers: SpecificType [] = [
-			{ x: 1 },
-			{ x: Number.POSITIVE_INFINITY }
+			{x: 1},
+			{x: Number.POSITIVE_INFINITY}
 		];
 		ow(arrayOfNumbers, ow.array.ofType(ow.object.catching(o => nestedOwValidator(o as SpecificType))));
 	}, '(array `arrayOfNumbers`) (object) Expected number `value.x` to be finite, got Infinity');
