@@ -156,6 +156,22 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	}
 
 	/**
+	 * Test if the value matches a custom validation function. The validation should throw an error if the value does not pass the validation. It allows to stack multiple ow() checks, eg. can be used to validate a subtype with ow functions.
+	 * @param throwingValidator — Validation function that throws an error
+	 */
+	catching(throwingValidator: (value: T) => void) {
+		const validator = (value: T) => {
+			try {
+				throwingValidator(value);
+				return true;
+			} catch (error) {
+				return error.message;
+			}
+		};
+		return this.is(validator);
+	}
+
+	/**
 	Register a new validator.
 
 	@param validator - Validator to register.
