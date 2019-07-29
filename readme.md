@@ -240,6 +240,29 @@ ow(1, 'input', ow.number.validate(value => ({
 
 This can be useful for creating your own reusable validators which can be extracted to a separate npm package.
 
+#### catching(fn)
+
+Use a custom validation function that throws error. The function should throw an error if value is invalid or return nothing when value is valid. This allows to use specific validators for complex property or array types.
+
+```ts
+interface Animal {
+	type: string;
+	weight: number;
+}
+
+function validateAnimal(animal: Animal) {
+	ow(animal.type, 'Animal.type', ow.string.oneOf([ 'dog', 'cat', 'elephant' ]));
+	ow(animal.weight, 'Animal.weight', ow.number.finite.positive);
+}
+
+const animals: Animal [] = [
+	{ type: 'dog', weight: 5 },
+	{ type: 'cat', weight: Number.POSITIVE_INFINITY }
+];
+
+ow(animals, ow.array.ofType(ow.object.catching(animal => validateAnimal(animal as Animal))));
+//=> ArgumentError: (array `animals`) (object) Expected number `Animal.weight` to be finite, got Infinity
+```
 
 ## Maintainers
 
