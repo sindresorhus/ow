@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
-import ow from '..';
 import {Predicate} from '../predicates/predicate';
+import ow from '..';
 
 const ofTypeDeep = (object: any, predicate: Predicate): boolean => {
 	if (!is.plainObject(object)) {

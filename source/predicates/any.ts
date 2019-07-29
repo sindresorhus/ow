@@ -1,7 +1,7 @@
 import {ArgumentError} from '../argument-error';
 import {BasePredicate, testSymbol} from './base-predicate';
-import {Main} from '..';
 import {PredicateOptions} from './predicate';
+import {Main} from '..';
 
 /**
 @hidden

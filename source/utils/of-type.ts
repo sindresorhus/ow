@@ -1,5 +1,5 @@
-import ow from '..';
 import {Predicate} from '../predicates/predicate';
+import ow from '..';
 
 /**
 Test all the values in the collection against a provided predicate.
