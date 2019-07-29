@@ -168,6 +168,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				return error.message;
 			}
 		};
+
 		return this.is(validator);
 	}
 
