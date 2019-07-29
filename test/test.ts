@@ -82,7 +82,7 @@ test('is', t => {
 
 test('catching', t => {
 	t.throws(() => {
-		ow('1', ow.string.catch(() => { throw new Error('Error in a throwing validator'); }));
+		ow('1', ow.string.catching(() => { throw new Error('Error in a throwing validator'); }));
 	}, '(string) Error in a throwing validator');
 
 	t.throws(() => {
