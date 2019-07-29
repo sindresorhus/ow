@@ -80,6 +80,27 @@ test('is', t => {
 	}, '(number `foo`) Expected `5` to be greater than `10`');
 });
 
+test('catching', t => {
+	t.throws(() => {
+		ow('1', ow.string.catch(() => { throw new Error('Error in a throwing validator'); }));
+	}, '(string) Error in a throwing validator');
+
+	t.throws(() => {
+		interface SpecificType {
+			x: number;
+		}
+		const nestedOwValidator = (value: SpecificType) => {
+			ow(value.x, ow.number.finite);
+		};
+
+		const arrayOfNumbers: SpecificType [] = [
+			{ x: 1 },
+			{ x: Number.POSITIVE_INFINITY }
+		];
+		ow(arrayOfNumbers, ow.array.ofType(ow.object.catching(o => nestedOwValidator(o as SpecificType))));
+	}, '(array `arrayOfNumbers`) (object) Expected number `value.x` to be finite, got Infinity');
+});
+
 test('isValid', t => {
 	t.true(ow.isValid(1, ow.number));
 	t.true(ow.isValid(1, ow.number.equal(1)));
