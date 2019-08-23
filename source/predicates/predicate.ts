@@ -7,6 +7,8 @@ import {BasePredicate, testSymbol} from './base-predicate';
 /**
 @hidden
 */
+export type ValidatorMessage<T> = (value?: T, label?: string, result?: any) => string;
+
 export interface Validator<T> {
 	message(value: T, label?: string, result?: any): string;
 
@@ -31,6 +33,8 @@ export interface Context<T = unknown> extends PredicateOptions {
 @hidden
 */
 export const validatorSymbol = Symbol('validators');
+
+
 
 export type CustomValidator<T> = (value: T) => {
 	/**
@@ -72,6 +76,14 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			},
 			validator: value => (is as any)[x](value)
 		});
+	}
+
+	public validateMessage(newMessage: string | ValidatorMessage<T>) {
+		const { validators } = this.context;
+
+		validators[validators.length - 1].message = typeof newMessage !== 'string' ? newMessage : () => newMessage;
+
+		return this;
 	}
 
 	/**
@@ -162,6 +174,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	protected addValidator(validator: Validator<T>) {
 		this.context.validators.push(validator);
+
 		return this;
 	}
 }
