@@ -1,8 +1,8 @@
 import is from '@sindresorhus/is';
 import {ArgumentError} from '../argument-error';
-import {Main} from '..';
 import {not} from '../operators/not';
 import {BasePredicate, testSymbol} from './base-predicate';
+import {Main} from '..';
 
 /**
 @hidden
@@ -33,8 +33,6 @@ export interface Context<T = unknown> extends PredicateOptions {
 @hidden
 */
 export const validatorSymbol = Symbol('validators');
-
-
 
 export type CustomValidator<T> = (value: T) => {
 	/**
@@ -79,9 +77,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	}
 
 	public validateMessage(newMessage: string | ValidatorMessage<T>) {
-		const { validators } = this.context;
+		const {validators} = this.context;
 
-		validators[validators.length - 1].message = typeof newMessage !== 'string' ? newMessage : () => newMessage;
+		validators[validators.length - 1].message = typeof newMessage === 'string' ? () => newMessage : newMessage;
 
 		return this;
 	}

@@ -1,5 +1,5 @@
 import test from 'ava';
-import  { default as ow, Predicate } from '../source';
+import {default as ow, Predicate} from '../source';
 
 class CustomPredicate extends Predicate<any> {
 	constructor() {
@@ -18,6 +18,6 @@ const custom = new CustomPredicate();
 
 test('custom validate message', t => {
 	t.throws(() => {
-		ow('🌈', 'unicorn', custom.unicorn.validateMessage("Expect unicorn, got rainbow"));
+		ow('🌈', 'unicorn', custom.unicorn.validateMessage('Expect unicorn, got rainbow'));
 	}, 'Expect unicorn, got rainbow');
 });
