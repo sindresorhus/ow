@@ -4,11 +4,11 @@ import {not} from '../operators/not';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '..';
 
+export type ValidatorMessage = (label?: string) => string;
+
 /**
 @hidden
 */
-export type ValidatorMessage<T> = (value?: T, label?: string, result?: any) => string;
-
 export interface Validator<T> {
 	message(value: T, label?: string, result?: any): string;
 
@@ -76,10 +76,22 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		});
 	}
 
-	public validateMessage(newMessage: string | ValidatorMessage<T>) {
+	/**
+	Allow specify validation message for last predicate expression
+
+	@param string |  - The length of the array.
+	*/
+
+	public validateMessage(newMessage: string | ValidatorMessage) {
 		const {validators} = this.context;
 
-		validators[validators.length - 1].message = typeof newMessage === 'string' ? () => newMessage : newMessage;
+		validators[validators.length - 1].message = (_, label) => {
+			if (typeof newMessage === 'string') {
+				return newMessage;
+			}
+
+			return newMessage(label);
+		};
 
 		return this;
 	}
