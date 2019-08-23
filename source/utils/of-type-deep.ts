@@ -2,7 +2,7 @@ import is from '@sindresorhus/is';
 import {Predicate} from '../predicates/predicate';
 import ow from '..';
 
-const ofTypeDeep = (object: any, predicate: Predicate): boolean => {
+const ofTypeDeep = (object: unknown, predicate: Predicate): boolean => {
 	if (!is.plainObject(object)) {
 		ow(object, predicate);
 
@@ -19,7 +19,7 @@ Test all the values in the object against a provided predicate.
 
 @param predicate - Predicate to test every value in the given object against.
 */
-export default (object: any, predicate: Predicate): boolean | string => {
+export default (object: unknown, predicate: Predicate): boolean | string => {
 	try {
 		return ofTypeDeep(object, predicate);
 	} catch (error) {
