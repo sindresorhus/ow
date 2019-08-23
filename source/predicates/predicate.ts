@@ -1,8 +1,8 @@
 import is from '@sindresorhus/is';
 import {ArgumentError} from '../argument-error';
-import {Main} from '..';
 import {not} from '../operators/not';
 import {BasePredicate, testSymbol} from './base-predicate';
+import {Main} from '..';
 
 /**
 @hidden

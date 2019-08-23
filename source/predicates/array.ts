@@ -1,6 +1,6 @@
 import isEqual = require('lodash.isequal');
-import ow from '..';
 import {Predicate, PredicateOptions} from './predicate';
+import ow from '..';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**

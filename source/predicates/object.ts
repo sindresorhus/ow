@@ -56,11 +56,7 @@ export class ObjectPredicate extends Predicate<object> {
 	valuesOfType<T>(predicate: Predicate<T>) {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: (object: any) => {
-				const values = Object.keys(object).map(key => object[key]);
-
-				return ofType(values, predicate);
-			}
+			validator: object => ofType(Object.values(object), predicate)
 		});
 	}
 
@@ -72,7 +68,7 @@ export class ObjectPredicate extends Predicate<object> {
 	deepValuesOfType<T>(predicate: Predicate<T>) {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: (object: any) => ofTypeDeep(object, predicate)
+			validator: object => ofTypeDeep(object, predicate)
 		});
 	}
 
@@ -133,7 +129,7 @@ export class ObjectPredicate extends Predicate<object> {
 	hasAnyKeys(...keys: readonly string[]) {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
-			validator: (object: object) => keys.some(key => dotProp.has(object, key))
+			validator: object => keys.some(key => dotProp.has(object, key))
 		});
 	}
 

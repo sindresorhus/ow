@@ -1,7 +1,7 @@
 import is from '@sindresorhus/is';
-import {BasePredicate} from '..';
 import test from '../test';
 import {isPredicate} from '../predicates/base-predicate';
+import {BasePredicate} from '..';
 
 export interface Shape {
 	[key: string]: BasePredicate | Shape;

@@ -1,7 +1,7 @@
 import hasItems from '../utils/has-items';
 import {Predicate, PredicateOptions} from './predicate';
 
-export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predicate<WeakMap<T1, T2>> {
+export class WeakMapPredicate<KeyType extends object = object> extends Predicate<WeakMap<KeyType, unknown>> {
 	/**
 	@hidden
 	*/
@@ -14,7 +14,7 @@ export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predica
 
 	@param keys - The keys that should be a key in the WeakMap.
 	*/
-	hasKeys(...keys: readonly T1[]) {
+	hasKeys(...keys: readonly KeyType[]) {
 		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: map => hasItems(map, keys)
@@ -26,7 +26,7 @@ export class WeakMapPredicate<T1 extends object = any, T2 = any> extends Predica
 
 	@param keys - The keys that could be a key in the WeakMap.
 	*/
-	hasAnyKeys(...keys: readonly T1[]) {
+	hasAnyKeys(...keys: readonly KeyType[]) {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: map => keys.some(key => map.has(key))
