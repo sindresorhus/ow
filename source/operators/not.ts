@@ -1,3 +1,4 @@
+import randomId from '../utils/random-id';
 import {validatorSymbol} from '../predicates/predicate';
 
 /**
@@ -12,7 +13,7 @@ export const not = (predicate: any) => {
 
 	predicate.addValidator = (validator: any) => {
 		const {validator: fn, message, negatedMessage} = validator;
-		const placeholder = Math.random().toString(16).slice(2);
+		const placeholder = randomId();
 
 		validator.message = (value: unknown, label: string) => (
 			negatedMessage ?
