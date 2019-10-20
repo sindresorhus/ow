@@ -8,9 +8,9 @@ import {Main} from '..';
 @hidden
 */
 export interface Validator<T> {
-  message(value: T, label?: string, result?: any): string;
+	message(value: T, label?: string, result?: any): string;
 
-  validator(value: T): unknown;
+	validator(value: T): unknown;
 
 	invertedMessage?(value: T, label?: string): string;
 }
