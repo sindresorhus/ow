@@ -12,7 +12,7 @@ export interface Validator<T> {
 
 	validator(value: T): unknown;
 
-	invertedMessage?(value: T, label?: string): string;
+	negatedMessage?(value: T, label?: string): string;
 }
 
 /**

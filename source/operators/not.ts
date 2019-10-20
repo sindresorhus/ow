@@ -11,12 +11,12 @@ export const not = (predicate: any) => {
 	const originalAddValidator = predicate.addValidator;
 
 	predicate.addValidator = (validator: any) => {
-		const {validator: fn, message, invertedMessage} = validator;
+		const {validator: fn, message, negatedMessage} = validator;
 		const placeholder = Math.random().toString(16).slice(2);
 
 		validator.message = (value: unknown, label: string) => (
-			invertedMessage ?
-				invertedMessage(value, label) :
+			negatedMessage ?
+				negatedMessage(value, label) :
 				message(value, placeholder).replace(/ to /, '$&not ').replace(placeholder, label)
 		);
 
