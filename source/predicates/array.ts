@@ -143,8 +143,8 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 					}
 
 					return true;
-				} catch (error2) {
-					error = error2.message;
+				} catch (error_) {
+					error = error_.message;
 					return false;
 				}
 			}
