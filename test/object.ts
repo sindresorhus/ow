@@ -49,6 +49,15 @@ test('object.empty', t => {
 	}, 'Expected object to be empty, got `{"unicorn":"🦄"}`');
 });
 
+test('object.nonEmpty', t => {
+	t.notThrows(() => {
+		ow({unicorn: '🦄'}, ow.object.nonEmpty);
+	});
+	t.throws(() => {
+		ow({}, ow.object.nonEmpty);
+	}, 'Expected object to not be empty');
+});
+
 test('object.valuesOfType', t => {
 	t.notThrows(() => {
 		ow({unicorn: '🦄'}, ow.object.valuesOfType(ow.string));

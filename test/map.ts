@@ -199,6 +199,16 @@ test('map.empty', t => {
 	}, 'Expected Map to be empty, got `[["unicorn","🦄"]]`');
 });
 
+test('map.notEmpty', t => {
+	t.notThrows(() => {
+		ow(new Map([['unicorn', '🦄']]), ow.map.nonEmpty);
+	});
+
+	t.throws(() => {
+		ow(new Map(), ow.map.nonEmpty);
+	}, 'Expected Map to not be empty');
+});
+
 test('map.deepEqual', t => {
 	t.notThrows(() => {
 		ow(new Map([['unicorn', '🦄']]), ow.map.deepEqual(new Map([['unicorn', '🦄']])));

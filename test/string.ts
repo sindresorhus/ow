@@ -163,6 +163,16 @@ test('string.empty', t => {
 	}, 'Expected string to be empty, got `foo`');
 });
 
+test('string.nonEmpty', t => {
+	t.notThrows(() => {
+		ow('foo', ow.string.nonEmpty);
+	});
+
+	t.throws(() => {
+		ow('' as any, ow.string.nonEmpty);
+	}, 'Expected string to not be empty');
+});
+
 test('string.equals', t => {
 	t.notThrows(() => {
 		ow('foo', ow.string.equals('foo'));
