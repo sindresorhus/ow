@@ -139,10 +139,10 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
-	 * Test a string to be equal to a specified string.
-	 *
-	 * @param expected Expected value to match.
-	 */
+	Test a string to be equal to a specified string.
+
+	@param expected - Expected value to match.
+	*/
 	equals(expected: string) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be equal to \`${expected}\`, got \`${value}\``,
