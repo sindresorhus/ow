@@ -191,7 +191,7 @@ Inverts the following predicate.
 ow(1, ow.number.not.infinite);
 
 ow('', ow.string.not.empty);
-//=> ArgumentError: [NOT] Expected string to be empty, got ``
+//=> ArgumentError: Expected string to not be empty, got ``
 ```
 
 #### is(fn)
@@ -223,7 +223,7 @@ Use a custom validation object. The difference with `is` is that the function sh
 ```ts
 ow(1, ow.number.validate(value => ({
 	validator: value > 10,
-	message: `Expected value to be greater than 10, got ${x}`
+	message: `Expected value to be greater than 10, got ${value}`
 })));
 //=> ArgumentError: (number) Expected value to be greater than 10, got 1
 ```
@@ -232,8 +232,8 @@ You can also pass in a function as `message` value which accepts the label as ar
 
 ```ts
 ow(1, 'input', ow.number.validate(value => ({
-	validator: x > 10,
-	message: label => `Expected ${label} to be greater than 10, got ${x}`
+	validator: value > 10,
+	message: label => `Expected ${label} to be greater than 10, got ${value}`
 })));
 //=> ArgumentError: Expected number `input` to be greater than 10, got 1
 ```
