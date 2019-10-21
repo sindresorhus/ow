@@ -12,7 +12,13 @@ export interface Validator<T> {
 
 	validator(value: T): unknown;
 
-	negatedMessage?(value: T, label?: string): string;
+	/**
+	Provide custom message used by `not` operator.
+
+	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to',
+	e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
+	*/
+	negatedMessage?(value: T, label: string): string;
 }
 
 /**
