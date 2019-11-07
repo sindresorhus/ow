@@ -72,11 +72,9 @@ export function exact(object: {[key: string]: any}, shape: Shape, parent?: strin
 		}
 
 		if (objectKeys.size > 0) {
-			const key = [...objectKeys.keys()][0];
-
-			const label = parent ? `${parent}.${key}` : key;
-
-			return `Did not expect property \`${label}\` to exist, got \`${object[key]}\``;
+			const firstKey = [...objectKeys.keys()][0];
+			const label = parent ? `${parent}.${firstKey}` : firstKey;
+			return `Did not expect property \`${label}\` to exist, got \`${object[firstKey]}\``;
 		}
 
 		return true;

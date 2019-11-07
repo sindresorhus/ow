@@ -5,11 +5,10 @@ import ow from '..';
 const ofTypeDeep = (object: unknown, predicate: Predicate): boolean => {
 	if (!is.plainObject(object)) {
 		ow(object, predicate);
-
 		return true;
 	}
 
-	return Object.keys(object).every(key => ofTypeDeep(object[key], predicate));
+	return Object.values(object).every(value => ofTypeDeep(value, predicate));
 };
 
 /**

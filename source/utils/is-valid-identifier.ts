@@ -1,4 +1,4 @@
-const identifierRegex = /^[a-z$_][a-z$_0-9]*$/i;
+const identifierRegex = /^[a-z$_][a-z$_\d]*$/i;
 
 const reservedSet = new Set([
 	'undefined',

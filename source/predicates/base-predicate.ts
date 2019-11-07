@@ -3,12 +3,12 @@ import {Main} from '..';
 /**
 @hidden
 */
-export const testSymbol = Symbol('test');
+export const testSymbol: unique symbol = Symbol('test');
 
 /**
 @hidden
 */
-export const isPredicate = (value: any): value is BasePredicate => Boolean(value && value[testSymbol]);
+export const isPredicate = (value: unknown): value is BasePredicate => Boolean((value as any)[testSymbol]);
 
 /**
 @hidden

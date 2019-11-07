@@ -26,7 +26,7 @@ export const inferLabel = (callsites: readonly CallSite[]) => {
 	const lineNumber = functionCallStackFrame.getLineNumber();
 	const columnNumber = functionCallStackFrame.getColumnNumber();
 
-	if (!fileName || lineNumber === null || columnNumber === null) {
+	if (fileName === null || lineNumber === null || columnNumber === null) {
 		return;
 	}
 
@@ -49,7 +49,7 @@ export const inferLabel = (callsites: readonly CallSite[]) => {
 
 	const match = labelRegex.exec(line);
 
-	if (!match || !match[1]) {
+	if (!match?.[1]) {
 		// Exit if we didn't find a label
 		return;
 	}

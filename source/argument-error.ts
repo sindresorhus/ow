@@ -6,9 +6,7 @@ export class ArgumentError extends Error {
 		super(message);
 
 		// TODO: Node.js does not preserve the error name in output when using the below, why?
-		if ('captureStackTrace' in Error) {
-			Error.captureStackTrace(this, context);
-		}
+		Error.captureStackTrace?.(this, context);
 
 		this.name = 'ArgumentError';
 	}

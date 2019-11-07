@@ -74,9 +74,8 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		this.addValidator({
 			message: (value, label) => {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
-				const label_ = label && label.slice(this.type.length + 1);
+				const label_ = label?.slice(this.type.length + 1);
 
-				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
 			validator: value => (is as any)[x](value)
@@ -86,7 +85,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function) {
+	[testSymbol](value: T, main: Main, label: string | Function): asserts value {
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
 				continue;
