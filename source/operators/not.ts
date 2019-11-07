@@ -1,3 +1,4 @@
+import randomId from '../utils/random-id';
 import {validatorSymbol} from '../predicates/predicate';
 
 /**
@@ -11,10 +12,15 @@ export const not = (predicate: any) => {
 	const originalAddValidator = predicate.addValidator;
 
 	predicate.addValidator = (validator: any) => {
-		const fn = validator.validator;
-		const {message} = validator;
+		const {validator: fn, message, negatedMessage} = validator;
+		const placeholder = randomId();
 
-		validator.message = (value: unknown, label: string) => `[NOT] ${message(value, label)}`;
+		validator.message = (value: unknown, label: string) => (
+			negatedMessage ?
+				negatedMessage(value, label) :
+				message(value, placeholder).replace(/ to /, '$&not ').replace(placeholder, label)
+		);
+
 		validator.validator = (value: unknown) => !fn(value);
 
 		predicate[validatorSymbol].push(validator);

@@ -31,7 +31,8 @@ export class StringPredicate extends Predicate<string> {
 	minLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value}\``,
-			validator: value => value.length >= length
+			validator: value => value.length >= length,
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value}\``
 		});
 	}
 
@@ -43,7 +44,8 @@ export class StringPredicate extends Predicate<string> {
 	maxLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value}\``,
-			validator: value => value.length <= length
+			validator: value => value.length <= length,
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value}\``
 		});
 	}
 

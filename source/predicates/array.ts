@@ -30,7 +30,8 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	minLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value.length}\``,
-			validator: value => value.length >= length
+			validator: value => value.length >= length,
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value.length}\``
 		});
 	}
 
@@ -42,7 +43,8 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	maxLength(length: number) {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value.length}\``,
-			validator: value => value.length <= length
+			validator: value => value.length <= length,
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value.length}\``
 		});
 	}
 

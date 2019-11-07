@@ -19,7 +19,7 @@ test('not', t => {
 
 	t.throws(() => {
 		ow(6, ow.number.not.infinite.not.greaterThan(5));
-	});
+	}, 'Expected number to not be greater than 5, got 6');
 
 	t.notThrows(() => {
 		ow('foo!', ow.string.not.alphabetical);
@@ -43,15 +43,123 @@ test('not', t => {
 
 	t.throws(() => {
 		ow('', ow.string.not.empty);
-	}, '[NOT] Expected string to be empty, got ``');
+	}, 'Expected string to not be empty, got ``');
 
 	t.throws(() => {
 		ow('', 'foo', ow.string.not.empty);
-	}, '[NOT] Expected string `foo` to be empty, got ``');
+	}, 'Expected string `foo` to not be empty, got ``');
 
 	t.throws(() => {
 		ow(foo, ow.string.not.empty);
-	}, '[NOT] Expected string `foo` to be empty, got ``');
+	}, 'Expected string `foo` to not be empty, got ``');
+
+	t.notThrows(() => {
+		ow('a', ow.string.not.minLength(3));
+	});
+	t.notThrows(() => {
+		ow('ab', ow.string.not.minLength(3));
+	});
+	t.throws(() => {
+		ow('abc', ow.string.not.minLength(3));
+	}, 'Expected string to have a maximum length of `2`, got `abc`');
+
+	t.notThrows(() => {
+		ow('abcd', ow.string.not.maxLength(2));
+	});
+	t.notThrows(() => {
+		ow('abcdef', ow.string.not.maxLength(2));
+	});
+	t.throws(() => {
+		ow('a', ow.string.not.maxLength(3));
+	}, 'Expected string to have a minimum length of `4`, got `a`');
+
+	t.notThrows(() => {
+		ow({a: 1}, ow.object.not.empty);
+	});
+	t.throws(() => {
+		ow({}, ow.object.not.empty);
+	}, 'Expected object to not be empty, got `{}`');
+
+	t.notThrows(() => {
+		ow(new Set([1]), ow.set.not.empty);
+	});
+	t.throws(() => {
+		ow(new Set([]), ow.set.not.empty);
+	}, 'Expected Set to not be empty, got `[]`');
+
+	t.notThrows(() => {
+		ow(new Set([1]), ow.set.not.minSize(3));
+	});
+	t.notThrows(() => {
+		ow(new Set([1, 2]), ow.set.not.minSize(3));
+	});
+	t.throws(() => {
+		ow(new Set([1, 2, 3]), ow.set.not.minSize(3));
+	}, 'Expected Set to have a maximum size of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow(new Set([1, 2]), ow.set.not.maxSize(1));
+	});
+	t.notThrows(() => {
+		ow(new Set([1, 2, 3, 4]), ow.set.not.maxSize(1));
+	});
+	t.throws(() => {
+		ow(new Set([1]), ow.set.not.maxSize(1));
+	}, 'Expected Set to have a minimum size of `2`, got `1`');
+
+	t.notThrows(() => {
+		ow(new Map([[1, 1]]), ow.map.not.empty);
+	});
+	t.throws(() => {
+		ow(new Map([]), ow.map.not.empty);
+	}, 'Expected Map to not be empty, got `[]`');
+
+	t.notThrows(() => {
+		ow(new Map([[1, 1]]), ow.map.not.minSize(3));
+	});
+	t.notThrows(() => {
+		ow(new Map([[1, 1], [2, 2]]), ow.map.not.minSize(3));
+	});
+	t.throws(() => {
+		ow(new Map([[1, 1], [2, 2], [3, 3]]), ow.map.not.minSize(3));
+	}, 'Expected Map to have a maximum size of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow(new Map([[1, 1], [2, 2]]), ow.map.not.maxSize(1));
+	});
+	t.notThrows(() => {
+		ow(new Map([[1, 1], [2, 2], [3, 3]]), ow.map.not.maxSize(1));
+	});
+	t.throws(() => {
+		ow(new Map([[1, 1]]), ow.map.not.maxSize(1));
+	}, 'Expected Map to have a minimum size of `2`, got `1`');
+
+	t.notThrows(() => {
+		ow(['foo'], ow.array.not.empty);
+	});
+	t.throws(() => {
+		ow([], ow.array.not.empty);
+	}, 'Expected array to not be empty, got `[]`');
+
+	t.notThrows(() => {
+		ow([1], ow.array.not.minLength(3));
+	});
+	t.notThrows(() => {
+		ow([1, 2], ow.array.not.minLength(3));
+	});
+	t.throws(() => {
+		ow([1, 2, 3], ow.array.not.minLength(3));
+	}, 'Expected array to have a maximum length of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow([1, 2, 3], ow.array.not.maxLength(2));
+	});
+	t.notThrows(() => {
+		ow([1, 2, 3, 4], ow.array.not.maxLength(2));
+	});
+	t.throws(() => {
+		ow([1], ow.array.not.maxLength(3));
+	}, 'Expected array to have a minimum length of `4`, got `1`');
 });
 
 test('is', t => {

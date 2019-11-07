@@ -31,7 +31,8 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	minSize(size: number) {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have a minimum size of \`${size}\`, got \`${map.size}\``,
-			validator: map => map.size >= size
+			validator: map => map.size >= size,
+			negatedMessage: (map, label) => `Expected ${label} to have a maximum size of \`${size - 1}\`, got \`${map.size}\``
 		});
 	}
 
@@ -43,7 +44,8 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	maxSize(size: number) {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have a maximum size of \`${size}\`, got \`${map.size}\``,
-			validator: map => map.size <= size
+			validator: map => map.size <= size,
+			negatedMessage: (map, label) => `Expected ${label} to have a minimum size of \`${size + 1}\`, got \`${map.size}\``
 		});
 	}
 
