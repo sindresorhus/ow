@@ -251,13 +251,19 @@ interface Animal {
 }
 
 function validateAnimal(animal: Animal) {
-	ow(animal.type, 'Animal.type', ow.string.oneOf([ 'dog', 'cat', 'elephant' ]));
+	ow(animal.type, 'Animal.type', ow.string.oneOf(['dog', 'cat', 'elephant']));
 	ow(animal.weight, 'Animal.weight', ow.number.finite.positive);
 }
 
 const animals: Animal [] = [
-	{ type: 'dog', weight: 5 },
-	{ type: 'cat', weight: Number.POSITIVE_INFINITY }
+	{
+		type: 'dog',
+		weight: 5
+	},
+	{
+		type: 'cat',
+		weight: Number.POSITIVE_INFINITY
+	}
 ];
 
 ow(animals, ow.array.ofType(ow.object.catching(animal => validateAnimal(animal as Animal))));
