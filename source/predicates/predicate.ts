@@ -107,6 +107,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				`${this.type} \`${label2}\`` :
 				this.type;
 
+			/* eslint-disable-next-line no-warning-comments */
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
 			throw new ArgumentError(message(value, label2, result), main);
 		}

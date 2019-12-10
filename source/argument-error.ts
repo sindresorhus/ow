@@ -6,6 +6,7 @@ export class ArgumentError extends Error {
 		super(message);
 
 		if (Error.captureStackTrace) {
+			/* eslint-disable-next-line no-warning-comments */
 			// TODO: Node.js does not preserve the error name in output when using the below, why?
 			Error.captureStackTrace(this, context);
 		} else {
