@@ -3,6 +3,7 @@ import ow from '../source';
 
 test('function', t => {
 	t.notThrows(() => {
+		/* eslint-disable-next-line @typescript-eslint/no-empty-function */
 		ow(() => {}, ow.function);
 	});
 
