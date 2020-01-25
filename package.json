@@ -23,7 +23,8 @@
 		"docs": "typedoc source"
 	},
 	"files": [
-		"dist/source"
+		"dist/source",
+		"dev-only.js"
 	],
 	"keywords": [
 		"type",
