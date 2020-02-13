@@ -1,4 +1,5 @@
 import isEqual = require('lodash.isequal');
+import {BasePredicate} from './base-predicate';
 import {Predicate, PredicateOptions} from './predicate';
 import ow from '..';
 
@@ -132,8 +133,13 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	Test all elements in the array to match to provided predicate.
 
 	@param predicate - The predicate that should be applied against every individual item.
+
+	@example
+	```
+	ow(['a', 1], ow.array.ofType(ow.any(ow.string, ow.number)));
+	```
 	*/
-	ofType(predicate: Predicate<T>) {
+	ofType<P extends BasePredicate<T>>(predicate: P) {
 		let error: string;
 
 		return this.addValidator({

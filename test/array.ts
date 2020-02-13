@@ -156,6 +156,10 @@ test('array.ofType', t => {
 		ow(['foo', 'bar'], ow.array.ofType(ow.string.minLength(3)));
 	});
 
+	t.notThrows(() => {
+		ow(['a', 1], ow.array.ofType(ow.any(ow.string, ow.number)));
+	});
+
 	t.throws(() => {
 		ow(['foo', 'b'], ow.array.ofType(ow.string.minLength(3)));
 	}, '(array) Expected string to have a minimum length of `3`, got `b`');
