@@ -114,3 +114,4 @@ export {
 	AnyPredicate,
 	Shape
 } from './predicates';
+export {ArgumentError} from './argument-error';
