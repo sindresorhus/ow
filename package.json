@@ -12,7 +12,7 @@
 	},
 	"main": "dist/source",
 	"engines": {
-		"node": ">=8"
+		"node": ">=10"
 	},
 	"scripts": {
 		"prepublishOnly": "npm run build",
@@ -51,10 +51,10 @@
 		"type-fest": "^0.8.1"
 	},
 	"devDependencies": {
-		"@sindresorhus/is": "^1.2.0",
-		"@sindresorhus/tsconfig": "^0.5.0",
+		"@sindresorhus/is": "^2.0.0",
+		"@sindresorhus/tsconfig": "^0.7.0",
 		"@types/lodash.isequal": "^4.5.2",
-		"@types/node": "^12.12.6",
+		"@types/node": "^13.7.1",
 		"@types/vali-date": "^1.0.0",
 		"@typescript-eslint/eslint-plugin": "^2.6.1",
 		"@typescript-eslint/parser": "^2.6.1",
@@ -64,18 +64,18 @@
 		"awesome-typescript-loader": "^5.2.1",
 		"callsites": "^3.0.0",
 		"codecov": "^3.1.0",
-		"del-cli": "^2.0.0",
+		"del-cli": "^3.0.0",
 		"dot-prop": "^5.2.0",
-		"eslint-config-xo-typescript": "^0.21.0",
+		"eslint-config-xo-typescript": "^0.26.0",
 		"license-webpack-plugin": "^2.0.2",
 		"lodash.isequal": "^4.5.0",
-		"nyc": "^14.1.1",
-		"typedoc": "^0.15.0",
+		"nyc": "^15.0.0",
+		"typedoc": "^0.16.9",
 		"typescript": "^3.7.2",
 		"vali-date": "^1.0.0",
 		"webpack": "^4.33.0",
 		"webpack-cli": "^3.3.10",
-		"xo": "^0.25.3"
+		"xo": "^0.26.0"
 	},
 	"browser": {
 		"./dist/source/utils/infer-label.js": "./dist/source/utils/infer-label.browser.js"
@@ -100,7 +100,8 @@
 			"@typescript-eslint/explicit-function-return-type": "off",
 			"@typescript-eslint/ban-types": "off",
 			"@typescript-eslint/no-explicit-any": "off",
-			"@typescript-eslint/no-empty-function": "off"
+			"@typescript-eslint/no-empty-function": "off",
+			"@typescript-eslint/restrict-template-expressions": "off"
 		}
 	},
 	"ava": {

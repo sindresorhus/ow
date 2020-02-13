@@ -76,6 +76,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
 				const label_ = label?.slice(this.type.length + 1);
 
+				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
 			validator: value => (is as any)[x](value)

@@ -4,7 +4,7 @@ import isValidIdentifier from './is-valid-identifier';
 import isNode from './node/is-node';
 
 // Regex to extract the label out of the `ow` function call
-const labelRegex = /^.*?\((.*?)[,)]/;
+const labelRegex = /^.*?\((?<label>.*?)[,)]/;
 
 /**
 Infer the label of the caller.
@@ -49,12 +49,12 @@ export const inferLabel = (callsites: readonly CallSite[]) => {
 
 	const match = labelRegex.exec(line);
 
-	if (!match?.[1]) {
+	if (!match?.groups?.label) {
 		// Exit if we didn't find a label
 		return;
 	}
 
-	const token = match[1];
+	const token = match.groups.label;
 
 	if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop())) {
 		return token;

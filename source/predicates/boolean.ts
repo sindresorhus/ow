@@ -14,7 +14,7 @@ export class BooleanPredicate extends Predicate<boolean> {
 	get true() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be true, got ${value}`,
-			validator: value => value === true
+			validator: value => value
 		});
 	}
 
@@ -24,7 +24,7 @@ export class BooleanPredicate extends Predicate<boolean> {
 	get false() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be false, got ${value}`,
-			validator: value => value === false
+			validator: value => !value
 		});
 	}
 }
