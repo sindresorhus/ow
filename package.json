@@ -58,6 +58,7 @@
 		"@types/vali-date": "^1.0.0",
 		"@typescript-eslint/eslint-plugin": "^2.6.1",
 		"@typescript-eslint/parser": "^2.6.1",
+		"add-asset-webpack-plugin": "^1.0.0",
 		"add-module-exports-webpack-plugin": "^1.0.0",
 		"ava": "^2.0.0",
 		"awesome-typescript-loader": "^5.2.1",

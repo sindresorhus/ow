@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const license = require('license-webpack-plugin');
 const AddModuleExportsPlugin = require('add-module-exports-webpack-plugin');
+const AddAssetPlugin = require('add-asset-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -26,7 +27,11 @@ module.exports = {
 		new license.LicenseWebpackPlugin({
 			excludedPackageTest: packageName => ['webpack'].includes(packageName),
 			outputFilename: 'licenses.txt'
-		})
+		}),
+		new AddAssetPlugin(
+			'utils/infer-label.browser.js',
+			'export const inferLabel = () => {};'
+		)
 	],
 	module: {
 		rules: [
