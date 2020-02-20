@@ -13,6 +13,7 @@ import {SetPredicate} from './predicates/set';
 import {WeakSetPredicate} from './predicates/weak-set';
 import {TypedArrayPredicate} from './predicates/typed-array';
 import {ArrayBufferPredicate} from './predicates/array-buffer';
+import {DataViewPredicate} from './predicates/data-view';
 import {BasePredicate} from './predicates/base-predicate';
 import {AnyPredicate} from './predicates/any';
 
@@ -180,7 +181,7 @@ export interface Predicates {
 	/**
 	Test the value to be a DataView.
 	*/
-	readonly dataView: Predicate<DataView>;
+	readonly dataView: DataViewPredicate;
 
 	/**
 	Test the value to be Iterable.
@@ -302,7 +303,7 @@ export default <T>(object: T, options?: PredicateOptions): T & Predicates => {
 			get: () => new ArrayBufferPredicate('SharedArrayBuffer', options)
 		},
 		dataView: {
-			get: () => new Predicate('DataView', options)
+			get: () => new DataViewPredicate(options)
 		},
 		iterable: {
 			get: () => new Predicate('Iterable', options)
@@ -329,6 +330,7 @@ export {
 	WeakSetPredicate,
 	TypedArrayPredicate,
 	ArrayBufferPredicate,
+	DataViewPredicate,
 	AnyPredicate,
 	Shape
 };

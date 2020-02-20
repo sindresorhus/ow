@@ -113,6 +113,7 @@ export {
 	WeakSetPredicate,
 	TypedArrayPredicate,
 	ArrayBufferPredicate,
+	DataViewPredicate,
 	AnyPredicate,
 	Shape
 } from './predicates';
