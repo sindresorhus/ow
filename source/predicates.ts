@@ -11,6 +11,8 @@ import {MapPredicate} from './predicates/map';
 import {WeakMapPredicate} from './predicates/weak-map';
 import {SetPredicate} from './predicates/set';
 import {WeakSetPredicate} from './predicates/weak-set';
+import {TypedArrayPredicate} from './predicates/typed-array';
+import {ArrayBufferPredicate} from './predicates/array-buffer';
 import {BasePredicate} from './predicates/base-predicate';
 import {AnyPredicate} from './predicates/any';
 
@@ -118,57 +120,62 @@ export interface Predicates {
 	/**
 	Test the value to be a typed array.
 	*/
-	readonly typedArray: Predicate<TypedArray>;
+	readonly typedArray: TypedArrayPredicate<TypedArray>;
 
 	/**
 	Test the value to be a Int8Array.
 	*/
-	readonly int8Array: Predicate<Int8Array>;
+	readonly int8Array: TypedArrayPredicate<Int8Array>;
 
 	/**
 	Test the value to be a Uint8Array.
 	*/
-	readonly uint8Array: Predicate<Uint8Array>;
+	readonly uint8Array: TypedArrayPredicate<Uint8Array>;
 
 	/**
 	Test the value to be a Uint8ClampedArray.
 	*/
-	readonly uint8ClampedArray: Predicate<Uint8ClampedArray>;
+	readonly uint8ClampedArray: TypedArrayPredicate<Uint8ClampedArray>;
 
 	/**
 	Test the value to be a Int16Array.
 	*/
-	readonly int16Array: Predicate<Int16Array>;
+	readonly int16Array: TypedArrayPredicate<Int16Array>;
 
 	/**
 	Test the value to be a Uint16Array.
 	*/
-	readonly uint16Array: Predicate<Uint16Array>;
+	readonly uint16Array: TypedArrayPredicate<Uint16Array>;
 
 	/**
 	Test the value to be a Int32Array.
 	*/
-	readonly int32Array: Predicate<Int32Array>;
+	readonly int32Array: TypedArrayPredicate<Int32Array>;
 
 	/**
 	Test the value to be a Uint32Array.
 	*/
-	readonly uint32Array: Predicate<Uint32Array>;
+	readonly uint32Array: TypedArrayPredicate<Uint32Array>;
 
 	/**
 	Test the value to be a Float32Array.
 	*/
-	readonly float32Array: Predicate<Float32Array>;
+	readonly float32Array: TypedArrayPredicate<Float32Array>;
 
 	/**
 	Test the value to be a Float64Array.
 	*/
-	readonly float64Array: Predicate<Float64Array>;
+	readonly float64Array: TypedArrayPredicate<Float64Array>;
 
 	/**
 	Test the value to be a ArrayBuffer.
 	*/
-	readonly arrayBuffer: Predicate<ArrayBuffer>;
+	readonly arrayBuffer: ArrayBufferPredicate<ArrayBuffer>;
+
+	/**
+	Test the value to be a SharedArrayBuffer.
+	*/
+	readonly sharedArrayBuffer: ArrayBufferPredicate<SharedArrayBuffer>;
 
 	/**
 	Test the value to be a DataView.
@@ -259,37 +266,40 @@ export default <T>(object: T, options?: PredicateOptions): T & Predicates => {
 			get: () => new Predicate('Promise', options)
 		},
 		typedArray: {
-			get: () => new Predicate('TypedArray', options)
+			get: () => new TypedArrayPredicate('TypedArray', options)
 		},
 		int8Array: {
-			get: () => new Predicate('Int8Array', options)
+			get: () => new TypedArrayPredicate('Int8Array', options)
 		},
 		uint8Array: {
-			get: () => new Predicate('Uint8Array', options)
+			get: () => new TypedArrayPredicate('Uint8Array', options)
 		},
 		uint8ClampedArray: {
-			get: () => new Predicate('Uint8ClampedArray', options)
+			get: () => new TypedArrayPredicate('Uint8ClampedArray', options)
 		},
 		int16Array: {
-			get: () => new Predicate('Int16Array', options)
+			get: () => new TypedArrayPredicate('Int16Array', options)
 		},
 		uint16Array: {
-			get: () => new Predicate('Uint16Array', options)
+			get: () => new TypedArrayPredicate('Uint16Array', options)
 		},
 		int32Array: {
-			get: () => new Predicate('Int32Array', options)
+			get: () => new TypedArrayPredicate('Int32Array', options)
 		},
 		uint32Array: {
-			get: () => new Predicate('Uint32Array', options)
+			get: () => new TypedArrayPredicate('Uint32Array', options)
 		},
 		float32Array: {
-			get: () => new Predicate('Float32Array', options)
+			get: () => new TypedArrayPredicate('Float32Array', options)
 		},
 		float64Array: {
-			get: () => new Predicate('Float64Array', options)
+			get: () => new TypedArrayPredicate('Float64Array', options)
 		},
 		arrayBuffer: {
-			get: () => new Predicate('ArrayBuffer', options)
+			get: () => new ArrayBufferPredicate('ArrayBuffer', options)
+		},
+		sharedArrayBuffer: {
+			get: () => new ArrayBufferPredicate('SharedArrayBuffer', options)
 		},
 		dataView: {
 			get: () => new Predicate('DataView', options)
@@ -317,6 +327,8 @@ export {
 	WeakMapPredicate,
 	SetPredicate,
 	WeakSetPredicate,
+	TypedArrayPredicate,
+	ArrayBufferPredicate,
 	AnyPredicate,
 	Shape
 };

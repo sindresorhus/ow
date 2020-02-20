@@ -31,6 +31,128 @@ test('typedArray', t => {
 	}, 'Expected argument to be of type `TypedArray` but received type `number`');
 });
 
+test('typedArray.byteLength', t => {
+	t.notThrows(() => {
+		ow(new Int8Array(1), ow.typedArray.byteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Uint8Array(1), ow.typedArray.byteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Uint8ClampedArray(1), ow.typedArray.byteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Int16Array(1), ow.typedArray.byteLength(2));
+	});
+
+	t.notThrows(() => {
+		ow(new Uint16Array(1), ow.typedArray.byteLength(2));
+	});
+
+	t.notThrows(() => {
+		ow(new Int32Array(1), ow.typedArray.byteLength(4));
+	});
+
+	t.notThrows(() => {
+		ow(new Uint32Array(1), ow.typedArray.byteLength(4));
+	});
+
+	t.notThrows(() => {
+		ow(new Float32Array(1), ow.typedArray.byteLength(4));
+	});
+
+	t.notThrows(() => {
+		ow(new Float64Array(1), ow.typedArray.byteLength(8));
+	});
+
+	t.throws(() => {
+		ow(new Int8Array(1), ow.typedArray.byteLength(2));
+	}, 'Expected TypedArray to have byte length of `2`, got `1`');
+
+	t.throws(() => {
+		ow(new Int8Array(1), 'foo', ow.typedArray.byteLength(2));
+	}, 'Expected TypedArray `foo` to have byte length of `2`, got `1`');
+});
+
+test('typedArray.minByteLength', t => {
+	t.notThrows(() => {
+		ow(new Int8Array(1), ow.typedArray.minByteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Float64Array(2), ow.typedArray.minByteLength(1));
+	});
+
+	t.throws(() => {
+		ow(new Uint8Array(1), ow.typedArray.minByteLength(2));
+	}, 'Expected TypedArray to have a minimum byte length of `2`, got `1`');
+});
+
+test('typedArray.maxByteLength', t => {
+	t.notThrows(() => {
+		ow(new Uint8Array(1), ow.typedArray.maxByteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Int16Array(1), ow.typedArray.maxByteLength(4));
+	});
+
+	t.throws(() => {
+		ow(new Uint32Array(1), ow.typedArray.maxByteLength(1));
+	}, 'Expected TypedArray to have a maximum byte length of `1`, got `4`');
+});
+
+test('typedArray.length', t => {
+	t.notThrows(() => {
+		t.notThrows(() => {
+			ow(new Int8Array(1), ow.typedArray.length(1));
+		});
+
+		t.notThrows(() => {
+			ow(new Uint16Array(2), ow.typedArray.length(2));
+		});
+
+		t.throws(() => {
+			ow(new Float32Array(1), ow.typedArray.length(2));
+		}, 'Expected TypedArray to have length `2`, got `1`');
+
+		t.throws(() => {
+			ow(new Float32Array(1), 'foo', ow.typedArray.length(2));
+		}, 'Expected TypedArray `foo` to have length `2`, got `1`');
+	});
+});
+
+test('typedArray.minLength', t => {
+	t.notThrows(() => {
+		ow(new Uint8Array(1), ow.typedArray.minLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Int16Array(2), ow.typedArray.minLength(1));
+	});
+
+	t.throws(() => {
+		ow(new Uint32Array(1), ow.typedArray.minLength(2));
+	}, 'Expected TypedArray to have a minimum length of `2`, got `1`');
+});
+
+test('typedArray.maxLength', t => {
+	t.notThrows(() => {
+		ow(new Uint8ClampedArray(1), ow.typedArray.maxLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new Int32Array(2), ow.typedArray.maxLength(4));
+	});
+
+	t.throws(() => {
+		ow(new Float64Array(2), ow.typedArray.maxLength(1));
+	}, 'Expected TypedArray to have a maximum length of `1`, got `2`');
+});
+
 test('int8Array', t => {
 	t.notThrows(() => {
 		ow(new Int8Array(2), ow.int8Array);
