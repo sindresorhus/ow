@@ -160,6 +160,86 @@ test('not', t => {
 	t.throws(() => {
 		ow([1], ow.array.not.maxLength(3));
 	}, 'Expected array to have a minimum length of `4`, got `1`');
+
+	t.notThrows(() => {
+		ow(new Int8Array(1), ow.typedArray.not.minByteLength(3));
+	});
+	t.notThrows(() => {
+		ow(new Int8Array(2), ow.typedArray.not.minByteLength(3));
+	});
+	t.throws(() => {
+		ow(new Int8Array(3), ow.typedArray.not.minByteLength(3));
+	}, 'Expected TypedArray to have a maximum byte length of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow(new Uint8Array(4), ow.typedArray.not.maxByteLength(2));
+	});
+	t.notThrows(() => {
+		ow(new Uint8Array(3), ow.typedArray.not.maxByteLength(2));
+	});
+	t.throws(() => {
+		ow(new Uint8Array(2), ow.typedArray.not.maxByteLength(2));
+	}, 'Expected TypedArray to have a minimum byte length of `3`, got `2`');
+
+	t.notThrows(() => {
+		ow(new Uint8ClampedArray(1), ow.typedArray.not.minLength(3));
+	});
+	t.notThrows(() => {
+		ow(new Int16Array(2), ow.typedArray.not.minLength(3));
+	});
+	t.throws(() => {
+		ow(new Float32Array(3), ow.typedArray.not.minLength(3));
+	}, 'Expected TypedArray to have a maximum length of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow(new Uint16Array(4), ow.typedArray.not.maxLength(2));
+	});
+	t.notThrows(() => {
+		ow(new Uint32Array(3), ow.typedArray.not.maxLength(2));
+	});
+	t.throws(() => {
+		ow(new Float64Array(2), ow.typedArray.not.maxLength(2));
+	}, 'Expected TypedArray to have a minimum length of `3`, got `2`');
+
+	t.notThrows(() => {
+		ow(new ArrayBuffer(1), ow.arrayBuffer.not.minByteLength(3));
+	});
+	t.notThrows(() => {
+		ow(new ArrayBuffer(2), ow.arrayBuffer.not.minByteLength(3));
+	});
+	t.throws(() => {
+		ow(new ArrayBuffer(3), ow.arrayBuffer.not.minByteLength(3));
+	}, 'Expected ArrayBuffer to have a maximum byte length of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow(new ArrayBuffer(4), ow.arrayBuffer.not.maxByteLength(2));
+	});
+	t.notThrows(() => {
+		ow(new ArrayBuffer(3), ow.arrayBuffer.not.maxByteLength(2));
+	});
+	t.throws(() => {
+		ow(new ArrayBuffer(2), ow.arrayBuffer.not.maxByteLength(2));
+	}, 'Expected ArrayBuffer to have a minimum byte length of `3`, got `2`');
+
+	t.notThrows(() => {
+		ow(new DataView(new ArrayBuffer(1)), ow.dataView.not.minByteLength(3));
+	});
+	t.notThrows(() => {
+		ow(new DataView(new ArrayBuffer(2)), ow.dataView.not.minByteLength(3));
+	});
+	t.throws(() => {
+		ow(new DataView(new ArrayBuffer(3)), ow.dataView.not.minByteLength(3));
+	}, 'Expected DataView to have a maximum byte length of `2`, got `3`');
+
+	t.notThrows(() => {
+		ow(new DataView(new ArrayBuffer(4)), ow.dataView.not.maxByteLength(2));
+	});
+	t.notThrows(() => {
+		ow(new DataView(new ArrayBuffer(3)), ow.dataView.not.maxByteLength(2));
+	});
+	t.throws(() => {
+		ow(new DataView(new ArrayBuffer(2)), ow.dataView.not.maxByteLength(2));
+	}, 'Expected DataView to have a minimum byte length of `3`, got `2`');
 });
 
 test('is', t => {
@@ -225,6 +305,33 @@ test('reusable validator', t => {
 	}, 'Expected argument to be of type `string` but received type `number`');
 });
 
+test('reusable validator called with label', t => {
+	const checkUsername = ow.create(ow.string.minLength(3));
+
+	const value = 'x';
+	const label = 'bar';
+
+	t.notThrows(() => {
+		checkUsername('foo', label);
+	});
+
+	t.notThrows(() => {
+		checkUsername('foobar', label);
+	});
+
+	t.throws(() => {
+		checkUsername('fo', label);
+	}, 'Expected string `bar` to have a minimum length of `3`, got `fo`');
+
+	t.throws(() => {
+		checkUsername(value, label);
+	}, 'Expected string `bar` to have a minimum length of `3`, got `x`');
+
+	t.throws(() => {
+		checkUsername(5 as any, label);
+	}, 'Expected `bar` to be of type `string` but received type `number`');
+});
+
 test('reusable validator with label', t => {
 	const checkUsername = ow.create('foo', ow.string.minLength(3));
 
@@ -243,6 +350,28 @@ test('reusable validator with label', t => {
 	t.throws(() => {
 		checkUsername(5 as any);
 	}, 'Expected `foo` to be of type `string` but received type `number`');
+});
+
+test('reusable validator with label called with label', t => {
+	const checkUsername = ow.create('foo', ow.string.minLength(3));
+
+	const label = 'bar';
+
+	t.notThrows(() => {
+		checkUsername('foo', label);
+	});
+
+	t.notThrows(() => {
+		checkUsername('foobar', label);
+	});
+
+	t.throws(() => {
+		checkUsername('fo', label);
+	}, 'Expected string `bar` to have a minimum length of `3`, got `fo`');
+
+	t.throws(() => {
+		checkUsername(5 as any, label);
+	}, 'Expected `bar` to be of type `string` but received type `number`');
 });
 
 test('any-reusable validator', t => {
