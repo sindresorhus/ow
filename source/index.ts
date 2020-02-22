@@ -43,7 +43,7 @@ export interface Ow extends Modifiers, Predicates {
 
 	@param predicate - Predicate used in the validator function.
 	*/
-	create<T>(predicate: BasePredicate<T>): (value: T, label?: string) => void;
+	create<T>(predicate: BasePredicate<T>): ReusableValidator<T>;
 
 	/**
 	Create a reusable validator.
@@ -51,7 +51,27 @@ export interface Ow extends Modifiers, Predicates {
 	@param label - Label which should be used in error messages.
 	@param predicate - Predicate used in the validator function.
 	*/
-	create<T>(label: string, predicate: BasePredicate<T>): (value: T, label?: string) => void;
+	create<T>(label: string, predicate: BasePredicate<T>): ReusableValidator<T>;
+}
+
+/**
+A reusable validator.
+*/
+export interface ReusableValidator<T> {
+	/**
+	Test if the value matches the predicate. Throws an `ArgumentError` with the default `label` if the test fails.
+
+	@param value - Value to test.
+	*/
+	(value: T): void;
+
+	/**
+	Test if the value matches the predicate. Throws an `ArgumentError` with the specified `label` instead of the default one if the test fails.
+	
+	@param value - Value to test.
+	@param label - Label which should be used in error messages.
+	*/
+	(value: T, label: string): void;
 }
 
 const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
