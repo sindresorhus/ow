@@ -59,19 +59,13 @@ A reusable validator.
 */
 export interface ReusableValidator<T> {
 	/**
-	Test if the value matches the predicate. Throws an `ArgumentError` with the default `label` if the test fails.
+	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
 
 	@param value - Value to test.
+	@param label - Override the label which should be used in error messages.
 	*/
-	(value: T): void;
-
-	/**
-	Test if the value matches the predicate. Throws an `ArgumentError` with the specified `label` instead of the default one if the test fails.
-	
-	@param value - Value to test.
-	@param label - Label which should be used in error messages.
-	*/
-	(value: T, label: string): void;
+	// eslint-disable-next-line @typescript-eslint/prefer-function-type
+	(value: T, label?: string): void;
 }
 
 const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
