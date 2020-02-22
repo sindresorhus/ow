@@ -43,7 +43,7 @@ export interface Ow extends Modifiers, Predicates {
 
 	@param predicate - Predicate used in the validator function.
 	*/
-	create<T>(predicate: BasePredicate<T>): (value: T) => void;
+	create<T>(predicate: BasePredicate<T>): ReusableValidator<T>;
 
 	/**
 	Create a reusable validator.
@@ -51,7 +51,21 @@ export interface Ow extends Modifiers, Predicates {
 	@param label - Label which should be used in error messages.
 	@param predicate - Predicate used in the validator function.
 	*/
-	create<T>(label: string, predicate: BasePredicate<T>): (value: T) => void;
+	create<T>(label: string, predicate: BasePredicate<T>): ReusableValidator<T>;
+}
+
+/**
+A reusable validator.
+*/
+export interface ReusableValidator<T> {
+	/**
+	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
+
+	@param value - Value to test.
+	@param label - Override the label which should be used in error messages.
+	*/
+	// eslint-disable-next-line @typescript-eslint/prefer-function-type
+	(value: T, label?: string): void;
 }
 
 const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
@@ -83,16 +97,16 @@ Object.defineProperties(ow, {
 		}
 	},
 	create: {
-		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T) => {
+		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T, label?: string) => {
 			if (isPredicate(labelOrPredicate)) {
 				const stackFrames = callsites();
 
-				test(value, () => inferLabel(stackFrames), labelOrPredicate);
+				test(value, label ?? (() => inferLabel(stackFrames)), labelOrPredicate);
 
 				return;
 			}
 
-			test(value, labelOrPredicate as string, predicate as BasePredicate<T>);
+			test(value, label ?? (labelOrPredicate as string), predicate as BasePredicate<T>);
 		}
 	}
 });
@@ -111,6 +125,9 @@ export {
 	WeakMapPredicate,
 	SetPredicate,
 	WeakSetPredicate,
+	TypedArrayPredicate,
+	ArrayBufferPredicate,
+	DataViewPredicate,
 	AnyPredicate,
 	Shape
 } from './predicates';

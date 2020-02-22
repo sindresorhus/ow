@@ -22,3 +22,49 @@ test('arrayBuffer', t => {
 		ow(12 as any, ow.arrayBuffer);
 	}, 'Expected argument to be of type `ArrayBuffer` but received type `number`');
 });
+
+test('arrayBuffer.byteLength', t => {
+	t.notThrows(() => {
+		ow(new ArrayBuffer(1), ow.arrayBuffer.byteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new ArrayBuffer(2), ow.arrayBuffer.byteLength(2));
+	});
+
+	t.throws(() => {
+		ow(new ArrayBuffer(1), ow.arrayBuffer.byteLength(2));
+	}, 'Expected ArrayBuffer to have byte length of `2`, got `1`');
+
+	t.throws(() => {
+		ow(new ArrayBuffer(1), 'foo', ow.arrayBuffer.byteLength(2));
+	}, 'Expected ArrayBuffer `foo` to have byte length of `2`, got `1`');
+});
+
+test('arrayBuffer.minByteLength', t => {
+	t.notThrows(() => {
+		ow(new ArrayBuffer(1), ow.arrayBuffer.minByteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new ArrayBuffer(2), ow.arrayBuffer.minByteLength(1));
+	});
+
+	t.throws(() => {
+		ow(new ArrayBuffer(1), ow.arrayBuffer.minByteLength(2));
+	}, 'Expected ArrayBuffer to have a minimum byte length of `2`, got `1`');
+});
+
+test('arrayBuffer.maxByteLength', t => {
+	t.notThrows(() => {
+		ow(new ArrayBuffer(1), ow.arrayBuffer.maxByteLength(1));
+	});
+
+	t.notThrows(() => {
+		ow(new ArrayBuffer(2), ow.arrayBuffer.maxByteLength(4));
+	});
+
+	t.throws(() => {
+		ow(new ArrayBuffer(2), ow.arrayBuffer.maxByteLength(1));
+	}, 'Expected ArrayBuffer to have a maximum byte length of `1`, got `2`');
+});
