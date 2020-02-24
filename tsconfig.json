@@ -26,6 +26,7 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"theme": "minimal",
 		"hideGenerator": true,
-		"readme": "readme.md"
+		"readme": "readme.md",
+		"media": "media"
 	}
 }
