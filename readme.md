@@ -107,6 +107,30 @@ checkPassword('foo');
 //=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
 ```
 
+### ow.validate(predicate)
+
+Create a reusable validator. It returns error and value.
+
+```ts
+const checkPassword = ow.validate(ow.string.minLength(6));
+
+const password = 'foo';
+
+const {error, value} = checkPassword(password);
+//=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
+```
+
+### ow.createValidate(label, predicate)
+
+Create a reusable validator with a specific `label`. It returns error and value.
+
+```ts
+const checkPassword = ow.createValidate('password', ow.string.minLength(6));
+
+const {error, value} = checkPassword('foo');
+//=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
+```
+
 ### ow.any(...predicate[])
 
 Returns a predicate that verifies if the value matches at least one of the given predicates.

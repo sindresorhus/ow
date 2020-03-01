@@ -52,6 +52,38 @@ export interface Ow extends Modifiers, Predicates {
 	@param predicate - Predicate used in the validator function.
 	*/
 	create<T>(label: string, predicate: BasePredicate<T>): ReusableValidator<T>;
+
+	/**
+	Test if the value matches the predicate. It returns error and value.
+
+	@param value - Value to test.
+	@param predicate - Predicate to test against.
+	*/
+	validate<T>(value: T, predicate: BasePredicate<T>): {error: Error | null; value: T};
+
+	/**
+	Test if the value matches the predicate. It returns error and value.
+
+	@param value - Value to test.
+	@param label - Label which should be used in error messages.
+	@param predicate - Predicate to test against.
+	*/
+	validate<T>(value: T, label: string, predicate: BasePredicate<T>): {error: Error | null; value: T};
+
+	/**
+	Create a reusable validator. It returns error, It ReusableValidator returns error.
+
+	@param predicate - Predicate to test against.
+	*/
+	createValidate<T>(predicate: BasePredicate<T>): (value: T, label?: string) => {error: Error | null; value: T};
+
+	/**
+	Create a reusable validator. It returns error, It ReusableValidator returns error.
+
+	@param label - Label which should be used in error messages.
+	@param predicate - Predicate to test against.
+	*/
+	createValidate<T>(label: string, predicate: BasePredicate<T>): (value: T, label?: string) => {error: Error | null; value: T};
 }
 
 /**
@@ -107,6 +139,40 @@ Object.defineProperties(ow, {
 			}
 
 			test(value, label ?? (labelOrPredicate as string), predicate as BasePredicate<T>);
+		}
+	},
+	validate: {
+		value: <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
+			try {
+				ow(value, labelOrPredicate, predicate);
+
+				return {
+					error: null,
+					value
+				};
+			} catch (error) {
+				return {
+					error,
+					value
+				};
+			}
+		}
+	},
+	createValidate: {
+		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T, label?: string) => {
+			try {
+				ow(value, label ?? labelOrPredicate, predicate);
+
+				return {
+					error: null,
+					value
+				};
+			} catch (error) {
+				return {
+					error,
+					value
+				};
+			}
 		}
 	}
 });

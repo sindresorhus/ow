@@ -279,8 +279,37 @@ test('isValid', t => {
 	t.false(ow.isValid(true as any, ow.any(ow.string, ow.number)));
 });
 
+test('validate', t => {
+	const valueCauseError = 1 as any as string;
+
+	t.notThrows(() => {
+		const {error, value} = ow.validate('foo', ow.string);
+		t.true(error === null);
+		t.true(value === 'foo');
+	});
+
+	t.notThrows(() => {
+		const {error, value} = ow.validate('foo', 'label', ow.string);
+		t.true(error === null);
+		t.true(value === 'foo');
+	});
+
+	t.notThrows(() => {
+		const {error, value} = ow.validate(valueCauseError, ow.string);
+		t.true(error instanceof Error);
+		t.true(value === valueCauseError);
+	});
+
+	t.notThrows(() => {
+		const {error, value} = ow.validate(valueCauseError, 'label', ow.string);
+		t.true(error instanceof Error);
+		t.true(value === valueCauseError);
+	});
+});
+
 test('reusable validator', t => {
 	const checkUsername = ow.create(ow.string.minLength(3));
+	const checkNickname = ow.createValidate('nickname', ow.string.minLength(3));
 
 	const value = 'x';
 
@@ -303,6 +332,18 @@ test('reusable validator', t => {
 	t.throws(() => {
 		checkUsername(5 as any);
 	}, 'Expected argument to be of type `string` but received type `number`');
+
+	t.notThrows(() => {
+		const {error, value} = checkNickname('foo');
+		t.true(error === null);
+		t.true(value === 'foo');
+	});
+
+	t.notThrows(() => {
+		const {error, value} = checkNickname('fo');
+		t.true(error instanceof Error);
+		t.true(value === 'fo');
+	});
 });
 
 test('reusable validator called with label', t => {
