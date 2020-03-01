@@ -67,6 +67,8 @@ ow(unicorn, ow.object.exactShape({
 
 [Complete API documentation](https://sindresorhus.com/ow)
 
+Ow does not currently include TypeScript type guards, but we do [plan to include type assertions](https://github.com/sindresorhus/ow/issues/159).
+
 ### ow(value, predicate)
 
 Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if the test fails.
