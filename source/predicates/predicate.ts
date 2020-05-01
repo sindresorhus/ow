@@ -4,6 +4,8 @@ import {not} from '../operators/not';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '..';
 
+export type ValidatorMessage<T> = (value: T, label?: string) => string;
+
 /**
 @hidden
 */
@@ -162,6 +164,25 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			),
 			validator
 		});
+	}
+
+	/**
+	Override the message thrown
+
+	@param newMessage | Either a string containing the new message or a function returning the new message
+	*/
+	message(newMessage: string | ValidatorMessage<T>) {
+		const {validators} = this.context;
+
+		validators[validators.length - 1].message = (value, label) => {
+			if (typeof newMessage === 'function') {
+				return newMessage(value, label);
+			}
+
+			return newMessage;
+		};
+
+		return this;
 	}
 
 	/**
