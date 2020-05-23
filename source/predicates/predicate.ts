@@ -5,7 +5,10 @@ import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '..';
 
 /**
-@hidden
+Function executed when the provided validation fails.
+The first argument provided to the function is the provided `value` for the property,
+the second argument is the optional `label` for the property.
+The returned value will be the error message.
  */
 export type ValidatorMessage<T> = (value: T, label?: string) => string;
 
