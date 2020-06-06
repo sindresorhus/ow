@@ -9,7 +9,7 @@ Function executed when the provided validation fails.
 The first argument provided to the function is the provided `value` for the property,
 the second argument is the optional `label` for the property.
 The returned value will be the error message.
- */
+*/
 export type ValidatorMessage<T> = (value: T, label?: string) => string;
 
 /**
@@ -175,7 +175,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	Provide an new error message to be thrown when the validation fails.
 
-	@param newMessage - Either a string containing the new message or a function returning the new message
+	@param newMessage - Either a string containing the new message or a function returning the new message.
 	*/
 	message(newMessage: string | ValidatorMessage<T>) {
 		const {validators} = this.context;
