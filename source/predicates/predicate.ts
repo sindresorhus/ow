@@ -6,11 +6,13 @@ import {Main} from '..';
 
 /**
 Function executed when the provided validation fails.
-The first argument provided to the function is the provided `value` for the property,
-the second argument is the optional `label` for the property.
-The returned value will be the error message.
+
+@param value - Tested value
+@param label - Label of the tested value
+
+@returns {string} - The actual error message
 */
-export type ValidatorMessage<T> = (value: T, label?: string) => string;
+export type ValidatorMessageBuilder<T> = (value: T, label?: string) => string;
 
 /**
 @hidden
@@ -173,11 +175,22 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	}
 
 	/**
-	Provide an new error message to be thrown when the validation fails.
+	Provide a new error message to be thrown when the validation fails.
 
 	@param newMessage - Either a string containing the new message or a function returning the new message.
+
+	@example
+	```
+	ow('🌈', 'unicorn', ow.string.equals('🦄').message('Expected unicorn, got rainbow'));
+	//=> ArgumentError: Expected unicorn, got rainbow
+	```
+	@example
+	```
+	ow('🌈', ow.string.minLength(5).message((value, label) => `Expected ${label}, to have a minimum length of 5, got \`${value}\``));
+	//=> ArgumentError: Expected string, to be have a minimum length of 5, got `🌈`
+	```
 	*/
-	message(newMessage: string | ValidatorMessage<T>) {
+	message(newMessage: string | ValidatorMessageBuilder<T>) {
 		const {validators} = this.context;
 
 		validators[validators.length - 1].message = (value, label) => {
