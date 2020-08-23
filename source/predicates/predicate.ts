@@ -91,9 +91,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			if (this.options.optional === true && value === undefined) {
 				continue;
 			}
-			
+
 			const knownValue = value as T;
-			
+
 			const result = validator(knownValue);
 
 			if (result === true) {
