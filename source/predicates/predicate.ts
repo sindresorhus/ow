@@ -86,13 +86,15 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function): asserts value {
+	[testSymbol](value: T | undefined, main: Main, label: string | Function): asserts value {
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
 				continue;
 			}
-
-			const result = validator(value);
+			
+			const knownValue = value as T;
+			
+			const result = validator(knownValue);
 
 			if (result === true) {
 				continue;
@@ -109,7 +111,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				this.type;
 
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-			throw new ArgumentError(message(value, label2, result), main);
+			throw new ArgumentError(message(knownValue, label2, result), main);
 		}
 	}
 
