@@ -7,6 +7,7 @@ import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
 import {partial, exact, Shape} from '../utils/match-shape';
 import {Predicate, PredicateOptions} from './predicate';
+import {BasePredicate} from './base-predicate';
 
 export {Shape};
 
@@ -53,7 +54,7 @@ export class ObjectPredicate extends Predicate<object> {
 
 	@param predicate - The predicate that should be applied against every value in the object.
 	*/
-	valuesOfType<T>(predicate: Predicate<T>) {
+	valuesOfType<T>(predicate: BasePredicate<T>) {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: object => ofType(Object.values(object), predicate)
