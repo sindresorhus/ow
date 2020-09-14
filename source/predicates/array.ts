@@ -2,6 +2,8 @@ import isEqual = require('lodash.isequal');
 import {BasePredicate} from './base-predicate';
 import {Predicate, PredicateOptions} from './predicate';
 import ow from '..';
+import {Shape} from './object';
+import {exact} from '../utils/match-shape';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
@@ -156,6 +158,19 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 					return false;
 				}
 			}
+		});
+	}
+
+	exactShape(shape: Predicate[]) {
+		const asd: Shape = {};
+		shape.forEach((s: Predicate, index) => {
+			asd[index] = s;
+		});
+		return this.addValidator({
+			// TODO: Improve this when message handling becomes smarter
+			message: (_, label, message) =>
+				`${message.replace('Expected', 'Expected property')} in ${label}`,
+			validator: object => exact(object, asd)
 		});
 	}
 }

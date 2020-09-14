@@ -168,3 +168,14 @@ test('array.ofType', t => {
 		ow(['foo', 'b'], 'foo', ow.array.ofType(ow.string.minLength(3)));
 	}, '(array `foo`) Expected string to have a minimum length of `3`, got `b`');
 });
+
+test('array.exactShape', t => {
+	t.notThrows(() => {
+		ow(['🦄', 2, 3, true, {isFirstCommit: true}], ow.array.exactShape([ow.string, ow.number, ow.number, ow.boolean, ow.object.exactShape({isFirstCommit: ow.boolean})]));
+	});
+
+	t.throws(() => {
+		ow(['🦄', 2, 'nope', true, {isFirstCommit: true}], ow.array.exactShape([ow.string, ow.number, ow.number, ow.boolean, ow.object.exactShape({isFirstCommit: ow.string})]));
+	}, 'Expected property `2` to be of type `number` but received type `string` in array');
+});
+
