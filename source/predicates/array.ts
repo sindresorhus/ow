@@ -161,16 +161,16 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 		});
 	}
 
-	exactShape(shape: Predicate[]) {
-		const asd: Shape = {};
-		shape.forEach((s: Predicate, index) => {
-			asd[index] = s;
+	exactShape(predicates: Predicate[]) {
+		const shape: Shape = {};
+		predicates.forEach((s: Predicate, index) => {
+			shape[index] = s;
 		});
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) =>
 				`${message.replace('Expected', 'Expected property')} in ${label}`,
-			validator: object => exact(object, asd)
+			validator: object => exact(object, shape)
 		});
 	}
 }
