@@ -5,6 +5,16 @@ import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '..';
 
 /**
+Function executed when the provided validation fails.
+
+@param value - The tested value.
+@param label - Label of the tested value.
+
+@returns {string} - The actual error message.
+*/
+export type ValidatorMessageBuilder<T> = (value: T, label?: string) => string;
+
+/**
 @hidden
 */
 export interface Validator<T> {
@@ -15,8 +25,7 @@ export interface Validator<T> {
 	/**
 	Provide custom message used by `not` operator.
 
-	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to',
-	e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
+	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to', e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
 	*/
 	negatedMessage?(value: T, label: string): string;
 }
@@ -162,6 +171,37 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			),
 			validator
 		});
+	}
+
+	/**
+	Provide a new error message to be thrown when the validation fails.
+
+	@param newMessage - Either a string containing the new message or a function returning the new message.
+
+	@example
+	```
+	ow('🌈', 'unicorn', ow.string.equals('🦄').message('Expected unicorn, got rainbow'));
+	//=> ArgumentError: Expected unicorn, got rainbow
+	```
+
+	@example
+	```
+	ow('🌈', ow.string.minLength(5).message((value, label) => `Expected ${label}, to have a minimum length of 5, got \`${value}\``));
+	//=> ArgumentError: Expected string, to be have a minimum length of 5, got `🌈`
+	```
+	*/
+	message(newMessage: string | ValidatorMessageBuilder<T>) {
+		const {validators} = this.context;
+
+		validators[validators.length - 1].message = (value, label) => {
+			if (typeof newMessage === 'function') {
+				return newMessage(value, label);
+			}
+
+			return newMessage;
+		};
+
+		return this;
 	}
 
 	/**
