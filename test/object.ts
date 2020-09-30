@@ -71,6 +71,10 @@ test('object.valuesOfType', t => {
 		ow({unicorn: 1, rainbow: 2}, ow.object.valuesOfType(ow.number));
 	});
 
+	t.notThrows(() => {
+		ow(['🦄', true], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
+	});
+
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: 2}, ow.object.valuesOfType(ow.string));
 	}, '(object) Expected argument to be of type `string` but received type `number`');
@@ -82,6 +86,10 @@ test('object.valuesOfType', t => {
 	t.throws(() => {
 		ow({unicorn: 'a', rainbow: 'b'}, ow.object.valuesOfType(ow.string.minLength(2)));
 	}, '(object) Expected string to have a minimum length of `2`, got `a`');
+
+	t.throws(() => {
+		ow(['🦄', true, 1], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
+	}, '(object) Any predicate failed with the following errors:\n- Expected argument to be of type `string` but received type `number`\n- Expected argument to be of type `boolean` but received type `number`');
 });
 
 test('object.valuesOfTypeDeep', t => {
