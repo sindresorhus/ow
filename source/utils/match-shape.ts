@@ -33,8 +33,8 @@ export function partial(object: {[key: string]: any}, shape: Shape, parent?: str
 		}
 
 		return true;
-	} catch (error) {
-		return error.message;
+	} catch (error: unknown) {
+		return (error as Error).message;
 	}
 }
 
@@ -78,7 +78,7 @@ export function exact(object: {[key: string]: any}, shape: Shape, parent?: strin
 		}
 
 		return true;
-	} catch (error) {
-		return error.message;
+	} catch (error: unknown) {
+		return (error as Error).message;
 	}
 }

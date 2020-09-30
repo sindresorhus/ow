@@ -21,12 +21,12 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 			try {
 				main(value, label, predicate);
 				return;
-			} catch (error) {
+			} catch (error: unknown) {
 				if (value === undefined && this.options.optional === true) {
 					return;
 				}
 
-				errors.push(`- ${error.message}`);
+				errors.push(`- ${(error as Error).message}`);
 			}
 		}
 

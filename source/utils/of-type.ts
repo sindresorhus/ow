@@ -15,7 +15,7 @@ export default <T>(source: IterableIterator<T> | Set<T> | T[], predicate: BasePr
 		}
 
 		return true;
-	} catch (error) {
-		return error.message;
+	} catch (error: unknown) {
+		return (error as Error).message;
 	}
 };

@@ -2,7 +2,7 @@
 @hidden
 */
 export interface CollectionLike<T> {
-	has(item: T): boolean;
+	has: (item: T) => boolean;
 }
 
 /**
