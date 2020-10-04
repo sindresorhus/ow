@@ -174,11 +174,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	```
 	*/
 	exactShape(predicates: Predicate[]) {
-		const shape: Shape = {};
-
-		for (const [index, predicate] of predicates) {
-			shape[index] = predicates;
-		}
+		const shape = predicates as unknown as Shape;
 
 		return this.addValidator({
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
