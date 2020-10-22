@@ -274,6 +274,18 @@ ow(
 
 This can be useful for creating your own reusable validators which can be extracted to a separate npm package.
 
+## Use with Webpack
+To use ow in a browser environment with webpack. You will need to tell webpack to provide an empty implementation of the built in node library 'fs'. You can add this option to your webpack config to allow it to compile properly.
+
+```js
+module.exports = {
+  // ...
+  node: {
+    fs: 'empty'
+  }
+}
+```
+
 ## Maintainers
 
 - [Sindre Sorhus](https://github.com/sindresorhus)
