@@ -92,7 +92,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				continue;
 			}
 
-			const knownValue = value as T;
+			const knownValue = value!;
 
 			const result = validator(knownValue);
 
