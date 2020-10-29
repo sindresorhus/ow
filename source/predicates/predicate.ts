@@ -18,10 +18,8 @@ export type ValidatorMessageBuilder<T> = (value: T, label?: string) => string;
 @hidden
 */
 export interface Validator<T> {
-	// eslint-disable-next-line @typescript-eslint/method-signature-style
 	message(value: T, label?: string, result?: any): string;
 
-	// eslint-disable-next-line @typescript-eslint/method-signature-style
 	validator(value: T): unknown;
 
 	/**
@@ -29,7 +27,7 @@ export interface Validator<T> {
 
 	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to', e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
 	*/
-	negatedMessage?(value: T, label: string): string; // eslint-disable-line @typescript-eslint/method-signature-style
+	negatedMessage?(value: T, label: string): string;
 }
 
 /**
