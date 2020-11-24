@@ -1,17 +1,22 @@
+const wrapStackTrace = (error: ArgumentError, stack: string) => `${error.name}: ${error.message}\n${stack}`;
+
 /**
 @hidden
 */
 export class ArgumentError extends Error {
-	constructor(message: string, context: Function) {
+	readonly validationErrors: ReadonlyMap<string, string[]>;
+
+	constructor(message: string, context: Function, stack: string, errors = new Map<string, string[]>()) {
 		super(message);
 
+		this.name = 'ArgumentError';
+
 		if (Error.captureStackTrace) {
-			// TODO: Node.js does not preserve the error name in output when using the below, why?
 			Error.captureStackTrace(this, context);
 		} else {
-			this.stack = (new Error()).stack;
+			this.stack = wrapStackTrace(this, stack);
 		}
 
-		this.name = 'ArgumentError';
+		this.validationErrors = errors;
 	}
 }

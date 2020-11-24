@@ -89,7 +89,7 @@ test('object.valuesOfType', t => {
 
 	t.throws(() => {
 		ow(['🦄', true, 1], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
-	}, '(object) Any predicate failed with the following errors:\n- Expected argument to be of type `string` but received type `number`\n- Expected argument to be of type `boolean` but received type `number`');
+	}, '(object) Any predicate failed with the following errors:\n  - Expected argument to be of type `string` but received type `number`\n  - Expected argument to be of type `boolean` but received type `number`');
 });
 
 test('object.valuesOfTypeDeep', t => {

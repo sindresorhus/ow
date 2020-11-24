@@ -3,6 +3,7 @@ import {ArgumentError} from '../argument-error';
 import {not} from '../operators/not';
 import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '..';
+import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message';
 
 /**
 Function executed when the provided validation fails.
@@ -95,30 +96,59 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function): asserts value is T {
+	[testSymbol](value: T, main: Main, label: string | Function, stack: string): asserts value is T {
+		// Create a map of labels -> received errors.
+		const errors = new Map<string, string[]>();
+
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
 				continue;
 			}
 
-			const result = validator(value);
+			let result: unknown;
+
+			try {
+				result = validator(value);
+			} catch (error: unknown) {
+				// Any errors caught means validators couldn't process the input.
+				result = error;
+			}
 
 			if (result === true) {
 				continue;
 			}
 
-			let label2 = label;
+			const label2 = is.function_(label) ? label() : label;
 
-			if (typeof label === 'function') {
-				label2 = label();
-			}
-
-			label2 = label2 ?
+			const label_ = label2 ?
 				`${this.type} \`${label2}\`` :
 				this.type;
 
-			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-			throw new ArgumentError(message(value, label2, result), main);
+			const mapKey = label2 || this.type;
+
+			// Get the current errors encountered for this label.
+			const currentErrors = errors.get(mapKey);
+			// Pre-generate the error message that will be reported to the user.
+			const errorMessage = message(value, label_, result);
+
+			// If we already have any errors for this label.
+			if (currentErrors) {
+				// If we don't already have this error logged, add it.
+				if (!currentErrors.includes(errorMessage)) {
+					currentErrors.push(errorMessage);
+				}
+			} else {
+				// Set this label and error in the full map.
+				errors.set(mapKey, [errorMessage]);
+			}
+		}
+
+		// If we have any errors to report, throw.
+		if (errors.size > 0) {
+			// Generate the `error.message` property.
+			const message = generateArgumentErrorMessage(errors);
+
+			throw new ArgumentError(message, main, stack, errors);
 		}
 	}
 
