@@ -19,7 +19,7 @@ test('undefined', t => {
 
 	t.throws(() => {
 		ow(y as any, ow.undefined);
-	}, 'Expected `y` to be of type `undefined` but received type `number`');
+	}, 'Expected argument to be of type `undefined` but received type `number`');
 
 	t.throws(() => {
 		ow(y as any, 'foo', ow.undefined);

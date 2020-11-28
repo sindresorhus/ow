@@ -142,7 +142,7 @@ test('set.empty', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), ow.set.empty);
-	}, 'Expected Set to be empty, got `["unicorn"]`');
+	}, 'Expected Set `ow.string` to be empty, got `["unicorn"]`');
 });
 
 test('set.notEmpty', t => {
@@ -152,7 +152,7 @@ test('set.notEmpty', t => {
 
 	t.throws(() => {
 		ow(new Set(), ow.set.nonEmpty);
-	}, 'Expected Set to not be empty');
+	}, 'Expected Set `ow.number` to not be empty');
 });
 
 test('set.deepEqual', t => {

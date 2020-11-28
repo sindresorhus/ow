@@ -1,5 +1,5 @@
 'use strict';
-const ow = require('./dist/source');
+const {default: ow} = require('./dist');
 
 const logError = fn => {
 	try {

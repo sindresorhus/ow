@@ -51,7 +51,7 @@ test('not', t => {
 
 	t.throws(() => {
 		ow(foo, ow.string.not.empty);
-	}, 'Expected string `foo` to not be empty, got ``');
+	}, 'Expected string to not be empty, got ``');
 
 	t.notThrows(() => {
 		ow('a', ow.string.not.minLength(3));
@@ -298,7 +298,7 @@ test('reusable validator', t => {
 
 	t.throws(() => {
 		checkUsername(value);
-	}, 'Expected string `value` to have a minimum length of `3`, got `x`');
+	}, 'Expected string to have a minimum length of `3`, got `x`');
 
 	t.throws(() => {
 		checkUsername(5 as any);

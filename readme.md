@@ -24,6 +24,8 @@ $ npm install ow
 
 ## Usage
 
+*If you use CommonJS, you need to import is as `const {default: ow} = require('ow')`.*
+
 ```ts
 import ow from 'ow';
 

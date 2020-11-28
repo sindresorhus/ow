@@ -8,5 +8,5 @@ if (process.env.NODE_ENV === 'production') {
 
 	module.exports = shim;
 } else {
-	module.exports = require('./dist/source');
+	module.exports = require('./dist');
 }

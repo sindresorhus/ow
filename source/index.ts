@@ -104,7 +104,9 @@ Object.defineProperties(ow, {
 });
 
 export default predicates(modifiers(ow)) as Ow;
+
 export {BasePredicate, Predicate};
+
 export {
 	StringPredicate,
 	NumberPredicate,
@@ -123,4 +125,5 @@ export {
 	AnyPredicate,
 	Shape
 } from './predicates';
+
 export {ArgumentError} from './argument-error';

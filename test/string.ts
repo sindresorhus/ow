@@ -18,7 +18,7 @@ test('string', t => {
 
 	t.throws(() => {
 		ow(bar, ow.string);
-	}, 'Expected `bar` to be of type `string` but received type `number`');
+	}, 'Expected argument to be of type `string` but received type `number`');
 });
 
 test('string.length', t => {
