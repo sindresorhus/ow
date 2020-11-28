@@ -61,7 +61,6 @@
 		"ava": "^2.0.0",
 		"awesome-typescript-loader": "^5.2.1",
 		"callsites": "^3.1.0",
-		"codecov": "^3.8.1",
 		"del-cli": "^3.0.1",
 		"dot-prop": "^6.0.1",
 		"license-webpack-plugin": "^2.3.1",

@@ -4,7 +4,7 @@
 	<br>
 </p>
 
-[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow) [![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow) [![gzip size](https://badgen.net/bundlephobia/minzip/ow)](https://bundlephobia.com/result?p=ow) [![install size](https://packagephobia.now.sh/badge?p=ow)](https://packagephobia.now.sh/result?p=ow)
+[![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow) [![gzip size](https://badgen.net/bundlephobia/minzip/ow)](https://bundlephobia.com/result?p=ow) [![install size](https://packagephobia.now.sh/badge?p=ow)](https://packagephobia.now.sh/result?p=ow)
 
 > Function argument validation for humans
 
