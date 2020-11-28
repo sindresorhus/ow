@@ -41,7 +41,7 @@ test('weakMap.hasKeys', t => {
 	}, 'Expected WeakMap to have keys `[{"rainbow":true}]`');
 
 	t.throws(() => {
-		ow(new WeakMap([[keys[0], 1], [keys[2], 3]]), ow.weakMap.hasKeys(...keys));
+		ow(new WeakMap([[keys[0]!, 1], [keys[2]!, 3]]), ow.weakMap.hasKeys(...keys));
 	}, 'Expected WeakMap to have keys `[{"x":2},{"x":4},{"x":5},{"x":6},{"x":7}]`');
 });
 

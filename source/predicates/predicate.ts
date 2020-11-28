@@ -78,7 +78,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			...this.options
 		};
 
-		const x = this.type[0].toLowerCase() + this.type.slice(1);
+		const typeString = this.type.charAt(0).toLowerCase() + this.type.slice(1);
 
 		this.addValidator({
 			message: (value, label) => {
@@ -88,7 +88,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
-			validator: value => (is as any)[x](value)
+			validator: value => (is as any)[typeString](value)
 		});
 	}
 
@@ -195,7 +195,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	message(newMessage: string | ValidatorMessageBuilder<T>) {
 		const {validators} = this.context;
 
-		validators[validators.length - 1].message = (value, label) => {
+		validators[validators.length - 1]!.message = (value, label) => {
 			if (typeof newMessage === 'function') {
 				return newMessage(value, label);
 			}

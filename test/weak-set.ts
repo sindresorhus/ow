@@ -51,7 +51,7 @@ test('weakSet.has', t => {
 	}, 'Expected WeakSet to have items `[{"rainbow":"🌈"}]`');
 
 	t.throws(() => {
-		ow(new WeakSet([keys[1], keys[3]]), ow.weakSet.has(...keys));
+		ow(new WeakSet([keys[1]!, keys[3]!]), ow.weakSet.has(...keys));
 	}, 'Expected WeakSet to have items `[{"x":1},{"x":3},{"x":5},{"x":6},{"x":7}]`');
 });
 
