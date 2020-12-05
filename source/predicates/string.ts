@@ -165,7 +165,7 @@ export class StringPredicate extends Predicate<string> {
 	get alphabetical() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be alphabetical, got \`${value}\``,
-			validator: value => /^[a-z]+$/ig.test(value)
+			validator: value => /^[a-z]+$/gi.test(value)
 		});
 	}
 
@@ -175,7 +175,7 @@ export class StringPredicate extends Predicate<string> {
 	get numeric() {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be numeric, got \`${value}\``,
-			validator: value => /^(?:\+|-)?\d+$/i.test(value)
+			validator: value => /^[+-]?\d+$/i.test(value)
 		});
 	}
 

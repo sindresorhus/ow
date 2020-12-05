@@ -5,6 +5,16 @@ import {BasePredicate, testSymbol} from './base-predicate';
 import {Main} from '..';
 
 /**
+Function executed when the provided validation fails.
+
+@param value - The tested value.
+@param label - Label of the tested value.
+
+@returns {string} - The actual error message.
+*/
+export type ValidatorMessageBuilder<T> = (value: T, label?: string) => string;
+
+/**
 @hidden
 */
 export interface Validator<T> {
@@ -15,8 +25,7 @@ export interface Validator<T> {
 	/**
 	Provide custom message used by `not` operator.
 
-	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to',
-	e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
+	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to', e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
 	*/
 	negatedMessage?(value: T, label: string): string;
 }
@@ -69,7 +78,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			...this.options
 		};
 
-		const x = this.type[0].toLowerCase() + this.type.slice(1);
+		const typeString = this.type.charAt(0).toLowerCase() + this.type.slice(1);
 
 		this.addValidator({
 			message: (value, label) => {
@@ -79,20 +88,22 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
-			validator: value => (is as any)[x](value)
+			validator: value => (is as any)[typeString](value)
 		});
 	}
 
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function): asserts value {
+	[testSymbol](value: T | undefined, main: Main, label: string | Function): asserts value {
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
 				continue;
 			}
 
-			const result = validator(value);
+			const knownValue = value!;
+
+			const result = validator(knownValue);
 
 			if (result === true) {
 				continue;
@@ -109,7 +120,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				this.type;
 
 			// TODO: Modify the stack output to show the original `ow()` call instead of this `throw` statement
-			throw new ArgumentError(message(value, label2, result), main);
+			throw new ArgumentError(message(knownValue, label2, result), main);
 		}
 	}
 
@@ -162,6 +173,37 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			),
 			validator
 		});
+	}
+
+	/**
+	Provide a new error message to be thrown when the validation fails.
+
+	@param newMessage - Either a string containing the new message or a function returning the new message.
+
+	@example
+	```
+	ow('🌈', 'unicorn', ow.string.equals('🦄').message('Expected unicorn, got rainbow'));
+	//=> ArgumentError: Expected unicorn, got rainbow
+	```
+
+	@example
+	```
+	ow('🌈', ow.string.minLength(5).message((value, label) => `Expected ${label}, to have a minimum length of 5, got \`${value}\``));
+	//=> ArgumentError: Expected string, to be have a minimum length of 5, got `🌈`
+	```
+	*/
+	message(newMessage: string | ValidatorMessageBuilder<T>) {
+		const {validators} = this.context;
+
+		validators[validators.length - 1]!.message = (value, label) => {
+			if (typeof newMessage === 'function') {
+				return newMessage(value, label);
+			}
+
+			return newMessage;
+		};
+
+		return this;
 	}
 
 	/**

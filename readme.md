@@ -4,7 +4,7 @@
 	<br>
 </p>
 
-[![Build Status](https://travis-ci.org/sindresorhus/ow.svg?branch=master)](https://travis-ci.org/sindresorhus/ow) [![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow) [![gzip size](https://badgen.net/bundlephobia/minzip/ow)](https://bundlephobia.com/result?p=ow) [![install size](https://packagephobia.now.sh/badge?p=ow)](https://packagephobia.now.sh/result?p=ow)
+[![Coverage Status](https://codecov.io/gh/sindresorhus/ow/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/ow) [![gzip size](https://badgen.net/bundlephobia/minzip/ow)](https://bundlephobia.com/result?p=ow) [![install size](https://packagephobia.now.sh/badge?p=ow)](https://packagephobia.now.sh/result?p=ow)
 
 > Function argument validation for humans
 
@@ -23,6 +23,8 @@ $ npm install ow
 ```
 
 ## Usage
+
+*If you use CommonJS, you need to import is as `const {default: ow} = require('ow')`.*
 
 ```ts
 import ow from 'ow';
@@ -236,6 +238,42 @@ ow(1, 'input', ow.number.validate(value => ({
 //=> ArgumentError: Expected number `input` to be greater than 10, got 1
 ```
 
+#### message(string | fn)
+
+Provide a custom message:
+
+```ts
+ow('🌈', 'unicorn', ow.string.equals('🦄').message('Expected unicorn, got rainbow'));
+//=> ArgumentError: Expected unicorn, got rainbow
+```
+
+You can also pass in a function which receives the value as the first parameter and the label as the second parameter and is expected to return the message.
+
+```ts
+ow('🌈', ow.string.minLength(5).message((value, label) => `Expected ${label}, to have a minimum length of 5, got \`${value}\``));
+//=> ArgumentError: Expected string, to be have a minimum length of 5, got `🌈`
+```
+
+It's also possible to add a separate message per validation:
+
+```ts
+ow(
+	'1234',
+	ow.string
+		.minLength(5).message((value, label) => `Expected ${label}, to be have a minimum length of 5, got \`${value}\``)
+		.url.message('This is no url')
+);
+//=> ArgumentError: Expected string, to be have a minimum length of 5, got `1234`
+
+ow(
+	'12345',
+	ow.string
+		.minLength(5).message((value, label) => `Expected ${label}, to be have a minimum length of 5, got \`${value}\``)
+		.url.message('This is no url')
+);
+//=> ArgumentError: This is no url
+```
+
 This can be useful for creating your own reusable validators which can be extracted to a separate npm package.
 
 ## Maintainers
@@ -247,4 +285,3 @@ This can be useful for creating your own reusable validators which can be extrac
 
 - [@sindresorhus/is](https://github.com/sindresorhus/is) - Type check values
 - [ngx-ow](https://github.com/SamVerschueren/ngx-ow) - Angular form validation on steroids
-

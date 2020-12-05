@@ -18,6 +18,18 @@ test('optional', t => {
 		ow(undefined, ow.optional.any(ow.string, ow.number));
 	});
 
+	t.notThrows(() => {
+		ow(undefined, ow.optional.function);
+	});
+
+	t.notThrows(() => {
+		ow((() => {}) as any as ((() => void) | undefined), ow.optional.function);
+	});
+
+	t.throws(() => {
+		ow(null, ow.optional.function);
+	}, 'Expected argument to be of type `Function` but received type `null`');
+
 	t.throws(() => {
 		ow(null, ow.optional.number);
 	}, 'Expected argument to be of type `number` but received type `null`');

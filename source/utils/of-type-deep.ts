@@ -21,7 +21,7 @@ Test all the values in the object against a provided predicate.
 export default (object: unknown, predicate: Predicate): boolean | string => {
 	try {
 		return ofTypeDeep(object, predicate);
-	} catch (error) {
-		return error.message;
+	} catch (error: unknown) {
+		return (error as Error).message;
 	}
 };

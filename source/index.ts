@@ -14,6 +14,21 @@ export type Main = <T>(value: T, label: string | Function, predicate: BasePredic
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
 	/**
+	Returns `true` if the value matches the predicate, otherwise returns `false`.
+
+	@param value - Value to test.
+	@param predicate - Predicate to test against.
+	*/
+	isValid: <T>(value: T, predicate: BasePredicate<T>) => value is T;
+
+	/**
+	Create a reusable validator.
+
+	@param predicate - Predicate used in the validator function.
+	*/
+	create: (<T>(predicate: BasePredicate<T>) => ReusableValidator<T>) & (<T>(label: string, predicate: BasePredicate<T>) => ReusableValidator<T>);
+
+	/**
 	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
 
 	@param value - Value to test.
@@ -29,29 +44,6 @@ export interface Ow extends Modifiers, Predicates {
 	@param predicate - Predicate to test against.
 	*/
 	<T>(value: T, label: string, predicate: BasePredicate<T>): void;
-
-	/**
-	Returns `true` if the value matches the predicate, otherwise returns `false`.
-
-	@param value - Value to test.
-	@param predicate - Predicate to test against.
-	*/
-	isValid<T>(value: T, predicate: BasePredicate<T>): value is T;
-
-	/**
-	Create a reusable validator.
-
-	@param predicate - Predicate used in the validator function.
-	*/
-	create<T>(predicate: BasePredicate<T>): ReusableValidator<T>;
-
-	/**
-	Create a reusable validator.
-
-	@param label - Label which should be used in error messages.
-	@param predicate - Predicate used in the validator function.
-	*/
-	create<T>(label: string, predicate: BasePredicate<T>): ReusableValidator<T>;
 }
 
 /**
@@ -112,7 +104,9 @@ Object.defineProperties(ow, {
 });
 
 export default predicates(modifiers(ow)) as Ow;
+
 export {BasePredicate, Predicate};
+
 export {
 	StringPredicate,
 	NumberPredicate,
@@ -131,4 +125,5 @@ export {
 	AnyPredicate,
 	Shape
 } from './predicates';
+
 export {ArgumentError} from './argument-error';

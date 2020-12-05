@@ -3,7 +3,7 @@ import ow from '../source';
 
 test('nan', t => {
 	t.notThrows(() => {
-		ow(NaN, ow.nan);
+		ow(Number.NaN, ow.nan);
 	});
 
 	t.notThrows(() => {

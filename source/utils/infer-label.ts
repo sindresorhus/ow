@@ -21,6 +21,9 @@ export const inferLabel = (callsites: readonly CallSite[]) => {
 
 	// Grab the stackframe with the `ow` function call
 	const functionCallStackFrame = callsites[1];
+	if (!functionCallStackFrame) {
+		return;
+	}
 
 	const fileName = functionCallStackFrame.getFileName();
 	const lineNumber = functionCallStackFrame.getLineNumber();

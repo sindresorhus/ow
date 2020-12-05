@@ -91,11 +91,11 @@ test('error.hasKeys', t => {
 
 	t.throws(() => {
 		ow(error, ow.error.hasKeys('foo'));
-	}, 'Expected error `error` message to have keys `foo`');
+	}, 'Expected error message to have keys `foo`');
 
 	t.throws(() => {
 		ow(error, ow.error.hasKeys('unicorn', 'foo'));
-	}, 'Expected error `error` message to have keys `unicorn`, `foo`');
+	}, 'Expected error message to have keys `unicorn`, `foo`');
 });
 
 test('error.instanceOf', t => {
@@ -143,7 +143,7 @@ test('error.typeError', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.typeError);
-	}, 'Expected error `Error` to be of type `TypeError`');
+	}, 'Expected error `Error` `Error` to be of type `TypeError`');
 
 	t.throws(() => {
 		ow(new Error('foo'), 'foo', ow.error.typeError);

@@ -71,6 +71,10 @@ test('object.valuesOfType', t => {
 		ow({unicorn: 1, rainbow: 2}, ow.object.valuesOfType(ow.number));
 	});
 
+	t.notThrows(() => {
+		ow(['🦄', true], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
+	});
+
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: 2}, ow.object.valuesOfType(ow.string));
 	}, '(object) Expected argument to be of type `string` but received type `number`');
@@ -81,7 +85,11 @@ test('object.valuesOfType', t => {
 
 	t.throws(() => {
 		ow({unicorn: 'a', rainbow: 'b'}, ow.object.valuesOfType(ow.string.minLength(2)));
-	}, '(object) Expected string to have a minimum length of `2`, got `a`');
+	}, '(object `ow.number`) Expected string to have a minimum length of `2`, got `a`');
+
+	t.throws(() => {
+		ow(['🦄', true, 1], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
+	}, '(object) Any predicate failed with the following errors:\n- Expected argument to be of type `string` but received type `number`\n- Expected argument to be of type `boolean` but received type `number`');
 });
 
 test('object.valuesOfTypeDeep', t => {
@@ -103,7 +111,7 @@ test('object.valuesOfTypeDeep', t => {
 
 	t.throws(() => {
 		ow({unicorn: {key: '🦄', value: 1}}, ow.object.deepValuesOfType(ow.string));
-	}, '(object) Expected argument to be of type `string` but received type `number`');
+	}, '(object `ow.any(ow.string`) Expected argument to be of type `string` but received type `number`');
 
 	t.throws(() => {
 		ow({unicorn: {key: '🦄', value: 1}}, 'foo', ow.object.deepValuesOfType(ow.string));
@@ -111,7 +119,7 @@ test('object.valuesOfTypeDeep', t => {
 
 	t.throws(() => {
 		ow({a: {b: {c: {d: 1}, e: '2'}, f: 3}}, ow.object.deepValuesOfType(ow.number));
-	}, '(object) Expected argument to be of type `number` but received type `string`');
+	}, '(object `ow.string`) Expected argument to be of type `number` but received type `string`');
 });
 
 test('object.deepEqual', t => {
@@ -173,7 +181,7 @@ test('object.hasKeys', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.hasKeys('unicorn', 'rainbow'));
-	}, 'Expected object to have keys `["rainbow"]`');
+	}, 'Expected object `Unicorn` to have keys `["rainbow"]`');
 
 	t.throws(() => {
 		ow({unicorn: {value: '🦄'}}, ow.object.hasKeys('unicorn.foo'));
@@ -252,7 +260,7 @@ test('object.exactShape', t => {
 				valid: ow.boolean
 			}
 		}));
-	}, 'Did not expect property `rainbow.value` to exist, got `🌈` in object `foo`');
+	}, 'Did not expect property `rainbow.value` to exist, got `🌈` in object');
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.exactShape({
@@ -303,5 +311,5 @@ test('object.partialShape', t => {
 		ow(foo, ow.object.partialShape({
 			unicorn: ow.number
 		}));
-	}, 'Expected property `unicorn` to be of type `number` but received type `string` in object `foo`');
+	}, 'Expected property `unicorn` to be of type `number` but received type `string` in object');
 });

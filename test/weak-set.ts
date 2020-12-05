@@ -40,7 +40,7 @@ test('weakSet.has', t => {
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rainbow]), ow.weakSet.has(rocket));
-	}, 'Expected WeakSet to have items `[{"rocket":"🚀"}]`');
+	}, 'Expected WeakSet `unicorn` to have items `[{"rocket":"🚀"}]`');
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rainbow]), 'foo', ow.weakSet.has(rocket));
@@ -51,7 +51,7 @@ test('weakSet.has', t => {
 	}, 'Expected WeakSet to have items `[{"rainbow":"🌈"}]`');
 
 	t.throws(() => {
-		ow(new WeakSet([keys[1], keys[3]]), ow.weakSet.has(...keys));
+		ow(new WeakSet([keys[1]!, keys[3]!]), ow.weakSet.has(...keys));
 	}, 'Expected WeakSet to have items `[{"x":1},{"x":3},{"x":5},{"x":6},{"x":7}]`');
 });
 
@@ -66,5 +66,5 @@ test('weakSet.hasAny', t => {
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rainbow]), ow.weakSet.hasAny(rocket));
-	}, 'Expected WeakSet to have any item of `[{"rocket":"🚀"}]`');
+	}, 'Expected WeakSet `...keys` to have any item of `[{"rocket":"🚀"}]`');
 });
