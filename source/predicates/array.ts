@@ -162,9 +162,9 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	}
 
 	/**
-	Test an array to match the `predicates` exactly.
+	Test all elements in the array to match the exact shape with the provided predicate.
 
-	The predicates is an array which describes how the tested array should look like. Each predicate is the same as the source array.
+	The predicates is an array which describes how the tested array should look like. Each predicate placed at the nth index should be applied also to the item at the same index.
 
 	@param predicates - The predicate placed at the nth index should be applied also to the item at the same index.
 
