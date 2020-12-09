@@ -139,7 +139,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	ow(['a', 1], ow.array.ofType(ow.any(ow.string, ow.number)));
 	```
 	*/
-	ofType<P extends BasePredicate<T>>(predicate: P) {
+	ofType<U extends T>(predicate: BasePredicate<U>): ArrayPredicate<U> {
 		let error: string;
 
 		return this.addValidator({
@@ -156,6 +156,6 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 					return false;
 				}
 			}
-		});
+		}) as unknown as ArrayPredicate<U>;
 	}
 }

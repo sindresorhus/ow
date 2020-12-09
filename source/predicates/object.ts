@@ -5,13 +5,13 @@ import isEqual = require('lodash.isequal');
 import hasItems from '../utils/has-items';
 import ofType from '../utils/of-type';
 import ofTypeDeep from '../utils/of-type-deep';
-import {partial, exact, Shape} from '../utils/match-shape';
+import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape';
 import {Predicate, PredicateOptions} from './predicate';
 import {BasePredicate} from './base-predicate';
 
 export {Shape};
 
-export class ObjectPredicate extends Predicate<object> {
+export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	/**
 	@hidden
 	*/
@@ -155,12 +155,12 @@ export class ObjectPredicate extends Predicate<object> {
 	}));
 	```
 	*/
-	partialShape(shape: Shape) {
+	partialShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => partial(object, shape)
-		});
+		}) as unknown as ObjectPredicate<TypeOfShape<S>>;
 	}
 
 	/**
@@ -179,11 +179,11 @@ export class ObjectPredicate extends Predicate<object> {
 	}));
 	```
 	*/
-	exactShape(shape: Shape) {
+	exactShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => exact(object, shape)
-		});
+		}) as unknown as ObjectPredicate<TypeOfShape<S>>;
 	}
 }

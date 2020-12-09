@@ -8,6 +8,15 @@ export interface Shape {
 	[key: string]: BasePredicate | Shape;
 }
 
+export type TypeOfShape<S extends BasePredicate | Shape> =
+	S extends BasePredicate<infer X>
+		? X
+		: S extends Shape
+			? {
+				[K in keyof S]: TypeOfShape<S[K]>
+			}
+			: never;
+
 /**
 Test if the `object` matches the `shape` partially.
 

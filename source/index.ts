@@ -34,7 +34,7 @@ export interface Ow extends Modifiers, Predicates {
 	@param value - Value to test.
 	@param predicate - Predicate to test against.
 	*/
-	<T>(value: T, predicate: BasePredicate<T>): void;
+	<T>(value: unknown, predicate: BasePredicate<T>): asserts value is T;
 
 	/**
 	Test if `value` matches the provided `predicate`. Throws an `ArgumentError` with the specified `label` if the test fails.
@@ -43,7 +43,7 @@ export interface Ow extends Modifiers, Predicates {
 	@param label - Label which should be used in error messages.
 	@param predicate - Predicate to test against.
 	*/
-	<T>(value: T, label: string, predicate: BasePredicate<T>): void;
+	<T>(value: unknown, label: string, predicate: BasePredicate<T>): asserts value is T;
 }
 
 /**
@@ -103,7 +103,12 @@ Object.defineProperties(ow, {
 	}
 });
 
-export default predicates(modifiers(ow)) as Ow;
+// Can't use `export default predicates(modifiers(ow)) as Ow` because the variable needs a type annotation to avoid a compiler error when used:
+// Assertions require every name in the call target to be declared with an explicit type annotation.ts(2775)
+// See https://github.com/microsoft/TypeScript/issues/36931 for more details.
+const _ow: Ow = predicates(modifiers(ow)) as Ow;
+
+export default _ow;
 
 export {BasePredicate, Predicate};
 
