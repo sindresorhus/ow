@@ -180,10 +180,11 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	```
 	*/
 	exactShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
+		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
 			validator: object => exact(object, shape)
-		}) as unknown as ObjectPredicate<TypeOfShape<S>>;
+		}) as ObjectPredicate<any>;
 	}
 }
