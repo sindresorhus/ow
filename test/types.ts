@@ -1,5 +1,5 @@
 import test from 'ava';
-import {expectTypeOf} from 'expect-type';
+import {ExpectTypeOf, expectTypeOf} from 'expect-type';
 import {TypedArray} from 'type-fest';
 import ow, {BasePredicate} from '../source';
 
@@ -90,41 +90,57 @@ function typeTests(value: unknown) {
 		},
 
 		() => {
-			// For the rest of the validators, just make sure they're mapped to the correct type.
-			// This helper makes it easy to write a one-line type validation.
-			const ensure = <T>(predicate: BasePredicate<T>): T => {
-				ow(value, predicate);
-				return value;
+			// To make sure all validators are mapped to the correct type, create a `Tests` type which requires that
+			// every property of `ow` has its type-mapping explicitly tested. If more properties are added this will
+			// fail until a type assertion is added below.
+
+			type AssertionProps = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional'>;
+
+			type Tests = {
+				[K in AssertionProps]:
+					typeof ow[K] extends BasePredicate<infer T>
+						? (type: ExpectTypeOf<T, true>) => void
+						: never
 			};
 
-			expectTypeOf(ensure(ow.arrayBuffer)).toEqualTypeOf<ArrayBuffer>();
-			expectTypeOf(ensure(ow.buffer)).toEqualTypeOf<Buffer>();
-			expectTypeOf(ensure(ow.dataView)).toEqualTypeOf<DataView>();
-			expectTypeOf(ensure(ow.date)).toEqualTypeOf<Date>();
-			expectTypeOf(ensure(ow.error)).toEqualTypeOf<Error>();
-			expectTypeOf(ensure(ow.float32Array)).toEqualTypeOf<Float32Array>();
-			expectTypeOf(ensure(ow.float64Array)).toEqualTypeOf<Float64Array>();
-			expectTypeOf(ensure(ow.function)).toEqualTypeOf<Function>();
-			expectTypeOf(ensure(ow.int16Array)).toEqualTypeOf<Int16Array>();
-			expectTypeOf(ensure(ow.int32Array)).toEqualTypeOf<Int32Array>();
-			expectTypeOf(ensure(ow.map)).toEqualTypeOf<Map<unknown, unknown>>();
-			expectTypeOf(ensure(ow.int8Array)).toEqualTypeOf<Int8Array>();
-			expectTypeOf(ensure(ow.nan)).toEqualTypeOf(Number.NaN);
-			expectTypeOf(ensure(ow.null)).toEqualTypeOf<null>();
-			expectTypeOf(ensure(ow.nullOrUndefined)).toEqualTypeOf<null | undefined>();
-			expectTypeOf(ensure(ow.sharedArrayBuffer)).toEqualTypeOf<SharedArrayBuffer>();
-			expectTypeOf(ensure(ow.promise)).toEqualTypeOf<Promise<unknown>>();
-			expectTypeOf(ensure(ow.regExp)).toEqualTypeOf<RegExp>();
-			expectTypeOf(ensure(ow.set)).toEqualTypeOf<Set<any>>();
-			expectTypeOf(ensure(ow.symbol)).toEqualTypeOf<symbol>();
-			expectTypeOf(ensure(ow.typedArray)).toEqualTypeOf<TypedArray>();
-			expectTypeOf(ensure(ow.uint16Array)).toEqualTypeOf<Uint16Array>();
-			expectTypeOf(ensure(ow.uint32Array)).toEqualTypeOf<Uint32Array>();
-			expectTypeOf(ensure(ow.uint8Array)).toEqualTypeOf<Uint8Array>();
-			expectTypeOf(ensure(ow.uint8ClampedArray)).toEqualTypeOf<Uint8ClampedArray>();
-			expectTypeOf(ensure(ow.undefined)).toEqualTypeOf<undefined>();
-			expectTypeOf(ensure(ow.weakMap)).toEqualTypeOf<WeakMap<object, unknown>>();
-			expectTypeOf(ensure(ow.weakSet)).toEqualTypeOf<WeakSet<object>>();
+			const tests: Tests = {
+				array: expect => expect.toBeArray(),
+				arrayBuffer: expect => expect.toEqualTypeOf<ArrayBuffer>(),
+				boolean: expect => expect.toBeBoolean(),
+				buffer: expect => expect.toEqualTypeOf<Buffer>(),
+				dataView: expect => expect.toEqualTypeOf<DataView>(),
+				date: expect => expect.toEqualTypeOf<Date>(),
+				error: expect => expect.toEqualTypeOf<Error>(),
+				float32Array: expect => expect.toEqualTypeOf<Float32Array>(),
+				float64Array: expect => expect.toEqualTypeOf<Float64Array>(),
+				function: expect => expect.toEqualTypeOf<Function>(),
+				int16Array: expect => expect.toEqualTypeOf<Int16Array>(),
+				int32Array: expect => expect.toEqualTypeOf<Int32Array>(),
+				int8Array: expect => expect.toEqualTypeOf<Int8Array>(),
+				iterable: expect => expect.toEqualTypeOf<Iterable<unknown>>(),
+				map: expect => expect.toEqualTypeOf<Map<unknown, unknown>>(),
+				nan: expect => expect.toEqualTypeOf(Number.NaN),
+				null: expect => expect.toEqualTypeOf<null>(),
+				nullOrUndefined: expect => expect.toEqualTypeOf<null | undefined>(),
+				number: expect => expect.toBeNumber(),
+				object: expect => expect.toBeObject(),
+				promise: expect => expect.toEqualTypeOf<Promise<unknown>>(),
+				regExp: expect => expect.toEqualTypeOf<RegExp>(),
+				set: expect => expect.toEqualTypeOf<Set<any>>(),
+				sharedArrayBuffer: expect => expect.toEqualTypeOf<SharedArrayBuffer>(),
+				string: expect => expect.toBeString(),
+				symbol: expect => expect.toEqualTypeOf<symbol>(),
+				typedArray: expect => expect.toEqualTypeOf<TypedArray>(),
+				uint16Array: expect => expect.toEqualTypeOf<Uint16Array>(),
+				uint32Array: expect => expect.toEqualTypeOf<Uint32Array>(),
+				uint8Array: expect => expect.toEqualTypeOf<Uint8Array>(),
+				uint8ClampedArray: expect => expect.toEqualTypeOf<Uint8ClampedArray>(),
+				undefined: expect => expect.toEqualTypeOf<undefined>(),
+				weakMap: expect => expect.toEqualTypeOf<WeakMap<object, unknown>>(),
+				weakSet: expect => expect.toEqualTypeOf<WeakSet<object>>()
+			};
+
+			return tests;
 		}
 	];
 }
