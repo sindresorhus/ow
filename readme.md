@@ -71,7 +71,7 @@ ow(unicorn, ow.object.exactShape({
 
 Ow includes TypeScript type guards, so using it will narrow the type of previously-unknown values.
 
-```typescript
+```ts
 function (input: unknown) {
 	input.slice(0, 3) // Error, Property 'slice' does not exist on type 'unknown'
 
