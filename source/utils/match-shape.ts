@@ -48,7 +48,7 @@ Test if the `object` matches the `shape` exactly.
 @param shape - Shape to test the object against.
 @param parent - Name of the parent property.
 */
-export function exact(object: Record<string, any>, shape: Shape, parent?: string): boolean | string {
+export function exact(object: Record<string, any>, shape: Shape, parent?: string, isArray?: boolean): boolean | string {
 	try {
 		const objectKeys = new Set<string>(Object.keys(object));
 
@@ -75,7 +75,7 @@ export function exact(object: Record<string, any>, shape: Shape, parent?: string
 		if (objectKeys.size > 0) {
 			const firstKey = [...objectKeys.keys()][0]!;
 			const label = parent ? `${parent}.${firstKey}` : firstKey;
-			return `Did not expect property \`${label}\` to exist, got \`${object[firstKey]}\``;
+			return `Did not expect ${isArray ? 'element' : 'property'} \`${label}\` to exist, got \`${object[firstKey]}\``;
 		}
 
 		return true;

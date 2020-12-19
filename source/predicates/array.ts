@@ -178,7 +178,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 		return this.addValidator({
 			message: (_, label, message) => `${message.replace('Expected', 'Expected element')} in ${label}`,
-			validator: object => exact(object, shape)
+			validator: object => exact(object, shape, undefined, true)
 		});
 	}
 }
