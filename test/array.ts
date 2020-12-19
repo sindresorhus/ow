@@ -176,13 +176,13 @@ test('array.exactShape', t => {
 
 	t.throws(() => {
 		ow(['🦄', 2, 'nope', true, {isFirstCommit: true}], ow.array.exactShape([ow.string, ow.number, ow.number, ow.boolean, ow.object.exactShape({isFirstCommit: ow.string})]));
-	}, 'Expected property `2` to be of type `number` but received type `string` in array');
+	}, 'Expected element `2` to be of type `number` but received type `string` in array');
 
 	t.throws(() => {
 		ow(['🦄', 'nope', {isFirstCommit: true}], ow.array.exactShape([ow.string, ow.string, ow.object.exactShape({isFirstCommit: ow.boolean}), ow.number, ow.boolean]));
-	}, 'Expected property `3` to be of type `number` but received type `undefined` in array');
+	}, 'Expected element `3` to be of type `number` but received type `undefined` in array');
 
 	t.throws(() => {
 		ow(['🦄', {isFirstCommit: true}, 'nope', 5, {accepted: false}], ow.array.exactShape([ow.string, ow.object.exactShape({isFirstCommit: ow.boolean}), ow.string]));
-	}, 'Did not expect property `3` to exist, got `5` in array');
+	}, 'Did not expect element `3` to exist, got `5` in array');
 });
