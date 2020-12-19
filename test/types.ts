@@ -9,7 +9,7 @@ test('type-level tests', t => {
 
 // These tests will fail at compile-time, not runtime.
 // The function isn't actually called, it's just a way of declaring scoped type-level tests
-// that doesn't make the compiler angry about unused variables
+// that doesn't make the compiler angry about unused variables.
 function typeTests(value: unknown) {
 	return [
 		() => {
