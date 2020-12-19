@@ -139,9 +139,10 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	ow(['a', 1], ow.array.ofType(ow.any(ow.string, ow.number)));
 	```
 	*/
-	ofType<P extends BasePredicate<T>>(predicate: P) {
+	ofType<U extends T>(predicate: BasePredicate<U>): ArrayPredicate<U> {
 		let error: string;
 
+		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
 		return this.addValidator({
 			message: (_, label) => `(${label}) ${error}`,
 			validator: value => {
@@ -156,6 +157,6 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 					return false;
 				}
 			}
-		});
+		}) as ArrayPredicate<any>;
 	}
 }
