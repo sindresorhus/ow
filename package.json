@@ -106,5 +106,11 @@
 		"require": [
 			"ts-node/register"
 		]
+	},
+	"nyc": {
+		"reporter": [
+			"text",
+			"lcov"
+		]
 	}
 }
