@@ -67,7 +67,7 @@ ow(unicorn, ow.object.exactShape({
 
 ## API
 
-[Complete API documentation](https://sindresorhus.com/ow)
+[Complete API documentation](https://sindresorhus.com/ow/interfaces/ow.html)
 
 Ow includes TypeScript type guards, so using it will narrow the type of previously-unknown values.
 

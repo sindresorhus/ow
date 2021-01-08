@@ -77,7 +77,7 @@ const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>
 		return;
 	}
 
-	test(value, labelOrPredicate, predicate as BasePredicate<T>, stack);
+	test(value, labelOrPredicate, predicate!, stack);
 };
 
 Object.defineProperties(ow, {
@@ -103,7 +103,7 @@ Object.defineProperties(ow, {
 				return;
 			}
 
-			test(value, label ?? (labelOrPredicate as string), predicate as BasePredicate<T>, stack);
+			test(value, label ?? (labelOrPredicate!), predicate!, stack);
 		}
 	}
 });

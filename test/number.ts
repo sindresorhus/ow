@@ -168,13 +168,13 @@ test('number.finite', t => {
 	});
 
 	t.throws(() => {
-		ow(Infinity as any, ow.number.finite);
+		ow(Number.POSITIVE_INFINITY as any, ow.number.finite);
 	}, 'Expected number to be finite, got Infinity');
 });
 
 test('number.infinite', t => {
 	t.notThrows(() => {
-		ow(Infinity, ow.number.infinite);
+		ow(Number.POSITIVE_INFINITY, ow.number.infinite);
 	});
 
 	t.throws(() => {
@@ -208,7 +208,7 @@ test('number.integerOrInfinite', t => {
 	});
 
 	t.notThrows(() => {
-		ow(Infinity, ow.number.integerOrInfinite);
+		ow(Number.POSITIVE_INFINITY, ow.number.integerOrInfinite);
 	});
 
 	t.notThrows(() => {
