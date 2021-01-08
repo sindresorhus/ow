@@ -5,11 +5,12 @@ import {BasePredicate, isPredicate} from './predicates/base-predicate';
 import modifiers, {Modifiers} from './modifiers';
 import predicates, {Predicates} from './predicates';
 import test from './test';
+import {generateStackTrace} from './utils/generate-stack';
 
 /**
 @hidden
 */
-export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
+export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>, stack: string) => void;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
@@ -61,6 +62,8 @@ export interface ReusableValidator<T> {
 }
 
 const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
+	const stack = generateStackTrace();
+
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
 		throw new TypeError(`Expected second argument to be a predicate or a string, got \`${typeof labelOrPredicate}\``);
 	}
@@ -69,12 +72,12 @@ const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>
 		// If the second argument is a predicate, infer the label
 		const stackFrames = callsites();
 
-		test(value, () => inferLabel(stackFrames), labelOrPredicate);
+		test(value, () => inferLabel(stackFrames), labelOrPredicate, stack);
 
 		return;
 	}
 
-	test(value, labelOrPredicate, predicate as BasePredicate<T>);
+	test(value, labelOrPredicate, predicate as BasePredicate<T>, stack);
 };
 
 Object.defineProperties(ow, {
@@ -90,15 +93,17 @@ Object.defineProperties(ow, {
 	},
 	create: {
 		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T, label?: string) => {
+			const stack = generateStackTrace();
+
 			if (isPredicate(labelOrPredicate)) {
 				const stackFrames = callsites();
 
-				test(value, label ?? (() => inferLabel(stackFrames)), labelOrPredicate);
+				test(value, label ?? (() => inferLabel(stackFrames)), labelOrPredicate, stack);
 
 				return;
 			}
 
-			test(value, label ?? (labelOrPredicate as string), predicate as BasePredicate<T>);
+			test(value, label ?? (labelOrPredicate as string), predicate as BasePredicate<T>, stack);
 		}
 	}
 });
