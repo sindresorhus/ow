@@ -162,12 +162,11 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	}
 
 	/**
-	Test all elements in the array to match the exact shape of the provided predicate.
+	Test if the nth element in the array exactly matches with the element placed at the same index in the predictions.
+	The predicates is an array which describes how the tested array should look like.
 
-	The predicates is an array which describes how the tested array should look like. Each predicate placed at the nth index should be applied to the item at the same index.
-
-	@param predicates - The predicate placed at the nth index should be applied also to the item at the same index.
-
+	@param predicates - Predicates to test the array against.
+	
 	@example
 	```
 	ow(['1', 2], ow.array.exactShape([ow.string, ow.number]));
