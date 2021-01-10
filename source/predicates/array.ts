@@ -166,7 +166,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	The predicates is an array which describes how the tested array should look like.
 
 	@param predicates - Predicates to test the array against.
-	
+
 	@example
 	```
 	ow(['1', 2], ow.array.exactShape([ow.string, ow.number]));
