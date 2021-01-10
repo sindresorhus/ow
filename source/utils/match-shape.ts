@@ -2,11 +2,38 @@ import is from '@sindresorhus/is';
 import test from '../test';
 import {isPredicate} from '../predicates/base-predicate';
 import {BasePredicate} from '..';
+import {generateStackTrace} from './generate-stack';
 
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 export interface Shape {
 	[key: string]: BasePredicate | Shape;
 }
+
+/**
+Extracts a regular type from a shape definition.
+
+@example
+```
+const myShape = {
+	foo: ow.string,
+	bar: {
+		baz: ow.boolean
+	}
+}
+
+type X = TypeOfShape<typeof myShape> // {foo: string; bar: {baz: boolean}}
+```
+
+This is used in the `ow.object.partialShape(…)` and `ow.object.exactShape(…)` functions.
+*/
+export type TypeOfShape<S extends BasePredicate | Shape> =
+	S extends BasePredicate<infer X>
+		? X
+		: S extends Shape
+			? {
+				[K in keyof S]: TypeOfShape<S[K]>
+			}
+			: never;
 
 /**
 Test if the `object` matches the `shape` partially.
@@ -18,12 +45,13 @@ Test if the `object` matches the `shape` partially.
 @param parent - Name of the parent property.
 */
 export function partial(object: Record<string, any>, shape: Shape, parent?: string): boolean | string {
+	const stack = generateStackTrace();
 	try {
 		for (const key of Object.keys(shape)) {
 			const label = parent ? `${parent}.${key}` : key;
 
 			if (isPredicate(shape[key])) {
-				test(object[key], label, shape[key] as BasePredicate);
+				test(object[key], label, shape[key] as BasePredicate, stack);
 			} else if (is.plainObject(shape[key])) {
 				const result = partial(object[key], shape[key] as Shape, label);
 
@@ -49,6 +77,7 @@ Test if the `object` matches the `shape` exactly.
 @param parent - Name of the parent property.
 */
 export function exact(object: Record<string, any>, shape: Shape, parent?: string, isArray?: boolean): boolean | string {
+	const stack = generateStackTrace();
 	try {
 		const objectKeys = new Set<string>(Object.keys(object));
 
@@ -58,7 +87,7 @@ export function exact(object: Record<string, any>, shape: Shape, parent?: string
 			const label = parent ? `${parent}.${key}` : key;
 
 			if (isPredicate(shape[key])) {
-				test(object[key], label, shape[key] as BasePredicate);
+				test(object[key], label, shape[key] as BasePredicate, stack);
 			} else if (is.plainObject(shape[key])) {
 				if (!Object.prototype.hasOwnProperty.call(object, key)) {
 					return `Expected \`${label}\` to exist`;

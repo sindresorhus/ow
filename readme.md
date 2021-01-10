@@ -67,9 +67,19 @@ ow(unicorn, ow.object.exactShape({
 
 ## API
 
-[Complete API documentation](https://sindresorhus.com/ow)
+[Complete API documentation](https://sindresorhus.com/ow/interfaces/ow.html)
 
-Ow does not currently include TypeScript type guards, but we do [plan to include type assertions](https://github.com/sindresorhus/ow/issues/159).
+Ow includes TypeScript type guards, so using it will narrow the type of previously-unknown values.
+
+```ts
+function (input: unknown) {
+	input.slice(0, 3) // Error, Property 'slice' does not exist on type 'unknown'
+
+	ow(input, ow.string)
+
+	input.slice(0, 3) // OK
+}
+```
 
 ### ow(value, predicate)
 

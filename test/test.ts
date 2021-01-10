@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow from '../source';
+import ow, {ArgumentError} from '../source';
 import {createAnyError} from './fixtures/create-error';
 
 test('not', t => {
@@ -300,9 +300,23 @@ test('reusable validator', t => {
 		checkUsername(value);
 	}, 'Expected string to have a minimum length of `3`, got `x`');
 
-	t.throws(() => {
+	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5 as any);
-	}, 'Expected argument to be of type `string` but received type `number`');
+	}, [
+		'Expected argument to be of type `string` but received type `number`',
+		'Expected string to have a minimum length of `3`, got `5`'
+	].join('\n'));
+
+	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
+	t.true(error.validationErrors.has('string'), 'Validation errors map has key `string`');
+
+	const result1_ = error.validationErrors.get('string')!;
+
+	t.is(result1_.length, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, [
+		'Expected argument to be of type `string` but received type `number`',
+		'Expected string to have a minimum length of `3`, got `5`'
+	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('reusable validator called with label', t => {
@@ -327,9 +341,23 @@ test('reusable validator called with label', t => {
 		checkUsername(value, label);
 	}, 'Expected string `bar` to have a minimum length of `3`, got `x`');
 
-	t.throws(() => {
+	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5 as any, label);
-	}, 'Expected `bar` to be of type `string` but received type `number`');
+	}, [
+		'Expected `bar` to be of type `string` but received type `number`',
+		'Expected string `bar` to have a minimum length of `3`, got `5`'
+	].join('\n'));
+
+	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
+	t.true(error.validationErrors.has('bar'), 'Validation errors map has key `bar`');
+
+	const result1_ = error.validationErrors.get('bar')!;
+
+	t.is(result1_.length, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, [
+		'Expected `bar` to be of type `string` but received type `number`',
+		'Expected string `bar` to have a minimum length of `3`, got `5`'
+	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('reusable validator with label', t => {
@@ -347,9 +375,23 @@ test('reusable validator with label', t => {
 		checkUsername('fo');
 	}, 'Expected string `foo` to have a minimum length of `3`, got `fo`');
 
-	t.throws(() => {
+	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5 as any);
-	}, 'Expected `foo` to be of type `string` but received type `number`');
+	}, [
+		'Expected `foo` to be of type `string` but received type `number`',
+		'Expected string `foo` to have a minimum length of `3`, got `5`'
+	].join('\n'));
+
+	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
+	t.true(error.validationErrors.has('foo'), 'Validation errors map has key `foo`');
+
+	const result1_ = error.validationErrors.get('foo')!;
+
+	t.is(result1_.length, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, [
+		'Expected `foo` to be of type `string` but received type `number`',
+		'Expected string `foo` to have a minimum length of `3`, got `5`'
+	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('reusable validator with label called with label', t => {
@@ -369,9 +411,23 @@ test('reusable validator with label called with label', t => {
 		checkUsername('fo', label);
 	}, 'Expected string `bar` to have a minimum length of `3`, got `fo`');
 
-	t.throws(() => {
+	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5 as any, label);
-	}, 'Expected `bar` to be of type `string` but received type `number`');
+	}, [
+		'Expected `bar` to be of type `string` but received type `number`',
+		'Expected string `bar` to have a minimum length of `3`, got `5`'
+	].join('\n'));
+
+	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
+	t.true(error.validationErrors.has('bar'), 'Validation errors map has key `bar`');
+
+	const result1_ = error.validationErrors.get('bar')!;
+
+	t.is(result1_.length, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, [
+		'Expected `bar` to be of type `string` but received type `number`',
+		'Expected string `bar` to have a minimum length of `3`, got `5`'
+	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('any-reusable validator', t => {
@@ -396,7 +452,8 @@ test('any-reusable validator', t => {
 		checkUsername(5 as any);
 	}, createAnyError(
 		'Expected argument to be of type `string` but received type `number`',
-		'Expected argument to be of type `string` but received type `number`'
+		'Expected string to include `.`, got `5`',
+		'Expected string to have a minimum length of `3`, got `5`'
 	));
 });
 
@@ -414,4 +471,45 @@ test('custom validation function', t => {
 			validator: value === '🌈'
 		})));
 	}, '(string `unicorn`) Should be `🌈`');
+
+	t.notThrows(() => {
+		ow('🦄', 'unicorn', ow.string.validate(value => ({
+			message: label => `Expected ${label} to be '🦄', got \`${value}\``,
+			validator: value === '🦄'
+		})));
+	});
+});
+
+test('ow without valid arguments', t => {
+	t.throws(() => {
+		ow(5, {} as any);
+	}, 'Expected second argument to be a predicate or a string, got `object`');
+});
+
+// This test is to cover all paths of source/utils/generate-stacks.ts
+test('ow without Error.captureStackTrace', t => {
+	const originalErrorStackTrace = Error.captureStackTrace;
+	// @ts-expect-error We are manually overwriting this
+	Error.captureStackTrace = null;
+
+	t.throws<ArgumentError>(() => {
+		ow('owo', ow.string.equals('OwO'));
+	}, 'Expected string to be equal to `OwO`, got `owo`');
+
+	// eslint-disable-next-line @typescript-eslint/no-var-requires
+	Object.defineProperty(require('../source/utils/node/is-node'), 'default', {
+		value: false
+	});
+
+	t.throws<ArgumentError>(() => {
+		ow('owo', ow.string.equals('OwO'));
+	}, 'Expected string to be equal to `OwO`, got `owo`');
+
+	// Re-set the properties back to their default values
+	Error.captureStackTrace = originalErrorStackTrace;
+
+	// eslint-disable-next-line @typescript-eslint/no-var-requires
+	Object.defineProperty(require('../source/utils/node/is-node'), 'default', {
+		value: true
+	});
 });
