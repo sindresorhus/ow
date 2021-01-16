@@ -19,6 +19,7 @@
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepublishOnly": "npm run build",
+		"postpublish": "gh-pages --dist docs --message \"Deploy documentation\"",
 		"example": "npm run build && node example.js"
 	},
 	"files": [
@@ -61,6 +62,7 @@
 		"ava": "^2.4.0",
 		"del-cli": "^3.0.1",
 		"expect-type": "^0.11.0",
+		"gh-pages": "^3.1.0",
 		"nyc": "^15.1.0",
 		"ts-node": "^9.1.1",
 		"typedoc": "^0.20.13",
