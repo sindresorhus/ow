@@ -143,12 +143,12 @@ All the below types return a predicate. Every predicate has some extra operators
 
 #### Primitives
 
-- [`undefined`](https://sindresorhus.com/ow/interfaces/ow.html#undefined)
+- [`undefined`](https://sindresorhus.com/ow/interfaces/ow.html#undefined-1)
 - [`null`](https://sindresorhus.com/ow/interfaces/ow.html#null)
 - [`string`](https://sindresorhus.com/ow/classes/stringpredicate.html)
 - [`number`](https://sindresorhus.com/ow/classes/numberpredicate.html)
 - [`boolean`](https://sindresorhus.com/ow/classes/booleanpredicate.html)
-- [`symbol`](https://sindresorhus.com/ow/interfaces/ow.html#symbol)
+- [`symbol`](https://sindresorhus.com/ow/interfaces/ow.html#symbol-1)
 
 #### Built-in types
 
@@ -156,10 +156,10 @@ All the below types return a predicate. Every predicate has some extra operators
 - [`function`](https://sindresorhus.com/ow/interfaces/ow.html#function)
 - [`buffer`](https://sindresorhus.com/ow/interfaces/ow.html#buffer)
 - [`object`](https://sindresorhus.com/ow/classes/objectpredicate.html)
-- [`regExp`](https://sindresorhus.com/ow/interfaces/ow.html#regexp)
+- [`regExp`](https://sindresorhus.com/ow/interfaces/ow.html#regexp-1)
 - [`date`](https://sindresorhus.com/ow/classes/datepredicate.html)
 - [`error`](https://sindresorhus.com/ow/classes/errorpredicate.html)
-- [`promise`](https://sindresorhus.com/ow/interfaces/ow.html#promise)
+- [`promise`](https://sindresorhus.com/ow/interfaces/ow.html#promise-1)
 - [`map`](https://sindresorhus.com/ow/classes/mappredicate.html)
 - [`set`](https://sindresorhus.com/ow/classes/setpredicate.html)
 - [`weakMap`](https://sindresorhus.com/ow/classes/weakmappredicate.html)
@@ -168,12 +168,12 @@ All the below types return a predicate. Every predicate has some extra operators
 #### Typed arrays
 
 - [`int8Array`](https://sindresorhus.com/ow/interfaces/ow.html#int8Array)
-- [`uint8Array`](https://sindresorhus.com/ow/interfaces/ow.html#uint8Array)
-- [`uint8ClampedArray`](https://sindresorhus.com/ow/interfaces/ow.html#uint8ClampedArray)
+- [`uint8Array`](https://sindresorhus.com/ow/interfaces/ow.html#uint8Array-1)
+- [`uint8ClampedArray`](https://sindresorhus.com/ow/interfaces/ow.html#uint8ClampedArray-1)
 - [`int16Array`](https://sindresorhus.com/ow/interfaces/ow.html#int16Array)
-- [`uint16Array`](https://sindresorhus.com/ow/interfaces/ow.html#uint16Array)
+- [`uint16Array`](https://sindresorhus.com/ow/interfaces/ow.html#uint16Array-1)
 - [`int32Array`](https://sindresorhus.com/ow/interfaces/ow.html#in32Array)
-- [`uint32Array`](https://sindresorhus.com/ow/interfaces/ow.html#uin32Array)
+- [`uint32Array`](https://sindresorhus.com/ow/interfaces/ow.html#uin32Array-1)
 - [`float32Array`](https://sindresorhus.com/ow/interfaces/ow.html#float32Array)
 - [`float64Array`](https://sindresorhus.com/ow/interfaces/ow.html#float64Array)
 
@@ -181,13 +181,14 @@ All the below types return a predicate. Every predicate has some extra operators
 
 - [`arrayBuffer`](https://sindresorhus.com/ow/interfaces/ow.html#arraybuffer)
 - [`dataView`](https://sindresorhus.com/ow/interfaces/ow.html#dataview)
+- [`sharedArrayBuffer`](https://sindresorhus.com/ow/interfaces/ow.html#sharedarraybuffer-1)
 
 #### Miscellaneous
 
 - [`nan`](https://sindresorhus.com/ow/interfaces/ow.html#nan)
 - [`nullOrUndefined`](https://sindresorhus.com/ow/interfaces/ow.html#nullorundefined)
 - [`iterable`](https://sindresorhus.com/ow/interfaces/ow.html#iterable)
-- [`typedArray`](https://sindresorhus.com/ow/interfaces/ow.html#typedarray)
+- [`typedArray`](https://sindresorhus.com/ow/interfaces/ow.html#typedarray-1)
 
 ### Predicates
 
