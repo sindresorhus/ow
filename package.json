@@ -19,7 +19,7 @@
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepublishOnly": "npm run build",
-		"postpublish": "gh-pages --dist docs --message \"Deploy documentation\"",
+		"postpublish": "gh-pages --dist docs --no-history --message \"Deploy documentation\"",
 		"example": "npm run build && node example.js"
 	},
 	"files": [
