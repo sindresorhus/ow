@@ -163,10 +163,9 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	}
 
 	/**
-	Test if the nth element in the array exactly matches with the element placed at the same index in the predictions.
-	The predicates is an array which describes how the tested array should look like.
+	Test if the elements in the array exactly matches the elements placed at the same indices in the predicates array.
 
-	@param predicates - Predicates to test the array against.
+	@param predicates - Predicates to test the array against. Describes what the tested array should look like.
 
 	@example
 	```
