@@ -2,6 +2,8 @@ import isEqual = require('lodash.isequal');
 import {BasePredicate} from './base-predicate';
 import {Predicate, PredicateOptions} from './predicate';
 import ow from '..';
+import {Shape} from './object';
+import {exact} from '../utils/match-shape';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
@@ -158,5 +160,24 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 				}
 			}
 		}) as ArrayPredicate<any>;
+	}
+
+	/**
+	Test if the elements in the array exactly matches the elements placed at the same indices in the predicates array.
+
+	@param predicates - Predicates to test the array against. Describes what the tested array should look like.
+
+	@example
+	```
+	ow(['1', 2], ow.array.exactShape([ow.string, ow.number]));
+	```
+	*/
+	exactShape(predicates: Predicate[]) {
+		const shape = predicates as unknown as Shape;
+
+		return this.addValidator({
+			message: (_, label, message) => `${message.replace('Expected', 'Expected element')} in ${label}`,
+			validator: object => exact(object, shape, undefined, true)
+		});
 	}
 }
