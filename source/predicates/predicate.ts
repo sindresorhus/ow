@@ -96,9 +96,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function, stack: string): asserts value is T {
+	[testSymbol](value: T, main: Main, label: string | Function): asserts value is T {
 		// Create a map of labels -> received errors.
-		const errors = new Map<string, string[]>();
+		const errors = new Map<string, Set<string>>();
 
 		for (const {validator, message} of this.context.validators) {
 			if (this.options.optional === true && value === undefined) {
@@ -134,12 +134,10 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			// If we already have any errors for this label.
 			if (currentErrors) {
 				// If we don't already have this error logged, add it.
-				if (!currentErrors.includes(errorMessage)) {
-					currentErrors.push(errorMessage);
-				}
+				currentErrors.add(errorMessage);
 			} else {
 				// Set this label and error in the full map.
-				errors.set(mapKey, [errorMessage]);
+				errors.set(mapKey, new Set([errorMessage]));
 			}
 		}
 
@@ -148,7 +146,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			// Generate the `error.message` property.
 			const message = generateArgumentErrorMessage(errors);
 
-			throw new ArgumentError(message, main, stack, errors);
+			throw new ArgumentError(message, main, errors);
 		}
 	}
 

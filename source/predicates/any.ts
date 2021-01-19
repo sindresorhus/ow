@@ -13,12 +13,12 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 		private readonly options: PredicateOptions = {}
 	) {}
 
-	[testSymbol](value: T, main: Main, label: string | Function, stack: string): asserts value {
-		const errors = new Map<string, string[]>();
+	[testSymbol](value: T, main: Main, label: string | Function): asserts value {
+		const errors = new Map<string, Set<string>>();
 
 		for (const predicate of this.predicates) {
 			try {
-				main(value, label, predicate, stack);
+				main(value, label, predicate);
 				return;
 			} catch (error: unknown) {
 				if (value === undefined && this.options.optional === true) {
@@ -32,13 +32,8 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 						// Get the current errors set, if any.
 						const alreadyPresent = errors.get(key);
 
-						// If they are present already, create a unique set with both current and new values.
-						if (alreadyPresent) {
-							errors.set(key, [...new Set([...alreadyPresent, ...value])]);
-						} else {
-							// Add the errors found as is to the map.
-							errors.set(key, value);
-						}
+						// Add all errors under the same key
+						errors.set(key, new Set([...alreadyPresent ?? [], ...value]));
 					}
 				}
 			}
@@ -51,7 +46,6 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 			throw new ArgumentError(
 				`Any predicate failed with the following errors:\n${message}`,
 				main,
-				stack,
 				errors
 			);
 		}

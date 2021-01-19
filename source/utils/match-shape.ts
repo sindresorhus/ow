@@ -2,7 +2,6 @@ import is from '@sindresorhus/is';
 import test from '../test';
 import {isPredicate} from '../predicates/base-predicate';
 import {BasePredicate} from '..';
-import {generateStackTrace} from './generate-stack';
 
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 export interface Shape {
@@ -45,13 +44,12 @@ Test if the `object` matches the `shape` partially.
 @param parent - Name of the parent property.
 */
 export function partial(object: Record<string, any>, shape: Shape, parent?: string): boolean | string {
-	const stack = generateStackTrace();
 	try {
 		for (const key of Object.keys(shape)) {
 			const label = parent ? `${parent}.${key}` : key;
 
 			if (isPredicate(shape[key])) {
-				test(object[key], label, shape[key] as BasePredicate, stack);
+				test(object[key], label, shape[key] as BasePredicate);
 			} else if (is.plainObject(shape[key])) {
 				const result = partial(object[key], shape[key] as Shape, label);
 
@@ -77,7 +75,6 @@ Test if the `object` matches the `shape` exactly.
 @param parent - Name of the parent property.
 */
 export function exact(object: Record<string, any>, shape: Shape, parent?: string): boolean | string {
-	const stack = generateStackTrace();
 	try {
 		const objectKeys = new Set<string>(Object.keys(object));
 
@@ -87,7 +84,7 @@ export function exact(object: Record<string, any>, shape: Shape, parent?: string
 			const label = parent ? `${parent}.${key}` : key;
 
 			if (isPredicate(shape[key])) {
-				test(object[key], label, shape[key] as BasePredicate, stack);
+				test(object[key], label, shape[key] as BasePredicate);
 			} else if (is.plainObject(shape[key])) {
 				if (!Object.prototype.hasOwnProperty.call(object, key)) {
 					return `Expected \`${label}\` to exist`;

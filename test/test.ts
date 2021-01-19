@@ -222,6 +222,16 @@ test('not', t => {
 	}, 'Expected ArrayBuffer to have a minimum byte length of `3`, got `2`');
 
 	t.notThrows(() => {
+		ow(new SharedArrayBuffer(4), ow.sharedArrayBuffer.not.maxByteLength(2));
+	});
+	t.notThrows(() => {
+		ow(new SharedArrayBuffer(3), ow.sharedArrayBuffer.not.maxByteLength(2));
+	});
+	t.throws(() => {
+		ow(new SharedArrayBuffer(2), ow.sharedArrayBuffer.not.maxByteLength(2));
+	}, 'Expected SharedArrayBuffer to have a minimum byte length of `3`, got `2`');
+
+	t.notThrows(() => {
 		ow(new DataView(new ArrayBuffer(1)), ow.dataView.not.minByteLength(3));
 	});
 	t.notThrows(() => {
@@ -312,11 +322,11 @@ test('reusable validator', t => {
 
 	const result1_ = error.validationErrors.get('string')!;
 
-	t.is(result1_.length, 2, 'There are two reported errors for this input');
-	t.deepEqual(result1_, [
+	t.is(result1_.size, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, new Set([
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to have a minimum length of `3`, got `5`'
-	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
+	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('reusable validator called with label', t => {
@@ -353,11 +363,11 @@ test('reusable validator called with label', t => {
 
 	const result1_ = error.validationErrors.get('bar')!;
 
-	t.is(result1_.length, 2, 'There are two reported errors for this input');
-	t.deepEqual(result1_, [
+	t.is(result1_.size, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, new Set([
 		'Expected `bar` to be of type `string` but received type `number`',
 		'Expected string `bar` to have a minimum length of `3`, got `5`'
-	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
+	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('reusable validator with label', t => {
@@ -387,11 +397,11 @@ test('reusable validator with label', t => {
 
 	const result1_ = error.validationErrors.get('foo')!;
 
-	t.is(result1_.length, 2, 'There are two reported errors for this input');
-	t.deepEqual(result1_, [
+	t.is(result1_.size, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, new Set([
 		'Expected `foo` to be of type `string` but received type `number`',
 		'Expected string `foo` to have a minimum length of `3`, got `5`'
-	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
+	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('reusable validator with label called with label', t => {
@@ -423,11 +433,11 @@ test('reusable validator with label called with label', t => {
 
 	const result1_ = error.validationErrors.get('bar')!;
 
-	t.is(result1_.length, 2, 'There are two reported errors for this input');
-	t.deepEqual(result1_, [
+	t.is(result1_.size, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, new Set([
 		'Expected `bar` to be of type `string` but received type `number`',
 		'Expected string `bar` to have a minimum length of `3`, got `5`'
-	], 'There is an error for invalid input type, and one for minimum length not being satisfied');
+	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
 test('any-reusable validator', t => {
@@ -512,4 +522,17 @@ test('ow without Error.captureStackTrace', t => {
 	Object.defineProperty(require('../source/utils/node/is-node'), 'default', {
 		value: true
 	});
+});
+
+// This test is to cover all paths of source/argument-error.ts
+test('ArgumentError with missing errors map', t => {
+	function throws() {
+		throw new ArgumentError('Hi from tests!', throws);
+	}
+
+	const error_1 = t.throws<ArgumentError>(() => {
+		throws();
+	}, 'Hi from tests!');
+
+	t.deepEqual(error_1.validationErrors, new Map(), 'Error should default to an empty error map');
 });

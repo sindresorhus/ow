@@ -39,11 +39,11 @@ test('custom validate message', t => {
 
 	const result1_ = error.validationErrors.get('string')!;
 
-	t.is(result1_.length, 2, 'There are two reported errors for this input');
-	t.deepEqual(result1_, [
+	t.is(result1_.size, 2, 'There are two reported errors for this input');
+	t.deepEqual(result1_, new Set([
 		'Expected string, to be have a minimum length of 5, got `1234`',
 		'This is no url'
-	], 'There is an error for the string length, and one for invalid URL');
+	]), 'There is an error for the string length, and one for invalid URL');
 
 	t.throws(() => {
 		ow('12345', ow.string.minLength(5).message((value, label) => `Expected ${label}, to be have a minimum length of 5, got \`${value}\``).url.message('This is no url'));
