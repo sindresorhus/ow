@@ -13,10 +13,10 @@ test('any predicate', t => {
 
 	const reportedError_1_1 = error_1.validationErrors.get('string')!;
 
-	t.is(reportedError_1_1.length, 1, 'There should be only one element');
-	t.deepEqual(reportedError_1_1, [
+	t.is(reportedError_1_1.size, 1, 'There should be only one element');
+	t.deepEqual(reportedError_1_1, new Set([
 		'Expected argument to be of type `string` but received type `number`'
-	]);
+	]));
 
 	// #endregion
 
@@ -43,18 +43,18 @@ test('any predicate', t => {
 	const reportedError_2_1 = error_2.validationErrors.get('string')!;
 	const reportedError_2_2 = error_2.validationErrors.get('number')!;
 
-	t.is(reportedError_2_1.length, 3, 'There should be three errors reported for the string predicate');
-	t.is(reportedError_2_2.length, 1, 'There should be one error reported for the number predicate');
+	t.is(reportedError_2_1.size, 3, 'There should be three errors reported for the string predicate');
+	t.is(reportedError_2_2.size, 1, 'There should be one error reported for the number predicate');
 
-	t.deepEqual(reportedError_2_1, [
+	t.deepEqual(reportedError_2_1, new Set([
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to be a URL, got `21`',
 		'Expected string to have a minimum length of `24`, got `21`'
-	]);
+	]));
 
-	t.deepEqual(reportedError_2_2, [
+	t.deepEqual(reportedError_2_2, new Set([
 		'Expected number to be greater than 42, got 21'
-	]);
+	]));
 
 	// #endregion
 
@@ -74,15 +74,15 @@ test('any predicate', t => {
 	const reportedError_3_1 = error_3.validationErrors.get('string')!;
 	const reportedError_3_2 = error_3.validationErrors.get('number')!;
 
-	t.is(reportedError_3_1.length, 1, 'There should be one error reported for the string predicate');
-	t.is(reportedError_3_2.length, 1, 'There should be one error reported for the number predicate');
+	t.is(reportedError_3_1.size, 1, 'There should be one error reported for the string predicate');
+	t.is(reportedError_3_2.size, 1, 'There should be one error reported for the number predicate');
 
-	t.deepEqual(reportedError_3_1, [
+	t.deepEqual(reportedError_3_1, new Set([
 		'Expected argument to be of type `string` but received type `null`'
-	]);
-	t.deepEqual(reportedError_3_2, [
+	]));
+	t.deepEqual(reportedError_3_2, new Set([
 		'Expected argument to be of type `number` but received type `null`'
-	]);
+	]));
 
 	const error_4 = t.throws<ArgumentError>(() => {
 		ow(21 as any, ow.any(
@@ -100,19 +100,19 @@ test('any predicate', t => {
 
 	const reportedError_4_1 = error_4.validationErrors.get('string')!;
 
-	t.is(reportedError_4_1.length, 4, 'There should be four errors reported for the string predicate');
+	t.is(reportedError_4_1.size, 4, 'There should be four errors reported for the string predicate');
 
-	t.deepEqual(reportedError_4_1, [
+	t.deepEqual(reportedError_4_1, new Set([
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to be a URL, got `21`',
 		'Expected string to have a minimum length of `21`, got `21`',
 		'Expected string to have a minimum length of `42`, got `21`'
-	]);
+	]));
 	// #endregion
 
 	// #region Tests line 47,65
 	class CustomPredicate implements BasePredicate<string> {
-		[testSymbol](_value: string, _main: Main, _label: string | Function, _stack: string): void {
+		[testSymbol](_value: string, _main: Main, _label: string | Function): void {
 			throw new Error('Custom error.');
 		}
 	}

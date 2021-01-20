@@ -1,12 +1,14 @@
+import {generateStackTrace} from './utils/generate-stack';
+
 const wrapStackTrace = (error: ArgumentError, stack: string) => `${error.name}: ${error.message}\n${stack}`;
 
 /**
 @hidden
 */
 export class ArgumentError extends Error {
-	readonly validationErrors: ReadonlyMap<string, string[]>;
+	readonly validationErrors: ReadonlyMap<string, Set<string>>;
 
-	constructor(message: string, context: Function, stack: string, errors = new Map<string, string[]>()) {
+	constructor(message: string, context: Function, errors = new Map<string, Set<string>>()) {
 		super(message);
 
 		this.name = 'ArgumentError';
@@ -14,7 +16,7 @@ export class ArgumentError extends Error {
 		if (Error.captureStackTrace) {
 			Error.captureStackTrace(this, context);
 		} else {
-			this.stack = wrapStackTrace(this, stack);
+			this.stack = wrapStackTrace(this, generateStackTrace());
 		}
 
 		this.validationErrors = errors;
