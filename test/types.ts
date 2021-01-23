@@ -90,11 +90,46 @@ function typeTests(value: unknown) {
 		},
 
 		() => {
+			const add = ow.method([ow.number, ow.number], (a, b) => a + b)
+
+			add(1, 2)
+
+			// @ts-expect-error
+			add(1, 'foo')
+
+			// @ts-expect-error
+			add('foo', 2)
+
+			// @ts-expect-error
+			add(1, 2, 3)
+
+			// @ts-expect-error
+			add(1)
+
+			const plus = ow.method([ow.number, ow.number], 'plus', (a, b) => a + b)
+
+			plus(1, 2)
+
+			// @ts-expect-error
+			plus(1, 'foo')
+
+			// @ts-expect-error (argument `c` unexpected)
+			ow.method([ow.number, ow.number], (a, b, c) => a + b + c)
+
+			const add8 = ow.method([ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number], (a, b, c, d, e, f, g, h) => a + b + c + d + e + f + g + h)
+
+			add8(1, 2, 3, 4, 5, 6, 7, 8)
+
+			// @ts-expect-error
+			const add9 = ow.method([ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number], (a, b, c, d, e, f, g, h, i) => a + b + c + d + e + f + g + h)
+		},
+
+		() => {
 			// To make sure all validators are mapped to the correct type, create a `Tests` type which requires that
 			// every property of `ow` has its type-mapping explicitly tested. If more properties are added this will
 			// fail until a type assertion is added below.
 
-			type AssertionProps = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional'>;
+			type AssertionProps = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional' | 'method'>;
 
 			type Tests = {
 				[K in AssertionProps]:

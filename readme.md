@@ -119,6 +119,19 @@ checkPassword('foo');
 //=> ArgumentError: Expected string `password` to have a minimum length of `6`, got `foo`
 ```
 
+### ow.method(predicates, label, body)
+
+Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with untrusted input.
+
+```ts
+const add = ow.method([ow.number, ow.number], (a, b) => a + b);
+
+add(1, 2) // returns 3
+
+add(1, '3')
+// => ArgumentError: 'Expected element `1` to be of type `number` but received type `string` in array `parameters`'
+```
+
 ### ow.any(...predicate[])
 
 Returns a predicate that verifies if the value matches at least one of the given predicates.

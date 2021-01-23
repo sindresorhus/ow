@@ -172,7 +172,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	ow(['1', 2], ow.array.exactShape([ow.string, ow.number]));
 	```
 	*/
-	exactShape(predicates: Predicate[]) {
+	exactShape(predicates: BasePredicate[]) {
 		const shape = predicates as unknown as Shape;
 
 		return this.addValidator({

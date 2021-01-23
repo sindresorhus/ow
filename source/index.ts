@@ -11,6 +11,17 @@ import test from './test';
 */
 export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
 
+// Helper type - when a typearg extends this, the function allows usage only with tuples, as opposed to arrays.
+type Tuple<T> = 
+	| [T]
+	| [T, T]
+	| [T, T, T]
+	| [T, T, T, T]
+	| [T, T, T, T, T]
+	| [T, T, T, T, T, T]
+	| [T, T, T, T, T, T, T]
+	| [T, T, T, T, T, T, T, T]
+
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
 	/**
@@ -27,6 +38,51 @@ export interface Ow extends Modifiers, Predicates {
 	@param predicate - Predicate used in the validator function.
 	*/
 	create: (<T>(predicate: BasePredicate<T>) => ReusableValidator<T>) & (<T>(label: string, predicate: BasePredicate<T>) => ReusableValidator<T>);
+
+	/**
+	Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with
+	untrusted input.
+
+	@param predicates - Tuple of predicates, corresponding to arguments the function will receive.
+	@param body - The function implementation.
+	@returns A function with the same type as `body`, but at runtime will first validate the argument list against `predicates`.
+
+	@example
+	```
+	const add = ow.method([ow.number, ow.number], (a, b) => a + b)
+
+	add(1, 2) // returns 3
+	add(1, 'foo') // throws 'Expected element `1` to be of type `number` but received type `string` in array'
+	```
+	 */
+	method<Predicates extends Tuple<BasePredicate<any>>, Return>(
+		predicates: Predicates,
+		body: (...args: Extract<{ [K in keyof Predicates]: Predicates[K] extends BasePredicate<infer X> ? X : never }, any[]>) => Return
+	): typeof body
+
+	
+	/**
+	Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with
+	untrusted input.
+
+	@param predicates - Tuple of predicates, corresponding to arguments the function will receive.
+	@param functionName - A name or label for the function whose arguments will be validated. This will appear in any assertion error messages.
+	@param body - The function implementation.
+	@returns A function with the same type as `body`, but at runtime will first validate the argument list against `predicates`.
+
+	@example
+	```
+	const add = ow.method([ow.number, ow.number], 'add', (a, b) => a + b)
+
+	add(1, 2) // returns 3
+	add(1, 'foo') // throws 'Expected element `1` to be of type `number` but received type `string` in array'
+	```
+	 */
+	method<Predicates extends Tuple<BasePredicate<any>>, Return>(
+		predicates: Predicates,
+		functionName: string,
+		body: (...args: Extract<{ [K in keyof Predicates]: Predicates[K] extends BasePredicate<infer X> ? X : never }, any[]>) => Return
+	): typeof body
 
 	/**
 	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
@@ -100,6 +156,26 @@ Object.defineProperties(ow, {
 
 			test(value, label ?? (labelOrPredicate!), predicate!);
 		}
+	},
+	method: {
+		value: (
+			predicates: Tuple<BasePredicate>,
+			functionNameOrBody: string | Function,
+			bodyOrUndefined: Function | undefined
+		) => {
+				const {functionName, body} = typeof functionNameOrBody === 'string'
+					? {functionName: functionNameOrBody, body: bodyOrUndefined as Function}
+					: {functionName: functionNameOrBody.name, body: functionNameOrBody}
+
+				const label = functionName ? `${functionName}:parameters` : 'parameters'
+
+				const argArrayType = _ow.array.exactShape(predicates)
+
+				return (...args: unknown[]) => {
+					_ow(args, label, argArrayType)
+					return body(...args)
+				}
+			}
 	}
 });
 
