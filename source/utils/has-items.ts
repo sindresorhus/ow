@@ -14,7 +14,7 @@ Retrieve the missing values in a collection based on an array of items.
 @param items - Items to search for.
 @param maxValues - Maximum number of values after the search process is stopped. Default: 5.
 */
-export default <T>(source: CollectionLike<T>, items: readonly T[], maxValues = 5) => {
+export default <T>(source: CollectionLike<T>, items: readonly T[], maxValues = 5): true | T[] => {
 	const missingValues: T[] = [];
 
 	for (const value of items) {
