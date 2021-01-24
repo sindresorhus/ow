@@ -90,42 +90,45 @@ function typeTests(value: unknown) {
 		},
 
 		() => {
-			const add = ow.method([ow.number, ow.number], (a, b) => a + b)
+			const add = ow.method([ow.number, ow.number], (a, b) => a + b);
 
-			add(1, 2)
-
-			// @ts-expect-error
-			add(1, 'foo')
+			add(1, 2);
 
 			// @ts-expect-error
-			add('foo', 2)
+			add(1, 'foo');
 
 			// @ts-expect-error
-			add(1, 2, 3)
+			add('foo', 2);
 
 			// @ts-expect-error
-			add(1)
+			add(1, 2, 3);
+
+			// @ts-expect-error
+			add(1);
 
 			const exclaim = ow.method([ow.string, ow.number.integer], 'exclaim', (text, enthusiasm) => {
-				expectTypeOf(text).toBeString()
-				expectTypeOf(enthusiasm).toBeNumber()
-				return text + '!'.repeat(enthusiasm)
-			})
+				expectTypeOf(text).toBeString();
+				expectTypeOf(enthusiasm).toBeNumber();
+				return text + '!'.repeat(enthusiasm);
+			});
 
-			exclaim('foo', 2)
+			exclaim('foo', 2);
 
 			// @ts-expect-error
-			exclaim('foo', 'bar')
+			exclaim('foo', 'bar');
 
 			// @ts-expect-error (argument `c` unexpected)
-			ow.method([ow.number, ow.number], (a, b, c) => a + b + c)
+			// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+			ow.method([ow.number, ow.number], (a, b, c) => a + b + c);
 
-			const add8 = ow.method([ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number], (a, b, c, d, e, f, g, h) => a + b + c + d + e + f + g + h)
+			// eslint-disable-next-line unicorn/prevent-abbreviations, max-params
+			const add8 = ow.method([ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number], (a, b, c, d, e, f, g, h) => a + b + c + d + e + f + g + h);
 
-			add8(1, 2, 3, 4, 5, 6, 7, 8)
+			add8(1, 2, 3, 4, 5, 6, 7, 8);
 
 			// @ts-expect-error
-			const add9 = ow.method([ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number], (a, b, c, d, e, f, g, h, i) => a + b + c + d + e + f + g + h)
+			// eslint-disable-next-line @typescript-eslint/restrict-plus-operands, unicorn/prevent-abbreviations, max-params
+			const add9 = ow.method([ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number, ow.number], (a, b, c, d, e, f, g, h, i) => a + b + c + d + e + f + g + h);
 		},
 
 		() => {

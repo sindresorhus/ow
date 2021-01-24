@@ -12,7 +12,7 @@ import test from './test';
 export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
 
 // Helper type - when a typearg extends this, the function allows usage only with tuples, as opposed to arrays.
-type Tuple<T> = 
+type Tuple<T> =
 	| [T]
 	| [T, T]
 	| [T, T, T]
@@ -20,7 +20,7 @@ type Tuple<T> =
 	| [T, T, T, T, T]
 	| [T, T, T, T, T, T]
 	| [T, T, T, T, T, T, T]
-	| [T, T, T, T, T, T, T, T]
+	| [T, T, T, T, T, T, T, T];
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
@@ -58,9 +58,8 @@ export interface Ow extends Modifiers, Predicates {
 	method<Predicates extends Tuple<BasePredicate<any>>, Return>(
 		predicates: Predicates,
 		body: (...args: Extract<{ [K in keyof Predicates]: Predicates[K] extends BasePredicate<infer X> ? X : never }, any[]>) => Return
-	): typeof body
+	): typeof body;
 
-	
 	/**
 	Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with
 	untrusted input.
@@ -82,7 +81,7 @@ export interface Ow extends Modifiers, Predicates {
 		predicates: Predicates,
 		functionName: string,
 		body: (...args: Extract<{ [K in keyof Predicates]: Predicates[K] extends BasePredicate<infer X> ? X : never }, any[]>) => Return
-	): typeof body
+	): typeof body;
 
 	/**
 	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
@@ -163,19 +162,19 @@ Object.defineProperties(ow, {
 			functionNameOrBody: string | Function,
 			bodyOrUndefined: Function | undefined
 		) => {
-				const {functionName, body} = typeof functionNameOrBody === 'string'
-					? {functionName: functionNameOrBody, body: bodyOrUndefined as Function}
-					: {functionName: functionNameOrBody.name, body: functionNameOrBody}
+			const {functionName, body} = typeof functionNameOrBody === 'string' ?
+				{functionName: functionNameOrBody, body: bodyOrUndefined!} :
+				{functionName: functionNameOrBody.name, body: functionNameOrBody};
 
-				const label = functionName ? `${functionName}:parameters` : 'parameters'
+			const label = functionName ? `${functionName}:parameters` : 'parameters';
 
-				const argArrayType = _ow.array.exactShape(predicates)
+			const argArrayType = _ow.array.exactShape(predicates);
 
-				return (...args: unknown[]) => {
-					_ow(args, label, argArrayType)
-					return body(...args)
-				}
-			}
+			return (...args: unknown[]) => {
+				_ow(args, label, argArrayType);
+				return body(...args);
+			};
+		}
 	}
 });
 
