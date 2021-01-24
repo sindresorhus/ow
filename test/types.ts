@@ -106,12 +106,16 @@ function typeTests(value: unknown) {
 			// @ts-expect-error
 			add(1)
 
-			const plus = ow.method([ow.number, ow.number], 'plus', (a, b) => a + b)
+			const exclaim = ow.method([ow.string, ow.number.integer], 'exclaim', (text, enthusiasm) => {
+				expectTypeOf(text).toBeString()
+				expectTypeOf(enthusiasm).toBeNumber()
+				return text + '!'.repeat(enthusiasm)
+			})
 
-			plus(1, 2)
+			exclaim('foo', 2)
 
 			// @ts-expect-error
-			plus(1, 'foo')
+			exclaim('foo', 'bar')
 
 			// @ts-expect-error (argument `c` unexpected)
 			ow.method([ow.number, ow.number], (a, b, c) => a + b + c)
