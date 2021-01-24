@@ -13,7 +13,7 @@ Infer the label of the caller.
 
 @param callsites - List of stack frames.
 */
-export const inferLabel = (callsites: readonly CallSite[]) => {
+export const inferLabel = (callsites: readonly CallSite[]): void | string => {
 	if (!isNode) {
 		// Exit if we are not running in a Node.js environment
 		return;

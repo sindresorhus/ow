@@ -1,1 +1,1 @@
-export default () => Math.random().toString(16).slice(2);
+export default (): string => Math.random().toString(16).slice(2);

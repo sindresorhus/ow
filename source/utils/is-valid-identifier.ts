@@ -16,4 +16,4 @@ Test if the string is a valid JavaScript identifier.
 
 @param string - String to test.
 */
-export default (string: string | undefined) => string && !reservedSet.has(string) && identifierRegex.test(string);
+export default (string: string | undefined): string | undefined | boolean => string && !reservedSet.has(string) && identifierRegex.test(string);

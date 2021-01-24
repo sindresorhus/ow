@@ -153,7 +153,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	get [validatorSymbol]() {
+	get [validatorSymbol](): Validator<T>[] {
 		return this.context.validators;
 	}
 
