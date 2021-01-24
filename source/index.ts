@@ -55,9 +55,9 @@ export interface Ow extends Modifiers, Predicates {
 	add(1, 'foo') // throws 'Expected element `1` to be of type `number` but received type `string` in array'
 	```
 	 */
-	method<Params extends Tuple<any>, Return>(
-		predicates: Extract<{ [K in keyof Params]: BasePredicate<Params[K]> }, any[]>,
-		body: (...args: Params) => Return
+	method<Arguments extends Tuple<any>, Return>(
+		predicates: Extract<{ [K in keyof Arguments]: BasePredicate<Arguments[K]> }, any[]>,
+		body: (...args: Arguments) => Return
 	): typeof body;
 
 	/**
@@ -77,10 +77,10 @@ export interface Ow extends Modifiers, Predicates {
 	add(1, 'foo') // throws 'Expected element `1` to be of type `number` but received type `string` in array'
 	```
 	 */
-	method<Params extends Tuple<any>, Return>(
-		predicates: Extract<{ [K in keyof Params]: BasePredicate<Params[K]> }, any[]>,
+	method<Arguments extends Tuple<any>, Return>(
+		predicates: Extract<{ [K in keyof Arguments]: BasePredicate<Arguments[K]> }, any[]>,
 		functionName: string,
-		body: (...args: Params) => Return
+		body: (...args: Arguments) => Return
 	): typeof body;
 
 	/**
