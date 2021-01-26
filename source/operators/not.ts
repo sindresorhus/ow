@@ -1,5 +1,6 @@
 import randomId from '../utils/random-id';
 import {validatorSymbol} from '../predicates/predicate';
+import type {Predicate, Validator} from '../predicates/predicate';
 
 /**
 Operator which inverts the following validation.
@@ -8,10 +9,10 @@ Operator which inverts the following validation.
 
 @param predictate - Predicate to wrap inside the operator.
 */
-export const not = (predicate: any) => {
+export const not = (predicate: Predicate) => {
 	const originalAddValidator = predicate.addValidator;
 
-	predicate.addValidator = (validator: any) => {
+	predicate.addValidator = (validator: Validator<unknown>) => {
 		const {validator: fn, message, negatedMessage} = validator;
 		const placeholder = randomId();
 
