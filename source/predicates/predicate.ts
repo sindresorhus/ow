@@ -237,7 +237,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 
 	@param validator - Validator to register.
 	*/
-	addValidator(validator: Validator<T>) {
+	addValidator(validator: Validator<T>): Predicate {
 		this.context.validators.push(validator);
 		return this;
 	}
