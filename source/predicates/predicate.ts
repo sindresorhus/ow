@@ -161,7 +161,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	Invert the following validators.
 	*/
 	get not(): this {
-		return not(this);
+		return not(this) as this;
 	}
 
 	/**
@@ -237,7 +237,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 
 	@param validator - Validator to register.
 	*/
-	protected addValidator(validator: Validator<T>) {
+	addValidator(validator: Validator<T>): this {
 		this.context.validators.push(validator);
 		return this;
 	}
