@@ -86,7 +86,7 @@
 		"rules": {
 			"no-useless-return": "off",
 			"ava/no-ignored-test-files": "off",
-			"@typescript-eslint/explicit-function-return-type": "off",
+			"@typescript-eslint/explicit-function-return-type": "error",
 			"@typescript-eslint/ban-types": "off",
 			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-empty-function": "off",
