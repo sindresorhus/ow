@@ -7,6 +7,15 @@ test('type-level tests', t => {
 	t.is(typeof typeTests, 'function');
 });
 
+type AssertionProps = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional'>;
+
+type Tests = {
+	[K in AssertionProps]:
+		typeof ow[K] extends BasePredicate<infer T>
+			? (type: ExpectTypeOf<T, true>) => void
+			: never
+};
+
 // These tests will fail at compile-time, not runtime.
 // The function isn't actually called, it's just a way of declaring scoped type-level tests
 // that doesn't make the compiler angry about unused variables.
@@ -89,19 +98,10 @@ function typeTests(value: unknown): (() => void)[] {
 			}>();
 		},
 
-		() => {
+		(): Tests => {
 			// To make sure all validators are mapped to the correct type, create a `Tests` type which requires that
 			// every property of `ow` has its type-mapping explicitly tested. If more properties are added this will
 			// fail until a type assertion is added below.
-
-			type AssertionProps = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional'>;
-
-			type Tests = {
-				[K in AssertionProps]:
-					typeof ow[K] extends BasePredicate<infer T>
-						? (type: ExpectTypeOf<T, true>) => void
-						: never
-			};
 
 			const tests: Tests = {
 				array: expect => expect.toBeArray(),
