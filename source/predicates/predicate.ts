@@ -169,7 +169,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 
 	@param customValidator - Custom validation function.
 	*/
-	validate(customValidator: CustomValidator<T>) {
+	validate(customValidator: CustomValidator<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => typeof error === 'string' ?
 				`(${label}) ${error}` :
@@ -191,7 +191,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 
 	@param validator - Validation function.
 	*/
-	is(validator: (value: T) => boolean | string) {
+	is(validator: (value: T) => boolean | string): this {
 		return this.addValidator({
 			message: (value, label, error) => (error ?
 				`(${label}) ${error}` :
@@ -218,10 +218,10 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	//=> ArgumentError: Expected string, to be have a minimum length of 5, got `🌈`
 	```
 	*/
-	message(newMessage: string | ValidatorMessageBuilder<T>) {
+	message(newMessage: string | ValidatorMessageBuilder<T>): this {
 		const {validators} = this.context;
 
-		validators[validators.length - 1]!.message = (value, label) => {
+		validators[validators.length - 1]!.message = (value, label): string => {
 			if (typeof newMessage === 'function') {
 				return newMessage(value, label);
 			}

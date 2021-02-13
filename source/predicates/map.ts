@@ -16,7 +16,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param size - The size of the Map.
 	*/
-	size(size: number) {
+	size(size: number): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have size \`${size}\`, got \`${map.size}\``,
 			validator: map => map.size === size
@@ -28,7 +28,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param size - The minimum size of the Map.
 	*/
-	minSize(size: number) {
+	minSize(size: number): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have a minimum size of \`${size}\`, got \`${map.size}\``,
 			validator: map => map.size >= size,
@@ -41,7 +41,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param size - The maximum size of the Map.
 	*/
-	maxSize(size: number) {
+	maxSize(size: number): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have a maximum size of \`${size}\`, got \`${map.size}\``,
 			validator: map => map.size <= size,
@@ -54,7 +54,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param keys - The keys that should be a key in the Map.
 	*/
-	hasKeys(...keys: readonly T1[]) {
+	hasKeys(...keys: readonly T1[]): this {
 		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: map => hasItems(map, keys)
@@ -66,7 +66,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param keys - The keys that could be a key in the Map.
 	*/
-	hasAnyKeys(...keys: readonly T1[]) {
+	hasAnyKeys(...keys: readonly T1[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: map => keys.some(key => map.has(key))
@@ -78,7 +78,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param values - The values that should be a value in the Map.
 	*/
-	hasValues(...values: readonly T2[]) {
+	hasValues(...values: readonly T2[]): this {
 		return this.addValidator({
 			message: (_, label, missingValues) => `Expected ${label} to have values \`${JSON.stringify(missingValues)}\``,
 			validator: map => hasItems(new Set(map.values()), values)
@@ -90,7 +90,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param values - The values that could be a value in the Map.
 	*/
-	hasAnyValues(...values: readonly T2[]) {
+	hasAnyValues(...values: readonly T2[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any value of \`${JSON.stringify(values)}\``,
 			validator: map => {
@@ -105,7 +105,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param predicate - The predicate that should be applied against every key in the Map.
 	*/
-	keysOfType(predicate: Predicate<T1>) {
+	keysOfType(predicate: Predicate<T1>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: map => ofType(map.keys(), predicate)
@@ -117,7 +117,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param predicate - The predicate that should be applied against every value in the Map.
 	*/
-	valuesOfType(predicate: Predicate<T2>) {
+	valuesOfType(predicate: Predicate<T2>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: map => ofType(map.values(), predicate)
@@ -127,7 +127,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	/**
 	Test a Map to be empty.
 	*/
-	get empty() {
+	get empty(): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to be empty, got \`${JSON.stringify([...map])}\``,
 			validator: map => map.size === 0
@@ -137,7 +137,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	/**
 	Test a Map to be not empty.
 	*/
-	get nonEmpty() {
+	get nonEmpty(): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
 			validator: map => map.size > 0
@@ -149,7 +149,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param expected - Expected Map to match.
 	*/
-	deepEqual(expected: Map<T1, T2>) {
+	deepEqual(expected: Map<T1, T2>): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify([...expected])}\`, got \`${JSON.stringify([...map])}\``,
 			validator: map => isEqual(map, expected)

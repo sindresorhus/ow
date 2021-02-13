@@ -253,7 +253,7 @@ test('not', t => {
 });
 
 test('is', t => {
-	const greaterThan = (max: number, x: number) => {
+	const greaterThan = (max: number, x: number): string | true => {
 		return x > max || `Expected \`${x}\` to be greater than \`${max}\``;
 	};
 
@@ -470,7 +470,7 @@ test('any-reusable validator', t => {
 test('custom validation function', t => {
 	t.throws(() => {
 		ow('🦄', 'unicorn', ow.string.validate(value => ({
-			message: label => `Expected ${label} to be \`🌈\`, got \`${value}\``,
+			message: (label): string => `Expected ${label} to be \`🌈\`, got \`${value}\``,
 			validator: value === '🌈'
 		})));
 	}, 'Expected string `unicorn` to be `🌈`, got `🦄`');
@@ -484,7 +484,7 @@ test('custom validation function', t => {
 
 	t.notThrows(() => {
 		ow('🦄', 'unicorn', ow.string.validate(value => ({
-			message: label => `Expected ${label} to be '🦄', got \`${value}\``,
+			message: (label): string => `Expected ${label} to be '🦄', got \`${value}\``,
 			validator: value === '🦄'
 		})));
 	});
@@ -526,7 +526,7 @@ test('ow without Error.captureStackTrace', t => {
 
 // This test is to cover all paths of source/argument-error.ts
 test('ArgumentError with missing errors map', t => {
-	function throws() {
+	function throws(): void {
 		throw new ArgumentError('Hi from tests!', throws);
 	}
 

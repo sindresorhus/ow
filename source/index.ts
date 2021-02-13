@@ -60,7 +60,7 @@ export interface ReusableValidator<T> {
 	(value: T, label?: string): void;
 }
 
-const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>) => {
+const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>): void => {
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
 		throw new TypeError(`Expected second argument to be a predicate or a string, got \`${typeof labelOrPredicate}\``);
 	}
@@ -79,7 +79,7 @@ const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>
 
 Object.defineProperties(ow, {
 	isValid: {
-		value: <T>(value: T, predicate: BasePredicate<T>) => {
+		value: <T>(value: T, predicate: BasePredicate<T>): boolean => {
 			try {
 				ow(value, predicate);
 				return true;
@@ -89,11 +89,11 @@ Object.defineProperties(ow, {
 		}
 	},
 	create: {
-		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T, label?: string) => {
+		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T, label?: string): void => {
 			if (isPredicate(labelOrPredicate)) {
 				const stackFrames = callsites();
 
-				test(value, label ?? (() => inferLabel(stackFrames)), labelOrPredicate);
+				test(value, label ?? ((): string | void => inferLabel(stackFrames)), labelOrPredicate);
 
 				return;
 			}

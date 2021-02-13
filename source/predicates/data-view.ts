@@ -13,7 +13,7 @@ export class DataViewPredicate extends Predicate<DataView> {
 
 	@param byteLength - The byte length of the DataView.
 	*/
-	byteLength(byteLength: number) {
+	byteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength === byteLength
@@ -25,7 +25,7 @@ export class DataViewPredicate extends Predicate<DataView> {
 
 	@param byteLength - The minimum byte length of the DataView.
 	*/
-	minByteLength(byteLength: number) {
+	minByteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength >= byteLength,
@@ -38,7 +38,7 @@ export class DataViewPredicate extends Predicate<DataView> {
 
 	@param length - The minimum byte length of the DataView.
 	*/
-	maxByteLength(byteLength: number) {
+	maxByteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength <= byteLength,
