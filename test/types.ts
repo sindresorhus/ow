@@ -10,9 +10,9 @@ test('type-level tests', t => {
 // These tests will fail at compile-time, not runtime.
 // The function isn't actually called, it's just a way of declaring scoped type-level tests
 // that doesn't make the compiler angry about unused variables.
-function typeTests(value: unknown) {
+function typeTests(value: unknown): (() => void)[] {
 	return [
-		() => {
+		(): void => {
 			expectTypeOf(value).toBeUnknown();
 
 			ow(value, ow.string);
@@ -25,25 +25,25 @@ function typeTests(value: unknown) {
 			expectTypeOf(value).toBeNever(); // Can't be a string and a boolean!
 		},
 
-		() => {
+		(): void => {
 			ow(value, 'my-label', ow.number);
 
 			expectTypeOf(value).toBeNumber();
 		},
 
-		() => {
+		(): void => {
 			ow(value, ow.string.maxLength(7));
 
 			expectTypeOf(value).toBeString();
 		},
 
-		() => {
+		(): void => {
 			ow(value, ow.optional.string);
 
 			expectTypeOf(value).toEqualTypeOf<string | undefined>();
 		},
 
-		() => {
+		(): void => {
 			ow(value, ow.iterable);
 
 			expectTypeOf(value).toEqualTypeOf<Iterable<unknown>>();
@@ -57,13 +57,13 @@ function typeTests(value: unknown) {
 			expectTypeOf(value).toEqualTypeOf<string[]>();
 		},
 
-		() => {
+		(): void => {
 			ow(value, ow.array.ofType(ow.any(ow.string, ow.number, ow.boolean, ow.nullOrUndefined)));
 
 			expectTypeOf(value).toEqualTypeOf<Array<string | number | boolean | null | undefined>>();
 		},
 
-		() => {
+		(): void => {
 			ow(value, ow.object);
 
 			expectTypeOf(value).toBeObject();

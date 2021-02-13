@@ -6,7 +6,7 @@ export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T
 
 	@param byteLength - The byte length of the array buffer.
 	*/
-	byteLength(byteLength: number) {
+	byteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength === byteLength
@@ -18,7 +18,7 @@ export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T
 
 	@param byteLength - The minimum byte length of the array buffer.
 	*/
-	minByteLength(byteLength: number) {
+	minByteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength >= byteLength,
@@ -31,7 +31,7 @@ export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T
 
 	@param length - The minimum byte length of the array buffer.
 	*/
-	maxByteLength(byteLength: number) {
+	maxByteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength <= byteLength,

@@ -1,6 +1,6 @@
 import {generateStackTrace} from './utils/generate-stack';
 
-const wrapStackTrace = (error: ArgumentError, stack: string) => `${error.name}: ${error.message}\n${stack}`;
+const wrapStackTrace = (error: ArgumentError, stack: string): string => `${error.name}: ${error.message}\n${stack}`;
 
 /**
 @hidden

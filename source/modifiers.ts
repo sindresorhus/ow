@@ -17,7 +17,7 @@ export interface Modifiers {
 export default <T>(object: T): T & Modifiers => {
 	Object.defineProperties(object, {
 		optional: {
-			get: () => predicates({}, {optional: true})
+			get: (): Predicates => predicates({}, {optional: true})
 		}
 	});
 

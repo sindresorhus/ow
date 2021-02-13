@@ -1,7 +1,7 @@
 /**
 @hidden
 */
-export const createAnyError = (...errors: readonly string[]) => {
+export const createAnyError = (...errors: readonly string[]): string => {
 	return [
 		'Any predicate failed with the following errors:',
 		...errors.map(error => `  - ${error}`)
@@ -11,7 +11,7 @@ export const createAnyError = (...errors: readonly string[]) => {
 /**
 @hidden
 */
-export const createAnyPredicateError = (...allErrors: Array<[predicateName: string, errors: string[]]>) => {
+export const createAnyPredicateError = (...allErrors: Array<[predicateName: string, errors: string[]]>): string => {
 	return [
 		'Any predicate failed with the following errors:',
 		...allErrors.map(([predicateName, errors]) => {

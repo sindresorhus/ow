@@ -13,7 +13,7 @@ export class DatePredicate extends Predicate<Date> {
 
 	@param date - Maximum value.
 	*/
-	before(date: Date) {
+	before(date: Date): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} ${value.toISOString()} to be before ${date.toISOString()}`,
 			validator: value => value.getTime() < date.getTime()
@@ -25,7 +25,7 @@ export class DatePredicate extends Predicate<Date> {
 
 	@param date - Minimum value.
 	*/
-	after(date: Date) {
+	after(date: Date): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} ${value.toISOString()} to be after ${date.toISOString()}`,
 			validator: value => value.getTime() > date.getTime()

@@ -18,7 +18,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param length - The length of the array.
 	*/
-	length(length: number) {
+	length(length: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have length \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length === length
@@ -30,7 +30,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param length - The minimum length of the array.
 	*/
-	minLength(length: number) {
+	minLength(length: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length >= length,
@@ -43,7 +43,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param length - The maximum length of the array.
 	*/
-	maxLength(length: number) {
+	maxLength(length: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length <= length,
@@ -56,7 +56,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param searchElement - The value that should be the start of the array.
 	*/
-	startsWith(searchElement: T) {
+	startsWith(searchElement: T): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to start with \`${searchElement}\`, got \`${value[0]}\``,
 			validator: value => value[0] === searchElement
@@ -68,7 +68,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param searchElement - The value that should be the end of the array.
 	*/
-	endsWith(searchElement: T) {
+	endsWith(searchElement: T): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to end with \`${searchElement}\`, got \`${value[value.length - 1]}\``,
 			validator: value => value[value.length - 1] === searchElement
@@ -80,7 +80,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param searchElements - The values that should be included in the array.
 	*/
-	includes(...searchElements: readonly T[]) {
+	includes(...searchElements: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include all elements of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => searchElements.every(element => value.includes(element))
@@ -92,7 +92,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param searchElements - The values that should be included in the array.
 	*/
-	includesAny(...searchElements: readonly T[]) {
+	includesAny(...searchElements: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include any element of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => searchElements.some(element => value.includes(element))
@@ -102,7 +102,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
 	Test an array to be empty.
 	*/
-	get empty() {
+	get empty(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be empty, got \`${JSON.stringify(value)}\``,
 			validator: value => value.length === 0
@@ -112,7 +112,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
 	Test an array to be not empty.
 	*/
-	get nonEmpty() {
+	get nonEmpty(): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
 			validator: value => value.length > 0
@@ -124,7 +124,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 
 	@param expected - Expected value to match.
 	*/
-	deepEqual(expected: readonly T[]) {
+	deepEqual(expected: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
 			validator: value => isEqual(value, expected)
@@ -172,7 +172,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	ow(['1', 2], ow.array.exactShape([ow.string, ow.number]));
 	```
 	*/
-	exactShape(predicates: Predicate[]) {
+	exactShape(predicates: Predicate[]): this {
 		const shape = predicates as unknown as Shape;
 
 		return this.addValidator({

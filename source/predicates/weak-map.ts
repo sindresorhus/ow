@@ -14,7 +14,7 @@ export class WeakMapPredicate<KeyType extends object = object> extends Predicate
 
 	@param keys - The keys that should be a key in the WeakMap.
 	*/
-	hasKeys(...keys: readonly KeyType[]) {
+	hasKeys(...keys: readonly KeyType[]): this {
 		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: map => hasItems(map, keys)
@@ -26,7 +26,7 @@ export class WeakMapPredicate<KeyType extends object = object> extends Predicate
 
 	@param keys - The keys that could be a key in the WeakMap.
 	*/
-	hasAnyKeys(...keys: readonly KeyType[]) {
+	hasAnyKeys(...keys: readonly KeyType[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
 			validator: map => keys.some(key => map.has(key))
