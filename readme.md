@@ -121,15 +121,16 @@ checkPassword('foo');
 
 ### ow.method(predicates, label, body)
 
-Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with untrusted input.
+Wrap a function with parameter validation. Useful for writing strongly-typed functions which will be called with untrusted input.
 
 ```ts
 const add = ow.method([ow.number, ow.number], (a, b) => a + b);
 
-add(1, 2) // returns 3
+add(1, 2);
+//=> 3
 
-add(1, '3')
-// => ArgumentError: 'Expected element `1` to be of type `number` but received type `string` in array `parameters`'
+add(1, '3');
+//=> ArgumentError: 'Expected element `1` to be of type `number` but received type `string` in array `parameters`'
 ```
 
 ### ow.any(...predicate[])
