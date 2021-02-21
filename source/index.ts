@@ -11,7 +11,7 @@ import test from './test';
 */
 export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
 
-// Helper type - when a typearg extends this, the function allows usage only with tuples, as opposed to arrays.
+// Helper type: When a type parameter extends this, the function allows usage only with tuples, as opposed to arrays.
 type Tuple<T> =
 	| [T]
 	| [T, T]
@@ -40,45 +40,51 @@ export interface Ow extends Modifiers, Predicates {
 	create: (<T>(predicate: BasePredicate<T>) => ReusableValidator<T>) & (<T>(label: string, predicate: BasePredicate<T>) => ReusableValidator<T>);
 
 	/**
-	Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with
+	Wrap a function with parameter validation. Useful for writing strongly-typed functions which will be called with
 	untrusted input.
 
-	@param predicates - Tuple of predicates, corresponding to arguments the function will receive.
+	@param predicates - Tuple of predicates, corresponding to the arguments the function will receive.
 	@param body - The function implementation.
 	@returns A function with the same type as `body`, but at runtime will first validate the argument list against `predicates`.
 
 	@example
 	```
-	const add = ow.method([ow.number, ow.number], (a, b) => a + b)
+	const add = ow.method([ow.number, ow.number], (a, b) => a + b);
 
-	add(1, 2) // returns 3
-	add(1, 'foo') // throws 'Expected element `1` to be of type `number` but received type `string` in array'
+	add(1, 2);
+	//=> 3
+
+	add(1, '3');
+	//=> ArgumentError: 'Expected element `1` to be of type `number` but received type `string` in array `parameters`'
 	```
-	 */
+	*/
 	method<Arguments extends Tuple<any>, Return>(
-		predicates: Extract<{ [K in keyof Arguments]: BasePredicate<Arguments[K]> }, any[]>,
+		predicates: Extract<{[K in keyof Arguments]: BasePredicate<Arguments[K]>}, any[]>,
 		body: (...args: Arguments) => Return
 	): typeof body;
 
 	/**
-	Wrap a function with parameter validation. Useful for writing strongly typed functions which will be called with
+	Wrap a function with parameter validation. Useful for writing strongly-typed functions which will be called with
 	untrusted input.
 
-	@param predicates - Tuple of predicates, corresponding to arguments the function will receive.
+	@param predicates - Tuple of predicates, corresponding to the arguments the function will receive.
 	@param functionName - A name or label for the function whose arguments will be validated. This will appear in any assertion error messages.
 	@param body - The function implementation.
 	@returns A function with the same type as `body`, but at runtime will first validate the argument list against `predicates`.
 
 	@example
 	```
-	const add = ow.method([ow.number, ow.number], 'add', (a, b) => a + b)
+	const add = ow.method([ow.number, ow.number], (a, b) => a + b);
 
-	add(1, 2) // returns 3
-	add(1, 'foo') // throws 'Expected element `1` to be of type `number` but received type `string` in array'
+	add(1, 2);
+	//=> 3
+
+	add(1, '3');
+	//=> ArgumentError: 'Expected element `1` to be of type `number` but received type `string` in array `parameters`'
 	```
-	 */
+	*/
 	method<Arguments extends Tuple<any>, Return>(
-		predicates: Extract<{ [K in keyof Arguments]: BasePredicate<Arguments[K]> }, any[]>,
+		predicates: Extract<{[K in keyof Arguments]: BasePredicate<Arguments[K]>}, any[]>,
 		functionName: string,
 		body: (...args: Arguments) => Return
 	): typeof body;
