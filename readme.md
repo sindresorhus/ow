@@ -10,6 +10,17 @@
 
 > Function argument validation for humans
 
+**This is a fork of the original [ow repository](https://github.com/sindresorhus/ow), but converted and "rewritten" from ts to modern js.**
+
+The main differences are:
+
+- the package name is `@pumpncode/ow`, use `npm install @pumpncode/ow`
+- minimum required Node version is 14, not 10
+- there is no compiled build, just use `import`, which imports the source code
+- you can't use `require`, this fork is written in es module syntax
+- the default export is `ow` itself, not an object like `{..., default: ow}`
+- other than the name in the package.json, links and mentions of the package name will still reference `ow` and `sindresorhus` (including this readme) in case this fork ever gets merged
+
 ## Highlights
 
 - Expressive chainable API
