@@ -26,9 +26,7 @@ $ npm install ow
 
 ## Usage
 
-*If you use CommonJS, you need to import is as `const {default: ow} = require('ow')`.*
-
-```ts
+```js
 import ow from 'ow';
 
 const unicorn = input => {
@@ -46,7 +44,7 @@ unicorn('yo');
 
 We can also match the shape of an object.
 
-```ts
+```js
 import ow from 'ow';
 
 const unicorn = {
@@ -71,18 +69,6 @@ ow(unicorn, ow.object.exactShape({
 
 [Complete API documentation](https://sindresorhus.com/ow/interfaces/ow.html)
 
-Ow includes TypeScript type guards, so using it will narrow the type of previously-unknown values.
-
-```ts
-function (input: unknown) {
-	input.slice(0, 3) // Error, Property 'slice' does not exist on type 'unknown'
-
-	ow(input, ow.string)
-
-	input.slice(0, 3) // OK
-}
-```
-
 ### ow(value, predicate)
 
 Test if `value` matches the provided `predicate`. Throws an `ArgumentError` if the test fails.
@@ -101,7 +87,7 @@ Returns `true` if the value matches the predicate, otherwise returns `false`.
 
 Create a reusable validator.
 
-```ts
+```js
 const checkPassword = ow.create(ow.string.minLength(6));
 
 const password = 'foo';
@@ -114,7 +100,7 @@ checkPassword(password);
 
 Create a reusable validator with a specific `label`.
 
-```ts
+```js
 const checkPassword = ow.create('password', ow.string.minLength(6));
 
 checkPassword('foo');
@@ -125,7 +111,7 @@ checkPassword('foo');
 
 Returns a predicate that verifies if the value matches at least one of the given predicates.
 
-```ts
+```js
 ow('foo', ow.any(ow.string.maxLength(3), ow.number));
 ```
 
@@ -133,7 +119,7 @@ ow('foo', ow.any(ow.string.maxLength(3), ow.number));
 
 Makes the predicate optional. An optional predicate means that it doesn't fail if the value is `undefined`.
 
-```ts
+```js
 ow(1, ow.optional.number);
 
 ow(undefined, ow.optional.number);
@@ -200,7 +186,7 @@ The following predicates are available on every type.
 
 Inverts the following predicate.
 
-```ts
+```js
 ow(1, ow.number.not.infinite);
 
 ow('', ow.string.not.empty);
@@ -211,7 +197,7 @@ ow('', ow.string.not.empty);
 
 Use a custom validation function. Return `true` if the value matches the validation, return `false` if it doesn't.
 
-```ts
+```js
 ow(1, ow.number.is(x => x < 10));
 
 ow(1, ow.number.is(x => x > 10));
@@ -220,7 +206,7 @@ ow(1, ow.number.is(x => x > 10));
 
 Instead of returning `false`, you can also return a custom error message which results in a failure.
 
-```ts
+```js
 const greaterThan = (max: number, x: number) => {
 	return x > max || `Expected \`${x}\` to be greater than \`${max}\``;
 };
@@ -233,7 +219,7 @@ ow(5, ow.number.is(x => greaterThan(10, x)));
 
 Use a custom validation object. The difference with `is` is that the function should return a validation object, which allows more flexibility.
 
-```ts
+```js
 ow(1, ow.number.validate(value => ({
 	validator: value > 10,
 	message: `Expected value to be greater than 10, got ${value}`
@@ -243,7 +229,7 @@ ow(1, ow.number.validate(value => ({
 
 You can also pass in a function as `message` value which accepts the label as argument.
 
-```ts
+```js
 ow(1, 'input', ow.number.validate(value => ({
 	validator: value > 10,
 	message: label => `Expected ${label} to be greater than 10, got ${value}`
@@ -255,21 +241,21 @@ ow(1, 'input', ow.number.validate(value => ({
 
 Provide a custom message:
 
-```ts
+```js
 ow('🌈', 'unicorn', ow.string.equals('🦄').message('Expected unicorn, got rainbow'));
 //=> ArgumentError: Expected unicorn, got rainbow
 ```
 
 You can also pass in a function which receives the value as the first parameter and the label as the second parameter and is expected to return the message.
 
-```ts
+```js
 ow('🌈', ow.string.minLength(5).message((value, label) => `Expected ${label}, to have a minimum length of 5, got \`${value}\``));
 //=> ArgumentError: Expected string, to be have a minimum length of 5, got `🌈`
 ```
 
 It's also possible to add a separate message per validation:
 
-```ts
+```js
 ow(
 	'1234',
 	ow.string
