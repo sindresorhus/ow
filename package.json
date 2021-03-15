@@ -1,9 +1,9 @@
 {
-	"name": "@pumpn/ow",
+	"name": "ow",
 	"version": "0.23.0",
 	"description": "Function argument validation for humans",
 	"license": "MIT",
-	"repository": "pumpncode/ow",
+	"repository": "sindresorhus/ow",
 	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
