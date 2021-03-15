@@ -1,12 +1,14 @@
-'use strict';
+import ow from "./source/index.js";
 
-if (process.env.NODE_ENV === 'production') {
-	const shim = new Proxy((() => {}), {
-		get: () => shim,
-		apply: () => shim
-	});
+export default (() => {
+	if (process.env.NODE_ENV === 'production') {
+		const shim = new Proxy((() => {}), {
+			get: () => shim,
+			apply: () => shim
+		});
 
-	module.exports = shim;
-} else {
-	module.exports = require('./dist');
-}
+		return shim;
+	} else {
+		return ow;
+	}
+})();
