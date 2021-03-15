@@ -14,7 +14,7 @@
 
 The main differences are:
 
-- the installed package name is `pumpncode/ow`, use `npm install pumpncode/ow` (referencing this github repo)
+- the installed package name is `pumpncode/ow#js`, use `npm install pumpncode/ow#js` (referencing this github repo and the "js" branch)
 - minimum required Node version is 14, not 10
 - there is no compiled build, just use `import`, which imports the source code
 - you can't use `require`, this fork is written in es module syntax
