@@ -10,20 +10,20 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "https://sindresorhus.com"
 	},
-	"main": "dist/index.js",
+	"main": "source/index.js",
+	"module": "source/index.js",
+	"type": "module",
 	"engines": {
-		"node": ">=10"
+		"node": ">=14"
 	},
 	"scripts": {
 		"test": "xo && nyc ava",
-		"docs": "typedoc source/index.ts",
-		"build": "del-cli dist && tsc",
-		"prepublishOnly": "npm run build",
+		"docs": "typedoc source/index.js",
 		"postpublish": "npm run docs && gh-pages --dist docs --no-history --message \"Deploy documentation\"",
-		"example": "npm run build && node example.js"
+		"example": "node example.js"
 	},
 	"files": [
-		"dist",
+		"source",
 		"dev-only.js"
 	],
 	"keywords": [
@@ -51,62 +51,35 @@
 		"callsites": "^3.1.0",
 		"dot-prop": "^6.0.1",
 		"lodash.isequal": "^4.5.0",
-		"type-fest": "^0.20.2",
+		"type-fest": "^0.21.3",
 		"vali-date": "^1.0.0"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^0.8.0",
-		"@types/lodash.isequal": "^4.5.5",
-		"@types/node": "^14.14.20",
-		"@types/vali-date": "^1.0.0",
-		"ava": "^2.4.0",
-		"del-cli": "^3.0.1",
+		"ava": "^3.15.0",
 		"expect-type": "^0.11.0",
 		"gh-pages": "^3.1.0",
 		"nyc": "^15.1.0",
-		"ts-node": "^9.1.1",
-		"typedoc": "^0.20.13",
-		"typescript": "~4.1.3",
-		"xo": "^0.37.1"
+		"typedoc": "^0.20.32",
+		"typescript": "~4.2.3",
+		"xo": "^0.38.2"
 	},
-	"browser": {
-		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
-	},
-	"types": "dist",
 	"sideEffects": false,
 	"xo": {
-		"parserOptions": {
-			"project": "./tsconfig.xo.json"
-		},
 		"ignores": [
 			"example.js",
 			"dev-only.js",
-			"source/utils/infer-label.browser.ts"
+			"source/utils/infer-label.browser.js"
 		],
 		"rules": {
 			"no-useless-return": "off",
 			"ava/no-ignored-test-files": "off",
-			"@typescript-eslint/explicit-function-return-type": "error",
-			"@typescript-eslint/ban-types": "off",
-			"@typescript-eslint/no-explicit-any": "off",
-			"@typescript-eslint/no-empty-function": "off",
-			"@typescript-eslint/restrict-template-expressions": "off",
-			"@typescript-eslint/no-unused-vars": "off",
 			"import/no-anonymous-default-export": "off"
 		}
 	},
 	"ava": {
-		"babel": false,
-		"compileEnhancements": false,
 		"files": [
 			"test/**",
 			"!test/fixtures/**"
-		],
-		"extensions": [
-			"ts"
-		],
-		"require": [
-			"ts-node/register"
 		]
 	},
 	"nyc": {
