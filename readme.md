@@ -14,7 +14,7 @@
 
 The main differences are:
 
-- the package name is `@pumpncode/ow`, use `npm install @pumpncode/ow`
+- the package name is `@pumpn/ow`, use `npm install @pumpn/ow`
 - minimum required Node version is 14, not 10
 - there is no compiled build, just use `import`, which imports the source code
 - you can't use `require`, this fork is written in es module syntax
