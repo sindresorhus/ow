@@ -160,6 +160,14 @@ test('object.instanceOf', t => {
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.instanceOf(Unicorn));
 	}, 'Expected object `{"unicorn":"🦄"}` to be of type `Unicorn`');
+
+	t.throws(() => {
+		ow(null, ow.object.instanceOf(Unicorn));
+	}, 'Expected object `null` to be of type `Unicorn`');
+
+	t.throws(() => {
+		ow(undefined, ow.object.instanceOf(Unicorn));
+	}, 'Expected object `undefined` to be of type `Unicorn`');
 });
 
 test('object.hasKeys', t => {
