@@ -93,7 +93,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	instanceOf(instance: Function): this {
 		return this.addValidator({
 			message: (object: object, label: string) => {
-				let {name} = object.constructor;
+				let {name} = object?.constructor ?? {};
 
 				if (!name || name === 'Object') {
 					name = JSON.stringify(object);
