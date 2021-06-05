@@ -111,24 +111,5 @@ const _ow: Ow = predicates(modifiers(ow)) as Ow;
 export default _ow;
 
 export {BasePredicate, Predicate};
-
-export {
-	StringPredicate,
-	NumberPredicate,
-	BooleanPredicate,
-	ArrayPredicate,
-	ObjectPredicate,
-	DatePredicate,
-	ErrorPredicate,
-	MapPredicate,
-	WeakMapPredicate,
-	SetPredicate,
-	WeakSetPredicate,
-	TypedArrayPredicate,
-	ArrayBufferPredicate,
-	DataViewPredicate,
-	AnyPredicate,
-	Shape
-} from './predicates';
-
+export * from './predicates';
 export {ArgumentError} from './argument-error';
