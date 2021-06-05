@@ -1,6 +1,7 @@
 import {TypedArray} from 'type-fest';
 import {StringPredicate} from './predicates/string';
 import {NumberPredicate} from './predicates/number';
+import {BigIntPredicate} from './predicates/bigint';
 import {BooleanPredicate} from './predicates/boolean';
 import {Predicate, PredicateOptions} from './predicates/predicate';
 import {ArrayPredicate} from './predicates/array';
@@ -27,6 +28,11 @@ export interface Predicates {
 	Test the value to be a number.
 	*/
 	readonly number: NumberPredicate;
+
+	/**
+	Test the value to be an bigint.
+	*/
+	readonly bigint: BigIntPredicate;
 
 	/**
 	Test the value to be a boolean.
@@ -212,6 +218,9 @@ export default <T>(object: T, options?: PredicateOptions): T & Predicates => {
 		number: {
 			get: (): NumberPredicate => new NumberPredicate(options)
 		},
+		bigint: {
+			get: (): BigIntPredicate => new BigIntPredicate(options)
+		},
 		boolean: {
 			get: (): BooleanPredicate => new BooleanPredicate(options)
 		},
@@ -319,6 +328,7 @@ export default <T>(object: T, options?: PredicateOptions): T & Predicates => {
 export {
 	StringPredicate,
 	NumberPredicate,
+	BigIntPredicate,
 	BooleanPredicate,
 	ArrayPredicate,
 	ObjectPredicate,
