@@ -81,7 +81,8 @@ Object.defineProperties(ow, {
 	isValid: {
 		value: <T>(value: T, predicate: BasePredicate<T>): boolean => {
 			try {
-				ow(value, predicate);
+				// Use a dummy label to avoid unnecessary inference.
+				ow(value, '', predicate);
 				return true;
 			} catch {
 				return false;

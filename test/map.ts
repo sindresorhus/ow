@@ -156,11 +156,11 @@ test('map.keysOfType', t => {
 
 	t.throws(() => {
 		ow(new Map([['unicorn', '🦄']]), ow.map.keysOfType(ow.number));
-	}, '(Map) Expected argument to be of type `number` but received type `string`');
+	}, '(Map) Expected `item` to be of type `number` but received type `string`');
 
 	t.throws(() => {
 		ow(new Map([['unicorn', '🦄']]), 'foo', ow.map.keysOfType(ow.number));
-	}, '(Map `foo`) Expected argument to be of type `number` but received type `string`');
+	}, '(Map `foo`) Expected `item` to be of type `number` but received type `string`');
 });
 
 test('map.valuesOfType', t => {
@@ -178,11 +178,11 @@ test('map.valuesOfType', t => {
 
 	t.throws(() => {
 		ow(new Map([['unicorn', '🦄']]), ow.map.valuesOfType(ow.number));
-	}, '(Map) Expected argument to be of type `number` but received type `string`');
+	}, '(Map) Expected `item` to be of type `number` but received type `string`');
 
 	t.throws(() => {
 		ow(new Map([['unicorn', '🦄']]), 'foo', ow.map.valuesOfType(ow.number));
-	}, '(Map `foo`) Expected argument to be of type `number` but received type `string`');
+	}, '(Map `foo`) Expected `item` to be of type `number` but received type `string`');
 });
 
 test('map.empty', t => {

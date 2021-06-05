@@ -11,7 +11,7 @@ Test all the values in the collection against a provided predicate.
 export default <T>(source: IterableIterator<T> | Set<T> | T[], predicate: BasePredicate<T>): boolean | string => {
 	try {
 		for (const item of source) {
-			ow(item, predicate);
+			ow(item, 'item', predicate);
 		}
 
 		return true;
