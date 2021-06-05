@@ -106,6 +106,8 @@ function typeTests(value: unknown): Array<(() => void)> {
 			const tests: Tests = {
 				array: expect => expect.toBeArray(),
 				arrayBuffer: expect => expect.toEqualTypeOf<ArrayBuffer>(),
+				// eslint-disable-next-line node/no-unsupported-features/es-builtins
+				bigint: expect => expect.toEqualTypeOf<BigInt>(),
 				boolean: expect => expect.toBeBoolean(),
 				buffer: expect => expect.toEqualTypeOf<Buffer>(),
 				dataView: expect => expect.toEqualTypeOf<DataView>(),
