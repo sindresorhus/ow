@@ -124,11 +124,11 @@ test('set.ofType', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), ow.set.ofType(ow.number));
-	}, '(Set) Expected `item` to be of type `number` but received type `string`');
+	}, '(Set) Expected argument to be of type `number` but received type `string`');
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), 'foo', ow.set.ofType(ow.number));
-	}, '(Set `foo`) Expected `item` to be of type `number` but received type `string`');
+	}, '(Set `foo`) Expected argument to be of type `number` but received type `string`');
 });
 
 test('set.empty', t => {

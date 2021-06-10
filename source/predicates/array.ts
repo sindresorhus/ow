@@ -150,7 +150,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 			validator: value => {
 				try {
 					for (const item of value) {
-						ow(item, 'item', predicate);
+						ow(item, predicate);
 					}
 
 					return true;

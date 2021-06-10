@@ -77,19 +77,19 @@ test('object.valuesOfType', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: 2}, ow.object.valuesOfType(ow.string));
-	}, '(object) Expected `item` to be of type `string` but received type `number`');
+	}, '(object) Expected values to be of type `string` but received type `number`');
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: 2}, 'foo', ow.object.valuesOfType(ow.string));
-	}, '(object `foo`) Expected `item` to be of type `string` but received type `number`');
+	}, '(object `foo`) Expected values to be of type `string` but received type `number`');
 
 	t.throws(() => {
 		ow({unicorn: 'a', rainbow: 'b'}, ow.object.valuesOfType(ow.string.minLength(2)));
-	}, '(object `ow.number`) Expected string `item` to have a minimum length of `2`, got `a`');
+	}, '(object `ow.number`) Expected string values to have a minimum length of `2`, got `a`');
 
 	t.throws(() => {
 		ow(['🦄', true, 1], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
-	}, '(object) Any predicate failed with the following errors:\n  - Expected `item` to be of type `string` but received type `number`\n  - Expected `item` to be of type `boolean` but received type `number`');
+	}, '(object) Any predicate failed with the following errors:\n  - Expected values to be of type `string` but received type `number`\n  - Expected values to be of type `boolean` but received type `number`');
 });
 
 test('object.valuesOfTypeDeep', t => {

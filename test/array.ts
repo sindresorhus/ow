@@ -162,11 +162,11 @@ test('array.ofType', t => {
 
 	t.throws(() => {
 		ow(['foo', 'b'], ow.array.ofType(ow.string.minLength(3)));
-	}, '(array) Expected string `item` to have a minimum length of `3`, got `b`');
+	}, '(array) Expected string to have a minimum length of `3`, got `b`');
 
 	t.throws(() => {
 		ow(['foo', 'b'], 'foo', ow.array.ofType(ow.string.minLength(3)));
-	}, '(array `foo`) Expected string `item` to have a minimum length of `3`, got `b`');
+	}, '(array `foo`) Expected string to have a minimum length of `3`, got `b`');
 });
 
 test('array.exactShape', t => {

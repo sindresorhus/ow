@@ -9,7 +9,7 @@ import test from './test';
 /**
 @hidden
 */
-export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
+export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>, idLabel?: boolean) => void;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {
@@ -81,8 +81,7 @@ Object.defineProperties(ow, {
 	isValid: {
 		value: <T>(value: T, predicate: BasePredicate<T>): boolean => {
 			try {
-				// Use a dummy label to avoid unnecessary inference.
-				ow(value, '', predicate);
+				ow(value, predicate);
 				return true;
 			} catch {
 				return false;

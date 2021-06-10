@@ -3,7 +3,7 @@ import is from '@sindresorhus/is';
 import dotProp = require('dot-prop');
 import isEqual = require('lodash.isequal');
 import hasItems from '../utils/has-items';
-import ofType from '../utils/of-type';
+import ofTypeWithName from '../utils/of-type-with-name';
 import ofTypeDeep from '../utils/of-type-deep';
 import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape';
 import {Predicate, PredicateOptions} from './predicate';
@@ -57,7 +57,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	valuesOfType<T>(predicate: BasePredicate<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: object => ofType(Object.values(object), predicate)
+			validator: object => ofTypeWithName(Object.values(object), 'values', predicate)
 		});
 	}
 
