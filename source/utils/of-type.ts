@@ -4,6 +4,7 @@ import {BasePredicate} from '../predicates/base-predicate';
 
 /**
 Test all the values in the collection against a provided predicate.
+TODO After we migrate all usages of this function to specify the optional 'name' parameter, we can change the parameter to be required.
 
 @hidden
 @param source Source collection to test.
