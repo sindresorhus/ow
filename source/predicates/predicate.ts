@@ -96,7 +96,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function): asserts value is T {
+	[testSymbol](value: T, main: Main, label: string | Function, idLabel: boolean): asserts value is T {
 		// Create a map of labels -> received errors.
 		const errors = new Map<string, Set<string>>();
 
@@ -119,9 +119,10 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			}
 
 			const label2 = is.function_(label) ? label() : label;
+			const labelWithTick = (label2 && idLabel) ? `\`${label2}\`` : label2;
 
-			const label_ = label2 ?
-				`${this.type} \`${label2}\`` :
+			const label_ = labelWithTick ?
+				`${this.type} ${labelWithTick}` :
 				this.type;
 
 			const mapKey = label2 || this.type;

@@ -9,7 +9,7 @@ import test from './test';
 /**
 @hidden
 */
-export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>) => void;
+export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>, idLabel?: boolean) => void;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
 export interface Ow extends Modifiers, Predicates {

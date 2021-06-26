@@ -13,12 +13,12 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 		private readonly options: PredicateOptions = {}
 	) {}
 
-	[testSymbol](value: T, main: Main, label: string | Function): asserts value {
+	[testSymbol](value: T, main: Main, label: string | Function, idLabel: boolean): asserts value {
 		const errors = new Map<string, Set<string>>();
 
 		for (const predicate of this.predicates) {
 			try {
-				main(value, label, predicate);
+				main(value, label, predicate, idLabel);
 				return;
 			} catch (error: unknown) {
 				if (value === undefined && this.options.optional === true) {

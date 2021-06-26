@@ -57,7 +57,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	valuesOfType<T>(predicate: BasePredicate<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: object => ofType(Object.values(object), predicate)
+			validator: object => ofType(Object.values(object), predicate, 'values')
 		});
 	}
 
