@@ -19,7 +19,7 @@
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepare": "npm run build",
-		"// postpublish": "npm run docs && gh-pages --dist docs --no-history --message \"Deploy documentation\"",
+		"postpublish": "npm run docs && gh-pages --dist docs --no-history --message \"Deploy documentation\"",
 		"example": "npm run build && node example.js"
 	},
 	"files": [
@@ -47,25 +47,26 @@
 		"object"
 	],
 	"dependencies": {
-		"@sindresorhus/is": "^4.0.0",
+		"@sindresorhus/is": "^4.0.1",
 		"callsites": "^3.1.0",
 		"dot-prop": "^6.0.1",
 		"lodash.isequal": "^4.5.0",
-		"type-fest": "^1.2.0",
+		"type-fest": "^1.2.1",
 		"vali-date": "^1.0.0"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^0.8.0",
 		"@types/lodash.isequal": "^4.5.5",
-		"@types/node": "^15.6.2",
+		"@types/node": "^15.12.4",
 		"@types/vali-date": "^1.0.0",
 		"ava": "^2.4.0",
-		"del-cli": "^3.0.1",
+		"del-cli": "^4.0.0",
 		"expect-type": "^0.11.0",
-		"gh-pages": "^3.2.0",
+		"gh-pages": "^3.2.3",
 		"nyc": "^15.1.0",
 		"ts-node": "^10.0.0",
-		"typescript": "^4.3.2",
+		"typedoc": "^0.21.1",
+		"typescript": "^4.3.4",
 		"xo": "^0.38.2"
 	},
 	"browser": {
