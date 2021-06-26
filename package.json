@@ -1,10 +1,12 @@
 {
 	"name": "ow",
-	"version": "0.24.1",
+	"version": "0.25.0",
 	"description": "Function argument validation for humans",
 	"license": "MIT",
 	"repository": "sindresorhus/ow",
-	"funding": "https://github.com/sponsors/sindresorhus",
+	"funding": {
+		"url": "https://github.com/sponsors/sindresorhus"
+	},
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
