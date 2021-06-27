@@ -1,10 +1,10 @@
 import is from '@sindresorhus/is';
 import {Predicate} from '../predicates/predicate';
-import ow from '..';
+import test from '../test';
 
 const ofTypeDeep = (object: unknown, predicate: Predicate): boolean => {
 	if (!is.plainObject(object)) {
-		ow(object, predicate);
+		test(object, 'deep values', predicate, false);
 		return true;
 	}
 

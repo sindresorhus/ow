@@ -1,24 +1,18 @@
-import ow from '..';
 import test from '../test';
 import {BasePredicate} from '../predicates/base-predicate';
 
-// TODO: After we migrate all usages of this function to specify the optional 'name' parameter, we can change the parameter to be required.
 /**
 Test all the values in the collection against a provided predicate.
 
 @hidden
 @param source Source collection to test.
+@param name The name to call the collection of values, such as `values` or `keys`.
 @param predicate Predicate to test every item in the source collection against.
-@param name The name to call the collection of values, such as `values` or `keys`. If it is `undefined`, it uses the call stack to infer the label.
 */
-export default <T>(source: IterableIterator<T> | Set<T> | T[], predicate: BasePredicate<T>, name?: string): boolean | string => {
+export default <T>(source: IterableIterator<T> | Set<T> | T[], name: string, predicate: BasePredicate<T>): boolean | string => {
 	try {
 		for (const item of source) {
-			if (name) {
-				test(item, name, predicate, false);
-			} else {
-				ow(item, predicate);
-			}
+			test(item, name, predicate, false);
 		}
 
 		return true;

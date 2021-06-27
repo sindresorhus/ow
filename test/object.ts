@@ -111,15 +111,15 @@ test('object.valuesOfTypeDeep', t => {
 
 	t.throws(() => {
 		ow({unicorn: {key: '🦄', value: 1}}, ow.object.deepValuesOfType(ow.string));
-	}, '(object `ow.any(ow.string`) Expected argument to be of type `string` but received type `number`');
+	}, '(object `ow.any(ow.string`) Expected deep values to be of type `string` but received type `number`');
 
 	t.throws(() => {
 		ow({unicorn: {key: '🦄', value: 1}}, 'foo', ow.object.deepValuesOfType(ow.string));
-	}, '(object `foo`) Expected argument to be of type `string` but received type `number`');
+	}, '(object `foo`) Expected deep values to be of type `string` but received type `number`');
 
 	t.throws(() => {
 		ow({a: {b: {c: {d: 1}, e: '2'}, f: 3}}, ow.object.deepValuesOfType(ow.number));
-	}, '(object `ow.string`) Expected argument to be of type `number` but received type `string`');
+	}, '(object `ow.string`) Expected deep values to be of type `number` but received type `string`');
 });
 
 test('object.deepEqual', t => {
