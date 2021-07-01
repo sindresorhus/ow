@@ -81,7 +81,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	ofType(predicate: Predicate<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: set => ofType(set, predicate)
+			validator: set => ofType(set, 'values', predicate)
 		});
 	}
 
