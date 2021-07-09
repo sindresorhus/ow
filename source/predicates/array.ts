@@ -1,9 +1,9 @@
 import isEqual = require('lodash.isequal');
 import {BasePredicate} from './base-predicate';
 import {Predicate, PredicateOptions} from './predicate';
-import ow from '..';
 import {Shape} from './object';
 import {exact} from '../utils/match-shape';
+import ofType from '../utils/of-type';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
@@ -142,23 +142,10 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	```
 	*/
 	ofType<U extends T>(predicate: BasePredicate<U>): ArrayPredicate<U> {
-		let error: string;
-
 		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
 		return this.addValidator({
-			message: (_, label) => `(${label}) ${error}`,
-			validator: value => {
-				try {
-					for (const item of value) {
-						ow(item, predicate);
-					}
-
-					return true;
-				} catch (error_: unknown) {
-					error = (error_ as Error).message;
-					return false;
-				}
-			}
+			message: (_, label, error) => `(${label}) ${error}`,
+			validator: value => ofType(value, 'values', predicate)
 		}) as ArrayPredicate<any>;
 	}
 

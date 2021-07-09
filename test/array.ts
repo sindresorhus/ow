@@ -162,11 +162,19 @@ test('array.ofType', t => {
 
 	t.throws(() => {
 		ow(['foo', 'b'], ow.array.ofType(ow.string.minLength(3)));
-	}, '(array) Expected string to have a minimum length of `3`, got `b`');
+	}, '(array) Expected string values to have a minimum length of `3`, got `b`');
 
 	t.throws(() => {
 		ow(['foo', 'b'], 'foo', ow.array.ofType(ow.string.minLength(3)));
-	}, '(array `foo`) Expected string to have a minimum length of `3`, got `b`');
+	}, '(array `foo`) Expected string values to have a minimum length of `3`, got `b`');
+
+	t.throws(() => {
+		ow(['foo', 'bar'], 'foo', ow.array.ofType(ow.number));
+	}, '(array `foo`) Expected values to be of type `number` but received type `string`');
+
+	t.throws(() => {
+		ow([1, -1], 'foo', ow.array.ofType(ow.number.not.negative));
+	}, '(array `foo`) Expected number values to not be negative, got -1');
 });
 
 test('array.exactShape', t => {
