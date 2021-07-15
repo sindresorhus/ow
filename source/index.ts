@@ -81,7 +81,7 @@ Object.defineProperties(ow, {
 	isValid: {
 		value: <T>(value: T, predicate: BasePredicate<T>): boolean => {
 			try {
-				ow(value, predicate);
+				test(value, '', predicate);
 				return true;
 			} catch {
 				return false;
