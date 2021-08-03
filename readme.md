@@ -69,7 +69,7 @@ ow(unicorn, ow.object.exactShape({
 
 ## API
 
-[Complete API documentation](https://sindresorhus.com/ow/interfaces/ow.html)
+[Complete API documentation](https://sindresorhus.com/ow/interfaces/Ow.html)
 
 Ow includes TypeScript type guards, so using it will narrow the type of previously-unknown values.
 
@@ -145,52 +145,52 @@ All the below types return a predicate. Every predicate has some extra operators
 
 #### Primitives
 
-- [`undefined`](https://sindresorhus.com/ow/interfaces/ow.html#undefined-1)
-- [`null`](https://sindresorhus.com/ow/interfaces/ow.html#null)
-- [`string`](https://sindresorhus.com/ow/classes/stringpredicate.html)
-- [`number`](https://sindresorhus.com/ow/classes/numberpredicate.html)
-- [`boolean`](https://sindresorhus.com/ow/classes/booleanpredicate.html)
-- [`symbol`](https://sindresorhus.com/ow/interfaces/ow.html#symbol-1)
+- [`undefined`](https://sindresorhus.com/ow/interfaces/Ow.html#undefined-1)
+- [`null`](https://sindresorhus.com/ow/interfaces/Ow.html#null)
+- [`string`](https://sindresorhus.com/ow/classes/StringPredicate.html)
+- [`number`](https://sindresorhus.com/ow/classes/NumberPredicate.html)
+- [`boolean`](https://sindresorhus.com/ow/classes/BooleanPredicate.html)
+- [`symbol`](https://sindresorhus.com/ow/interfaces/Ow.html#symbol-1)
 
 #### Built-in types
 
-- [`array`](https://sindresorhus.com/ow/classes/arraypredicate.html)
-- [`function`](https://sindresorhus.com/ow/interfaces/ow.html#function)
-- [`buffer`](https://sindresorhus.com/ow/interfaces/ow.html#buffer)
-- [`object`](https://sindresorhus.com/ow/classes/objectpredicate.html)
-- [`regExp`](https://sindresorhus.com/ow/interfaces/ow.html#regexp-1)
-- [`date`](https://sindresorhus.com/ow/classes/datepredicate.html)
-- [`error`](https://sindresorhus.com/ow/classes/errorpredicate.html)
-- [`promise`](https://sindresorhus.com/ow/interfaces/ow.html#promise-1)
-- [`map`](https://sindresorhus.com/ow/classes/mappredicate.html)
-- [`set`](https://sindresorhus.com/ow/classes/setpredicate.html)
-- [`weakMap`](https://sindresorhus.com/ow/classes/weakmappredicate.html)
-- [`weakSet`](https://sindresorhus.com/ow/classes/weaksetpredicate.html)
+- [`array`](https://sindresorhus.com/ow/classes/ArrayPredicate.html)
+- [`function`](https://sindresorhus.com/ow/interfaces/Ow.html#function)
+- [`buffer`](https://sindresorhus.com/ow/interfaces/Ow.html#buffer)
+- [`object`](https://sindresorhus.com/ow/classes/ObjectPredicate.html)
+- [`regExp`](https://sindresorhus.com/ow/interfaces/Ow.html#regexp-1)
+- [`date`](https://sindresorhus.com/ow/classes/DatePredicate.html)
+- [`error`](https://sindresorhus.com/ow/classes/ErrorPredicate.html)
+- [`promise`](https://sindresorhus.com/ow/interfaces/Ow.html#promise-1)
+- [`map`](https://sindresorhus.com/ow/classes/MapPredicate.html)
+- [`set`](https://sindresorhus.com/ow/classes/SetPredicate.html)
+- [`weakMap`](https://sindresorhus.com/ow/classes/WeakMapPredicate.html)
+- [`weakSet`](https://sindresorhus.com/ow/classes/WeakSetPredicate.html)
 
 #### Typed arrays
 
-- [`int8Array`](https://sindresorhus.com/ow/interfaces/ow.html#int8Array)
-- [`uint8Array`](https://sindresorhus.com/ow/interfaces/ow.html#uint8Array-1)
-- [`uint8ClampedArray`](https://sindresorhus.com/ow/interfaces/ow.html#uint8ClampedArray-1)
-- [`int16Array`](https://sindresorhus.com/ow/interfaces/ow.html#int16Array)
-- [`uint16Array`](https://sindresorhus.com/ow/interfaces/ow.html#uint16Array-1)
-- [`int32Array`](https://sindresorhus.com/ow/interfaces/ow.html#in32Array)
-- [`uint32Array`](https://sindresorhus.com/ow/interfaces/ow.html#uin32Array-1)
-- [`float32Array`](https://sindresorhus.com/ow/interfaces/ow.html#float32Array)
-- [`float64Array`](https://sindresorhus.com/ow/interfaces/ow.html#float64Array)
+- [`int8Array`](https://sindresorhus.com/ow/interfaces/Ow.html#int8Array)
+- [`uint8Array`](https://sindresorhus.com/ow/interfaces/Ow.html#uint8Array-1)
+- [`uint8ClampedArray`](https://sindresorhus.com/ow/interfaces/Ow.html#uint8ClampedArray-1)
+- [`int16Array`](https://sindresorhus.com/ow/interfaces/Ow.html#int16Array)
+- [`uint16Array`](https://sindresorhus.com/ow/interfaces/Ow.html#uint16Array-1)
+- [`int32Array`](https://sindresorhus.com/ow/interfaces/Ow.html#int32Array)
+- [`uint32Array`](https://sindresorhus.com/ow/interfaces/Ow.html#uint32Array-1)
+- [`float32Array`](https://sindresorhus.com/ow/interfaces/Ow.html#float32Array)
+- [`float64Array`](https://sindresorhus.com/ow/interfaces/Ow.html#float64Array)
 
 #### Structured data
 
-- [`arrayBuffer`](https://sindresorhus.com/ow/interfaces/ow.html#arraybuffer)
-- [`dataView`](https://sindresorhus.com/ow/interfaces/ow.html#dataview)
-- [`sharedArrayBuffer`](https://sindresorhus.com/ow/interfaces/ow.html#sharedarraybuffer-1)
+- [`arrayBuffer`](https://sindresorhus.com/ow/interfaces/Ow.html#arrayBuffer)
+- [`dataView`](https://sindresorhus.com/ow/interfaces/Ow.html#dataView)
+- [`sharedArrayBuffer`](https://sindresorhus.com/ow/interfaces/Ow.html#sharedArrayBuffer-1)
 
 #### Miscellaneous
 
-- [`nan`](https://sindresorhus.com/ow/interfaces/ow.html#nan)
-- [`nullOrUndefined`](https://sindresorhus.com/ow/interfaces/ow.html#nullorundefined)
-- [`iterable`](https://sindresorhus.com/ow/interfaces/ow.html#iterable)
-- [`typedArray`](https://sindresorhus.com/ow/interfaces/ow.html#typedarray-1)
+- [`nan`](https://sindresorhus.com/ow/interfaces/Ow.html#nan)
+- [`nullOrUndefined`](https://sindresorhus.com/ow/interfaces/Ow.html#nullOrUndefined)
+- [`iterable`](https://sindresorhus.com/ow/interfaces/Ow.html#iterable)
+- [`typedArray`](https://sindresorhus.com/ow/interfaces/Ow.html#typedArray-1)
 
 ### Predicates
 
