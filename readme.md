@@ -289,6 +289,20 @@ ow(
 
 This can be useful for creating your own reusable validators which can be extracted to a separate npm package.
 
+### TypeScript
+
+Ow includes a type utility that allows you to extract a TypeScript type from the provided `predicate`
+
+```ts
+import ow, { Infer } from 'ow';
+
+const userPredicate = ow.object.exactShape({
+  name: ow.string
+});
+
+type User = Infer<typeof userPredicate>;
+```
+
 ## Maintainers
 
 - [Sindre Sorhus](https://github.com/sindresorhus)
