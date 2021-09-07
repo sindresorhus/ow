@@ -12,8 +12,8 @@ import test from './test';
 export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>, idLabel?: boolean) => void;
 
 /**
- * Retrieve the type from the provided `predicate`
- */
+Retrieve the type from the provided `predicate`
+*/
 export type Infer<P> = P extends BasePredicate<infer T> ? T : never;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
