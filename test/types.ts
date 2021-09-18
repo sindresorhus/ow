@@ -226,10 +226,9 @@ function typeTests(value: unknown): Array<(() => void)> {
 				iterable: Iterable<unknown>;
 				typedArray: TypedArray;
 				nested: {
-					nested: { nested: number }[]
-				}
+					nested: Array<{nested: number}>;
+				};
 			}>();
-		},
-
+		}
 	];
 }
