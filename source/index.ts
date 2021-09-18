@@ -13,6 +13,15 @@ export type Main = <T>(value: T, label: string | Function, predicate: BasePredic
 
 /**
  * Retrieve the type from the provided `predicate`
+ *
+ * @example
+ * import ow, { Infer } from 'ow';
+ *
+ * const userPredicate = ow.object.exactShape({
+ * 		name: ow.string
+ * });
+ *
+ * type User = Infer<typeof userPredicate>;
  */
 export type Infer<P> = P extends BasePredicate<infer T> ? T : never;
 
