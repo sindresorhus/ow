@@ -12,17 +12,19 @@ import test from './test';
 export type Main = <T>(value: T, label: string | Function, predicate: BasePredicate<T>, idLabel?: boolean) => void;
 
 /**
- * Retrieve the type from the provided `predicate`
- *
- * @example
- * import ow, { Infer } from 'ow';
- *
- * const userPredicate = ow.object.exactShape({
- * 		name: ow.string
- * });
- *
- * type User = Infer<typeof userPredicate>;
- */
+Retrieve the type from the given predicate.
+
+@example
+```
+import ow, {Infer} from 'ow';
+
+const userPredicate = ow.object.exactShape({
+	name: ow.string
+});
+
+type User = Infer<typeof userPredicate>;
+```
+*/
 export type Infer<P> = P extends BasePredicate<infer T> ? T : never;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
