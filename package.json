@@ -1,6 +1,6 @@
 {
 	"name": "ow",
-	"version": "0.27.0",
+	"version": "0.28.0",
 	"description": "Function argument validation for humans",
 	"license": "MIT",
 	"repository": "sindresorhus/ow",
