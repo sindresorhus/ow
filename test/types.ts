@@ -1,7 +1,7 @@
 import test from 'ava';
 import {ExpectTypeOf, expectTypeOf} from 'expect-type';
 import {TypedArray} from 'type-fest';
-import ow, {BasePredicate} from '../source';
+import ow, {BasePredicate, Infer} from '../source';
 
 test('type-level tests', t => {
 	t.is(typeof typeTests, 'function');
@@ -143,6 +143,92 @@ function typeTests(value: unknown): Array<(() => void)> {
 			};
 
 			return tests;
+		},
+
+		(): void => {
+			const schema = ow.object.exactShape({
+				undefined: ow.undefined,
+				null: ow.null,
+				nullOrUndefined: ow.nullOrUndefined,
+				optionalString: ow.optional.string,
+				number: ow.number,
+				boolean: ow.boolean,
+				symbol: ow.symbol,
+				array: ow.array,
+				function: ow.function,
+				buffer: ow.buffer,
+				object: ow.object,
+				regExp: ow.regExp,
+				date: ow.date,
+				error: ow.error,
+				promise: ow.promise,
+				map: ow.map,
+				set: ow.set,
+				weakMap: ow.weakMap,
+				weakSet: ow.weakSet,
+				int8Array: ow.int8Array,
+				uint8Array: ow.uint8Array,
+				uint8ClampedArray: ow.uint8ClampedArray,
+				int16Array: ow.int16Array,
+				uint16Array: ow.uint16Array,
+				int32Array: ow.int32Array,
+				uint32Array: ow.uint32Array,
+				float32Array: ow.float32Array,
+				float64Array: ow.float64Array,
+				arrayBuffer: ow.arrayBuffer,
+				dataView: ow.dataView,
+				sharedArrayBuffer: ow.sharedArrayBuffer,
+				nan: ow.nan,
+				iterable: ow.iterable,
+				typedArray: ow.typedArray,
+				nested: ow.object.exactShape({
+					nested: ow.array.ofType(
+						ow.object.exactShape({
+							nested: ow.number
+						})
+					)
+				})
+			});
+
+			expectTypeOf<Infer<typeof schema>>().toEqualTypeOf<{
+				undefined: undefined;
+				null: null;
+				nullOrUndefined: null | undefined;
+				optionalString: string | undefined;
+				number: number;
+				boolean: boolean;
+				symbol: symbol;
+				array: unknown[];
+				function: Function;
+				buffer: Buffer;
+				object: object;
+				regExp: RegExp;
+				date: Date;
+				error: Error;
+				promise: Promise<unknown>;
+				map: Map<unknown, unknown>;
+				set: Set<any>;
+				weakMap: WeakMap<object, unknown>;
+				weakSet: WeakSet<object>;
+				int8Array: Int8Array;
+				uint8Array: Uint8Array;
+				uint8ClampedArray: Uint8ClampedArray;
+				int16Array: Int16Array;
+				uint16Array: Uint16Array;
+				int32Array: Int32Array;
+				uint32Array: Uint32Array;
+				float32Array: Float32Array;
+				float64Array: Float64Array;
+				arrayBuffer: ArrayBuffer;
+				dataView: DataView;
+				sharedArrayBuffer: SharedArrayBuffer;
+				nan: number;
+				iterable: Iterable<unknown>;
+				typedArray: TypedArray;
+				nested: {
+					nested: Array<{nested: number}>;
+				};
+			}>();
 		}
 	];
 }
