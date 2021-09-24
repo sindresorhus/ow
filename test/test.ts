@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow, {ArgumentError} from '../source';
+import ow, {ArgumentError, AssertingValidator} from '../source';
 import {createAnyError} from './fixtures/create-error';
 
 test('not', t => {
@@ -284,15 +284,17 @@ test('isValid', t => {
 	t.true(ow.isValid('foo!', ow.string.not.alphanumeric));
 	t.true(ow.isValid('foo!', ow.any(ow.string, ow.number)));
 	t.true(ow.isValid(1, ow.any(ow.string, ow.number)));
-	t.false(ow.isValid(1 as any, ow.string));
-	t.false(ow.isValid(1 as any, ow.number.greaterThan(2)));
-	t.false(ow.isValid(true as any, ow.any(ow.string, ow.number)));
+	t.false(ow.isValid(1, ow.string));
+	t.false(ow.isValid(1, ow.number.greaterThan(2)));
+	t.false(ow.isValid(true, ow.any(ow.string, ow.number)));
 });
 
 test('reusable validator', t => {
 	const checkUsername = ow.create(ow.string.minLength(3));
+	const checkUsername_: AssertingValidator<typeof checkUsername> = checkUsername;
 
 	const value = 'x';
+	const value_ = 'foo' as string | number;
 
 	t.notThrows(() => {
 		checkUsername('foo');
@@ -300,6 +302,11 @@ test('reusable validator', t => {
 
 	t.notThrows(() => {
 		checkUsername('foobar');
+	});
+
+	t.notThrows(() => {
+		checkUsername_(value_);
+		((_: string): void => {})(value_); // The _ function should narrow the type. If it didn't, this would not compile
 	});
 
 	t.throws(() => {
@@ -311,7 +318,7 @@ test('reusable validator', t => {
 	}, 'Expected string to have a minimum length of `3`, got `x`');
 
 	const error = t.throws<ArgumentError>(() => {
-		checkUsername(5 as any);
+		checkUsername(5);
 	}, [
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to have a minimum length of `3`, got `5`'
@@ -352,7 +359,7 @@ test('reusable validator called with label', t => {
 	}, 'Expected string `bar` to have a minimum length of `3`, got `x`');
 
 	const error = t.throws<ArgumentError>(() => {
-		checkUsername(5 as any, label);
+		checkUsername(5, label);
 	}, [
 		'Expected `bar` to be of type `string` but received type `number`',
 		'Expected string `bar` to have a minimum length of `3`, got `5`'
@@ -386,7 +393,7 @@ test('reusable validator with label', t => {
 	}, 'Expected string `foo` to have a minimum length of `3`, got `fo`');
 
 	const error = t.throws<ArgumentError>(() => {
-		checkUsername(5 as any);
+		checkUsername(5);
 	}, [
 		'Expected `foo` to be of type `string` but received type `number`',
 		'Expected string `foo` to have a minimum length of `3`, got `5`'
@@ -422,7 +429,7 @@ test('reusable validator with label called with label', t => {
 	}, 'Expected string `bar` to have a minimum length of `3`, got `fo`');
 
 	const error = t.throws<ArgumentError>(() => {
-		checkUsername(5 as any, label);
+		checkUsername(5, label);
 	}, [
 		'Expected `bar` to be of type `string` but received type `number`',
 		'Expected string `bar` to have a minimum length of `3`, got `5`'
@@ -459,7 +466,7 @@ test('any-reusable validator', t => {
 	));
 
 	t.throws(() => {
-		checkUsername(5 as any);
+		checkUsername(5);
 	}, createAnyError(
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to include `.`, got `5`',
