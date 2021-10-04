@@ -52,7 +52,7 @@ export interface Ow extends Modifiers, Predicates {
 	@param value - Value to test.
 	@param predicate - Predicate to test against.
 	*/
-	isValid: <T>(value: T, predicate: BasePredicate<T>) => value is T;
+	isValid: <T>(value: unknown, predicate: BasePredicate<T>) => value is T;
 
 	/**
 	Create a reusable validator.
@@ -73,10 +73,32 @@ export interface ReusableValidator<T> {
 	@param label - Override the label which should be used in error messages.
 	*/
 	// eslint-disable-next-line @typescript-eslint/prefer-function-type
-	(value: T, label?: string): void;
+	(value: unknown | T, label?: string): void;
 }
 
-const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>): void => {
+/**
+Turn a `ReusableValidator` into one with a type assertion.
+
+@example
+```
+const checkUsername = ow.create(ow.string.minLength(3));
+const checkUsername_: AssertingValidator<typeof checkUsername> = checkUsername;
+```
+
+@example
+```
+const predicate = ow.string.minLength(3);
+const checkUsername: AssertingValidator<typeof predicate> = ow.create(predicate);
+```
+*/
+export type AssertingValidator<T> =
+	T extends ReusableValidator<infer R>
+		? (value: unknown, label?: string) => asserts value is R
+		: T extends BasePredicate<infer R>
+			? (value: unknown, label?: string) => asserts value is R
+			: never;
+
+const ow = <T>(value: unknown, labelOrPredicate: unknown, predicate?: BasePredicate<T>): void => {
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
 		throw new TypeError(`Expected second argument to be a predicate or a string, got \`${typeof labelOrPredicate}\``);
 	}
@@ -95,7 +117,7 @@ const ow = <T>(value: T, labelOrPredicate: unknown, predicate?: BasePredicate<T>
 
 Object.defineProperties(ow, {
 	isValid: {
-		value: <T>(value: T, predicate: BasePredicate<T>): boolean => {
+		value: <T>(value: unknown, predicate: BasePredicate<T>): boolean => {
 			try {
 				test(value, '', predicate);
 				return true;
@@ -105,7 +127,7 @@ Object.defineProperties(ow, {
 		}
 	},
 	create: {
-		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: T, label?: string): void => {
+		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: unknown, label?: string): asserts value is T => {
 			if (isPredicate(labelOrPredicate)) {
 				const stackFrames = callsites();
 
