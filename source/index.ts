@@ -77,7 +77,7 @@ export interface ReusableValidator<T> {
 }
 
 /**
-Turns a ReusableValidator into one that narrows the type using assert.
+Turn a `ReusableValidator` into one with a type assertion.
 
 @example
 ```
