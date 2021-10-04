@@ -292,6 +292,7 @@ test('isValid', t => {
 test('reusable validator', t => {
 	const checkUsername = ow.create(ow.string.minLength(3));
 	const checkUsername_: AssertingValidator<typeof checkUsername> = checkUsername;
+	const checkUsername__: AssertingValidator<typeof ow.string> = checkUsername;
 
 	const value = 'x';
 	const value_ = 'foo' as string | number;
@@ -307,6 +308,11 @@ test('reusable validator', t => {
 	t.notThrows(() => {
 		checkUsername_(value_);
 		((_: string): void => {})(value_); // The _ function should narrow the type. If it didn't, this would not compile
+	});
+
+	t.notThrows(() => {
+		checkUsername__(value_);
+		((_: string): void => {})(value_); // The __ function should narrow the type. If it didn't, this would not compile
 	});
 
 	t.throws(() => {

@@ -75,7 +75,28 @@ export interface ReusableValidator<T> {
 	// eslint-disable-next-line @typescript-eslint/prefer-function-type
 	(value: unknown | T, label?: string): void;
 }
-export type AssertingValidator<T> = T extends ReusableValidator<infer R> ? (value: unknown, label?: string) => asserts value is R : never;
+
+/**
+Turns a ReusableValidator into one that narrows the type using assert.
+
+@example
+```
+const checkUsername = ow.create(ow.string.minLength(3));
+const checkUsername_: AssertingValidator<typeof checkUsername> = checkUsername;
+```
+
+@example
+```
+const predicate = ow.string.minLength(3);
+const checkUsername: AssertingValidator<typeof predicate> = ow.create(predicate);
+```
+*/
+export type AssertingValidator<T> =
+	T extends ReusableValidator<infer R>
+		? (value: unknown, label?: string) => asserts value is R
+		: T extends BasePredicate<infer R>
+			? (value: unknown, label?: string) => asserts value is R
+			: never;
 
 const ow = <T>(value: unknown, labelOrPredicate: unknown, predicate?: BasePredicate<T>): void => {
 	if (!isPredicate(labelOrPredicate) && typeof labelOrPredicate !== 'string') {
