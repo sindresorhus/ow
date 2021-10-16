@@ -1,13 +1,13 @@
 import is from '@sindresorhus/is';
 
-import dotProp = require('dot-prop');
-import isEqual = require('lodash.isequal');
-import hasItems from '../utils/has-items';
-import ofType from '../utils/of-type';
-import ofTypeDeep from '../utils/of-type-deep';
-import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape';
-import {Predicate, PredicateOptions} from './predicate';
-import {BasePredicate} from './base-predicate';
+import dotProp from 'dot-prop';
+import isEqual from 'lodash.isequal';
+import hasItems from '../utils/has-items.js';
+import ofType from '../utils/of-type.js';
+import ofTypeDeep from '../utils/of-type-deep.js';
+import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape.js';
+import {Predicate, PredicateOptions} from './predicate.js';
+import {BasePredicate} from './base-predicate.js';
 
 export {Shape};
 

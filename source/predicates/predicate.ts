@@ -1,9 +1,9 @@
 import is from '@sindresorhus/is';
-import {ArgumentError} from '../argument-error';
-import {not} from '../operators/not';
-import {BasePredicate, testSymbol} from './base-predicate';
-import {Main} from '..';
-import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message';
+import {ArgumentError} from '../argument-error.js';
+import {not} from '../operators/not.js';
+import {BasePredicate, testSymbol} from './base-predicate.js';
+import {Main} from '../index.js';
+import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
 
 /**
 Function executed when the provided validation fails.

@@ -1,4 +1,4 @@
-import {Predicate, PredicateOptions} from './predicate';
+import {Predicate, PredicateOptions} from './predicate.js';
 
 export class BooleanPredicate extends Predicate<boolean> {
 	/**

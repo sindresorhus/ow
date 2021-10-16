@@ -1,6 +1,6 @@
-import randomId from '../utils/random-id';
-import {validatorSymbol} from '../predicates/predicate';
-import type {Predicate, Validator} from '../predicates/predicate';
+import randomId from '../utils/random-id.js';
+import {validatorSymbol} from '../predicates/predicate.js';
+import type {Predicate, Validator} from '../predicates/predicate.js';
 
 /**
 Operator which inverts the following validation.

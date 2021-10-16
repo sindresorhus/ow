@@ -1,5 +1,5 @@
-import {BasePredicate} from '.';
-import predicates, {Predicates} from './predicates';
+import {BasePredicate} from './index.js';
+import predicates, {Predicates} from './predicates.js';
 
 type Optionalify<P> = P extends BasePredicate<infer X>
 	? P & BasePredicate<X | undefined>

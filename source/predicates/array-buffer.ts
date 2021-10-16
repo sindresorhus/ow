@@ -1,4 +1,4 @@
-import {Predicate} from './predicate';
+import {Predicate} from './predicate.js';
 
 export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T> {
 	/**

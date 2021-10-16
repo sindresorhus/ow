@@ -1,5 +1,5 @@
 import {TypedArray} from 'type-fest';
-import {Predicate} from './predicate';
+import {Predicate} from './predicate.js';
 
 export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 	/**

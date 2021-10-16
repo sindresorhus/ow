@@ -1,5 +1,5 @@
 import is from '@sindresorhus/is';
-import {Predicate, PredicateOptions} from './predicate';
+import {Predicate, PredicateOptions} from './predicate.js';
 
 export class NumberPredicate extends Predicate<number> {
 	/**

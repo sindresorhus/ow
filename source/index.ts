@@ -1,10 +1,10 @@
 import callsites from 'callsites';
-import {inferLabel} from './utils/infer-label';
-import {Predicate} from './predicates/predicate';
-import {BasePredicate, isPredicate} from './predicates/base-predicate';
-import modifiers, {Modifiers} from './modifiers';
-import predicates, {Predicates} from './predicates';
-import test from './test';
+import {inferLabel} from './utils/infer-label.js';
+import {Predicate} from './predicates/predicate.js';
+import {BasePredicate, isPredicate} from './predicates/base-predicate.js';
+import modifiers, {Modifiers} from './modifiers.js';
+import predicates, {Predicates} from './predicates.js';
+import test from './test.js';
 
 /**
 @hidden
@@ -149,5 +149,5 @@ const _ow: Ow = predicates(modifiers(ow)) as Ow;
 export default _ow;
 
 export {BasePredicate, Predicate};
-export * from './predicates';
-export {ArgumentError} from './argument-error';
+export * from './predicates.js';
+export {ArgumentError} from './argument-error.js';

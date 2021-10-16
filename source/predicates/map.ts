@@ -1,7 +1,7 @@
-import isEqual = require('lodash.isequal');
-import hasItems from '../utils/has-items';
-import ofType from '../utils/of-type';
-import {Predicate, PredicateOptions} from './predicate';
+import isEqual from 'lodash.isequal';
+import hasItems from '../utils/has-items.js';
+import ofType from '../utils/of-type.js';
+import {Predicate, PredicateOptions} from './predicate.js';
 
 export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, T2>> {
 	/**

@@ -1,5 +1,5 @@
-import hasItems from '../utils/has-items';
-import {Predicate, PredicateOptions} from './predicate';
+import hasItems from '../utils/has-items.js';
+import {Predicate, PredicateOptions} from './predicate.js';
 
 export class WeakSetPredicate<T extends object = object> extends Predicate<WeakSet<T>> {
 	/**

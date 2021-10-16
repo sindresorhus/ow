@@ -1,22 +1,22 @@
 import {TypedArray} from 'type-fest';
-import {StringPredicate} from './predicates/string';
-import {NumberPredicate} from './predicates/number';
-import {BigIntPredicate} from './predicates/bigint';
-import {BooleanPredicate} from './predicates/boolean';
-import {Predicate, PredicateOptions} from './predicates/predicate';
-import {ArrayPredicate} from './predicates/array';
-import {ObjectPredicate, Shape} from './predicates/object';
-import {DatePredicate} from './predicates/date';
-import {ErrorPredicate} from './predicates/error';
-import {MapPredicate} from './predicates/map';
-import {WeakMapPredicate} from './predicates/weak-map';
-import {SetPredicate} from './predicates/set';
-import {WeakSetPredicate} from './predicates/weak-set';
-import {TypedArrayPredicate} from './predicates/typed-array';
-import {ArrayBufferPredicate} from './predicates/array-buffer';
-import {DataViewPredicate} from './predicates/data-view';
-import {BasePredicate} from './predicates/base-predicate';
-import {AnyPredicate} from './predicates/any';
+import {StringPredicate} from './predicates/string.js';
+import {NumberPredicate} from './predicates/number.js';
+import {BigIntPredicate} from './predicates/bigint.js';
+import {BooleanPredicate} from './predicates/boolean.js';
+import {Predicate, PredicateOptions} from './predicates/predicate.js';
+import {ArrayPredicate} from './predicates/array.js';
+import {ObjectPredicate, Shape} from './predicates/object.js';
+import {DatePredicate} from './predicates/date.js';
+import {ErrorPredicate} from './predicates/error.js';
+import {MapPredicate} from './predicates/map.js';
+import {WeakMapPredicate} from './predicates/weak-map.js';
+import {SetPredicate} from './predicates/set.js';
+import {WeakSetPredicate} from './predicates/weak-set.js';
+import {TypedArrayPredicate} from './predicates/typed-array.js';
+import {ArrayBufferPredicate} from './predicates/array-buffer.js';
+import {DataViewPredicate} from './predicates/data-view.js';
+import {BasePredicate} from './predicates/base-predicate.js';
+import {AnyPredicate} from './predicates/any.js';
 
 export interface Predicates {
 	/**
