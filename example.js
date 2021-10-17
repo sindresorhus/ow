@@ -1,5 +1,4 @@
-'use strict';
-const {default: ow} = require('./dist');
+import ow from './dist/index.js'
 
 const logError = fn => {
 	try {
