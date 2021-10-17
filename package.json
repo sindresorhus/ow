@@ -70,7 +70,7 @@
 		"ts-node": "^10.3.0",
 		"typedoc": "^0.22.5",
 		"typescript": "^4.5.0-beta",
-		"xo": "^0.38.2"
+		"xo": "^0.45.0"
 	},
 	"browser": {
 		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
@@ -95,7 +95,27 @@
 			"@typescript-eslint/no-empty-function": "off",
 			"@typescript-eslint/restrict-template-expressions": "off",
 			"@typescript-eslint/no-unused-vars": "off",
-			"import/no-anonymous-default-export": "off"
+			"import/no-anonymous-default-export": "off",
+			"@typescript-eslint/comma-dang": "off",
+			"operator-linebreak": "off",
+			"@typescript-eslint/object-curly-spacing": "off",
+			"@typescript-eslint/comma-dangle": "off",
+			"node/prefer-global/buffer": "off",
+			"unicorn/prefer-node-protocol": "off",
+			"no-warning-comments": "off",
+			"@typescript-eslint/no-unsafe-call": "off",
+			"import/order": "off",
+			"unicorn/numeric-separators-style": "off",
+			"key-spacing": "off",
+			"capitalized-comments": "off",
+			"arrow-body-style": "off",
+			"@typescript-eslint/no-unsafe-return": "off",
+			"no-multi-spaces": "off",
+			"node/prefer-global/process": "off",
+			"@typescript-eslint/naming-convention": "off",
+			"@typescript-eslint/indent": "off",
+			"@typescript-eslint/no-unsafe-assignment": "off",
+			"@typescript-eslint/ban-ts-comment": "off"
 		}
 	},
 	"ava": {
