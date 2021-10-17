@@ -124,7 +124,7 @@ Object.defineProperties(ow, {
 			} catch {
 				return false;
 			}
-		}
+		},
 	},
 	create: {
 		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: unknown, label?: string): asserts value is T => {
@@ -137,8 +137,8 @@ Object.defineProperties(ow, {
 			}
 
 			test(value, label ?? (labelOrPredicate!), predicate!);
-		}
-	}
+		},
+	},
 });
 
 // Can't use `export default predicates(modifiers(ow)) as Ow` because the variable needs a type annotation to avoid a compiler error when used:

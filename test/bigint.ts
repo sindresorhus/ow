@@ -3,7 +3,7 @@ import ow from '../source';
 
 test('bigint', t => {
 	t.notThrows(() => {
-		ow(BigInt(9007199254740991), ow.bigint);
+		ow(BigInt(9_007_199_254_740_991), ow.bigint);
 	});
 
 	// TODO: Enable when targeting Node.js 14.
@@ -13,5 +13,5 @@ test('bigint', t => {
 
 	t.throws(() => {
 		ow(10, ow.bigint);
-	}, { message: 'Expected argument to be of type `bigint` but received type `number`' });
+	}, {message: 'Expected argument to be of type `bigint` but received type `number`'});
 });

@@ -17,9 +17,9 @@ export const not = (predicate: Predicate): Predicate => {
 		const placeholder = randomId();
 
 		validator.message = (value: unknown, label: string): string => (
-			negatedMessage ?
-				negatedMessage(value, label) :
-				message(value, placeholder).replace(/ to /, '$&not ').replace(placeholder, label)
+			negatedMessage
+				? negatedMessage(value, label)
+				: message(value, placeholder).replace(/ to /, '$&not ').replace(placeholder, label)
 		);
 
 		validator.validator = (value: unknown): unknown => !fn(value);

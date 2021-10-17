@@ -18,10 +18,12 @@ Test all the values in the object against a provided predicate.
 
 @param predicate - Predicate to test every value in the given object against.
 */
-export default (object: unknown, predicate: Predicate): boolean | string => {
+const ofTypeDeepSafe = (object: unknown, predicate: Predicate): boolean | string => {
 	try {
 		return ofTypeDeep(object, predicate);
 	} catch (error: unknown) {
 		return (error as Error).message;
 	}
 };
+
+export default ofTypeDeepSafe;

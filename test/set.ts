@@ -12,11 +12,11 @@ test('set', t => {
 
 	t.throws(() => {
 		ow(12 as any, ow.set);
-	}, { message: 'Expected argument to be of type `Set` but received type `number`' });
+	}, {message: 'Expected argument to be of type `Set` but received type `number`'});
 
 	t.throws(() => {
 		ow(12 as any, 'foo', ow.set);
-	}, { message: 'Expected `foo` to be of type `Set` but received type `number`' });
+	}, {message: 'Expected `foo` to be of type `Set` but received type `number`'});
 });
 
 test('set.size', t => {
@@ -30,11 +30,11 @@ test('set.size', t => {
 
 	t.throws(() => {
 		ow(new Set(['🦄']), ow.set.size(0));
-	}, { message: 'Expected Set to have size `0`, got `1`' });
+	}, {message: 'Expected Set to have size `0`, got `1`'});
 
 	t.throws(() => {
 		ow(new Set(['🦄']), 'foo', ow.set.size(0));
-	}, { message: 'Expected Set `foo` to have size `0`, got `1`' });
+	}, {message: 'Expected Set `foo` to have size `0`, got `1`'});
 });
 
 test('set.minSize', t => {
@@ -48,7 +48,7 @@ test('set.minSize', t => {
 
 	t.throws(() => {
 		ow(new Set(['🦄']), ow.set.minSize(2));
-	}, { message: 'Expected Set to have a minimum size of `2`, got `1`' });
+	}, {message: 'Expected Set to have a minimum size of `2`, got `1`'});
 });
 
 test('set.maxSize', t => {
@@ -62,7 +62,7 @@ test('set.maxSize', t => {
 
 	t.throws(() => {
 		ow(new Set(['🦄', '🌈']), ow.set.maxSize(1));
-	}, { message: 'Expected Set to have a maximum size of `1`, got `2`' });
+	}, {message: 'Expected Set to have a maximum size of `1`, got `2`'});
 });
 
 test('set.hasKeys', t => {
@@ -80,15 +80,15 @@ test('set.hasKeys', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn', 'rainbow']), ow.set.has('foo'));
-	}, { message: 'Expected Set to have items `["foo"]`' });
+	}, {message: 'Expected Set to have items `["foo"]`'});
 
 	t.throws(() => {
 		ow(new Set(['unicorn', 'foo']), ow.set.has('foo', 'bar'));
-	}, { message: 'Expected Set to have items `["bar"]`' });
+	}, {message: 'Expected Set to have items `["bar"]`'});
 
 	t.throws(() => {
 		ow(new Set([2, 4]), ow.set.has(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-	}, { message: 'Expected Set to have items `[1,3,5,6,7]`' });
+	}, {message: 'Expected Set to have items `[1,3,5,6,7]`'});
 });
 
 test('set.hasAny', t => {
@@ -106,7 +106,7 @@ test('set.hasAny', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn', 'rainbow']), ow.set.hasAny('foo'));
-	}, { message: 'Expected Set to have any item of `["foo"]`' });
+	}, {message: 'Expected Set to have any item of `["foo"]`'});
 });
 
 test('set.ofType', t => {
@@ -124,11 +124,11 @@ test('set.ofType', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), ow.set.ofType(ow.number));
-	}, { message: '(Set) Expected values to be of type `number` but received type `string`' });
+	}, {message: '(Set) Expected values to be of type `number` but received type `string`'});
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), 'foo', ow.set.ofType(ow.number));
-	}, { message: '(Set `foo`) Expected values to be of type `number` but received type `string`' });
+	}, {message: '(Set `foo`) Expected values to be of type `number` but received type `string`'});
 });
 
 test('set.empty', t => {
@@ -142,7 +142,7 @@ test('set.empty', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), ow.set.empty);
-	}, { message: 'Expected Set to be empty, got `["unicorn"]`' });
+	}, {message: 'Expected Set to be empty, got `["unicorn"]`'});
 });
 
 test('set.notEmpty', t => {
@@ -152,7 +152,7 @@ test('set.notEmpty', t => {
 
 	t.throws(() => {
 		ow(new Set(), ow.set.nonEmpty);
-	}, { message: 'Expected Set to not be empty' });
+	}, {message: 'Expected Set to not be empty'});
 });
 
 test('set.deepEqual', t => {
@@ -166,9 +166,9 @@ test('set.deepEqual', t => {
 
 	t.throws(() => {
 		ow(new Set(['unicorn']), ow.set.deepEqual(new Set(['rainbow'])));
-	}, { message: 'Expected Set to be deeply equal to `["rainbow"]`, got `["unicorn"]`' });
+	}, {message: 'Expected Set to be deeply equal to `["rainbow"]`, got `["unicorn"]`'});
 
 	t.throws(() => {
 		ow(new Set([{foo: 'bar'}]), ow.set.deepEqual(new Set([{foo: 'baz'}])));
-	}, { message: 'Expected Set to be deeply equal to `[{"foo":"baz"}]`, got `[{"foo":"bar"}]`' });
+	}, {message: 'Expected Set to be deeply equal to `[{"foo":"baz"}]`, got `[{"foo":"bar"}]`'});
 });

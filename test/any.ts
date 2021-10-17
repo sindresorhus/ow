@@ -22,7 +22,7 @@ test('any', t => {
 	t.throws(() => {
 		ow(1 as any, ow.any(ow.string));
 	}, {
-		message: createAnyError('Expected argument to be of type `string` but received type `number`')
+		message: createAnyError('Expected argument to be of type `string` but received type `number`'),
 	});
 
 	t.throws(() => {
@@ -30,8 +30,8 @@ test('any', t => {
 	}, {
 		message: createAnyError(
 			'Expected argument to be of type `number` but received type `boolean`',
-			'Expected argument to be of type `string` but received type `boolean`'
-		)
+			'Expected argument to be of type `string` but received type `boolean`',
+		),
 	});
 });
 

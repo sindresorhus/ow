@@ -17,7 +17,7 @@ export class WeakSetPredicate<T extends object = object> extends Predicate<WeakS
 	has(...items: readonly T[]): this {
 		return this.addValidator({
 			message: (_, label, missingItems) => `Expected ${label} to have items \`${JSON.stringify(missingItems)}\``,
-			validator: set => hasItems(set, items)
+			validator: set => hasItems(set, items),
 		});
 	}
 
@@ -29,7 +29,7 @@ export class WeakSetPredicate<T extends object = object> extends Predicate<WeakS
 	hasAny(...items: readonly T[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any item of \`${JSON.stringify(items)}\``,
-			validator: set => items.some(item => set.has(item))
+			validator: set => items.some(item => set.has(item)),
 		});
 	}
 }

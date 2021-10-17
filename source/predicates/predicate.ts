@@ -1,9 +1,9 @@
 import is from '@sindresorhus/is';
 import {ArgumentError} from '../argument-error.js';
 import {not} from '../operators/not.js';
-import {BasePredicate, testSymbol} from './base-predicate.js';
 import {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
+import {BasePredicate, testSymbol} from './base-predicate.js';
 
 /**
 Function executed when the provided validation fails.
@@ -67,16 +67,16 @@ export type CustomValidator<T> = (value: T) => {
 */
 export class Predicate<T = unknown> implements BasePredicate<T> {
 	private readonly context: Context<T> = {
-		validators: []
+		validators: [],
 	};
 
 	constructor(
 		private readonly type: string,
-		private readonly options: PredicateOptions = {}
+		private readonly options: PredicateOptions = {},
 	) {
 		this.context = {
 			...this.context,
-			...this.options
+			...this.options,
 		};
 
 		const typeString = this.type.charAt(0).toLowerCase() + this.type.slice(1);
@@ -89,14 +89,15 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
 			},
-			validator: value => (is as any)[typeString](value)
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+			validator: value => (is as any)[typeString](value),
 		});
 	}
 
 	/**
 	@hidden
 	*/
-	[testSymbol](value: T, main: Main, label: string | Function, idLabel: boolean): asserts value is T {
+	[testSymbol](value: T, main: Main, label: string | (() => string), idLabel: boolean): asserts value is T {
 		// Create a map of labels -> received errors.
 		const errors = new Map<string, Set<string>>();
 
@@ -121,9 +122,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			const label2 = is.function_(label) ? label() : label;
 			const labelWithTick = (label2 && idLabel) ? `\`${label2}\`` : label2;
 
-			const label_ = labelWithTick ?
-				`${this.type} ${labelWithTick}` :
-				this.type;
+			const label_ = labelWithTick
+				? `${this.type} ${labelWithTick}`
+				: this.type;
 
 			const mapKey = label2 || this.type;
 
@@ -172,9 +173,11 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	validate(customValidator: CustomValidator<T>): this {
 		return this.addValidator({
-			message: (_, label, error) => typeof error === 'string' ?
-				`(${label}) ${error}` :
-				error(label),
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+			message: (_, label, error) => typeof error === 'string'
+				? `(${label}) ${error}`
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+				: error(label),
 			validator: value => {
 				const {message, validator} = customValidator(value);
 
@@ -183,7 +186,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				}
 
 				return message;
-			}
+			},
 		});
 	}
 
@@ -194,11 +197,11 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	is(validator: (value: T) => boolean | string): this {
 		return this.addValidator({
-			message: (value, label, error) => (error ?
-				`(${label}) ${error}` :
-				`Expected ${label} \`${value}\` to pass custom validation function`
+			message: (value, label, error) => (error
+				? `(${label}) ${error}`
+				: `Expected ${label} \`${value}\` to pass custom validation function`
 			),
-			validator
+			validator,
 		});
 	}
 

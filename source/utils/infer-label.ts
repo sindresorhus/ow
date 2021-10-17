@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
 import {CallSite} from 'callsites';
 import isValidIdentifier from './is-valid-identifier.js';
 import isNode from './node/is-node.js';

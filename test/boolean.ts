@@ -7,10 +7,10 @@ test('boolean', t => {
 	});
 	t.throws(() => {
 		ow('12' as any, ow.boolean);
-	}, { message: 'Expected argument to be of type `boolean` but received type `string`' });
+	}, {message: 'Expected argument to be of type `boolean` but received type `string`'});
 	t.throws(() => {
 		ow('12' as any, 'foo', ow.boolean);
-	}, { message: 'Expected `foo` to be of type `boolean` but received type `string`' });
+	}, {message: 'Expected `foo` to be of type `boolean` but received type `string`'});
 });
 
 test('boolean.true', t => {
@@ -28,15 +28,15 @@ test('boolean.true', t => {
 
 	t.throws(() => {
 		ow(false, ow.boolean.true);
-	}, { message: 'Expected boolean to be true, got false' });
+	}, {message: 'Expected boolean to be true, got false'});
 
 	t.throws(() => {
 		ow(false, 'foo', ow.boolean.true);
-	}, { message: 'Expected boolean `foo` to be true, got false' });
+	}, {message: 'Expected boolean `foo` to be true, got false'});
 
 	t.throws(() => {
 		ow(Boolean(0), ow.boolean.true);
-	}, { message: 'Expected boolean to be true, got false' });
+	}, {message: 'Expected boolean to be true, got false'});
 });
 
 test('boolean.false', t => {
@@ -54,9 +54,9 @@ test('boolean.false', t => {
 
 	t.throws(() => {
 		ow(true, ow.boolean.false);
-	}, { message: 'Expected boolean to be false, got true' });
+	}, {message: 'Expected boolean to be false, got true'});
 
 	t.throws(() => {
 		ow(Boolean(1), ow.boolean.false);
-	}, { message: 'Expected boolean to be false, got true' });
+	}, {message: 'Expected boolean to be false, got true'});
 });

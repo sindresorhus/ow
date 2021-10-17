@@ -16,7 +16,7 @@ export class DataViewPredicate extends Predicate<DataView> {
 	byteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
-			validator: value => value.byteLength === byteLength
+			validator: value => value.byteLength === byteLength,
 		});
 	}
 
@@ -29,7 +29,7 @@ export class DataViewPredicate extends Predicate<DataView> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength >= byteLength,
-			negatedMessage: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength - 1}\`, got \`${value.byteLength}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength - 1}\`, got \`${value.byteLength}\``,
 		});
 	}
 
@@ -42,7 +42,7 @@ export class DataViewPredicate extends Predicate<DataView> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength <= byteLength,
-			negatedMessage: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength + 1}\`, got \`${value.byteLength}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength + 1}\`, got \`${value.byteLength}\``,
 		});
 	}
 }

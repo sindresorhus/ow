@@ -18,7 +18,7 @@ export class NumberPredicate extends Predicate<number> {
 	inRange(start: number, end: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be in range [${start}..${end}], got ${value}`,
-			validator: value => is.inRange(value, [start, end])
+			validator: value => is.inRange(value, [start, end]),
 		});
 	}
 
@@ -30,7 +30,7 @@ export class NumberPredicate extends Predicate<number> {
 	greaterThan(number: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be greater than ${number}, got ${value}`,
-			validator: value => value > number
+			validator: value => value > number,
 		});
 	}
 
@@ -42,7 +42,7 @@ export class NumberPredicate extends Predicate<number> {
 	greaterThanOrEqual(number: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be greater than or equal to ${number}, got ${value}`,
-			validator: value => value >= number
+			validator: value => value >= number,
 		});
 	}
 
@@ -54,7 +54,7 @@ export class NumberPredicate extends Predicate<number> {
 	lessThan(number: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be less than ${number}, got ${value}`,
-			validator: value => value < number
+			validator: value => value < number,
 		});
 	}
 
@@ -66,7 +66,7 @@ export class NumberPredicate extends Predicate<number> {
 	lessThanOrEqual(number: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be less than or equal to ${number}, got ${value}`,
-			validator: value => value <= number
+			validator: value => value <= number,
 		});
 	}
 
@@ -78,7 +78,7 @@ export class NumberPredicate extends Predicate<number> {
 	equal(expected: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be equal to ${expected}, got ${value}`,
-			validator: value => value === expected
+			validator: value => value === expected,
 		});
 	}
 
@@ -99,7 +99,7 @@ export class NumberPredicate extends Predicate<number> {
 
 				return `Expected ${label} to be one of \`${printedList}\`, got ${value}`;
 			},
-			validator: value => list.includes(value)
+			validator: value => list.includes(value),
 		});
 	}
 
@@ -109,7 +109,7 @@ export class NumberPredicate extends Predicate<number> {
 	get integer(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be an integer, got ${value}`,
-			validator: value => is.integer(value)
+			validator: value => is.integer(value),
 		});
 	}
 
@@ -119,7 +119,7 @@ export class NumberPredicate extends Predicate<number> {
 	get finite(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be finite, got ${value}`,
-			validator: value => !is.infinite(value)
+			validator: value => !is.infinite(value),
 		});
 	}
 
@@ -129,7 +129,7 @@ export class NumberPredicate extends Predicate<number> {
 	get infinite(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be infinite, got ${value}`,
-			validator: value => is.infinite(value)
+			validator: value => is.infinite(value),
 		});
 	}
 
@@ -139,7 +139,7 @@ export class NumberPredicate extends Predicate<number> {
 	get positive(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be positive, got ${value}`,
-			validator: value => value > 0
+			validator: value => value > 0,
 		});
 	}
 
@@ -149,7 +149,7 @@ export class NumberPredicate extends Predicate<number> {
 	get negative(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be negative, got ${value}`,
-			validator: value => value < 0
+			validator: value => value < 0,
 		});
 	}
 
@@ -159,7 +159,7 @@ export class NumberPredicate extends Predicate<number> {
 	get integerOrInfinite(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be an integer or infinite, got ${value}`,
-			validator: value => is.integer(value) || is.infinite(value)
+			validator: value => is.integer(value) || is.infinite(value),
 		});
 	}
 
@@ -174,14 +174,14 @@ export class NumberPredicate extends Predicate<number> {
 	Test a number to be in a valid range for a 16-bit unsigned integer.
 	*/
 	get uint16(): this {
-		return this.integer.inRange(0, 65535);
+		return this.integer.inRange(0, 65_535);
 	}
 
 	/**
 	Test a number to be in a valid range for a 32-bit unsigned integer.
 	*/
 	get uint32(): this {
-		return this.integer.inRange(0, 4294967295);
+		return this.integer.inRange(0, 4_294_967_295);
 	}
 
 	/**
@@ -195,13 +195,13 @@ export class NumberPredicate extends Predicate<number> {
 	Test a number to be in a valid range for a 16-bit signed integer.
 	*/
 	get int16(): this {
-		return this.integer.inRange(-32768, 32767);
+		return this.integer.inRange(-32_768, 32_767);
 	}
 
 	/**
 	Test a number to be in a valid range for a 32-bit signed integer.
 	*/
 	get int32(): this {
-		return this.integer.inRange(-2147483648, 2147483647);
+		return this.integer.inRange(-2_147_483_648, 2_147_483_647);
 	}
 }

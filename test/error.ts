@@ -15,11 +15,11 @@ test('error', t => {
 
 	t.throws(() => {
 		ow('12' as any, ow.error);
-	}, { message: 'Expected argument to be of type `error` but received type `string`' });
+	}, {message: 'Expected argument to be of type `error` but received type `string`'});
 
 	t.throws(() => {
 		ow('12' as any, 'err', ow.error);
-	}, { message: 'Expected `err` to be of type `error` but received type `string`' });
+	}, {message: 'Expected `err` to be of type `error` but received type `string`'});
 });
 
 test('error.name', t => {
@@ -37,11 +37,11 @@ test('error.name', t => {
 
 	t.throws(() => {
 		ow(new CustomError('foo'), ow.error.name('Error'));
-	}, { message: 'Expected error to have name `Error`, got `CustomError`' });
+	}, {message: 'Expected error to have name `Error`, got `CustomError`'});
 
 	t.throws(() => {
 		ow(new CustomError('foo'), 'err', ow.error.name('Error'));
-	}, { message: 'Expected error `err` to have name `Error`, got `CustomError`' });
+	}, {message: 'Expected error `err` to have name `Error`, got `CustomError`'});
 });
 
 test('error.message', t => {
@@ -55,7 +55,7 @@ test('error.message', t => {
 
 	t.throws(() => {
 		ow(new CustomError('foo'), ow.error.message('bar'));
-	}, { message: 'Expected error message to be `bar`, got `foo`' });
+	}, {message: 'Expected error message to be `bar`, got `foo`'});
 });
 
 test('error.messageIncludes', t => {
@@ -73,7 +73,7 @@ test('error.messageIncludes', t => {
 
 	t.throws(() => {
 		ow(new CustomError('foo bar'), ow.error.messageIncludes('unicorn'));
-	}, { message: 'Expected error message to include `unicorn`, got `foo bar`' });
+	}, {message: 'Expected error message to include `unicorn`, got `foo bar`'});
 });
 
 test('error.hasKeys', t => {
@@ -91,11 +91,11 @@ test('error.hasKeys', t => {
 
 	t.throws(() => {
 		ow(error, ow.error.hasKeys('foo'));
-	}, { message: 'Expected error message to have keys `foo`' });
+	}, {message: 'Expected error message to have keys `foo`'});
 
 	t.throws(() => {
 		ow(error, ow.error.hasKeys('unicorn', 'foo'));
-	}, { message: 'Expected error message to have keys `unicorn`, `foo`' });
+	}, {message: 'Expected error message to have keys `unicorn`, `foo`'});
 });
 
 test('error.instanceOf', t => {
@@ -121,19 +121,19 @@ test('error.instanceOf', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.instanceOf(CustomError));
-	}, { message: 'Expected error `Error` to be of type `CustomError`' });
+	}, {message: 'Expected error `Error` to be of type `CustomError`'});
 
 	t.throws(() => {
 		ow(new Error('foo'), 'err', ow.error.instanceOf(CustomError));
-	}, { message: 'Expected error `err` `Error` to be of type `CustomError`' });
+	}, {message: 'Expected error `err` `Error` to be of type `CustomError`'});
 
 	t.throws(() => {
 		ow(new TypeError('foo'), ow.error.instanceOf(EvalError));
-	}, { message: 'Expected error `TypeError` to be of type `EvalError`' });
+	}, {message: 'Expected error `TypeError` to be of type `EvalError`'});
 
 	t.throws(() => {
 		ow(new TypeError('foo'), 'err', ow.error.instanceOf(EvalError));
-	}, { message: 'Expected error `err` `TypeError` to be of type `EvalError`' });
+	}, {message: 'Expected error `err` `TypeError` to be of type `EvalError`'});
 });
 
 test('error.typeError', t => {
@@ -143,11 +143,11 @@ test('error.typeError', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.typeError);
-	}, { message: 'Expected error `Error` to be of type `TypeError`' });
+	}, {message: 'Expected error `Error` to be of type `TypeError`'});
 
 	t.throws(() => {
 		ow(new Error('foo'), 'foo', ow.error.typeError);
-	}, { message: 'Expected error `foo` `Error` to be of type `TypeError`' });
+	}, {message: 'Expected error `foo` `Error` to be of type `TypeError`'});
 });
 
 test('error.evalError', t => {
@@ -157,7 +157,7 @@ test('error.evalError', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.evalError);
-	}, { message: 'Expected error `Error` to be of type `EvalError`' });
+	}, {message: 'Expected error `Error` to be of type `EvalError`'});
 });
 
 test('error.rangeError', t => {
@@ -167,7 +167,7 @@ test('error.rangeError', t => {
 
 	t.throws(() => {
 		ow(new EvalError('foo'), ow.error.rangeError);
-	}, { message: 'Expected error `EvalError` to be of type `RangeError`' });
+	}, {message: 'Expected error `EvalError` to be of type `RangeError`'});
 });
 
 test('error.referenceError', t => {
@@ -177,7 +177,7 @@ test('error.referenceError', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.referenceError);
-	}, { message: 'Expected error `Error` to be of type `ReferenceError`' });
+	}, {message: 'Expected error `Error` to be of type `ReferenceError`'});
 });
 
 test('error.syntaxError', t => {
@@ -187,7 +187,7 @@ test('error.syntaxError', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.syntaxError);
-	}, { message: 'Expected error `Error` to be of type `SyntaxError`' });
+	}, {message: 'Expected error `Error` to be of type `SyntaxError`'});
 });
 
 test('error.uriError', t => {
@@ -197,5 +197,5 @@ test('error.uriError', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.error.uriError);
-	}, { message: 'Expected error `Error` to be of type `URIError`' });
+	}, {message: 'Expected error `Error` to be of type `URIError`'});
 });

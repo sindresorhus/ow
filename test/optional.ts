@@ -28,13 +28,13 @@ test('optional', t => {
 
 	t.throws(() => {
 		ow(null, ow.optional.function);
-	}, { message: 'Expected argument to be of type `Function` but received type `null`' });
+	}, {message: 'Expected argument to be of type `Function` but received type `null`'});
 
 	t.throws(() => {
 		ow(null, ow.optional.number);
-	}, { message: 'Expected argument to be of type `number` but received type `null`' });
+	}, {message: 'Expected argument to be of type `number` but received type `null`'});
 
 	t.throws(() => {
 		ow('1' as any, ow.optional.number);
-	}, { message: 'Expected argument to be of type `number` but received type `string`' });
+	}, {message: 'Expected argument to be of type `number` but received type `string`'});
 });

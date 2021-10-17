@@ -1,3 +1,4 @@
+import type {Buffer} from 'node:buffer';
 import {TypedArray} from 'type-fest';
 import {StringPredicate} from './predicates/string.js';
 import {NumberPredicate} from './predicates/number.js';
@@ -210,120 +211,122 @@ export interface Predicates {
 	& ((...predicate: BasePredicate[]) => AnyPredicate);
 }
 
-export default <T>(object: T, options?: PredicateOptions): T & Predicates => {
+const predicates = <T>(object: T, options?: PredicateOptions): T & Predicates => {
 	Object.defineProperties(object, {
 		string: {
-			get: (): StringPredicate => new StringPredicate(options)
+			get: (): StringPredicate => new StringPredicate(options),
 		},
 		number: {
-			get: (): NumberPredicate => new NumberPredicate(options)
+			get: (): NumberPredicate => new NumberPredicate(options),
 		},
 		bigint: {
-			get: (): BigIntPredicate => new BigIntPredicate(options)
+			get: (): BigIntPredicate => new BigIntPredicate(options),
 		},
 		boolean: {
-			get: (): BooleanPredicate => new BooleanPredicate(options)
+			get: (): BooleanPredicate => new BooleanPredicate(options),
 		},
 		undefined: {
-			get: (): Predicate => new Predicate('undefined', options)
+			get: (): Predicate => new Predicate('undefined', options),
 		},
 		null: {
-			get: (): Predicate => new Predicate('null', options)
+			get: (): Predicate => new Predicate('null', options),
 		},
 		nullOrUndefined: {
-			get: (): Predicate => new Predicate('nullOrUndefined', options)
+			get: (): Predicate => new Predicate('nullOrUndefined', options),
 		},
 		nan: {
-			get: (): Predicate => new Predicate('nan', options)
+			get: (): Predicate => new Predicate('nan', options),
 		},
 		symbol: {
-			get: (): Predicate => new Predicate('symbol', options)
+			get: (): Predicate => new Predicate('symbol', options),
 		},
 		array: {
-			get: (): ArrayPredicate => new ArrayPredicate(options)
+			get: (): ArrayPredicate => new ArrayPredicate(options),
 		},
 		object: {
-			get: (): ObjectPredicate => new ObjectPredicate(options)
+			get: (): ObjectPredicate => new ObjectPredicate(options),
 		},
 		date: {
-			get: (): DatePredicate => new DatePredicate(options)
+			get: (): DatePredicate => new DatePredicate(options),
 		},
 		error: {
-			get: (): ErrorPredicate => new ErrorPredicate(options)
+			get: (): ErrorPredicate => new ErrorPredicate(options),
 		},
 		map: {
-			get: (): MapPredicate => new MapPredicate(options)
+			get: (): MapPredicate => new MapPredicate(options),
 		},
 		weakMap: {
-			get: (): WeakMapPredicate => new WeakMapPredicate(options)
+			get: (): WeakMapPredicate => new WeakMapPredicate(options),
 		},
 		set: {
-			get: (): SetPredicate => new SetPredicate(options)
+			get: (): SetPredicate => new SetPredicate(options),
 		},
 		weakSet: {
-			get: (): WeakSetPredicate => new WeakSetPredicate(options)
+			get: (): WeakSetPredicate => new WeakSetPredicate(options),
 		},
 		function: {
-			get: (): Predicate => new Predicate('Function', options)
+			get: (): Predicate => new Predicate('Function', options),
 		},
 		buffer: {
-			get: (): Predicate => new Predicate('Buffer', options)
+			get: (): Predicate => new Predicate('Buffer', options),
 		},
 		regExp: {
-			get: (): Predicate<RegExp> => new Predicate('RegExp', options)
+			get: (): Predicate<RegExp> => new Predicate('RegExp', options),
 		},
 		promise: {
-			get: (): Predicate => new Predicate('Promise', options)
+			get: (): Predicate => new Predicate('Promise', options),
 		},
 		typedArray: {
-			get: (): TypedArrayPredicate<TypedArray> => new TypedArrayPredicate('TypedArray', options)
+			get: (): TypedArrayPredicate<TypedArray> => new TypedArrayPredicate('TypedArray', options),
 		},
 		int8Array: {
-			get: (): TypedArrayPredicate<Int8Array> => new TypedArrayPredicate('Int8Array', options)
+			get: (): TypedArrayPredicate<Int8Array> => new TypedArrayPredicate('Int8Array', options),
 		},
 		uint8Array: {
-			get: (): TypedArrayPredicate<Uint8Array> => new TypedArrayPredicate('Uint8Array', options)
+			get: (): TypedArrayPredicate<Uint8Array> => new TypedArrayPredicate('Uint8Array', options),
 		},
 		uint8ClampedArray: {
-			get: (): TypedArrayPredicate<Uint8Array> => new TypedArrayPredicate('Uint8ClampedArray', options)
+			get: (): TypedArrayPredicate<Uint8Array> => new TypedArrayPredicate('Uint8ClampedArray', options),
 		},
 		int16Array: {
-			get: (): TypedArrayPredicate<Int16Array> => new TypedArrayPredicate('Int16Array', options)
+			get: (): TypedArrayPredicate<Int16Array> => new TypedArrayPredicate('Int16Array', options),
 		},
 		uint16Array: {
-			get: (): TypedArrayPredicate<Uint16Array> => new TypedArrayPredicate('Uint16Array', options)
+			get: (): TypedArrayPredicate<Uint16Array> => new TypedArrayPredicate('Uint16Array', options),
 		},
 		int32Array: {
-			get: (): TypedArrayPredicate<Int32Array> => new TypedArrayPredicate('Int32Array', options)
+			get: (): TypedArrayPredicate<Int32Array> => new TypedArrayPredicate('Int32Array', options),
 		},
 		uint32Array: {
-			get: (): TypedArrayPredicate<Uint32Array> => new TypedArrayPredicate('Uint32Array', options)
+			get: (): TypedArrayPredicate<Uint32Array> => new TypedArrayPredicate('Uint32Array', options),
 		},
 		float32Array: {
-			get: (): TypedArrayPredicate<Float32Array> => new TypedArrayPredicate('Float32Array', options)
+			get: (): TypedArrayPredicate<Float32Array> => new TypedArrayPredicate('Float32Array', options),
 		},
 		float64Array: {
-			get: (): TypedArrayPredicate<Float64Array> => new TypedArrayPredicate('Float64Array', options)
+			get: (): TypedArrayPredicate<Float64Array> => new TypedArrayPredicate('Float64Array', options),
 		},
 		arrayBuffer: {
-			get: (): ArrayBufferPredicate<ArrayBuffer> => new ArrayBufferPredicate('ArrayBuffer', options)
+			get: (): ArrayBufferPredicate<ArrayBuffer> => new ArrayBufferPredicate('ArrayBuffer', options),
 		},
 		sharedArrayBuffer: {
-			get: (): ArrayBufferPredicate<SharedArrayBuffer> => new ArrayBufferPredicate('SharedArrayBuffer', options)
+			get: (): ArrayBufferPredicate<SharedArrayBuffer> => new ArrayBufferPredicate('SharedArrayBuffer', options),
 		},
 		dataView: {
-			get: (): DataViewPredicate => new DataViewPredicate(options)
+			get: (): DataViewPredicate => new DataViewPredicate(options),
 		},
 		iterable: {
-			get: (): Predicate => new Predicate('Iterable', options)
+			get: (): Predicate => new Predicate('Iterable', options),
 		},
 		any: {
-			value: (...predicates: BasePredicate[]): AnyPredicate => new AnyPredicate(predicates, options)
-		}
+			value: (...predicates: BasePredicate[]): AnyPredicate => new AnyPredicate(predicates, options),
+		},
 	});
 
 	return object as T & Predicates;
 };
+
+export default predicates;
 
 export {
 	StringPredicate,
@@ -342,5 +345,5 @@ export {
 	ArrayBufferPredicate,
 	DataViewPredicate,
 	AnyPredicate,
-	Shape
+	Shape,
 };

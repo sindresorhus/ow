@@ -19,7 +19,7 @@ test('not', t => {
 
 	t.throws(() => {
 		ow(6, ow.number.not.infinite.not.greaterThan(5));
-	}, { message: 'Expected number to not be greater than 5, got 6' });
+	}, {message: 'Expected number to not be greater than 5, got 6'});
 
 	t.notThrows(() => {
 		ow('foo!', ow.string.not.alphabetical);
@@ -43,15 +43,15 @@ test('not', t => {
 
 	t.throws(() => {
 		ow('', ow.string.not.empty);
-	}, { message: 'Expected string to not be empty, got ``' });
+	}, {message: 'Expected string to not be empty, got ``'});
 
 	t.throws(() => {
 		ow('', 'foo', ow.string.not.empty);
-	}, { message: 'Expected string `foo` to not be empty, got ``' });
+	}, {message: 'Expected string `foo` to not be empty, got ``'});
 
 	t.throws(() => {
 		ow(foo, ow.string.not.empty);
-	}, { message: 'Expected string to not be empty, got ``' });
+	}, {message: 'Expected string to not be empty, got ``'});
 
 	t.notThrows(() => {
 		ow('a', ow.string.not.minLength(3));
@@ -61,7 +61,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow('abc', ow.string.not.minLength(3));
-	}, { message: 'Expected string to have a maximum length of `2`, got `abc`' });
+	}, {message: 'Expected string to have a maximum length of `2`, got `abc`'});
 
 	t.notThrows(() => {
 		ow('abcd', ow.string.not.maxLength(2));
@@ -71,21 +71,21 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow('a', ow.string.not.maxLength(3));
-	}, { message: 'Expected string to have a minimum length of `4`, got `a`' });
+	}, {message: 'Expected string to have a minimum length of `4`, got `a`'});
 
 	t.notThrows(() => {
 		ow({a: 1}, ow.object.not.empty);
 	});
 	t.throws(() => {
 		ow({}, ow.object.not.empty);
-	}, { message: 'Expected object to not be empty, got `{}`' });
+	}, {message: 'Expected object to not be empty, got `{}`'});
 
 	t.notThrows(() => {
 		ow(new Set([1]), ow.set.not.empty);
 	});
 	t.throws(() => {
 		ow(new Set([]), ow.set.not.empty);
-	}, { message: 'Expected Set to not be empty, got `[]`' });
+	}, {message: 'Expected Set to not be empty, got `[]`'});
 
 	t.notThrows(() => {
 		ow(new Set([1]), ow.set.not.minSize(3));
@@ -95,7 +95,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Set([1, 2, 3]), ow.set.not.minSize(3));
-	}, { message: 'Expected Set to have a maximum size of `2`, got `3`' });
+	}, {message: 'Expected Set to have a maximum size of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow(new Set([1, 2]), ow.set.not.maxSize(1));
@@ -105,14 +105,14 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Set([1]), ow.set.not.maxSize(1));
-	}, { message: 'Expected Set to have a minimum size of `2`, got `1`' });
+	}, {message: 'Expected Set to have a minimum size of `2`, got `1`'});
 
 	t.notThrows(() => {
 		ow(new Map([[1, 1]]), ow.map.not.empty);
 	});
 	t.throws(() => {
 		ow(new Map([]), ow.map.not.empty);
-	}, { message: 'Expected Map to not be empty, got `[]`' });
+	}, {message: 'Expected Map to not be empty, got `[]`'});
 
 	t.notThrows(() => {
 		ow(new Map([[1, 1]]), ow.map.not.minSize(3));
@@ -122,7 +122,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Map([[1, 1], [2, 2], [3, 3]]), ow.map.not.minSize(3));
-	}, { message: 'Expected Map to have a maximum size of `2`, got `3`' });
+	}, {message: 'Expected Map to have a maximum size of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow(new Map([[1, 1], [2, 2]]), ow.map.not.maxSize(1));
@@ -132,14 +132,14 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Map([[1, 1]]), ow.map.not.maxSize(1));
-	}, { message: 'Expected Map to have a minimum size of `2`, got `1`' });
+	}, {message: 'Expected Map to have a minimum size of `2`, got `1`'});
 
 	t.notThrows(() => {
 		ow(['foo'], ow.array.not.empty);
 	});
 	t.throws(() => {
 		ow([], ow.array.not.empty);
-	}, { message: 'Expected array to not be empty, got `[]`' });
+	}, {message: 'Expected array to not be empty, got `[]`'});
 
 	t.notThrows(() => {
 		ow([1], ow.array.not.minLength(3));
@@ -149,7 +149,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow([1, 2, 3], ow.array.not.minLength(3));
-	}, { message: 'Expected array to have a maximum length of `2`, got `3`' });
+	}, {message: 'Expected array to have a maximum length of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow([1, 2, 3], ow.array.not.maxLength(2));
@@ -159,7 +159,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow([1], ow.array.not.maxLength(3));
-	}, { message: 'Expected array to have a minimum length of `4`, got `1`' });
+	}, {message: 'Expected array to have a minimum length of `4`, got `1`'});
 
 	t.notThrows(() => {
 		ow(new Int8Array(1), ow.typedArray.not.minByteLength(3));
@@ -169,7 +169,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Int8Array(3), ow.typedArray.not.minByteLength(3));
-	}, { message: 'Expected TypedArray to have a maximum byte length of `2`, got `3`' });
+	}, {message: 'Expected TypedArray to have a maximum byte length of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow(new Uint8Array(4), ow.typedArray.not.maxByteLength(2));
@@ -179,7 +179,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Uint8Array(2), ow.typedArray.not.maxByteLength(2));
-	}, { message: 'Expected TypedArray to have a minimum byte length of `3`, got `2`' });
+	}, {message: 'Expected TypedArray to have a minimum byte length of `3`, got `2`'});
 
 	t.notThrows(() => {
 		ow(new Uint8ClampedArray(1), ow.typedArray.not.minLength(3));
@@ -189,7 +189,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Float32Array(3), ow.typedArray.not.minLength(3));
-	}, { message: 'Expected TypedArray to have a maximum length of `2`, got `3`' });
+	}, {message: 'Expected TypedArray to have a maximum length of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow(new Uint16Array(4), ow.typedArray.not.maxLength(2));
@@ -199,7 +199,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new Float64Array(2), ow.typedArray.not.maxLength(2));
-	}, { message: 'Expected TypedArray to have a minimum length of `3`, got `2`' });
+	}, {message: 'Expected TypedArray to have a minimum length of `3`, got `2`'});
 
 	t.notThrows(() => {
 		ow(new ArrayBuffer(1), ow.arrayBuffer.not.minByteLength(3));
@@ -209,7 +209,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new ArrayBuffer(3), ow.arrayBuffer.not.minByteLength(3));
-	}, { message: 'Expected ArrayBuffer to have a maximum byte length of `2`, got `3`' });
+	}, {message: 'Expected ArrayBuffer to have a maximum byte length of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow(new ArrayBuffer(4), ow.arrayBuffer.not.maxByteLength(2));
@@ -219,7 +219,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new ArrayBuffer(2), ow.arrayBuffer.not.maxByteLength(2));
-	}, { message: 'Expected ArrayBuffer to have a minimum byte length of `3`, got `2`' });
+	}, {message: 'Expected ArrayBuffer to have a minimum byte length of `3`, got `2`'});
 
 	t.notThrows(() => {
 		ow(new SharedArrayBuffer(4), ow.sharedArrayBuffer.not.maxByteLength(2));
@@ -229,7 +229,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new SharedArrayBuffer(2), ow.sharedArrayBuffer.not.maxByteLength(2));
-	}, { message: 'Expected SharedArrayBuffer to have a minimum byte length of `3`, got `2`' });
+	}, {message: 'Expected SharedArrayBuffer to have a minimum byte length of `3`, got `2`'});
 
 	t.notThrows(() => {
 		ow(new DataView(new ArrayBuffer(1)), ow.dataView.not.minByteLength(3));
@@ -239,7 +239,7 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new DataView(new ArrayBuffer(3)), ow.dataView.not.minByteLength(3));
-	}, { message: 'Expected DataView to have a maximum byte length of `2`, got `3`' });
+	}, {message: 'Expected DataView to have a maximum byte length of `2`, got `3`'});
 
 	t.notThrows(() => {
 		ow(new DataView(new ArrayBuffer(4)), ow.dataView.not.maxByteLength(2));
@@ -249,13 +249,11 @@ test('not', t => {
 	});
 	t.throws(() => {
 		ow(new DataView(new ArrayBuffer(2)), ow.dataView.not.maxByteLength(2));
-	}, { message: 'Expected DataView to have a minimum byte length of `3`, got `2`' });
+	}, {message: 'Expected DataView to have a minimum byte length of `3`, got `2`'});
 });
 
 test('is', t => {
-	const greaterThan = (max: number, x: number): string | true => {
-		return x > max || `Expected \`${x}\` to be greater than \`${max}\``;
-	};
+	const greaterThan = (max: number, x: number): string | true => x > max || `Expected \`${x}\` to be greater than \`${max}\``;
 
 	t.notThrows(() => {
 		ow(1, ow.number.is(x => x < 10));
@@ -263,19 +261,19 @@ test('is', t => {
 
 	t.throws(() => {
 		ow(1, ow.number.is(x => x > 10));
-	}, { message: 'Expected number `1` to pass custom validation function' });
+	}, {message: 'Expected number `1` to pass custom validation function'});
 
 	t.throws(() => {
 		ow(1, 'foo', ow.number.is(x => x > 10));
-	}, { message: 'Expected number `foo` `1` to pass custom validation function' });
+	}, {message: 'Expected number `foo` `1` to pass custom validation function'});
 
 	t.throws(() => {
 		ow(5, ow.number.is(x => greaterThan(10, x)));
-	}, { message:'(number) Expected `5` to be greater than `10`' });
+	}, {message: '(number) Expected `5` to be greater than `10`'});
 
 	t.throws(() => {
 		ow(5, 'foo', ow.number.is(x => greaterThan(10, x)));
-	}, { message:'(number `foo`) Expected `5` to be greater than `10`' });
+	}, {message: '(number `foo`) Expected `5` to be greater than `10`'});
 });
 
 test('isValid', t => {
@@ -291,8 +289,8 @@ test('isValid', t => {
 
 test('reusable validator', t => {
 	const checkUsername = ow.create(ow.string.minLength(3));
-	const checkUsername_: AssertingValidator<typeof checkUsername> = checkUsername;
-	const checkUsername__: AssertingValidator<typeof ow.string> = checkUsername;
+	const checkUsername1: AssertingValidator<typeof checkUsername> = checkUsername;
+	const checkUsername2: AssertingValidator<typeof ow.string> = checkUsername;
 
 	const value = 'x';
 	const value_ = 'foo' as string | number;
@@ -306,30 +304,30 @@ test('reusable validator', t => {
 	});
 
 	t.notThrows(() => {
-		checkUsername_(value_);
+		checkUsername1(value_);
 		((_: string): void => {})(value_); // The _ function should narrow the type. If it didn't, this would not compile
 	});
 
 	t.notThrows(() => {
-		checkUsername__(value_);
+		checkUsername2(value_);
 		((_: string): void => {})(value_); // The __ function should narrow the type. If it didn't, this would not compile
 	});
 
 	t.throws(() => {
 		checkUsername('fo');
-	}, { message: 'Expected string to have a minimum length of `3`, got `fo`' });
+	}, {message: 'Expected string to have a minimum length of `3`, got `fo`'});
 
 	t.throws(() => {
 		checkUsername(value);
-	}, { message: 'Expected string to have a minimum length of `3`, got `x`' });
+	}, {message: 'Expected string to have a minimum length of `3`, got `x`'});
 
 	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5);
 	}, {
 		message: [
 			'Expected argument to be of type `string` but received type `number`',
-			'Expected string to have a minimum length of `3`, got `5`'
-		].join('\n')
+			'Expected string to have a minimum length of `3`, got `5`',
+		].join('\n'),
 	});
 
 	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
@@ -340,7 +338,7 @@ test('reusable validator', t => {
 	t.is(result1_.size, 2, 'There are two reported errors for this input');
 	t.deepEqual(result1_, new Set([
 		'Expected argument to be of type `string` but received type `number`',
-		'Expected string to have a minimum length of `3`, got `5`'
+		'Expected string to have a minimum length of `3`, got `5`',
 	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
@@ -360,19 +358,19 @@ test('reusable validator called with label', t => {
 
 	t.throws(() => {
 		checkUsername('fo', label);
-	}, { message: 'Expected string `bar` to have a minimum length of `3`, got `fo`' });
+	}, {message: 'Expected string `bar` to have a minimum length of `3`, got `fo`'});
 
 	t.throws(() => {
 		checkUsername(value, label);
-	}, { message: 'Expected string `bar` to have a minimum length of `3`, got `x`' });
+	}, {message: 'Expected string `bar` to have a minimum length of `3`, got `x`'});
 
 	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5, label);
 	}, {
 		message: [
 			'Expected `bar` to be of type `string` but received type `number`',
-			'Expected string `bar` to have a minimum length of `3`, got `5`'
-		].join('\n')
+			'Expected string `bar` to have a minimum length of `3`, got `5`',
+		].join('\n'),
 	});
 
 	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
@@ -383,7 +381,7 @@ test('reusable validator called with label', t => {
 	t.is(result1_.size, 2, 'There are two reported errors for this input');
 	t.deepEqual(result1_, new Set([
 		'Expected `bar` to be of type `string` but received type `number`',
-		'Expected string `bar` to have a minimum length of `3`, got `5`'
+		'Expected string `bar` to have a minimum length of `3`, got `5`',
 	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
@@ -400,15 +398,15 @@ test('reusable validator with label', t => {
 
 	t.throws(() => {
 		checkUsername('fo');
-	}, { message: 'Expected string `foo` to have a minimum length of `3`, got `fo`' });
+	}, {message: 'Expected string `foo` to have a minimum length of `3`, got `fo`'});
 
 	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5);
 	}, {
 		message: [
 			'Expected `foo` to be of type `string` but received type `number`',
-			'Expected string `foo` to have a minimum length of `3`, got `5`'
-		].join('\n')
+			'Expected string `foo` to have a minimum length of `3`, got `5`',
+		].join('\n'),
 	});
 
 	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
@@ -419,7 +417,7 @@ test('reusable validator with label', t => {
 	t.is(result1_.size, 2, 'There are two reported errors for this input');
 	t.deepEqual(result1_, new Set([
 		'Expected `foo` to be of type `string` but received type `number`',
-		'Expected string `foo` to have a minimum length of `3`, got `5`'
+		'Expected string `foo` to have a minimum length of `3`, got `5`',
 	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
@@ -438,15 +436,15 @@ test('reusable validator with label called with label', t => {
 
 	t.throws(() => {
 		checkUsername('fo', label);
-	}, { message: 'Expected string `bar` to have a minimum length of `3`, got `fo`' });
+	}, {message: 'Expected string `bar` to have a minimum length of `3`, got `fo`'});
 
 	const error = t.throws<ArgumentError>(() => {
 		checkUsername(5, label);
 	}, {
 		message: [
 			'Expected `bar` to be of type `string` but received type `number`',
-			'Expected string `bar` to have a minimum length of `3`, got `5`'
-		].join('\n')
+			'Expected string `bar` to have a minimum length of `3`, got `5`',
+		].join('\n'),
 	});
 
 	t.is(error.validationErrors.size, 1, 'There is one item in the `validationErrors` map');
@@ -457,7 +455,7 @@ test('reusable validator with label called with label', t => {
 	t.is(result1_.size, 2, 'There are two reported errors for this input');
 	t.deepEqual(result1_, new Set([
 		'Expected `bar` to be of type `string` but received type `number`',
-		'Expected string `bar` to have a minimum length of `3`, got `5`'
+		'Expected string `bar` to have a minimum length of `3`, got `5`',
 	]), 'There is an error for invalid input type, and one for minimum length not being satisfied');
 });
 
@@ -477,8 +475,8 @@ test('any-reusable validator', t => {
 	}, {
 		message: createAnyError(
 			'Expected string to include `.`, got `fo`',
-			'Expected string to have a minimum length of `3`, got `fo`'
-		)
+			'Expected string to have a minimum length of `3`, got `fo`',
+		),
 	});
 
 	t.throws(() => {
@@ -487,8 +485,8 @@ test('any-reusable validator', t => {
 		message: createAnyError(
 			'Expected argument to be of type `string` but received type `number`',
 			'Expected string to include `.`, got `5`',
-			'Expected string to have a minimum length of `3`, got `5`'
-		)
+			'Expected string to have a minimum length of `3`, got `5`',
+		),
 	});
 });
 
@@ -496,21 +494,21 @@ test('custom validation function', t => {
 	t.throws(() => {
 		ow('🦄', 'unicorn', ow.string.validate(value => ({
 			message: (label): string => `Expected ${label} to be \`🌈\`, got \`${value}\``,
-			validator: value === '🌈'
+			validator: value === '🌈',
 		})));
-	}, { message: 'Expected string `unicorn` to be `🌈`, got `🦄`' });
+	}, {message: 'Expected string `unicorn` to be `🌈`, got `🦄`'});
 
 	t.throws(() => {
 		ow('🦄', 'unicorn', ow.string.validate(value => ({
 			message: 'Should be `🌈`',
-			validator: value === '🌈'
+			validator: value === '🌈',
 		})));
-	}, { message:'(string `unicorn`) Should be `🌈`' });
+	}, {message: '(string `unicorn`) Should be `🌈`'});
 
 	t.notThrows(() => {
 		ow('🦄', 'unicorn', ow.string.validate(value => ({
 			message: (label): string => `Expected ${label} to be '🦄', got \`${value}\``,
-			validator: value === '🦄'
+			validator: value === '🦄',
 		})));
 	});
 });
@@ -518,10 +516,10 @@ test('custom validation function', t => {
 test('ow without valid arguments', t => {
 	t.throws(() => {
 		ow(5, {} as any);
-	}, { message: 'Expected second argument to be a predicate or a string, got `object`' });
+	}, {message: 'Expected second argument to be a predicate or a string, got `object`'});
 });
 
-// skipped because require is not defined in esm
+// Skipped because require is not defined in esm
 // This test is to cover all paths of source/utils/generate-stacks.ts
 // test('ow without Error.captureStackTrace', t => {
 // 	const originalErrorStackTrace = Error.captureStackTrace;
@@ -556,9 +554,9 @@ test('ArgumentError with missing errors map', t => {
 		throw new ArgumentError('Hi from tests!', throws);
 	}
 
-	const error_1 = t.throws<ArgumentError>(() => {
+	const error1 = t.throws<ArgumentError>(() => {
 		throws();
-	}, { message: 'Hi from tests!' });
+	}, {message: 'Hi from tests!'});
 
-	t.deepEqual(error_1.validationErrors, new Map(), 'Error should default to an empty error map');
+	t.deepEqual(error1.validationErrors, new Map(), 'Error should default to an empty error map');
 });

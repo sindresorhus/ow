@@ -9,7 +9,7 @@ export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T
 	byteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
-			validator: value => value.byteLength === byteLength
+			validator: value => value.byteLength === byteLength,
 		});
 	}
 
@@ -22,7 +22,7 @@ export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength >= byteLength,
-			negatedMessage: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength - 1}\`, got \`${value.byteLength}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength - 1}\`, got \`${value.byteLength}\``,
 		});
 	}
 
@@ -35,7 +35,7 @@ export class ArrayBufferPredicate<T extends ArrayBufferLike> extends Predicate<T
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength <= byteLength,
-			negatedMessage: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength + 1}\`, got \`${value.byteLength}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength + 1}\`, got \`${value.byteLength}\``,
 		});
 	}
 }
