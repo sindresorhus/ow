@@ -7,7 +7,9 @@ test('any predicate', t => {
 	// #region Tests line 49 of predicates/any.ts and lines 16-21 of utils/generate-argument-error-message.ts
 	const error_1 = t.throws<ArgumentError>(() => {
 		ow(5 as any, ow.any(ow.string));
-	}, createAnyError('Expected argument to be of type `string` but received type `number`'));
+	}, {
+		message: createAnyError('Expected argument to be of type `string` but received type `number`')
+	});
 
 	t.is(error_1.validationErrors.size, 1, 'There should be only one error');
 
@@ -26,17 +28,20 @@ test('any predicate', t => {
 			ow.string.url.minLength(24),
 			ow.number.greaterThan(42)
 		));
-	}, createAnyPredicateError([
-		'string',
-		[
-			'Expected argument to be of type `string` but received type `number`',
-			'Expected string to be a URL, got `21`',
-			'Expected string to have a minimum length of `24`, got `21`'
-		]
-	], [
-		'number',
-		['Expected number to be greater than 42, got 21']
-	]));
+	},
+	{
+		message: createAnyPredicateError([
+			'string',
+			[
+				'Expected argument to be of type `string` but received type `number`',
+				'Expected string to be a URL, got `21`',
+				'Expected string to have a minimum length of `24`, got `21`'
+			]
+		], [
+			'number',
+			['Expected number to be greater than 42, got 21']
+		])
+});
 
 	t.is(error_2.validationErrors.size, 2, 'There should be two types of errors reported');
 
@@ -64,10 +69,12 @@ test('any predicate', t => {
 			ow.string,
 			ow.number
 		));
-	}, createAnyError(
-		'Expected argument to be of type `string` but received type `null`',
-		'Expected argument to be of type `number` but received type `null`'
-	));
+	}, {
+		message: createAnyError(
+			'Expected argument to be of type `string` but received type `null`',
+			'Expected argument to be of type `number` but received type `null`'
+		)
+	});
 
 	t.is(error_3.validationErrors.size, 2, 'There should be two types of errors reported');
 
@@ -89,12 +96,14 @@ test('any predicate', t => {
 			ow.string.url.minLength(21),
 			ow.string.url.minLength(42)
 		));
-	}, createAnyError(
-		'Expected argument to be of type `string` but received type `number`',
-		'Expected string to be a URL, got `21`',
-		'Expected string to have a minimum length of `21`, got `21`',
-		'Expected string to have a minimum length of `42`, got `21`'
-	));
+	}, {
+		message: createAnyError(
+			'Expected argument to be of type `string` but received type `number`',
+			'Expected string to be a URL, got `21`',
+			'Expected string to have a minimum length of `21`, got `21`',
+			'Expected string to have a minimum length of `42`, got `21`'
+		)
+	});
 
 	t.is(error_4.validationErrors.size, 1, 'There should be one type of error reported');
 

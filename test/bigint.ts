@@ -13,5 +13,5 @@ test('bigint', t => {
 
 	t.throws(() => {
 		ow(10, ow.bigint);
-	}, 'Expected argument to be of type `bigint` but received type `number`');
+	}, { message: 'Expected argument to be of type `bigint` but received type `number`' });
 });

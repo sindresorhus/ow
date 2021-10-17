@@ -12,15 +12,15 @@ test('arrayBuffer', t => {
 
 	t.throws(() => {
 		ow('foo' as any, ow.arrayBuffer);
-	}, 'Expected argument to be of type `ArrayBuffer` but received type `string`');
+	}, { message: 'Expected argument to be of type `ArrayBuffer` but received type `string`' });
 
 	t.throws(() => {
 		ow('foo' as any, 'foo', ow.arrayBuffer);
-	}, 'Expected `foo` to be of type `ArrayBuffer` but received type `string`');
+	}, { message: 'Expected `foo` to be of type `ArrayBuffer` but received type `string`' });
 
 	t.throws(() => {
 		ow(12 as any, ow.arrayBuffer);
-	}, 'Expected argument to be of type `ArrayBuffer` but received type `number`');
+	}, { message: 'Expected argument to be of type `ArrayBuffer` but received type `number`' });
 });
 
 test('arrayBuffer.byteLength', t => {
@@ -34,11 +34,11 @@ test('arrayBuffer.byteLength', t => {
 
 	t.throws(() => {
 		ow(new ArrayBuffer(1), ow.arrayBuffer.byteLength(2));
-	}, 'Expected ArrayBuffer to have byte length of `2`, got `1`');
+	}, { message: 'Expected ArrayBuffer to have byte length of `2`, got `1`' });
 
 	t.throws(() => {
 		ow(new ArrayBuffer(1), 'foo', ow.arrayBuffer.byteLength(2));
-	}, 'Expected ArrayBuffer `foo` to have byte length of `2`, got `1`');
+	}, { message: 'Expected ArrayBuffer `foo` to have byte length of `2`, got `1`' });
 });
 
 test('arrayBuffer.minByteLength', t => {
@@ -52,7 +52,7 @@ test('arrayBuffer.minByteLength', t => {
 
 	t.throws(() => {
 		ow(new ArrayBuffer(1), ow.arrayBuffer.minByteLength(2));
-	}, 'Expected ArrayBuffer to have a minimum byte length of `2`, got `1`');
+	}, { message: 'Expected ArrayBuffer to have a minimum byte length of `2`, got `1`' });
 });
 
 test('arrayBuffer.maxByteLength', t => {
@@ -66,5 +66,5 @@ test('arrayBuffer.maxByteLength', t => {
 
 	t.throws(() => {
 		ow(new ArrayBuffer(2), ow.arrayBuffer.maxByteLength(1));
-	}, 'Expected ArrayBuffer to have a maximum byte length of `1`, got `2`');
+	}, { message: 'Expected ArrayBuffer to have a maximum byte length of `1`, got `2`' });
 });

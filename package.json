@@ -62,12 +62,12 @@
 		"@types/lodash.isequal": "^4.5.5",
 		"@types/node": "^16.10.2",
 		"@types/vali-date": "^1.0.0",
-		"ava": "^2.4.0",
+		"ava": "^3.15.0",
 		"del-cli": "^4.0.0",
 		"expect-type": "^0.12.0",
 		"gh-pages": "^3.2.3",
 		"nyc": "^15.1.0",
-		"ts-node": "^10.2.1",
+		"ts-node": "^10.3.0",
 		"typedoc": "^0.22.5",
 		"typescript": "^4.5.0-beta",
 		"xo": "^0.38.2"
@@ -99,18 +99,20 @@
 		}
 	},
 	"ava": {
-		"babel": false,
-		"compileEnhancements": false,
+		"nonSemVerExperiments": {
+			"configurableModuleFormat": true
+		},
+		"nodeArguments": [
+			"--loader=ts-node/esm",
+			"--experimental-specifier-resolution=node"
+		],
 		"files": [
 			"test/**",
 			"!test/fixtures/**"
 		],
-		"extensions": [
-			"ts"
-		],
-		"require": [
-			"ts-node/register"
-		]
+		"extensions": {
+			"ts": "module"
+		}
 	},
 	"nyc": {
 		"reporter": [

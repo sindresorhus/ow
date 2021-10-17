@@ -20,11 +20,11 @@ test('weakSet', t => {
 
 	t.throws(() => {
 		ow(12 as any, ow.weakSet);
-	}, 'Expected argument to be of type `WeakSet` but received type `number`');
+	}, { message: 'Expected argument to be of type `WeakSet` but received type `number`' });
 
 	t.throws(() => {
 		ow(12 as any, 'foo', ow.weakSet);
-	}, 'Expected `foo` to be of type `WeakSet` but received type `number`');
+	}, { message: 'Expected `foo` to be of type `WeakSet` but received type `number`' });
 });
 
 test('weakSet.has', t => {
@@ -40,19 +40,19 @@ test('weakSet.has', t => {
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rainbow]), ow.weakSet.has(rocket));
-	}, 'Expected WeakSet `unicorn` to have items `[{"rocket":"🚀"}]`');
+	}, { message: 'Expected WeakSet to have items `[{"rocket":"🚀"}]`' });
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rainbow]), 'foo', ow.weakSet.has(rocket));
-	}, 'Expected WeakSet `foo` to have items `[{"rocket":"🚀"}]`');
+	}, { message: 'Expected WeakSet `foo` to have items `[{"rocket":"🚀"}]`' });
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rocket]), ow.weakSet.has(rainbow, rocket));
-	}, 'Expected WeakSet to have items `[{"rainbow":"🌈"}]`');
+	}, { message: 'Expected WeakSet to have items `[{"rainbow":"🌈"}]`' });
 
 	t.throws(() => {
 		ow(new WeakSet([keys[1]!, keys[3]!]), ow.weakSet.has(...keys));
-	}, 'Expected WeakSet to have items `[{"x":1},{"x":3},{"x":5},{"x":6},{"x":7}]`');
+	}, { message: 'Expected WeakSet to have items `[{"x":1},{"x":3},{"x":5},{"x":6},{"x":7}]`' });
 });
 
 test('weakSet.hasAny', t => {
@@ -66,5 +66,5 @@ test('weakSet.hasAny', t => {
 
 	t.throws(() => {
 		ow(new WeakSet([unicorn, rainbow]), ow.weakSet.hasAny(rocket));
-	}, 'Expected WeakSet `...keys` to have any item of `[{"rocket":"🚀"}]`');
+	}, { message: 'Expected WeakSet to have any item of `[{"rocket":"🚀"}]`' });
 });

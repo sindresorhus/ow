@@ -23,5 +23,5 @@ test('custom predicates', t => {
 
 	t.throws(() => {
 		ow('🌈', 'unicorn', custom.unicorn);
-	}, 'Expected string `unicorn` to be `🦄`, got `🌈`');
+	}, { message: 'Expected string `unicorn` to be `🦄`, got `🌈`' });
 });

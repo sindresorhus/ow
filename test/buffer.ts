@@ -12,13 +12,13 @@ test('buffer', t => {
 
 	t.throws(() => {
 		ow('foo' as any, ow.buffer);
-	}, 'Expected argument to be of type `Buffer` but received type `string`');
+	}, { message: 'Expected argument to be of type `Buffer` but received type `string`' });
 
 	t.throws(() => {
 		ow('foo' as any, 'foo', ow.buffer);
-	}, 'Expected `foo` to be of type `Buffer` but received type `string`');
+	}, { message: 'Expected `foo` to be of type `Buffer` but received type `string`' });
 
 	t.throws(() => {
 		ow(12 as any, ow.buffer);
-	}, 'Expected argument to be of type `Buffer` but received type `number`');
+	}, { message: 'Expected argument to be of type `Buffer` but received type `number`' });
 });

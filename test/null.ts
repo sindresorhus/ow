@@ -14,13 +14,13 @@ test('null', t => {
 
 	t.throws(() => {
 		ow(undefined as any, ow.null);
-	}, 'Expected argument to be of type `null` but received type `undefined`');
+	}, { message: 'Expected argument to be of type `null` but received type `undefined`' });
 
 	t.throws(() => {
 		ow(undefined as any, 'foo', ow.null);
-	}, 'Expected `foo` to be of type `null` but received type `undefined`');
+	}, { message: 'Expected `foo` to be of type `null` but received type `undefined`' });
 
 	t.throws(() => {
 		ow('foo' as any, ow.null);
-	}, 'Expected argument to be of type `null` but received type `string`');
+	}, { message: 'Expected argument to be of type `null` but received type `string`' });
 });
