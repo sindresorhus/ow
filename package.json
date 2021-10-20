@@ -70,7 +70,7 @@
 		"ts-node": "^10.3.0",
 		"typedoc": "^0.22.5",
 		"typescript": "^4.5.0-beta",
-		"xo": "github:Spence-S/xo#ffc482368cc2df5cbcf37bbbc07c37c707308d13"
+		"xo": "github:Spence-S/xo#221131c9156953aad63f6f2a57cb14258211dec3"
 	},
 	"browser": {
 		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
