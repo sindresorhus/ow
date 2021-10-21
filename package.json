@@ -18,7 +18,7 @@
 		"node": ">=12"
 	},
 	"scripts": {
-		"test": "xo && nyc ava",
+		"test": "xo && c8 --reporter=html --reporter=text ava",
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepare": "npm run build",
@@ -63,11 +63,11 @@
 		"@types/node": "^16.10.2",
 		"@types/vali-date": "^1.0.0",
 		"ava": "^3.15.0",
+		"c8": "^7.10.0",
 		"del-cli": "^4.0.0",
 		"expect-type": "^0.12.0",
 		"gh-pages": "^3.2.3",
-		"nyc": "^15.1.0",
-		"ts-node": "^10.3.0",
+		"ts-node": "^10.3.1",
 		"typedoc": "^0.22.5",
 		"typescript": "^4.5.0-beta",
 		"xo": "github:Spence-S/xo#9d4286767a4e580eb90b85dac8cd796c0c3e905b"
