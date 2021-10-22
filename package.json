@@ -67,7 +67,7 @@
 		"del-cli": "^4.0.0",
 		"expect-type": "^0.12.0",
 		"gh-pages": "^3.2.3",
-		"ts-node": "^10.3.1",
+		"ts-node": "^10.4.0",
 		"typedoc": "^0.22.5",
 		"typescript": "^4.5.0-beta",
 		"xo": "github:Spence-S/xo#9d4286767a4e580eb90b85dac8cd796c0c3e905b"
