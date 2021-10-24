@@ -18,7 +18,7 @@
 		"node": ">=12"
 	},
 	"scripts": {
-		"test": "xo && c8 --reporter=html --reporter=text ava",
+		"test": "xo && c8 ava",
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepare": "npm run build",
@@ -113,7 +113,7 @@
 			"ts": "module"
 		}
 	},
-	"nyc": {
+	"c8": {
 		"reporter": [
 			"text",
 			"lcov"
