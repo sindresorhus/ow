@@ -70,7 +70,7 @@
 		"ts-node": "^10.4.0",
 		"typedoc": "^0.22.5",
 		"typescript": "^4.5.0-beta",
-		"xo": "^0.46.0"
+		"xo": "^0.46.1"
 	},
 	"browser": {
 		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
