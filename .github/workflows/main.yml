@@ -12,7 +12,6 @@ jobs:
         node-version:
           - 16
           - 14
-          - 12
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -20,7 +19,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install --force
       - run: npm test
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v2
         if: matrix.node-version == 16
         with:
           fail_ci_if_error: true
