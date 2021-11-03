@@ -8,15 +8,15 @@ test('dataView', t => {
 
 	t.throws(() => {
 		ow(new ArrayBuffer(1) as any, ow.dataView);
-	}, 'Expected argument to be of type `DataView` but received type `ArrayBuffer`');
+	}, {message: 'Expected argument to be of type `DataView` but received type `ArrayBuffer`'});
 
 	t.throws(() => {
 		ow(new ArrayBuffer(1) as any, 'data', ow.dataView);
-	}, 'Expected `data` to be of type `DataView` but received type `ArrayBuffer`');
+	}, {message: 'Expected `data` to be of type `DataView` but received type `ArrayBuffer`'});
 
 	t.throws(() => {
 		ow(12 as any, ow.dataView);
-	}, 'Expected argument to be of type `DataView` but received type `number`');
+	}, {message: 'Expected argument to be of type `DataView` but received type `number`'});
 });
 
 test('dataView.byteLength', t => {
@@ -30,11 +30,11 @@ test('dataView.byteLength', t => {
 
 	t.throws(() => {
 		ow(new DataView(new ArrayBuffer(1)), ow.dataView.byteLength(2));
-	}, 'Expected DataView to have byte length of `2`, got `1`');
+	}, {message: 'Expected DataView to have byte length of `2`, got `1`'});
 
 	t.throws(() => {
 		ow(new DataView(new ArrayBuffer(1)), 'foo', ow.dataView.byteLength(2));
-	}, 'Expected DataView `foo` to have byte length of `2`, got `1`');
+	}, {message: 'Expected DataView `foo` to have byte length of `2`, got `1`'});
 });
 
 test('dataView.minByteLength', t => {
@@ -48,7 +48,7 @@ test('dataView.minByteLength', t => {
 
 	t.throws(() => {
 		ow(new DataView(new ArrayBuffer(1)), ow.dataView.minByteLength(2));
-	}, 'Expected DataView to have a minimum byte length of `2`, got `1`');
+	}, {message: 'Expected DataView to have a minimum byte length of `2`, got `1`'});
 });
 
 test('dataView.maxByteLength', t => {
@@ -62,5 +62,5 @@ test('dataView.maxByteLength', t => {
 
 	t.throws(() => {
 		ow(new DataView(new ArrayBuffer(2)), ow.dataView.maxByteLength(1));
-	}, 'Expected DataView to have a maximum byte length of `1`, got `2`');
+	}, {message: 'Expected DataView to have a maximum byte length of `1`, got `2`'});
 });

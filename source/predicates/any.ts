@@ -1,8 +1,8 @@
-import {ArgumentError} from '../argument-error';
-import {BasePredicate, testSymbol} from './base-predicate';
-import {PredicateOptions} from './predicate';
-import {Main} from '..';
-import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message';
+import {ArgumentError} from '../argument-error.js';
+import {Main} from '../index.js';
+import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
+import {BasePredicate, testSymbol} from './base-predicate.js';
+import {PredicateOptions} from './predicate.js';
 
 /**
 @hidden
@@ -10,7 +10,7 @@ import {generateArgumentErrorMessage} from '../utils/generate-argument-error-mes
 export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 	constructor(
 		private readonly predicates: BasePredicate[],
-		private readonly options: PredicateOptions = {}
+		private readonly options: PredicateOptions = {},
 	) {}
 
 	[testSymbol](value: T, main: Main, label: string | Function, idLabel: boolean): asserts value {
@@ -46,7 +46,7 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 			throw new ArgumentError(
 				`Any predicate failed with the following errors:\n${message}`,
 				main,
-				errors
+				errors,
 			);
 		}
 	}

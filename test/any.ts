@@ -21,14 +21,18 @@ test('any', t => {
 
 	t.throws(() => {
 		ow(1 as any, ow.any(ow.string));
-	}, createAnyError('Expected argument to be of type `string` but received type `number`'));
+	}, {
+		message: createAnyError('Expected argument to be of type `string` but received type `number`'),
+	});
 
 	t.throws(() => {
 		ow(true as any, ow.any(ow.number, ow.string));
-	}, createAnyError(
-		'Expected argument to be of type `number` but received type `boolean`',
-		'Expected argument to be of type `string` but received type `boolean`'
-	));
+	}, {
+		message: createAnyError(
+			'Expected argument to be of type `number` but received type `boolean`',
+			'Expected argument to be of type `string` but received type `boolean`',
+		),
+	});
 });
 
 test('any inception', t => {

@@ -14,15 +14,15 @@ test('object', t => {
 
 	t.throws(() => {
 		ow('foo' as any, ow.object);
-	}, 'Expected argument to be of type `object` but received type `string`');
+	}, {message: 'Expected argument to be of type `object` but received type `string`'});
 
 	t.throws(() => {
 		ow('foo' as any, 'foo', ow.object);
-	}, 'Expected `foo` to be of type `object` but received type `string`');
+	}, {message: 'Expected `foo` to be of type `object` but received type `string`'});
 
 	t.throws(() => {
 		ow(1 as any, ow.object);
-	}, 'Expected argument to be of type `object` but received type `number`');
+	}, {message: 'Expected argument to be of type `object` but received type `number`'});
 });
 
 test('object.plain', t => {
@@ -32,11 +32,11 @@ test('object.plain', t => {
 
 	t.throws(() => {
 		ow(new Error('foo'), ow.object.plain);
-	}, 'Expected object to be a plain object');
+	}, {message: 'Expected object to be a plain object'});
 
 	t.throws(() => {
 		ow(new Error('foo'), 'foo', ow.object.plain);
-	}, 'Expected object `foo` to be a plain object');
+	}, {message: 'Expected object `foo` to be a plain object'});
 });
 
 test('object.empty', t => {
@@ -46,7 +46,7 @@ test('object.empty', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.empty);
-	}, 'Expected object to be empty, got `{"unicorn":"🦄"}`');
+	}, {message: 'Expected object to be empty, got `{"unicorn":"🦄"}`'});
 });
 
 test('object.nonEmpty', t => {
@@ -55,7 +55,7 @@ test('object.nonEmpty', t => {
 	});
 	t.throws(() => {
 		ow({}, ow.object.nonEmpty);
-	}, 'Expected object to not be empty');
+	}, {message: 'Expected object to not be empty'});
 });
 
 test('object.valuesOfType', t => {
@@ -77,19 +77,19 @@ test('object.valuesOfType', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: 2}, ow.object.valuesOfType(ow.string));
-	}, '(object) Expected values to be of type `string` but received type `number`');
+	}, {message: '(object) Expected values to be of type `string` but received type `number`'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: 2}, 'foo', ow.object.valuesOfType(ow.string));
-	}, '(object `foo`) Expected values to be of type `string` but received type `number`');
+	}, {message: '(object `foo`) Expected values to be of type `string` but received type `number`'});
 
 	t.throws(() => {
 		ow({unicorn: 'a', rainbow: 'b'}, ow.object.valuesOfType(ow.string.minLength(2)));
-	}, '(object `ow.number`) Expected string values to have a minimum length of `2`, got `a`');
+	}, {message: '(object) Expected string values to have a minimum length of `2`, got `a`'});
 
 	t.throws(() => {
 		ow(['🦄', true, 1], ow.object.valuesOfType(ow.any(ow.string, ow.boolean)));
-	}, '(object) Any predicate failed with the following errors:\n  - Expected values to be of type `string` but received type `number`\n  - Expected values to be of type `boolean` but received type `number`');
+	}, {message: '(object) Any predicate failed with the following errors:\n  - Expected values to be of type `string` but received type `number`\n  - Expected values to be of type `boolean` but received type `number`'});
 });
 
 test('object.valuesOfTypeDeep', t => {
@@ -111,15 +111,15 @@ test('object.valuesOfTypeDeep', t => {
 
 	t.throws(() => {
 		ow({unicorn: {key: '🦄', value: 1}}, ow.object.deepValuesOfType(ow.string));
-	}, '(object `ow.any(ow.string`) Expected deep values to be of type `string` but received type `number`');
+	}, {message: '(object) Expected deep values to be of type `string` but received type `number`'});
 
 	t.throws(() => {
 		ow({unicorn: {key: '🦄', value: 1}}, 'foo', ow.object.deepValuesOfType(ow.string));
-	}, '(object `foo`) Expected deep values to be of type `string` but received type `number`');
+	}, {message: '(object `foo`) Expected deep values to be of type `string` but received type `number`'});
 
 	t.throws(() => {
 		ow({a: {b: {c: {d: 1}, e: '2'}, f: 3}}, ow.object.deepValuesOfType(ow.number));
-	}, '(object `ow.string`) Expected deep values to be of type `number` but received type `string`');
+	}, {message: '(object) Expected deep values to be of type `number` but received type `string`'});
 });
 
 test('object.deepEqual', t => {
@@ -133,7 +133,7 @@ test('object.deepEqual', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.deepEqual({rainbow: '🌈'}));
-	}, 'Expected object to be deeply equal to `{"rainbow":"🌈"}`, got `{"unicorn":"🦄"}`');
+	}, {message: 'Expected object to be deeply equal to `{"rainbow":"🌈"}`, got `{"unicorn":"🦄"}`'});
 });
 
 test('object.instanceOf', t => {
@@ -147,27 +147,27 @@ test('object.instanceOf', t => {
 
 	t.throws(() => {
 		ow(new Unicorn(), ow.object.instanceOf(Error));
-	}, 'Expected object `Unicorn` to be of type `Error`');
+	}, {message: 'Expected object `Unicorn` to be of type `Error`'});
 
 	t.throws(() => {
 		ow(new Unicorn(), 'foo', ow.object.instanceOf(Error));
-	}, 'Expected object `foo` `Unicorn` to be of type `Error`');
+	}, {message: 'Expected object `foo` `Unicorn` to be of type `Error`'});
 
 	t.throws(() => {
 		ow(new Error('🦄'), ow.object.instanceOf(Unicorn));
-	}, 'Expected object `Error` to be of type `Unicorn`');
+	}, {message: 'Expected object `Error` to be of type `Unicorn`'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.instanceOf(Unicorn));
-	}, 'Expected object `{"unicorn":"🦄"}` to be of type `Unicorn`');
+	}, {message: 'Expected object `{"unicorn":"🦄"}` to be of type `Unicorn`'});
 
 	t.throws(() => {
 		ow(null, ow.object.instanceOf(Unicorn));
-	}, /Expected object `null` to be of type `Unicorn`/);
+	}, {message: /Expected object `null` to be of type `Unicorn`/});
 
 	t.throws(() => {
 		ow(undefined, ow.object.instanceOf(Unicorn));
-	}, /Expected object `undefined` to be of type `Unicorn`/);
+	}, {message: /Expected object `undefined` to be of type `Unicorn`/});
 });
 
 test('object.hasKeys', t => {
@@ -189,11 +189,11 @@ test('object.hasKeys', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.hasKeys('unicorn', 'rainbow'));
-	}, 'Expected object to have keys `["rainbow"]`');
+	}, {message: 'Expected object to have keys `["rainbow"]`'});
 
 	t.throws(() => {
 		ow({unicorn: {value: '🦄'}}, ow.object.hasKeys('unicorn.foo'));
-	}, 'Expected object to have keys `["unicorn.foo"]`');
+	}, {message: 'Expected object to have keys `["unicorn.foo"]`'});
 });
 
 test('object.hasAnyKeys', t => {
@@ -215,23 +215,23 @@ test('object.hasAnyKeys', t => {
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.hasAnyKeys('foo'));
-	}, 'Expected object to have any key of `["foo"]`');
+	}, {message: 'Expected object to have any key of `["foo"]`'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.hasAnyKeys('unicorn.value'));
-	}, 'Expected object to have any key of `["unicorn.value"]`');
+	}, {message: 'Expected object to have any key of `["unicorn.value"]`'});
 });
 
 test('object.exactShape', t => {
 	t.notThrows(() => {
 		ow({unicorn: '🦄'}, ow.object.exactShape({
-			unicorn: ow.string
+			unicorn: ow.string,
 		}));
 	});
 
 	t.notThrows(() => {
 		ow({unicorn: '🦄'}, ow.object.exactShape({
-			unicorn: ow.string
+			unicorn: ow.string,
 		}));
 	});
 
@@ -239,8 +239,8 @@ test('object.exactShape', t => {
 		ow({unicorn: '🦄', rainbow: {value: '🌈'}}, ow.object.exactShape({
 			unicorn: ow.string,
 			rainbow: {
-				value: ow.string
-			}
+				value: ow.string,
+			},
 		}));
 	});
 
@@ -248,16 +248,16 @@ test('object.exactShape', t => {
 		ow({unicorn: '🦄', rainbow: {value: '🌈'}}, ow.object.exactShape({
 			unicorn: ow.string,
 			rainbow: {
-				foo: ow.string
-			}
+				foo: ow.string,
+			},
 		}));
-	}, 'Expected property `rainbow.foo` to be of type `string` but received type `undefined` in object');
+	}, {message: 'Expected property `rainbow.foo` to be of type `string` but received type `undefined` in object'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: '🌈'}, ow.object.exactShape({
-			unicorn: ow.string
+			unicorn: ow.string,
 		}));
-	}, 'Did not expect property `rainbow` to exist, got `🌈` in object');
+	}, {message: 'Did not expect property `rainbow` to exist, got `🌈` in object'});
 
 	const foo = {unicorn: '🦄', rainbow: {valid: true, value: '🌈'}};
 
@@ -265,59 +265,59 @@ test('object.exactShape', t => {
 		ow(foo, ow.object.exactShape({
 			unicorn: ow.string,
 			rainbow: {
-				valid: ow.boolean
-			}
+				valid: ow.boolean,
+			},
 		}));
-	}, 'Did not expect property `rainbow.value` to exist, got `🌈` in object');
+	}, {message: 'Did not expect property `rainbow.value` to exist, got `🌈` in object'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.exactShape({
 			unicorn: ow.string,
 			rainbow: {
-				valid: ow.boolean
-			}
+				valid: ow.boolean,
+			},
 		}));
-	}, 'Expected property `rainbow` to exist in object');
+	}, {message: 'Expected property `rainbow` to exist in object'});
 });
 
 test('object.partialShape', t => {
 	t.notThrows(() => {
 		ow({unicorn: '🦄'}, ow.object.partialShape({
-			unicorn: ow.string
+			unicorn: ow.string,
 		}));
 	});
 
 	t.throws(() => {
 		ow({unicorn: '🦄'}, ow.object.partialShape({
-			unicorn: ow.number
+			unicorn: ow.number,
 		}));
-	}, 'Expected property `unicorn` to be of type `number` but received type `string` in object');
+	}, {message: 'Expected property `unicorn` to be of type `number` but received type `string` in object'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: {value: '🌈'}}, ow.object.partialShape({
 			unicorn: ow.string,
 			rainbow: {
-				value: ow.number
-			}
+				value: ow.number,
+			},
 		}));
-	}, 'Expected property `rainbow.value` to be of type `number` but received type `string` in object');
+	}, {message: 'Expected property `rainbow.value` to be of type `number` but received type `string` in object'});
 
 	t.throws(() => {
 		ow({unicorn: '🦄', rainbow: {rocket: {value: '🌈'}}}, ow.object.partialShape({
 			unicorn: ow.string,
 			rainbow: {
 				rocket: {
-					value: ow.number
-				}
-			}
+					value: ow.number,
+				},
+			},
 		}));
-	}, 'Expected property `rainbow.rocket.value` to be of type `number` but received type `string` in object');
+	}, {message: 'Expected property `rainbow.rocket.value` to be of type `number` but received type `string` in object'});
 
 	const foo = {unicorn: '🦄'};
 
 	t.throws(() => {
 		ow(foo, ow.object.partialShape({
-			unicorn: ow.number
+			unicorn: ow.number,
 		}));
-	}, 'Expected property `unicorn` to be of type `number` but received type `string` in object');
+	}, {message: 'Expected property `unicorn` to be of type `number` but received type `string` in object'});
 });

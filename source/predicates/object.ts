@@ -1,13 +1,13 @@
 import is from '@sindresorhus/is';
 
-import dotProp = require('dot-prop');
-import isEqual = require('lodash.isequal');
-import hasItems from '../utils/has-items';
-import ofType from '../utils/of-type';
-import ofTypeDeep from '../utils/of-type-deep';
-import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape';
-import {Predicate, PredicateOptions} from './predicate';
-import {BasePredicate} from './base-predicate';
+import dotProp from 'dot-prop';
+import isEqual from 'lodash.isequal';
+import hasItems from '../utils/has-items.js';
+import ofType from '../utils/of-type.js';
+import ofTypeDeep from '../utils/of-type-deep.js';
+import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape.js';
+import {Predicate, PredicateOptions} from './predicate.js';
+import {BasePredicate} from './base-predicate.js';
 
 export {Shape};
 
@@ -25,7 +25,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	get plain(): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to be a plain object`,
-			validator: object => is.plainObject(object)
+			validator: object => is.plainObject(object),
 		});
 	}
 
@@ -35,7 +35,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	get empty(): this {
 		return this.addValidator({
 			message: (object, label) => `Expected ${label} to be empty, got \`${JSON.stringify(object)}\``,
-			validator: object => Object.keys(object).length === 0
+			validator: object => Object.keys(object).length === 0,
 		});
 	}
 
@@ -45,7 +45,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	get nonEmpty(): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
-			validator: object => Object.keys(object).length > 0
+			validator: object => Object.keys(object).length > 0,
 		});
 	}
 
@@ -57,7 +57,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	valuesOfType<T>(predicate: BasePredicate<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: object => ofType(Object.values(object), 'values', predicate)
+			validator: object => ofType(Object.values(object), 'values', predicate),
 		});
 	}
 
@@ -69,7 +69,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	deepValuesOfType<T>(predicate: Predicate<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: object => ofTypeDeep(object, predicate)
+			validator: object => ofTypeDeep(object, predicate),
 		});
 	}
 
@@ -81,7 +81,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	deepEqual(expected: object): this {
 		return this.addValidator({
 			message: (object, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(object)}\``,
-			validator: object => isEqual(object, expected)
+			validator: object => isEqual(object, expected),
 		});
 	}
 
@@ -101,7 +101,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 
 				return `Expected ${label} \`${name}\` to be of type \`${instance.name}\``;
 			},
-			validator: object => object instanceof instance
+			validator: object => object instanceof instance,
 		});
 	}
 
@@ -115,10 +115,10 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: object => hasItems(
 				{
-					has: item => dotProp.has(object, item)
+					has: item => dotProp.has(object, item),
 				},
-				keys
-			)
+				keys,
+			),
 		});
 	}
 
@@ -130,7 +130,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	hasAnyKeys(...keys: readonly string[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
-			validator: object => keys.some(key => dotProp.has(object, key))
+			validator: object => keys.some(key => dotProp.has(object, key)),
 		});
 	}
 
@@ -158,8 +158,9 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	partialShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
-			validator: object => partial(object, shape)
+			validator: object => partial(object, shape),
 		}) as unknown as ObjectPredicate<TypeOfShape<S>>;
 	}
 
@@ -181,10 +182,12 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	*/
 	exactShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
 		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
-			validator: object => exact(object, shape)
+			validator: object => exact(object, shape),
 		}) as ObjectPredicate<any>;
 	}
 }

@@ -1,4 +1,4 @@
-import {testSymbol, BasePredicate} from './predicates/base-predicate';
+import {testSymbol, BasePredicate} from './predicates/base-predicate.js';
 
 /**
 Validate the value against the provided predicate.

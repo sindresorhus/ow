@@ -12,11 +12,11 @@ test('weakMap', t => {
 
 	t.throws(() => {
 		ow(12 as any, ow.weakMap);
-	}, 'Expected argument to be of type `WeakMap` but received type `number`');
+	}, {message: 'Expected argument to be of type `WeakMap` but received type `number`'});
 
 	t.throws(() => {
 		ow(12 as any, 'foo', ow.weakMap);
-	}, 'Expected `foo` to be of type `WeakMap` but received type `number`');
+	}, {message: 'Expected `foo` to be of type `WeakMap` but received type `number`'});
 });
 
 test('weakMap.hasKeys', t => {
@@ -30,19 +30,19 @@ test('weakMap.hasKeys', t => {
 
 	t.throws(() => {
 		ow(new WeakMap([[{rainbow: true}, '🌈']]), ow.weakMap.hasKeys({rainbow: true}));
-	}, 'Expected WeakMap to have keys `[{"rainbow":true}]`');
+	}, {message: 'Expected WeakMap to have keys `[{"rainbow":true}]`'});
 
 	t.throws(() => {
 		ow(new WeakMap([[{rainbow: true}, '🌈']]), 'foo', ow.weakMap.hasKeys({rainbow: true}));
-	}, 'Expected WeakMap `foo` to have keys `[{"rainbow":true}]`');
+	}, {message: 'Expected WeakMap `foo` to have keys `[{"rainbow":true}]`'});
 
 	t.throws(() => {
 		ow(new WeakMap([[unicorn, '🦄'], [rainbow, '🌈']]), ow.weakMap.hasKeys(unicorn, {rainbow: true}));
-	}, 'Expected WeakMap to have keys `[{"rainbow":true}]`');
+	}, {message: 'Expected WeakMap to have keys `[{"rainbow":true}]`'});
 
 	t.throws(() => {
 		ow(new WeakMap([[keys[0]!, 1], [keys[2]!, 3]]), ow.weakMap.hasKeys(...keys));
-	}, 'Expected WeakMap to have keys `[{"x":2},{"x":4},{"x":5},{"x":6},{"x":7}]`');
+	}, {message: 'Expected WeakMap to have keys `[{"x":2},{"x":4},{"x":5},{"x":6},{"x":7}]`'});
 });
 
 test('weakMap.hasAnyKeys', t => {
@@ -64,5 +64,5 @@ test('weakMap.hasAnyKeys', t => {
 
 	t.throws(() => {
 		ow(new WeakMap([[unicorn, '🦄'], [rainbow, '🌈']]), ow.weakMap.hasAnyKeys(rocket));
-	}, 'Expected WeakMap to have any key of `[{"rocket":true}]`');
+	}, {message: 'Expected WeakMap to have any key of `[{"rocket":true}]`'});
 });

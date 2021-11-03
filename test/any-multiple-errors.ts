@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import test from 'ava';
 import ow, {ArgumentError, BasePredicate, Main} from '../source';
 import {testSymbol} from '../source/predicates/base-predicate';
@@ -7,7 +8,9 @@ test('any predicate', t => {
 	// #region Tests line 49 of predicates/any.ts and lines 16-21 of utils/generate-argument-error-message.ts
 	const error_1 = t.throws<ArgumentError>(() => {
 		ow(5 as any, ow.any(ow.string));
-	}, createAnyError('Expected argument to be of type `string` but received type `number`'));
+	}, {
+		message: createAnyError('Expected argument to be of type `string` but received type `number`'),
+	});
 
 	t.is(error_1.validationErrors.size, 1, 'There should be only one error');
 
@@ -15,7 +18,7 @@ test('any predicate', t => {
 
 	t.is(reportedError_1_1.size, 1, 'There should be only one element');
 	t.deepEqual(reportedError_1_1, new Set([
-		'Expected argument to be of type `string` but received type `number`'
+		'Expected argument to be of type `string` but received type `number`',
 	]));
 
 	// #endregion
@@ -24,19 +27,22 @@ test('any predicate', t => {
 	const error_2 = t.throws<ArgumentError>(() => {
 		ow(21 as any, ow.any(
 			ow.string.url.minLength(24),
-			ow.number.greaterThan(42)
+			ow.number.greaterThan(42),
 		));
-	}, createAnyPredicateError([
-		'string',
-		[
-			'Expected argument to be of type `string` but received type `number`',
-			'Expected string to be a URL, got `21`',
-			'Expected string to have a minimum length of `24`, got `21`'
-		]
-	], [
-		'number',
-		['Expected number to be greater than 42, got 21']
-	]));
+	},
+	{
+		message: createAnyPredicateError([
+			'string',
+			[
+				'Expected argument to be of type `string` but received type `number`',
+				'Expected string to be a URL, got `21`',
+				'Expected string to have a minimum length of `24`, got `21`',
+			],
+		], [
+			'number',
+			['Expected number to be greater than 42, got 21'],
+		]),
+	});
 
 	t.is(error_2.validationErrors.size, 2, 'There should be two types of errors reported');
 
@@ -49,11 +55,11 @@ test('any predicate', t => {
 	t.deepEqual(reportedError_2_1, new Set([
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to be a URL, got `21`',
-		'Expected string to have a minimum length of `24`, got `21`'
+		'Expected string to have a minimum length of `24`, got `21`',
 	]));
 
 	t.deepEqual(reportedError_2_2, new Set([
-		'Expected number to be greater than 42, got 21'
+		'Expected number to be greater than 42, got 21',
 	]));
 
 	// #endregion
@@ -62,12 +68,14 @@ test('any predicate', t => {
 	const error_3 = t.throws<ArgumentError>(() => {
 		ow(null as any, ow.any(
 			ow.string,
-			ow.number
+			ow.number,
 		));
-	}, createAnyError(
-		'Expected argument to be of type `string` but received type `null`',
-		'Expected argument to be of type `number` but received type `null`'
-	));
+	}, {
+		message: createAnyError(
+			'Expected argument to be of type `string` but received type `null`',
+			'Expected argument to be of type `number` but received type `null`',
+		),
+	});
 
 	t.is(error_3.validationErrors.size, 2, 'There should be two types of errors reported');
 
@@ -78,23 +86,25 @@ test('any predicate', t => {
 	t.is(reportedError_3_2.size, 1, 'There should be one error reported for the number predicate');
 
 	t.deepEqual(reportedError_3_1, new Set([
-		'Expected argument to be of type `string` but received type `null`'
+		'Expected argument to be of type `string` but received type `null`',
 	]));
 	t.deepEqual(reportedError_3_2, new Set([
-		'Expected argument to be of type `number` but received type `null`'
+		'Expected argument to be of type `number` but received type `null`',
 	]));
 
 	const error_4 = t.throws<ArgumentError>(() => {
 		ow(21 as any, ow.any(
 			ow.string.url.minLength(21),
-			ow.string.url.minLength(42)
+			ow.string.url.minLength(42),
 		));
-	}, createAnyError(
-		'Expected argument to be of type `string` but received type `number`',
-		'Expected string to be a URL, got `21`',
-		'Expected string to have a minimum length of `21`, got `21`',
-		'Expected string to have a minimum length of `42`, got `21`'
-	));
+	}, {
+		message: createAnyError(
+			'Expected argument to be of type `string` but received type `number`',
+			'Expected string to be a URL, got `21`',
+			'Expected string to have a minimum length of `21`, got `21`',
+			'Expected string to have a minimum length of `42`, got `21`',
+		),
+	});
 
 	t.is(error_4.validationErrors.size, 1, 'There should be one type of error reported');
 
@@ -106,7 +116,7 @@ test('any predicate', t => {
 		'Expected argument to be of type `string` but received type `number`',
 		'Expected string to be a URL, got `21`',
 		'Expected string to have a minimum length of `21`, got `21`',
-		'Expected string to have a minimum length of `42`, got `21`'
+		'Expected string to have a minimum length of `42`, got `21`',
 	]));
 	// #endregion
 

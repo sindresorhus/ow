@@ -1,5 +1,5 @@
-import test from '../test';
-import {BasePredicate} from '../predicates/base-predicate';
+import test from '../test.js';
+import {BasePredicate} from '../predicates/base-predicate.js';
 
 /**
 Test all the values in the collection against a provided predicate.
@@ -9,7 +9,7 @@ Test all the values in the collection against a provided predicate.
 @param name The name to call the collection of values, such as `values` or `keys`.
 @param predicate Predicate to test every item in the source collection against.
 */
-export default <T>(source: IterableIterator<T> | Set<T> | T[], name: string, predicate: BasePredicate<T>): boolean | string => {
+const ofType = <T>(source: IterableIterator<T> | Set<T> | T[], name: string, predicate: BasePredicate<T>): boolean | string => {
 	try {
 		for (const item of source) {
 			test(item, name, predicate, false);
@@ -20,3 +20,5 @@ export default <T>(source: IterableIterator<T> | Set<T> | T[], name: string, pre
 		return (error as Error).message;
 	}
 };
+
+export default ofType;

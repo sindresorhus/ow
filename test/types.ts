@@ -1,3 +1,4 @@
+import type {Buffer} from 'node:buffer';
 import test from 'ava';
 import {ExpectTypeOf, expectTypeOf} from 'expect-type';
 import {TypedArray} from 'type-fest';
@@ -78,7 +79,7 @@ function typeTests(value: unknown): Array<(() => void)> {
 			expectTypeOf(value).toBeObject();
 
 			ow(value, ow.object.partialShape({
-				foo: ow.string
+				foo: ow.string,
 			}));
 
 			expectTypeOf(value).toEqualTypeOf<{
@@ -88,8 +89,8 @@ function typeTests(value: unknown): Array<(() => void)> {
 			ow(value, ow.object.exactShape({
 				foo: ow.string,
 				bar: ow.object.exactShape({
-					baz: ow.number
-				})
+					baz: ow.number,
+				}),
 			}));
 
 			expectTypeOf(value).toEqualTypeOf<{
@@ -106,7 +107,7 @@ function typeTests(value: unknown): Array<(() => void)> {
 			const tests: Tests = {
 				array: expect => expect.toBeArray(),
 				arrayBuffer: expect => expect.toEqualTypeOf<ArrayBuffer>(),
-				// @ts-expect-error
+				// @ts-expect-error not why this doesn't work
 				bigint: expect => expect.toEqualTypeOf<BigInt>(),
 				boolean: expect => expect.toBeBoolean(),
 				buffer: expect => expect.toEqualTypeOf<Buffer>(),
@@ -139,7 +140,7 @@ function typeTests(value: unknown): Array<(() => void)> {
 				uint8ClampedArray: expect => expect.toEqualTypeOf<Uint8ClampedArray>(),
 				undefined: expect => expect.toEqualTypeOf<undefined>(),
 				weakMap: expect => expect.toEqualTypeOf<WeakMap<object, unknown>>(),
-				weakSet: expect => expect.toEqualTypeOf<WeakSet<object>>()
+				weakSet: expect => expect.toEqualTypeOf<WeakSet<object>>(),
 			};
 
 			return tests;
@@ -184,10 +185,10 @@ function typeTests(value: unknown): Array<(() => void)> {
 				nested: ow.object.exactShape({
 					nested: ow.array.ofType(
 						ow.object.exactShape({
-							nested: ow.number
-						})
-					)
-				})
+							nested: ow.number,
+						}),
+					),
+				}),
 			});
 
 			expectTypeOf<Infer<typeof schema>>().toEqualTypeOf<{
@@ -229,6 +230,6 @@ function typeTests(value: unknown): Array<(() => void)> {
 					nested: Array<{nested: number}>;
 				};
 			}>();
-		}
+		},
 	];
 }

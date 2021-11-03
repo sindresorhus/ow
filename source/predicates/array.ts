@@ -1,9 +1,9 @@
-import isEqual = require('lodash.isequal');
-import {BasePredicate} from './base-predicate';
-import {Predicate, PredicateOptions} from './predicate';
-import {Shape} from './object';
-import {exact} from '../utils/match-shape';
-import ofType from '../utils/of-type';
+import isEqual from 'lodash.isequal';
+import {exact} from '../utils/match-shape.js';
+import ofType from '../utils/of-type.js';
+import {BasePredicate} from './base-predicate.js';
+import {Predicate, PredicateOptions} from './predicate.js';
+import {Shape} from './object.js';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
@@ -21,7 +21,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	length(length: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have length \`${length}\`, got \`${value.length}\``,
-			validator: value => value.length === length
+			validator: value => value.length === length,
 		});
 	}
 
@@ -34,7 +34,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length >= length,
-			negatedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value.length}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value.length}\``,
 		});
 	}
 
@@ -47,7 +47,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length <= length,
-			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value.length}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value.length}\``,
 		});
 	}
 
@@ -59,7 +59,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	startsWith(searchElement: T): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to start with \`${searchElement}\`, got \`${value[0]}\``,
-			validator: value => value[0] === searchElement
+			validator: value => value[0] === searchElement,
 		});
 	}
 
@@ -71,7 +71,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	endsWith(searchElement: T): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to end with \`${searchElement}\`, got \`${value[value.length - 1]}\``,
-			validator: value => value[value.length - 1] === searchElement
+			validator: value => value[value.length - 1] === searchElement,
 		});
 	}
 
@@ -83,7 +83,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	includes(...searchElements: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include all elements of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => searchElements.every(element => value.includes(element))
+			validator: value => searchElements.every(element => value.includes(element)),
 		});
 	}
 
@@ -95,7 +95,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	includesAny(...searchElements: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to include any element of \`${JSON.stringify(searchElements)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => searchElements.some(element => value.includes(element))
+			validator: value => searchElements.some(element => value.includes(element)),
 		});
 	}
 
@@ -105,7 +105,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	get empty(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be empty, got \`${JSON.stringify(value)}\``,
-			validator: value => value.length === 0
+			validator: value => value.length === 0,
 		});
 	}
 
@@ -115,7 +115,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	get nonEmpty(): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
-			validator: value => value.length > 0
+			validator: value => value.length > 0,
 		});
 	}
 
@@ -127,7 +127,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	deepEqual(expected: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => isEqual(value, expected)
+			validator: value => isEqual(value, expected),
 		});
 	}
 
@@ -143,9 +143,10 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	*/
 	ofType<U extends T>(predicate: BasePredicate<U>): ArrayPredicate<U> {
 		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: value => ofType(value, 'values', predicate)
+			validator: value => ofType(value, 'values', predicate),
 		}) as ArrayPredicate<any>;
 	}
 
@@ -163,8 +164,9 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 		const shape = predicates as unknown as Shape;
 
 		return this.addValidator({
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			message: (_, label, message) => `${message.replace('Expected', 'Expected element')} in ${label}`,
-			validator: object => exact(object, shape, undefined, true)
+			validator: object => exact(object, shape, undefined, true),
 		});
 	}
 }

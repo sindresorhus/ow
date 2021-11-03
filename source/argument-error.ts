@@ -1,4 +1,4 @@
-import {generateStackTrace} from './utils/generate-stack';
+import {generateStackTrace} from './utils/generate-stack.js';
 
 const wrapStackTrace = (error: ArgumentError, stack: string): string => `${error.name}: ${error.message}\n${stack}`;
 

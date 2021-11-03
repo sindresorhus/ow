@@ -16,13 +16,13 @@ test('nan', t => {
 
 	t.throws(() => {
 		ow(12, ow.nan);
-	}, 'Expected argument to be of type `nan` but received type `number`');
+	}, {message: 'Expected argument to be of type `nan` but received type `number`'});
 
 	t.throws(() => {
 		ow(12, 'foo', ow.nan);
-	}, 'Expected `foo` to be of type `nan` but received type `number`');
+	}, {message: 'Expected `foo` to be of type `nan` but received type `number`'});
 
 	t.throws(() => {
 		ow('12' as any, ow.nan);
-	}, 'Expected argument to be of type `nan` but received type `string`');
+	}, {message: 'Expected argument to be of type `nan` but received type `string`'});
 });

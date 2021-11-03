@@ -1,7 +1,7 @@
-import isEqual = require('lodash.isequal');
-import hasItems from '../utils/has-items';
-import ofType from '../utils/of-type';
-import {Predicate, PredicateOptions} from './predicate';
+import isEqual from 'lodash.isequal';
+import hasItems from '../utils/has-items.js';
+import ofType from '../utils/of-type.js';
+import {Predicate, PredicateOptions} from './predicate.js';
 
 export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, T2>> {
 	/**
@@ -19,7 +19,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	size(size: number): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have size \`${size}\`, got \`${map.size}\``,
-			validator: map => map.size === size
+			validator: map => map.size === size,
 		});
 	}
 
@@ -32,7 +32,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have a minimum size of \`${size}\`, got \`${map.size}\``,
 			validator: map => map.size >= size,
-			negatedMessage: (map, label) => `Expected ${label} to have a maximum size of \`${size - 1}\`, got \`${map.size}\``
+			negatedMessage: (map, label) => `Expected ${label} to have a maximum size of \`${size - 1}\`, got \`${map.size}\``,
 		});
 	}
 
@@ -45,7 +45,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to have a maximum size of \`${size}\`, got \`${map.size}\``,
 			validator: map => map.size <= size,
-			negatedMessage: (map, label) => `Expected ${label} to have a minimum size of \`${size + 1}\`, got \`${map.size}\``
+			negatedMessage: (map, label) => `Expected ${label} to have a minimum size of \`${size + 1}\`, got \`${map.size}\``,
 		});
 	}
 
@@ -57,7 +57,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	hasKeys(...keys: readonly T1[]): this {
 		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
-			validator: map => hasItems(map, keys)
+			validator: map => hasItems(map, keys),
 		});
 	}
 
@@ -69,7 +69,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	hasAnyKeys(...keys: readonly T1[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
-			validator: map => keys.some(key => map.has(key))
+			validator: map => keys.some(key => map.has(key)),
 		});
 	}
 
@@ -81,7 +81,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	hasValues(...values: readonly T2[]): this {
 		return this.addValidator({
 			message: (_, label, missingValues) => `Expected ${label} to have values \`${JSON.stringify(missingValues)}\``,
-			validator: map => hasItems(new Set(map.values()), values)
+			validator: map => hasItems(new Set(map.values()), values),
 		});
 	}
 
@@ -96,7 +96,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 			validator: map => {
 				const valueSet = new Set(map.values());
 				return values.some(key => valueSet.has(key));
-			}
+			},
 		});
 	}
 
@@ -108,7 +108,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	keysOfType(predicate: Predicate<T1>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: map => ofType(map.keys(), 'keys', predicate)
+			validator: map => ofType(map.keys(), 'keys', predicate),
 		});
 	}
 
@@ -120,7 +120,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	valuesOfType(predicate: Predicate<T2>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
-			validator: map => ofType(map.values(), 'values', predicate)
+			validator: map => ofType(map.values(), 'values', predicate),
 		});
 	}
 
@@ -130,7 +130,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	get empty(): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to be empty, got \`${JSON.stringify([...map])}\``,
-			validator: map => map.size === 0
+			validator: map => map.size === 0,
 		});
 	}
 
@@ -140,7 +140,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	get nonEmpty(): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to not be empty`,
-			validator: map => map.size > 0
+			validator: map => map.size > 0,
 		});
 	}
 
@@ -152,7 +152,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	deepEqual(expected: Map<T1, T2>): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify([...expected])}\`, got \`${JSON.stringify([...map])}\``,
-			validator: map => isEqual(map, expected)
+			validator: map => isEqual(map, expected),
 		});
 	}
 }

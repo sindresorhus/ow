@@ -1,7 +1,7 @@
-import * as fs from 'fs';
+import * as fs from 'node:fs';
 import {CallSite} from 'callsites';
-import isValidIdentifier from './is-valid-identifier';
-import isNode from './node/is-node';
+import isValidIdentifier from './is-valid-identifier.js';
+import isNode from './node/is-node.js';
 
 // Regex to extract the label out of the `ow` function call
 const labelRegex = /^.*?\((?<label>.*?)[,)]/;

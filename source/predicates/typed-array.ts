@@ -1,5 +1,5 @@
 import {TypedArray} from 'type-fest';
-import {Predicate} from './predicate';
+import {Predicate} from './predicate.js';
 
 export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 	/**
@@ -10,7 +10,7 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 	byteLength(byteLength: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
-			validator: value => value.byteLength === byteLength
+			validator: value => value.byteLength === byteLength,
 		});
 	}
 
@@ -23,7 +23,7 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength >= byteLength,
-			negatedMessage: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength - 1}\`, got \`${value.byteLength}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength - 1}\`, got \`${value.byteLength}\``,
 		});
 	}
 
@@ -36,7 +36,7 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum byte length of \`${byteLength}\`, got \`${value.byteLength}\``,
 			validator: value => value.byteLength <= byteLength,
-			negatedMessage: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength + 1}\`, got \`${value.byteLength}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum byte length of \`${byteLength + 1}\`, got \`${value.byteLength}\``,
 		});
 	}
 
@@ -48,7 +48,7 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 	length(length: number): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have length \`${length}\`, got \`${value.length}\``,
-			validator: value => value.length === length
+			validator: value => value.length === length,
 		});
 	}
 
@@ -61,7 +61,7 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a minimum length of \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length >= length,
-			negatedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value.length}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a maximum length of \`${length - 1}\`, got \`${value.length}\``,
 		});
 	}
 
@@ -74,7 +74,7 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to have a maximum length of \`${length}\`, got \`${value.length}\``,
 			validator: value => value.length <= length,
-			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value.length}\``
+			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value.length}\``,
 		});
 	}
 }

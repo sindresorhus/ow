@@ -1,5 +1,5 @@
-import hasItems from '../utils/has-items';
-import {Predicate, PredicateOptions} from './predicate';
+import hasItems from '../utils/has-items.js';
+import {Predicate, PredicateOptions} from './predicate.js';
 
 export class WeakMapPredicate<KeyType extends object = object> extends Predicate<WeakMap<KeyType, unknown>> {
 	/**
@@ -17,7 +17,7 @@ export class WeakMapPredicate<KeyType extends object = object> extends Predicate
 	hasKeys(...keys: readonly KeyType[]): this {
 		return this.addValidator({
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
-			validator: map => hasItems(map, keys)
+			validator: map => hasItems(map, keys),
 		});
 	}
 
@@ -29,7 +29,7 @@ export class WeakMapPredicate<KeyType extends object = object> extends Predicate
 	hasAnyKeys(...keys: readonly KeyType[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
-			validator: map => keys.some(key => map.has(key))
+			validator: map => keys.some(key => map.has(key)),
 		});
 	}
 }

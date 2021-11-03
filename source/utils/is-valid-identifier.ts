@@ -8,7 +8,7 @@ const reservedSet = new Set([
 	'super',
 	'this',
 	'Infinity',
-	'NaN'
+	'NaN',
 ]);
 
 /**
@@ -16,4 +16,6 @@ Test if the string is a valid JavaScript identifier.
 
 @param string - String to test.
 */
-export default (string: string | undefined): string | boolean | undefined => string && !reservedSet.has(string) && identifierRegex.test(string);
+const isValidIdentifier = (string: string | undefined): string | boolean | undefined => string && !reservedSet.has(string) && identifierRegex.test(string);
+
+export default isValidIdentifier;

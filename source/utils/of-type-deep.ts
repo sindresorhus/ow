@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
-import {Predicate} from '../predicates/predicate';
-import test from '../test';
+import {Predicate} from '../predicates/predicate.js';
+import test from '../test.js';
 
 const ofTypeDeep = (object: unknown, predicate: Predicate): boolean => {
 	if (!is.plainObject(object)) {
@@ -18,10 +18,12 @@ Test all the values in the object against a provided predicate.
 
 @param predicate - Predicate to test every value in the given object against.
 */
-export default (object: unknown, predicate: Predicate): boolean | string => {
+const ofTypeDeepSafe = (object: unknown, predicate: Predicate): boolean | string => {
 	try {
 		return ofTypeDeep(object, predicate);
 	} catch (error: unknown) {
 		return (error as Error).message;
 	}
 };
+
+export default ofTypeDeepSafe;

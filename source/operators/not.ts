@@ -1,6 +1,6 @@
-import randomId from '../utils/random-id';
-import {validatorSymbol} from '../predicates/predicate';
-import type {Predicate, Validator} from '../predicates/predicate';
+import randomId from '../utils/random-id.js';
+import {validatorSymbol} from '../predicates/predicate.js';
+import type {Predicate, Validator} from '../predicates/predicate.js';
 
 /**
 Operator which inverts the following validation.
@@ -17,9 +17,9 @@ export const not = (predicate: Predicate): Predicate => {
 		const placeholder = randomId();
 
 		validator.message = (value: unknown, label: string): string => (
-			negatedMessage ?
-				negatedMessage(value, label) :
-				message(value, placeholder).replace(/ to /, '$&not ').replace(placeholder, label)
+			negatedMessage
+				? negatedMessage(value, label)
+				: message(value, placeholder).replace(/ to /, '$&not ').replace(placeholder, label)
 		);
 
 		validator.validator = (value: unknown): unknown => !fn(value);
