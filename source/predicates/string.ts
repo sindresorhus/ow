@@ -128,6 +128,16 @@ export class StringPredicate extends Predicate<string> {
 	}
 
 	/**
+	Test a string to contain at least 1 non-whitespace character.
+	*/
+	get nonBlank(): this {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to not be only whitespace, got \`${value}\``,
+			validator: value => value.trim() !== '',
+		});
+	}
+
+	/**
 	Test a string to be not empty.
 	*/
 	get nonEmpty(): this {

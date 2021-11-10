@@ -163,6 +163,16 @@ test('string.empty', t => {
 	}, {message: 'Expected string to be empty, got `foo`'});
 });
 
+test('string.nonBlank', t => {
+	t.notThrows(() => {
+		ow('foo', ow.string.nonBlank);
+	});
+
+	t.throws(() => {
+		ow(' \n\t', ow.string.nonBlank);
+	}, {message: 'Expected string to not be only whitespace, got ` \n\t`'});
+});
+
 test('string.nonEmpty', t => {
 	t.notThrows(() => {
 		ow('foo', ow.string.nonEmpty);
