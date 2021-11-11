@@ -169,8 +169,8 @@ test('string.nonBlank', t => {
 	});
 
 	t.throws(() => {
-		ow(' \n\t', ow.string.nonBlank);
-	}, {message: 'Expected string to not be only whitespace, got ` \n\t`'});
+		ow(' \n\t\f\v', ow.string.nonBlank);
+	}, {message: 'Expected string to not be only whitespace, got `·\\n\\t\\f\\v`'});
 });
 
 test('string.nonEmpty', t => {

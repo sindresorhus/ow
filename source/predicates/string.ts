@@ -132,7 +132,18 @@ export class StringPredicate extends Predicate<string> {
 	*/
 	get nonBlank(): this {
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to not be only whitespace, got \`${value}\``,
+			message: (value, label) => {
+				// Unicode's formal substitute characters can be barely legible and may not be easily recognized.
+				// Hence this alternative substitution scheme.
+				const madeVisible = value
+					.replace(/ /g, '·')
+					.replace(/\f/g, '\\f')
+					.replace(/\n/g, '\\n')
+					.replace(/\r/g, '\\r')
+					.replace(/\t/g, '\\t')
+					.replace(/\v/g, '\\v');
+				return `Expected ${label} to not be only whitespace, got \`${madeVisible}\``;
+			},
 			validator: value => value.trim() !== '',
 		});
 	}
