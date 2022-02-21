@@ -11,6 +11,10 @@ test('number', t => {
 	}, {message: 'Expected argument to be of type `number` but received type `string`'});
 
 	t.throws(() => {
+		ow(Number.NaN as any, ow.number);
+	}, {message: 'Expected argument to be of type `number` but received type `NaN`'});
+
+	t.throws(() => {
 		ow('12' as any, 'foo', ow.number);
 	}, {message: 'Expected `foo` to be of type `number` but received type `string`'});
 });
