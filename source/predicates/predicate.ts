@@ -87,7 +87,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				const label_ = label?.slice(this.type.length + 1);
 
 				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${is(value)}\``;
+				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${Number.isNaN(value) ? 'NaN' : is(value)}\``;
 			},
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
 			validator: value => (is as any)[typeString](value),
