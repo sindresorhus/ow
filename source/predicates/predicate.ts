@@ -86,6 +86,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				// We do not include type in this label as we do for other messages, because it would be redundant.
 				const label_ = label?.slice(this.type.length + 1);
 
+				// TODO: The NaN check can be removed when `@sindresorhus/is` is fixed: https://github.com/sindresorhus/ow/issues/231#issuecomment-1047100612
 				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${Number.isNaN(value) ? 'NaN' : is(value)}\``;
 			},
