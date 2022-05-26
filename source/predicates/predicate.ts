@@ -179,7 +179,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				? `(${label}) ${error}`
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 				: error(label),
-			validator: value => {
+			validator(value) {
 				const {message, validator} = customValidator(value);
 
 				if (validator) {

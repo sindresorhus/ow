@@ -6,7 +6,7 @@ import {BigIntPredicate} from './predicates/bigint.js';
 import {BooleanPredicate} from './predicates/boolean.js';
 import {Predicate, PredicateOptions} from './predicates/predicate.js';
 import {ArrayPredicate} from './predicates/array.js';
-import {ObjectPredicate, Shape} from './predicates/object.js';
+import {ObjectPredicate} from './predicates/object.js';
 import {DatePredicate} from './predicates/date.js';
 import {ErrorPredicate} from './predicates/error.js';
 import {MapPredicate} from './predicates/map.js';
@@ -328,22 +328,19 @@ const predicates = <T>(object: T, options?: PredicateOptions): T & Predicates =>
 
 export default predicates;
 
-export {
-	StringPredicate,
-	NumberPredicate,
-	BigIntPredicate,
-	BooleanPredicate,
-	ArrayPredicate,
-	ObjectPredicate,
-	DatePredicate,
-	ErrorPredicate,
-	MapPredicate,
-	WeakMapPredicate,
-	SetPredicate,
-	WeakSetPredicate,
-	TypedArrayPredicate,
-	ArrayBufferPredicate,
-	DataViewPredicate,
-	AnyPredicate,
-	Shape,
-};
+export {Shape, ObjectPredicate} from './predicates/object.js';
+export {StringPredicate} from './predicates/string.js';
+export {NumberPredicate} from './predicates/number.js';
+export {BigIntPredicate} from './predicates/bigint.js';
+export {BooleanPredicate} from './predicates/boolean.js';
+export {ArrayPredicate} from './predicates/array.js';
+export {DatePredicate} from './predicates/date.js';
+export {ErrorPredicate} from './predicates/error.js';
+export {MapPredicate} from './predicates/map.js';
+export {WeakMapPredicate} from './predicates/weak-map.js';
+export {SetPredicate} from './predicates/set.js';
+export {WeakSetPredicate} from './predicates/weak-set.js';
+export {TypedArrayPredicate} from './predicates/typed-array.js';
+export {ArrayBufferPredicate} from './predicates/array-buffer.js';
+export {DataViewPredicate} from './predicates/data-view.js';
+export {AnyPredicate} from './predicates/any.js';

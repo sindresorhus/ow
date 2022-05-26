@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow from '../source';
+import ow from '../source/index.js';
 
 test('string', t => {
 	const bar: any = 12;

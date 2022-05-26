@@ -1,13 +1,11 @@
 {
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
-		"outDir": "dist",
-		"target": "ES2019",
-		"module": "ESNext",
-		"allowSyntheticDefaultImports": true,
-		"lib": ["ES2020"]
+		"outDir": "dist"
 	},
-	"include": ["source"],
+	"include": [
+		"source"
+	],
 	"typedocOptions": {
 		"out": "docs",
 		"excludePrivate": true,

@@ -20,13 +20,11 @@
 
 ## Install
 
-```
-$ npm install ow
+```sh
+npm install ow
 ```
 
 ## Usage
-
-*If you use CommonJS, you need to import is as `const {default: ow} = require('ow')`.*
 
 ```ts
 import ow from 'ow';
@@ -291,6 +289,8 @@ This can be useful for creating your own reusable validators which can be extrac
 
 ### TypeScript
 
+**Requires TypeScript 4.7 or later.**
+
 Ow includes a type utility that lets you to extract a TypeScript type from the given predicate.
 
 ```ts
@@ -306,6 +306,9 @@ type User = Infer<typeof userPredicate>;
 ## Maintainers
 
 - [Sindre Sorhus](https://github.com/sindresorhus)
+
+**Former:**
+
 - [Sam Verschueren](https://github.com/SamVerschueren)
 
 ## Related

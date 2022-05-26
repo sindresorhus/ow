@@ -1,6 +1,5 @@
 import callsites from 'callsites';
 import {inferLabel} from './utils/infer-label.js';
-import {Predicate} from './predicates/predicate.js';
 import {BasePredicate, isPredicate} from './predicates/base-predicate.js';
 import modifiers, {Modifiers} from './modifiers.js';
 import predicates, {Predicates} from './predicates.js';
@@ -72,7 +71,7 @@ export interface ReusableValidator<T> {
 	@param value - Value to test.
 	@param label - Override the label which should be used in error messages.
 	*/
-	// eslint-disable-next-line @typescript-eslint/prefer-function-type
+	// eslint-disable-next-line @typescript-eslint/prefer-function-type, @typescript-eslint/no-redundant-type-constituents
 	(value: unknown | T, label?: string): void;
 }
 
@@ -117,7 +116,7 @@ const ow = <T>(value: unknown, labelOrPredicate: unknown, predicate?: BasePredic
 
 Object.defineProperties(ow, {
 	isValid: {
-		value: <T>(value: unknown, predicate: BasePredicate<T>): boolean => {
+		value(value: unknown, predicate: BasePredicate<T>): boolean {
 			try {
 				test(value, '', predicate);
 				return true;
@@ -148,6 +147,8 @@ const _ow: Ow = predicates(modifiers(ow)) as Ow;
 
 export default _ow;
 
-export {BasePredicate, Predicate};
 export * from './predicates.js';
 export {ArgumentError} from './argument-error.js';
+
+export {Predicate} from './predicates/predicate.js';
+export {BasePredicate} from './predicates/base-predicate.js';

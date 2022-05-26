@@ -1,6 +1,6 @@
 import test from 'ava';
-import ow, {ArgumentError, AssertingValidator} from '../source';
-import {createAnyError} from './fixtures/create-error';
+import ow, {ArgumentError, AssertingValidator} from '../source/index.js';
+import {createAnyError} from './fixtures/create-error.js';
 
 test('not', t => {
 	const foo = '';

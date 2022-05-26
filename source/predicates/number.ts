@@ -89,7 +89,7 @@ export class NumberPredicate extends Predicate<number> {
 	*/
 	oneOf(list: readonly number[]): this {
 		return this.addValidator({
-			message: (value, label) => {
+			message(value, label) {
 				let printedList = JSON.stringify(list);
 
 				if (list.length > 10) {
