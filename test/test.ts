@@ -517,6 +517,10 @@ test('ow without valid arguments', t => {
 	t.throws(() => {
 		ow(5, {} as any);
 	}, {message: 'Expected second argument to be a predicate or a string, got `object`'});
+
+	t.throws(() => {
+		ow(5, undefined);
+	}, {message: 'Expected second argument to be a predicate or a string, got `undefined`'});
 });
 
 // Skipped because require is not defined in esm
