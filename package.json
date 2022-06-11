@@ -21,7 +21,7 @@
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepare": "npm run build",
-		"//postpublish": "npm run docs && gh-pages --dist docs --no-history --message \"Deploy documentation\"",
+		"postpublish": "npm run docs && gh-pages --dist docs --no-history --message \"Deploy documentation\"",
 		"example": "npm run build && node example.js"
 	},
 	"files": [
@@ -49,7 +49,7 @@
 		"object"
 	],
 	"dependencies": {
-		"@sindresorhus/is": "^4.6.0",
+		"@sindresorhus/is": "^5.0.1",
 		"callsites": "^4.0.0",
 		"dot-prop": "^7.2.0",
 		"lodash.isequal": "^4.5.0",
@@ -59,25 +59,23 @@
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^3.0.1",
 		"@types/lodash.isequal": "^4.5.6",
-		"@types/node": "^17.0.36",
+		"@types/node": "^17.0.42",
 		"@types/vali-date": "^1.0.0",
-		"ava": "^4.2.0",
+		"ava": "^4.3.0",
 		"c8": "^7.11.3",
 		"del-cli": "^4.0.1",
 		"expect-type": "^0.13.0",
 		"gh-pages": "^4.0.0",
-		"ts-node": "^10.8.0",
-		"typescript": "^4.7.2",
-		"xo": "^0.49.0"
+		"ts-node": "^10.8.1",
+		"typedoc": "^0.22.17",
+		"typescript": "^4.7.3",
+		"xo": "^0.50.0"
 	},
 	"browser": {
 		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
 	},
 	"sideEffects": false,
 	"xo": {
-		"parserOptions": {
-			"project": "./tsconfig.xo.json"
-		},
 		"ignores": [
 			"example.js",
 			"dev-only.js",
@@ -95,17 +93,16 @@
 		}
 	},
 	"ava": {
-		"nodeArguments": [
-			"--loader=ts-node/esm",
-			"--experimental-specifier-resolution=node"
-		],
 		"files": [
 			"test/**",
 			"!test/fixtures/**"
 		],
 		"extensions": {
 			"ts": "module"
-		}
+		},
+		"nodeArguments": [
+			"--loader=ts-node/esm"
+		]
 	},
 	"c8": {
 		"reporter": [

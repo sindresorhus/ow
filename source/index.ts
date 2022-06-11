@@ -116,7 +116,7 @@ const ow = <T>(value: unknown, labelOrPredicate: unknown, predicate?: BasePredic
 
 Object.defineProperties(ow, {
 	isValid: {
-		value(value: unknown, predicate: BasePredicate<T>): boolean {
+		value<T>(value: unknown, predicate: BasePredicate<T>): boolean {
 			try {
 				test(value, '', predicate);
 				return true;
@@ -151,4 +151,4 @@ export * from './predicates.js';
 export {ArgumentError} from './argument-error.js';
 
 export {Predicate} from './predicates/predicate.js';
-export {BasePredicate} from './predicates/base-predicate.js';
+export type {BasePredicate} from './predicates/base-predicate.js';

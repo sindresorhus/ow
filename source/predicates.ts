@@ -328,7 +328,8 @@ const predicates = <T>(object: T, options?: PredicateOptions): T & Predicates =>
 
 export default predicates;
 
-export {Shape, ObjectPredicate} from './predicates/object.js';
+export {ObjectPredicate} from './predicates/object.js';
+export type {Shape} from './predicates/object.js';
 export {StringPredicate} from './predicates/string.js';
 export {NumberPredicate} from './predicates/number.js';
 export {BigIntPredicate} from './predicates/bigint.js';

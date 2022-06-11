@@ -51,13 +51,12 @@ export const inferLabel = (callsites: readonly CallSite[]): void | string => {
 	line = line.slice(columnNumber - 1);
 
 	const match = labelRegex.exec(line);
+	const token = match?.groups?.['label'];
 
-	if (!match?.groups?.label) {
+	if (!token) {
 		// Exit if we didn't find a label
 		return;
 	}
-
-	const token = match.groups.label;
 
 	if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop())) {
 		return token;

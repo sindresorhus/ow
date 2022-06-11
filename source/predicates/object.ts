@@ -189,4 +189,4 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	}
 }
 
-export {Shape} from '../utils/match-shape.js';
+export type {Shape} from '../utils/match-shape.js';
