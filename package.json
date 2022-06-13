@@ -11,8 +11,16 @@
 		"url": "https://sindresorhus.com"
 	},
 	"type": "module",
-	"exports": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"node": "./dist/index.js"
+		},
+		"./dev-only": {
+			"types": "./dist/index.d.ts",
+			"node": "./dev-only.js"
+		}
+	},
 	"engines": {
 		"node": ">=14.16"
 	},
@@ -49,7 +57,7 @@
 		"object"
 	],
 	"dependencies": {
-		"@sindresorhus/is": "^5.0.1",
+		"@sindresorhus/is": "^5.1.0",
 		"callsites": "^4.0.0",
 		"dot-prop": "^7.2.0",
 		"lodash.isequal": "^4.5.0",
