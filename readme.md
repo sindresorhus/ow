@@ -20,13 +20,11 @@
 
 ## Install
 
-```
-$ npm install ow
+```sh
+npm install ow
 ```
 
 ## Usage
-
-*If you use CommonJS, you need to import is as `const {default: ow} = require('ow')`.*
 
 ```ts
 import ow from 'ow';
@@ -65,7 +63,7 @@ ow(unicorn, ow.object.exactShape({
 //=> ArgumentError: Expected property `stars.value` to be of type `number` but received type `string` in object `unicorn`
 ```
 
-***Note:*** If you intend on using `ow` for development purposes only, use `require('ow/dev-only')` instead of the usual `import 'ow'`, and run the bundler with `NODE_ENV` set to `production` (e.g. `$ NODE_ENV="production" parcel build index.js`). This will make `ow` automatically export a shim when running in production, which should result in a significantly lower bundle size.
+***Note:*** If you intend on using `ow` for development purposes only, use `import ow from 'ow/dev-only'` instead of the usual `import ow from 'ow'`, and run the bundler with `NODE_ENV` set to `production` (e.g. `$ NODE_ENV="production" parcel build index.js`). This will make `ow` automatically export a shim when running in production, which should result in a significantly lower bundle size.
 
 ## API
 
@@ -291,6 +289,8 @@ This can be useful for creating your own reusable validators which can be extrac
 
 ### TypeScript
 
+**Requires TypeScript 4.7 or later.**
+
 Ow includes a type utility that lets you to extract a TypeScript type from the given predicate.
 
 ```ts
@@ -306,6 +306,9 @@ type User = Infer<typeof userPredicate>;
 ## Maintainers
 
 - [Sindre Sorhus](https://github.com/sindresorhus)
+
+**Former:**
+
 - [Sam Verschueren](https://github.com/SamVerschueren)
 
 ## Related

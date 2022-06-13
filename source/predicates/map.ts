@@ -93,7 +93,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	hasAnyValues(...values: readonly T2[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any value of \`${JSON.stringify(values)}\``,
-			validator: map => {
+			validator(map) {
 				const valueSet = new Set(map.values());
 				return values.some(key => valueSet.has(key));
 			},

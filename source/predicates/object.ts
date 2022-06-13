@@ -1,6 +1,5 @@
 import is from '@sindresorhus/is';
-
-import dotProp from 'dot-prop';
+import {hasProperty} from 'dot-prop';
 import isEqual from 'lodash.isequal';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
@@ -8,8 +7,6 @@ import ofTypeDeep from '../utils/of-type-deep.js';
 import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape.js';
 import {Predicate, PredicateOptions} from './predicate.js';
 import {BasePredicate} from './base-predicate.js';
-
-export {Shape};
 
 export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	/**
@@ -92,7 +89,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	*/
 	instanceOf(instance: Function): this {
 		return this.addValidator({
-			message: (object: object, label: string) => {
+			message(object: object, label: string) {
 				let {name} = object?.constructor ?? {};
 
 				if (!name || name === 'Object') {
@@ -115,7 +112,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 			message: (_, label, missingKeys) => `Expected ${label} to have keys \`${JSON.stringify(missingKeys)}\``,
 			validator: object => hasItems(
 				{
-					has: item => dotProp.has(object, item),
+					has: item => hasProperty(object, item),
 				},
 				keys,
 			),
@@ -130,7 +127,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	hasAnyKeys(...keys: readonly string[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} to have any key of \`${JSON.stringify(keys)}\``,
-			validator: object => keys.some(key => dotProp.has(object, key)),
+			validator: object => keys.some(key => hasProperty(object, key)),
 		});
 	}
 
@@ -191,3 +188,5 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 		}) as ObjectPredicate<any>;
 	}
 }
+
+export type {Shape} from '../utils/match-shape.js';

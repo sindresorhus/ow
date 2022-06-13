@@ -1,6 +1,6 @@
 import {Buffer} from 'node:buffer';
 import test from 'ava';
-import ow from '../source';
+import ow from '../source/index.js';
 
 test('buffer', t => {
 	t.notThrows(() => {

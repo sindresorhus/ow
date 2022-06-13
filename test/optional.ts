@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow from '../source';
+import ow from '../source/index.js';
 
 test('optional', t => {
 	t.notThrows(() => {

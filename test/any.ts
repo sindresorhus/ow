@@ -1,6 +1,6 @@
 import test from 'ava';
-import ow from '../source';
-import {createAnyError} from './fixtures/create-error';
+import ow from '../source/index.js';
+import {createAnyError} from './fixtures/create-error.js';
 
 test('any', t => {
 	t.notThrows(() => {

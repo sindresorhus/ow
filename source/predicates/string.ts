@@ -103,7 +103,7 @@ export class StringPredicate extends Predicate<string> {
 	*/
 	oneOf(list: readonly string[]): this {
 		return this.addValidator({
-			message: (value, label) => {
+			message(value, label) {
 				let printedList = JSON.stringify(list);
 
 				if (list.length > 10) {
@@ -132,7 +132,7 @@ export class StringPredicate extends Predicate<string> {
 	*/
 	get nonBlank(): this {
 		return this.addValidator({
-			message: (value, label) => {
+			message(value, label) {
 				// Unicode's formal substitute characters can be barely legible and may not be easily recognized.
 				// Hence this alternative substitution scheme.
 				const madeVisible = value

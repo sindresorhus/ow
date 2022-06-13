@@ -1,12 +1,13 @@
-'use strict';
-
+let ow;
 if (process.env.NODE_ENV === 'production') {
 	const shim = new Proxy((() => {}), {
 		get: () => shim,
-		apply: () => shim
+		apply: () => shim,
 	});
 
-	module.exports = shim;
+	ow = shim;
 } else {
-	module.exports = require('./dist');
+	ow = await import('./dist/index.js');
 }
+
+export default ow;

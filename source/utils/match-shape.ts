@@ -3,7 +3,6 @@ import test from '../test.js';
 import {isPredicate} from '../predicates/base-predicate.js';
 import {BasePredicate} from '../index.js';
 
-// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 export interface Shape {
 	[key: string]: BasePredicate | Shape;
 }

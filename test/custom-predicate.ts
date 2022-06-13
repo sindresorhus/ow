@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow, {Predicate} from '../source';
+import ow, {Predicate} from '../source/index.js';
 
 class CustomPredicate extends Predicate<string> {
 	constructor() {

@@ -25,7 +25,7 @@ export class ErrorPredicate extends Predicate<Error> {
 
 	@param expected - Expected message of the Error.
 	*/
-	message(expected: string): this {
+	override message(expected: string): this {
 		return this.addValidator({
 			message: (error, label) => `Expected ${label} message to be \`${expected}\`, got \`${error.message}\``,
 			validator: error => error.message === expected,
