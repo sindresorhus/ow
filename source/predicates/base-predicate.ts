@@ -8,7 +8,7 @@ export const testSymbol: unique symbol = Symbol('test');
 /**
 @hidden
 */
-export const isPredicate = (value: unknown): value is BasePredicate => Boolean((value as any)[testSymbol]);
+export const isPredicate = (value: unknown): value is BasePredicate => Boolean((value as any)?.[testSymbol]);
 
 /**
 @hidden
