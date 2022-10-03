@@ -1,5 +1,5 @@
 import type {Buffer} from 'node:buffer';
-import {TypedArray} from 'type-fest';
+import {TypedArray} from './typed-array.js';
 import {StringPredicate} from './predicates/string.js';
 import {NumberPredicate} from './predicates/number.js';
 import {BigIntPredicate} from './predicates/bigint.js';
