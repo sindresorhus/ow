@@ -53,7 +53,6 @@
 		"callsites": "^3.1.0",
 		"dot-prop": "^6.0.1",
 		"lodash.isequal": "^4.5.0",
-		"type-fest": "^2.3.4",
 		"vali-date": "^1.0.0"
 	},
 	"devDependencies": {

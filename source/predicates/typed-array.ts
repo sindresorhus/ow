@@ -1,4 +1,4 @@
-import {TypedArray} from 'type-fest';
+import {TypedArray} from './typed-array.js';
 import {Predicate} from './predicate';
 
 export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {

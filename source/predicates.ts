@@ -1,4 +1,4 @@
-import {TypedArray} from 'type-fest';
+import {TypedArray} from './typed-array.js';
 import {StringPredicate} from './predicates/string';
 import {NumberPredicate} from './predicates/number';
 import {BigIntPredicate} from './predicates/bigint';
