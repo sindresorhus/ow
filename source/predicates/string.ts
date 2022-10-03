@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
 import valiDate from 'vali-date';
-import {Predicate, PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions} from './predicate.js';
 
 export class StringPredicate extends Predicate<string> {
 	/**

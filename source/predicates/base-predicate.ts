@@ -1,4 +1,4 @@
-import {Main} from '../index.js';
+import type {Main} from '../index.js';
 
 /**
 @hidden
@@ -13,6 +13,6 @@ export const isPredicate = (value: unknown): value is BasePredicate => Boolean((
 /**
 @hidden
 */
-export interface BasePredicate<T = unknown> {
+export type BasePredicate<T = unknown> = {
 	[testSymbol](value: T, main: Main, label: string | Function, idLabel?: boolean): void;
-}
+};

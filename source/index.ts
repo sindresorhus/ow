@@ -1,8 +1,8 @@
 import callsites from 'callsites';
 import {inferLabel} from './utils/infer-label.js';
-import {BasePredicate, isPredicate} from './predicates/base-predicate.js';
-import modifiers, {Modifiers} from './modifiers.js';
-import predicates, {Predicates} from './predicates.js';
+import {isPredicate, type BasePredicate} from './predicates/base-predicate.js';
+import modifiers, {type Modifiers} from './modifiers.js';
+import predicates, {type Predicates} from './predicates.js';
 import test from './test.js';
 
 /**
@@ -27,7 +27,7 @@ type User = Infer<typeof userPredicate>;
 export type Infer<P> = P extends BasePredicate<infer T> ? T : never;
 
 // Extends is only necessary for the generated documentation to be cleaner. The loaders below infer the correct type.
-export interface Ow extends Modifiers, Predicates {
+export type Ow = {
 	/**
 	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
 
@@ -59,12 +59,12 @@ export interface Ow extends Modifiers, Predicates {
 	@param predicate - Predicate used in the validator function.
 	*/
 	create: (<T>(predicate: BasePredicate<T>) => ReusableValidator<T>) & (<T>(label: string, predicate: BasePredicate<T>) => ReusableValidator<T>);
-}
+} & Modifiers & Predicates;
 
 /**
 A reusable validator.
 */
-export interface ReusableValidator<T> {
+export type ReusableValidator<T> = {
 	/**
 	Test if the value matches the predicate. Throws an `ArgumentError` if the test fails.
 
@@ -73,7 +73,7 @@ export interface ReusableValidator<T> {
 	*/
 	// eslint-disable-next-line @typescript-eslint/prefer-function-type, @typescript-eslint/no-redundant-type-constituents
 	(value: unknown | T, label?: string): void;
-}
+};
 
 /**
 Turn a `ReusableValidator` into one with a type assertion.

@@ -1,11 +1,11 @@
 import is from '@sindresorhus/is';
 import test from '../test.js';
 import {isPredicate} from '../predicates/base-predicate.js';
-import {BasePredicate} from '../index.js';
+import type {BasePredicate} from '../index.js';
 
-export interface Shape {
+export type Shape = {
 	[key: string]: BasePredicate | Shape;
-}
+};
 
 /**
 Extracts a regular type from a shape definition.

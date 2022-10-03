@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import test from 'ava';
-import ow, {ArgumentError, BasePredicate, Main} from '../source/index.js';
+import ow, {type ArgumentError, type BasePredicate, type Main} from '../source/index.js';
 import {testSymbol} from '../source/predicates/base-predicate.js';
 import {createAnyError, createAnyPredicateError} from './fixtures/create-error.js';
 

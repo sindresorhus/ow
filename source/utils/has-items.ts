@@ -1,9 +1,9 @@
 /**
 @hidden
 */
-export interface CollectionLike<T> {
+export type CollectionLike<T> = {
 	has: (item: T) => boolean;
-}
+};
 
 /**
 Retrieve the missing values in a collection based on an array of items.

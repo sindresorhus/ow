@@ -4,9 +4,9 @@ import isEqual from 'lodash.isequal';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
 import ofTypeDeep from '../utils/of-type-deep.js';
-import {partial, exact, Shape, TypeOfShape} from '../utils/match-shape.js';
-import {Predicate, PredicateOptions} from './predicate.js';
-import {BasePredicate} from './base-predicate.js';
+import {partial, exact, type Shape, type TypeOfShape} from '../utils/match-shape.js';
+import {Predicate, type PredicateOptions} from './predicate.js';
+import type {BasePredicate} from './base-predicate.js';
 
 export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	/**

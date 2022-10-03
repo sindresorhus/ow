@@ -1,10 +1,10 @@
 import type {Buffer} from 'node:buffer';
-import {TypedArray} from './typed-array.js';
+import type {TypedArray} from './typed-array.js';
 import {StringPredicate} from './predicates/string.js';
 import {NumberPredicate} from './predicates/number.js';
 import {BigIntPredicate} from './predicates/bigint.js';
 import {BooleanPredicate} from './predicates/boolean.js';
-import {Predicate, PredicateOptions} from './predicates/predicate.js';
+import {Predicate, type PredicateOptions} from './predicates/predicate.js';
 import {ArrayPredicate} from './predicates/array.js';
 import {ObjectPredicate} from './predicates/object.js';
 import {DatePredicate} from './predicates/date.js';
@@ -16,10 +16,10 @@ import {WeakSetPredicate} from './predicates/weak-set.js';
 import {TypedArrayPredicate} from './predicates/typed-array.js';
 import {ArrayBufferPredicate} from './predicates/array-buffer.js';
 import {DataViewPredicate} from './predicates/data-view.js';
-import {BasePredicate} from './predicates/base-predicate.js';
+import type {BasePredicate} from './predicates/base-predicate.js';
 import {AnyPredicate} from './predicates/any.js';
 
-export interface Predicates {
+export type Predicates = {
 	/**
 	Test the value to be a string.
 	*/
@@ -209,7 +209,7 @@ export interface Predicates {
 	& (<T1, T2, T3, T4, T5, T6, T7, T8, T9>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>) => AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>)
 	& (<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(p1: BasePredicate<T1>, p2: BasePredicate<T2>, p3: BasePredicate<T3>, p4: BasePredicate<T4>, p5: BasePredicate<T5>, p6: BasePredicate<T6>, p7: BasePredicate<T7>, p8: BasePredicate<T8>, p9: BasePredicate<T9>, p10: BasePredicate<T10>) => AnyPredicate<T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10>)
 	& ((...predicate: BasePredicate[]) => AnyPredicate);
-}
+};
 
 const predicates = <T>(object: T, options?: PredicateOptions): T & Predicates => {
 	Object.defineProperties(object, {

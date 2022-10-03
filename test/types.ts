@@ -1,8 +1,9 @@
 import type {Buffer} from 'node:buffer';
 import test from 'ava';
-import {ExpectTypeOf, expectTypeOf} from 'expect-type';
-import {TypedArray} from '../source/typed-array.js';
-import ow, {BasePredicate, Infer} from '../source/index.js';
+import {expectTypeOf, type ExpectTypeOf} from 'expect-type';
+import type {TypedArray} from '../source/typed-array.js';
+import type {BasePredicate, Infer} from '../source/index.js';
+import ow from '../source/index.js';
 
 test('type-level tests', t => {
 	t.is(typeof typeTests, 'function');

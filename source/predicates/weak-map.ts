@@ -1,5 +1,5 @@
 import hasItems from '../utils/has-items.js';
-import {Predicate, PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions} from './predicate.js';
 
 export class WeakMapPredicate<KeyType extends object = object> extends Predicate<WeakMap<KeyType, unknown>> {
 	/**

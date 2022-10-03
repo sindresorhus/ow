@@ -1,5 +1,5 @@
-import * as fs from 'node:fs';
-import {CallSite} from 'callsites';
+import fs from 'node:fs';
+import type {CallSite} from 'callsites';
 import isValidIdentifier from './is-valid-identifier.js';
 import isNode from './node/is-node.js';
 
@@ -58,7 +58,7 @@ export const inferLabel = (callsites: readonly CallSite[]): void | string => {
 		return;
 	}
 
-	if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop())) {
+	if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop() ?? '')) {
 		return token;
 	}
 

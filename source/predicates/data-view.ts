@@ -1,4 +1,4 @@
-import {Predicate, PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions} from './predicate.js';
 
 export class DataViewPredicate extends Predicate<DataView> {
 	/**

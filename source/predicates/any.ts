@@ -1,8 +1,8 @@
 import {ArgumentError} from '../argument-error.js';
-import {Main} from '../index.js';
+import type {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
-import {BasePredicate, testSymbol} from './base-predicate.js';
-import {PredicateOptions} from './predicate.js';
+import {testSymbol, type BasePredicate} from './base-predicate.js';
+import type {PredicateOptions} from './predicate.js';
 
 /**
 @hidden

@@ -1,9 +1,9 @@
 import isEqual from 'lodash.isequal';
 import {exact} from '../utils/match-shape.js';
 import ofType from '../utils/of-type.js';
-import {BasePredicate} from './base-predicate.js';
-import {Predicate, PredicateOptions} from './predicate.js';
-import {Shape} from './object.js';
+import type {BasePredicate} from './base-predicate.js';
+import {Predicate, type PredicateOptions} from './predicate.js';
+import type {Shape} from './object.js';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**

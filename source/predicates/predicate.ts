@@ -1,9 +1,9 @@
 import is from '@sindresorhus/is';
 import {ArgumentError} from '../argument-error.js';
 import {not} from '../operators/not.js';
-import {Main} from '../index.js';
+import type {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
-import {BasePredicate, testSymbol} from './base-predicate.js';
+import {testSymbol, type BasePredicate} from './base-predicate.js';
 
 /**
 Function executed when the provided validation fails.
@@ -18,7 +18,7 @@ export type ValidatorMessageBuilder<T> = (value: T, label?: string) => string;
 /**
 @hidden
 */
-export interface Validator<T> {
+export type Validator<T> = {
 	message(value: T, label?: string, result?: any): string;
 
 	validator(value: T): unknown;
@@ -29,21 +29,21 @@ export interface Validator<T> {
 	When absent, the return value of `message()` is used and 'not' is inserted after the first 'to', e.g. `Expected 'smth' to be empty` -> `Expected 'smth' to not be empty`.
 	*/
 	negatedMessage?(value: T, label: string): string;
-}
+};
 
 /**
 @hidden
 */
-export interface PredicateOptions {
+export type PredicateOptions = {
 	optional?: boolean;
-}
+};
 
 /**
 @hidden
 */
-export interface Context<T = unknown> extends PredicateOptions {
+export type Context<T = unknown> = {
 	validators: Array<Validator<T>>;
-}
+} & PredicateOptions;
 
 /**
 @hidden

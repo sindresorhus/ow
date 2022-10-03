@@ -21,6 +21,7 @@
 			"node": "./dev-only.js"
 		}
 	},
+	"sideEffects": false,
 	"engines": {
 		"node": ">=14.16"
 	},
@@ -57,7 +58,7 @@
 		"object"
 	],
 	"dependencies": {
-		"@sindresorhus/is": "^5.1.0",
+		"@sindresorhus/is": "^5.3.0",
 		"callsites": "^4.0.0",
 		"dot-prop": "^7.2.0",
 		"lodash.isequal": "^4.5.0",
@@ -66,22 +67,21 @@
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^3.0.1",
 		"@types/lodash.isequal": "^4.5.6",
-		"@types/node": "^17.0.42",
+		"@types/node": "^18.8.0",
 		"@types/vali-date": "^1.0.0",
-		"ava": "^4.3.0",
-		"c8": "^7.11.3",
-		"del-cli": "^4.0.1",
-		"expect-type": "^0.13.0",
+		"ava": "^4.3.3",
+		"c8": "^7.12.0",
+		"del-cli": "^5.0.0",
+		"expect-type": "^0.14.2",
 		"gh-pages": "^4.0.0",
-		"ts-node": "^10.8.1",
-		"typedoc": "^0.22.17",
-		"typescript": "^4.7.3",
-		"xo": "^0.50.0"
+		"ts-node": "^10.9.1",
+		"typedoc": "^0.23.15",
+		"typescript": "^4.8.4",
+		"xo": "^0.52.3"
 	},
 	"browser": {
 		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
 	},
-	"sideEffects": false,
 	"xo": {
 		"ignores": [
 			"example.js",
@@ -90,13 +90,11 @@
 		],
 		"rules": {
 			"no-useless-return": "off",
-			"ava/no-ignored-test-files": "off",
 			"@typescript-eslint/explicit-function-return-type": "error",
 			"@typescript-eslint/ban-types": "off",
 			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-empty-function": "off",
-			"@typescript-eslint/restrict-template-expressions": "off",
-			"@typescript-eslint/no-unused-vars": "off"
+			"@typescript-eslint/restrict-template-expressions": "off"
 		}
 	},
 	"ava": {

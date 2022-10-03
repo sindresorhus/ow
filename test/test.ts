@@ -1,5 +1,5 @@
 import test from 'ava';
-import ow, {ArgumentError, AssertingValidator} from '../source/index.js';
+import ow, {ArgumentError, type AssertingValidator} from '../source/index.js';
 import {createAnyError} from './fixtures/create-error.js';
 
 test('not', t => {

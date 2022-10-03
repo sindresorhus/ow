@@ -1,4 +1,4 @@
-import {TypedArray} from '../typed-array.js';
+import type {TypedArray} from '../typed-array.js';
 import {Predicate} from './predicate.js';
 
 export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
