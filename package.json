@@ -17,7 +17,7 @@
 		"node": ">=12"
 	},
 	"scripts": {
-		"test": "xo && nyc ava",
+		"test": "xo && ava",
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepare": "npm run build",
