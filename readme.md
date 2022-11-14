@@ -67,7 +67,7 @@ ow(unicorn, ow.object.exactShape({
 
 ## API
 
-[Complete API documentation](https://sindresorhus.com/ow/interfaces/Ow.html)
+[Complete API documentation](https://sindresorhus.com/ow/)
 
 Ow includes TypeScript type guards, so using it will narrow the type of previously-unknown values.
 
@@ -141,54 +141,56 @@ ow(undefined, ow.optional.number);
 
 All the below types return a predicate. Every predicate has some extra operators that you can use to test the value even more fine-grained.
 
+[Predicate docs.](https://sindresorhus.com/ow/types/Predicates.html)
+
 #### Primitives
 
-- [`undefined`](https://sindresorhus.com/ow/interfaces/Ow.html#undefined-1)
-- [`null`](https://sindresorhus.com/ow/interfaces/Ow.html#null)
-- [`string`](https://sindresorhus.com/ow/classes/StringPredicate.html)
-- [`number`](https://sindresorhus.com/ow/classes/NumberPredicate.html)
-- [`boolean`](https://sindresorhus.com/ow/classes/BooleanPredicate.html)
-- [`symbol`](https://sindresorhus.com/ow/interfaces/Ow.html#symbol-1)
+- `undefined`
+- `null`
+- `string`
+- `number`
+- `boolean`
+- `symbol`
 
 #### Built-in types
 
-- [`array`](https://sindresorhus.com/ow/classes/ArrayPredicate.html)
-- [`function`](https://sindresorhus.com/ow/interfaces/Ow.html#function)
-- [`buffer`](https://sindresorhus.com/ow/interfaces/Ow.html#buffer)
-- [`object`](https://sindresorhus.com/ow/classes/ObjectPredicate.html)
-- [`regExp`](https://sindresorhus.com/ow/interfaces/Ow.html#regexp-1)
-- [`date`](https://sindresorhus.com/ow/classes/DatePredicate.html)
-- [`error`](https://sindresorhus.com/ow/classes/ErrorPredicate.html)
-- [`promise`](https://sindresorhus.com/ow/interfaces/Ow.html#promise-1)
-- [`map`](https://sindresorhus.com/ow/classes/MapPredicate.html)
-- [`set`](https://sindresorhus.com/ow/classes/SetPredicate.html)
-- [`weakMap`](https://sindresorhus.com/ow/classes/WeakMapPredicate.html)
-- [`weakSet`](https://sindresorhus.com/ow/classes/WeakSetPredicate.html)
+- `array`
+- `function`
+- `buffer`
+- `object`
+- `regExp`
+- `date`
+- `error`
+- `promise`
+- `map`
+- `set`
+- `weakMap`
+- `weakSet`
 
 #### Typed arrays
 
-- [`int8Array`](https://sindresorhus.com/ow/interfaces/Ow.html#int8Array)
-- [`uint8Array`](https://sindresorhus.com/ow/interfaces/Ow.html#uint8Array-1)
-- [`uint8ClampedArray`](https://sindresorhus.com/ow/interfaces/Ow.html#uint8ClampedArray-1)
-- [`int16Array`](https://sindresorhus.com/ow/interfaces/Ow.html#int16Array)
-- [`uint16Array`](https://sindresorhus.com/ow/interfaces/Ow.html#uint16Array-1)
-- [`int32Array`](https://sindresorhus.com/ow/interfaces/Ow.html#int32Array)
-- [`uint32Array`](https://sindresorhus.com/ow/interfaces/Ow.html#uint32Array-1)
-- [`float32Array`](https://sindresorhus.com/ow/interfaces/Ow.html#float32Array)
-- [`float64Array`](https://sindresorhus.com/ow/interfaces/Ow.html#float64Array)
+- `int8Array`
+- `uint8Array`
+- `uint8ClampedArray`
+- `int16Array`
+- `uint16Array`
+- `int32Array`
+- `uint32Array`
+- `float32Array`
+- `float64Array`
 
 #### Structured data
 
-- [`arrayBuffer`](https://sindresorhus.com/ow/interfaces/Ow.html#arrayBuffer)
-- [`dataView`](https://sindresorhus.com/ow/interfaces/Ow.html#dataView)
-- [`sharedArrayBuffer`](https://sindresorhus.com/ow/interfaces/Ow.html#sharedArrayBuffer-1)
+- `arrayBuffer`
+- `dataView`
+- `sharedArrayBuffer`
 
 #### Miscellaneous
 
-- [`nan`](https://sindresorhus.com/ow/interfaces/Ow.html#nan)
-- [`nullOrUndefined`](https://sindresorhus.com/ow/interfaces/Ow.html#nullOrUndefined)
-- [`iterable`](https://sindresorhus.com/ow/interfaces/Ow.html#iterable)
-- [`typedArray`](https://sindresorhus.com/ow/interfaces/Ow.html#typedArray-1)
+- `nan`
+- `nullOrUndefined`
+- `iterable`
+- `typedArray`
 
 ### Predicates
 
