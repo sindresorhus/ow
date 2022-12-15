@@ -14,11 +14,13 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"node": "./dist/index.js"
+			"node": "./dist/index.js",
+			"import": "./dist/index.js"
 		},
 		"./dev-only": {
 			"types": "./dist/index.d.ts",
-			"node": "./dev-only.js"
+			"node": "./dev-only.js",
+			"import": "./dist/index.js"
 		}
 	},
 	"sideEffects": false,
