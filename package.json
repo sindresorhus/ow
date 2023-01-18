@@ -21,7 +21,7 @@
 			"node": "./dev-only.js"
 		}
 	},
-    "types": "./dist/index.d.ts",
+	"types": "./dist/index.d.ts",
 	"sideEffects": false,
 	"engines": {
 		"node": ">=14.16"
