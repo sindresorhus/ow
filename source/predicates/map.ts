@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal';
+import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
 import {Predicate, type PredicateOptions} from './predicate.js';
@@ -152,7 +152,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 	deepEqual(expected: Map<T1, T2>): this {
 		return this.addValidator({
 			message: (map, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify([...expected])}\`, got \`${JSON.stringify([...map])}\``,
-			validator: map => isEqual(map, expected),
+			validator: map => deepEqual(map, expected),
 		});
 	}
 }

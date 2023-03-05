@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal';
+import {deepEqual} from 'fast-equals';
 import {exact} from '../utils/match-shape.js';
 import ofType from '../utils/of-type.js';
 import type {BasePredicate} from './base-predicate.js';
@@ -127,7 +127,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	deepEqual(expected: readonly T[]): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(value)}\``,
-			validator: value => isEqual(value, expected),
+			validator: value => deepEqual(value, expected),
 		});
 	}
 
