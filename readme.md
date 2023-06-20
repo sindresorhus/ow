@@ -10,6 +10,8 @@
 
 > Function argument validation for humans
 
+For schema validation, I recommend [`zod`](https://github.com/colinhacks/zod).
+
 ## Highlights
 
 - Expressive chainable API
