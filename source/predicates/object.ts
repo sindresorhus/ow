@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
 import {hasProperty} from 'dot-prop';
-import isEqual from 'lodash.isequal';
+import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
 import ofTypeDeep from '../utils/of-type-deep.js';
@@ -78,7 +78,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	deepEqual(expected: object): this {
 		return this.addValidator({
 			message: (object, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify(expected)}\`, got \`${JSON.stringify(object)}\``,
-			validator: object => isEqual(object, expected),
+			validator: object => deepEqual(object, expected),
 		});
 	}
 

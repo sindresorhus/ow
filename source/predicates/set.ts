@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal';
+import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
 import {Predicate, type PredicateOptions} from './predicate.js';
@@ -113,7 +113,7 @@ export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	deepEqual(expected: Set<T>): this {
 		return this.addValidator({
 			message: (set, label) => `Expected ${label} to be deeply equal to \`${JSON.stringify([...expected])}\`, got \`${JSON.stringify([...set])}\``,
-			validator: set => isEqual(set, expected),
+			validator: set => deepEqual(set, expected),
 		});
 	}
 }
