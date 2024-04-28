@@ -25,13 +25,9 @@ type X = TypeOfShape<typeof myShape> // {foo: string; bar: {baz: boolean}}
 This is used in the `ow.object.partialShape(…)` and `ow.object.exactShape(…)` functions.
 */
 export type TypeOfShape<S extends BasePredicate | Shape> =
-	S extends BasePredicate<infer X>
-		? X
-		: S extends Shape
-			? {
-				[K in keyof S]: TypeOfShape<S[K]>
-			}
-			: never;
+	S extends BasePredicate<infer X> ? X extends object ? X : never :
+		S extends Shape ? {[K in keyof S]: TypeOfShape<S[K]>} extends object ? {[K in keyof S]: TypeOfShape<S[K]>} : never :
+			never;
 
 /**
 Test if the `object` matches the `shape` partially.
@@ -85,7 +81,7 @@ export function exact(object: Record<string, any>, shape: Shape, parent?: string
 			if (isPredicate(shape[key])) {
 				test(object[key], label, shape[key] as BasePredicate);
 			} else if (is.plainObject(shape[key])) {
-				if (!Object.prototype.hasOwnProperty.call(object, key)) {
+				if (!Object.hasOwn(object, key)) {
 					return `Expected \`${label}\` to exist`;
 				}
 

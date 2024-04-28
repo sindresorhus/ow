@@ -1,5 +1,4 @@
 import is from '@sindresorhus/is';
-import valiDate from 'vali-date';
 import {Predicate, type PredicateOptions} from './predicate.js';
 
 export class StringPredicate extends Predicate<string> {
@@ -136,12 +135,12 @@ export class StringPredicate extends Predicate<string> {
 				// Unicode's formal substitute characters can be barely legible and may not be easily recognized.
 				// Hence this alternative substitution scheme.
 				const madeVisible = value
-					.replace(/ /g, '·')
-					.replace(/\f/g, '\\f')
-					.replace(/\n/g, '\\n')
-					.replace(/\r/g, '\\r')
-					.replace(/\t/g, '\\t')
-					.replace(/\v/g, '\\v');
+					.replaceAll(' ', '·')
+					.replaceAll('\f', '\\f')
+					.replaceAll('\n', '\\n')
+					.replaceAll('\r', '\\r')
+					.replaceAll('\t', '\\t')
+					.replaceAll('\v', '\\v');
 				return `Expected ${label} to not be only whitespace, got \`${madeVisible}\``;
 			},
 			validator: value => value.trim() !== '',
@@ -206,7 +205,7 @@ export class StringPredicate extends Predicate<string> {
 	get date(): this {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be a date, got \`${value}\``,
-			validator: valiDate,
+			validator: value => is.validDate(new Date(value)),
 		});
 	}
 

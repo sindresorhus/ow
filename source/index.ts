@@ -71,7 +71,7 @@ export type ReusableValidator<T> = {
 	@param value - Value to test.
 	@param label - Override the label which should be used in error messages.
 	*/
-	// eslint-disable-next-line @typescript-eslint/prefer-function-type, @typescript-eslint/no-redundant-type-constituents
+	// eslint-disable-next-line @typescript-eslint/prefer-function-type
 	(value: unknown | T, label?: string): void;
 };
 

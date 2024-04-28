@@ -307,14 +307,6 @@ const userPredicate = ow.object.exactShape({
 type User = Infer<typeof userPredicate>;
 ```
 
-## Maintainers
-
-- [Sindre Sorhus](https://github.com/sindresorhus)
-
-**Former:**
-
-- [Sam Verschueren](https://github.com/SamVerschueren)
-
 ## Related
 
 - [@sindresorhus/is](https://github.com/sindresorhus/is) - Type check values

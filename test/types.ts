@@ -2,17 +2,16 @@ import type {Buffer} from 'node:buffer';
 import test from 'ava';
 import {expectTypeOf, type ExpectTypeOf} from 'expect-type';
 import type {TypedArray} from '../source/typed-array.js';
-import type {BasePredicate, Infer} from '../source/index.js';
-import ow from '../source/index.js';
+import ow, {type BasePredicate, type Infer} from '../source/index.js';
 
 test('type-level tests', t => {
 	t.is(typeof typeTests, 'function');
 });
 
-type AssertionProps = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional'>;
+type AssertionProperties = Exclude<keyof typeof ow, 'any' | 'isValid' | 'create' | 'optional'>;
 
 type Tests = {
-	[K in AssertionProps]:
+	[K in AssertionProperties]:
 		typeof ow[K] extends BasePredicate<infer T>
 			? (type: ExpectTypeOf<T, true>) => void
 			: never

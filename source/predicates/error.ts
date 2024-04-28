@@ -52,7 +52,7 @@ export class ErrorPredicate extends Predicate<Error> {
 	hasKeys(...keys: readonly string[]): this {
 		return this.addValidator({
 			message: (_, label) => `Expected ${label} message to have keys \`${keys.join('`, `')}\``,
-			validator: error => keys.every(key => Object.prototype.hasOwnProperty.call(error, key)),
+			validator: error => keys.every(key => Object.hasOwn(error, key)),
 		});
 	}
 

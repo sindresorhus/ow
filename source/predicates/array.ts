@@ -70,8 +70,8 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	*/
 	endsWith(searchElement: T): this {
 		return this.addValidator({
-			message: (value, label) => `Expected ${label} to end with \`${searchElement}\`, got \`${value[value.length - 1]}\``,
-			validator: value => value[value.length - 1] === searchElement,
+			message: (value, label) => `Expected ${label} to end with \`${searchElement}\`, got \`${value.at(-1)}\``,
+			validator: value => value.at(-1) === searchElement,
 		});
 	}
 
@@ -142,8 +142,7 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	```
 	*/
 	ofType<U extends T>(predicate: BasePredicate<U>): ArrayPredicate<U> {
-		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		// TODO [typescript@>=6] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: value => ofType(value, 'values', predicate),

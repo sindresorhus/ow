@@ -6,11 +6,6 @@
 	"include": [
 		"source"
 	],
-	"ts-node": {
-		"transpileOnly": true,
-		"files": true,
-		"experimentalResolver": true
-	},
 	"typedocOptions": {
 		"out": "docs",
 		"excludePrivate": true,

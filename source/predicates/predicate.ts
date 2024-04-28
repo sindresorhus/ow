@@ -90,7 +90,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${Number.isNaN(value) ? 'NaN' : is(value)}\``;
 			},
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			validator: value => (is as any)[typeString](value),
 		});
 	}
@@ -174,7 +174,6 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	validate(customValidator: CustomValidator<T>): this {
 		return this.addValidator({
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			message: (_, label, error) => typeof error === 'string'
 				? `(${label}) ${error}`
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -226,7 +225,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	message(newMessage: string | ValidatorMessageBuilder<T>): this {
 		const {validators} = this.context;
 
-		validators[validators.length - 1]!.message = (value, label): string => {
+		validators.at(-1)!.message = (value, label): string => {
 			if (typeof newMessage === 'function') {
 				return newMessage(value, label);
 			}

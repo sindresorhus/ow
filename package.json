@@ -23,10 +23,10 @@
 	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=14.16"
+		"node": ">=18"
 	},
 	"scripts": {
-		"test": "xo && c8 ava",
+		"test": "xo && NODE_OPTIONS='--import=tsx/esm' c8 ava",
 		"docs": "typedoc source/index.ts",
 		"build": "del-cli dist && tsc",
 		"prepare": "npm run build",
@@ -58,25 +58,25 @@
 		"object"
 	],
 	"dependencies": {
-		"@sindresorhus/is": "^5.3.0",
-		"callsites": "^4.0.0",
-		"dot-prop": "^7.2.0",
-		"fast-equals": "^5.0.0",
-		"vali-date": "^1.0.0"
+		"@sindresorhus/is": "^6.3.0",
+		"callsites": "^4.1.0",
+		"dot-prop": "^8.0.2",
+		"environment": "^1.0.0",
+		"fast-equals": "^5.0.1",
+		"is-identifier": "^1.0.0"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^3.0.1",
-		"@types/node": "^18.8.0",
-		"@types/vali-date": "^1.0.0",
-		"ava": "^4.3.3",
-		"c8": "^7.12.0",
-		"del-cli": "^5.0.0",
-		"expect-type": "^0.14.2",
-		"gh-pages": "^4.0.0",
-		"ts-node": "^10.9.1",
-		"typedoc": "^0.23.15",
-		"typescript": "^4.8.4",
-		"xo": "^0.52.3"
+		"@sindresorhus/tsconfig": "^5.0.0",
+		"@types/node": "^20.12.8",
+		"ava": "^6.1.2",
+		"c8": "^9.1.0",
+		"del-cli": "^5.1.0",
+		"expect-type": "^0.19.0",
+		"gh-pages": "^6.1.1",
+		"tsx": "^4.9.1",
+		"typedoc": "^0.25.13",
+		"typescript": "^5.4.5",
+		"xo": "^0.58.0"
 	},
 	"browser": {
 		"./dist/utils/infer-label.js": "./dist/utils/infer-label.browser.js"
@@ -93,7 +93,9 @@
 			"@typescript-eslint/ban-types": "off",
 			"@typescript-eslint/no-explicit-any": "off",
 			"@typescript-eslint/no-empty-function": "off",
-			"@typescript-eslint/restrict-template-expressions": "off"
+			"@typescript-eslint/restrict-template-expressions": "off",
+			"@typescript-eslint/no-unsafe-return": "off",
+			"@typescript-eslint/no-unsafe-argument": "off"
 		}
 	},
 	"ava": {
@@ -104,9 +106,7 @@
 		"extensions": {
 			"ts": "module"
 		},
-		"nodeArguments": [
-			"--loader=ts-node/esm"
-		]
+		"workerThreads": false
 	},
 	"c8": {
 		"reporter": [

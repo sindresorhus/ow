@@ -4,7 +4,12 @@ import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
 import ofTypeDeep from '../utils/of-type-deep.js';
-import {partial, exact, type Shape, type TypeOfShape} from '../utils/match-shape.js';
+import {
+	partial,
+	exact,
+	type Shape,
+	type TypeOfShape,
+} from '../utils/match-shape.js';
 import {Predicate, type PredicateOptions} from './predicate.js';
 import type {BasePredicate} from './base-predicate.js';
 
@@ -178,8 +183,7 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	```
 	*/
 	exactShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
-		// TODO [typescript@>=5] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		// TODO [typescript@>=6] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-call

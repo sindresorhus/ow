@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import type {CallSite} from 'callsites';
-import isValidIdentifier from './is-valid-identifier.js';
-import isNode from './node/is-node.js';
+import {isNode} from 'environment';
+import isIdentifier from 'is-identifier';
 
 // Regex to extract the label out of the `ow` function call
 const labelRegex = /^.*?\((?<label>.*?)[,)]/;
@@ -58,7 +58,8 @@ export const inferLabel = (callsites: readonly CallSite[]): void | string => {
 		return;
 	}
 
-	if (isValidIdentifier(token) || isValidIdentifier(token.split('.').pop() ?? '')) {
+	// @ts-expect-error - Doesn't seem like something I can work around.
+	if (isIdentifier(token) || isIdentifier(token.split('.').pop() ?? '')) { // eslint-disable-line @typescript-eslint/no-unsafe-call
 		return token;
 	}
 
