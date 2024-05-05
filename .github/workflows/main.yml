@@ -19,7 +19,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install --force
       - run: npm test
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         if: matrix.node-version == 18
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
