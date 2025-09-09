@@ -1,14 +1,14 @@
 import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class SetPredicate<T = any> extends Predicate<Set<T>> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('Set', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<Set<T>>>) {
+		super('Set', options, validators);
 	}
 
 	/**

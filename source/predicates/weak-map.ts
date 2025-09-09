@@ -1,12 +1,12 @@
 import hasItems from '../utils/has-items.js';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class WeakMapPredicate<KeyType extends object = object> extends Predicate<WeakMap<KeyType, unknown>> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('WeakMap', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<WeakMap<KeyType, unknown>>>) {
+		super('WeakMap', options, validators);
 	}
 
 	/**

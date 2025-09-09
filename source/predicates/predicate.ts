@@ -66,33 +66,36 @@ export type CustomValidator<T> = (value: T) => {
 @hidden
 */
 export class Predicate<T = unknown> implements BasePredicate<T> {
-	private readonly context: Context<T> = {
-		validators: [],
-	};
+	private readonly context: Context<T>;
 
 	constructor(
 		private readonly type: string,
-		private readonly options: PredicateOptions = {},
+		protected readonly options: PredicateOptions = {},
+		existingValidators?: Array<Validator<T>>,
 	) {
 		this.context = {
-			...this.context,
+			validators: existingValidators ? [...existingValidators] : [],
 			...this.options,
 		};
 
-		const typeString = this.type.charAt(0).toLowerCase() + this.type.slice(1);
+		// Only add the type validator if we don't have existing validators
+		// (i.e., this is a fresh predicate, not a clone)
+		if (!existingValidators) {
+			const typeString = this.type.charAt(0).toLowerCase() + this.type.slice(1);
 
-		this.addValidator({
-			message: (value, label) => {
-				// We do not include type in this label as we do for other messages, because it would be redundant.
-				const label_ = label?.slice(this.type.length + 1);
+			this.context.validators.push({
+				message: (value, label) => {
+					// We do not include type in this label as we do for other messages, because it would be redundant.
+					const label_ = label?.slice(this.type.length + 1);
 
-				// TODO: The NaN check can be removed when `@sindresorhus/is` is fixed: https://github.com/sindresorhus/ow/issues/231#issuecomment-1047100612
-				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-				return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${Number.isNaN(value) ? 'NaN' : is(value)}\``;
-			},
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-			validator: value => (is as any)[typeString](value),
-		});
+					// TODO: The NaN check can be removed when `@sindresorhus/is` is fixed: https://github.com/sindresorhus/ow/issues/231#issuecomment-1047100612
+					// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+					return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${Number.isNaN(value) ? 'NaN' : is(value)}\``;
+				},
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+				validator: value => (is as any)[typeString](value),
+			});
+		}
 	}
 
 	/**
@@ -223,17 +226,19 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	```
 	*/
 	message(newMessage: string | ValidatorMessageBuilder<T>): this {
-		const {validators} = this.context;
+		const validators = [...this.context.validators];
+		const lastValidator = validators.at(-1);
 
-		validators.at(-1)!.message = (value, label): string => {
-			if (typeof newMessage === 'function') {
-				return newMessage(value, label);
-			}
+		if (lastValidator) {
+			validators[validators.length - 1] = {
+				...lastValidator,
+				message: (value: T, label?: string): string => typeof newMessage === 'function'
+					? newMessage(value, label)
+					: newMessage,
+			};
+		}
 
-			return newMessage;
-		};
-
-		return this;
+		return this.withValidators(validators);
 	}
 
 	/**
@@ -242,7 +247,21 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	@param validator - Validator to register.
 	*/
 	addValidator(validator: Validator<T>): this {
-		this.context.validators.push(validator);
-		return this;
+		// Create a new array with the existing validators plus the new one
+		const validators = [...this.context.validators, validator];
+
+		// Return a new instance with the updated validators
+		return this.withValidators(validators);
+	}
+
+	/**
+	@hidden
+	Create a new instance with the given validators
+	*/
+	protected withValidators(validators: Array<Validator<T>>): this {
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const Constructor = this.constructor as new (...arguments_: any[]) => this;
+		const instance = new Constructor(this.options, validators);
+		return instance;
 	}
 }

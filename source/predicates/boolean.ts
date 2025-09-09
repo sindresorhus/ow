@@ -1,11 +1,11 @@
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class BooleanPredicate extends Predicate<boolean> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('boolean', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<boolean>>) {
+		super('boolean', options, validators);
 	}
 
 	/**

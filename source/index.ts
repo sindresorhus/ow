@@ -152,3 +152,4 @@ export {ArgumentError} from './argument-error.js';
 
 export {Predicate} from './predicates/predicate.js';
 export type {BasePredicate} from './predicates/base-predicate.js';
+export type {PredicateOptions, Validator} from './predicates/predicate.js';

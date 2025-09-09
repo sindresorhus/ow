@@ -1,12 +1,12 @@
 import is from '@sindresorhus/is';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class NumberPredicate extends Predicate<number> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('number', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<number>>) {
+		super('number', options, validators);
 	}
 
 	/**

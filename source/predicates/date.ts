@@ -1,11 +1,11 @@
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class DatePredicate extends Predicate<Date> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('date', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<Date>>) {
+		super('date', options, validators);
 	}
 
 	/**

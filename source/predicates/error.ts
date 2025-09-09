@@ -1,11 +1,11 @@
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class ErrorPredicate extends Predicate<Error> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('error', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<Error>>) {
+		super('error', options, validators);
 	}
 
 	/**

@@ -1,12 +1,12 @@
 import is from '@sindresorhus/is';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class StringPredicate extends Predicate<string> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('string', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<string>>) {
+		super('string', options, validators);
 	}
 
 	/**

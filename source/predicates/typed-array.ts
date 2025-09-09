@@ -1,7 +1,17 @@
 import type {TypedArray} from '../typed-array.js';
-import {Predicate} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
+	private readonly typeName: string;
+
+	/**
+	@hidden
+	*/
+	constructor(type: string, options?: PredicateOptions, validators?: Array<Validator<T>>) {
+		super(type, options, validators);
+		this.typeName = type;
+	}
+
 	/**
 	Test a typed array to have a specific byte length.
 
@@ -76,5 +86,14 @@ export class TypedArrayPredicate<T extends TypedArray> extends Predicate<T> {
 			validator: value => value.length <= length,
 			negatedMessage: (value, label) => `Expected ${label} to have a minimum length of \`${length + 1}\`, got \`${value.length}\``,
 		});
+	}
+
+	/**
+	@hidden
+	*/
+	protected override withValidators(validators: Array<Validator<T>>): this {
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const Constructor = this.constructor as new (type: string, options?: PredicateOptions, validators?: Array<Validator<T>>) => this;
+		return new Constructor(this.typeName, this.options, validators);
 	}
 }

@@ -10,15 +10,15 @@ import {
 	type Shape,
 	type TypeOfShape,
 } from '../utils/match-shape.js';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 import type {BasePredicate} from './base-predicate.js';
 
 export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('object', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<T>>) {
+		super('object', options, validators);
 	}
 
 	/**

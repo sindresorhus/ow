@@ -1,12 +1,12 @@
 import hasItems from '../utils/has-items.js';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class WeakSetPredicate<T extends object = object> extends Predicate<WeakSet<T>> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('WeakSet', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<WeakSet<T>>>) {
+		super('WeakSet', options, validators);
 	}
 
 	/**

@@ -1,14 +1,14 @@
 import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, T2>> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('Map', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<Map<T1, T2>>>) {
+		super('Map', options, validators);
 	}
 
 	/**

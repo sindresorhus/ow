@@ -1,9 +1,14 @@
 import test from 'ava';
-import ow, {Predicate, type ArgumentError} from '../source/index.js';
+import ow, {
+	Predicate,
+	type ArgumentError,
+	type PredicateOptions,
+	type Validator,
+} from '../source/index.js';
 
 class CustomPredicate extends Predicate<any> {
-	constructor() {
-		super('string');
+	constructor(options?: PredicateOptions, validators?: Array<Validator<any>>) {
+		super('string', options, validators);
 	}
 
 	get unicorn(): this {

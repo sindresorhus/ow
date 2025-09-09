@@ -2,15 +2,15 @@ import {deepEqual} from 'fast-equals';
 import {exact} from '../utils/match-shape.js';
 import ofType from '../utils/of-type.js';
 import type {BasePredicate} from './base-predicate.js';
-import {Predicate, type PredicateOptions} from './predicate.js';
+import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 import type {Shape} from './object.js';
 
 export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 	/**
 	@hidden
 	*/
-	constructor(options?: PredicateOptions) {
-		super('array', options);
+	constructor(options?: PredicateOptions, validators?: Array<Validator<T[]>>) {
+		super('array', options, validators);
 	}
 
 	/**
