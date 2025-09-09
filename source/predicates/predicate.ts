@@ -3,7 +3,7 @@ import {ArgumentError} from '../argument-error.js';
 import {not} from '../operators/not.js';
 import type {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
-import {testSymbol, type BasePredicate} from './base-predicate.js';
+import {testSymbol, optionalSymbol, type BasePredicate} from './base-predicate.js';
 
 /**
 Function executed when the provided validation fails.
@@ -66,6 +66,7 @@ export type CustomValidator<T> = (value: T) => {
 @hidden
 */
 export class Predicate<T = unknown> implements BasePredicate<T> {
+	[optionalSymbol]?: boolean;
 	private readonly context: Context<T>;
 
 	constructor(
@@ -77,6 +78,11 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 			validators: existingValidators ? [...existingValidators] : [],
 			...this.options,
 		};
+
+		// Expose optional status via symbol
+		if (this.options.optional === true) {
+			this[optionalSymbol] = true;
+		}
 
 		// Only add the type validator if we don't have existing validators
 		// (i.e., this is a fresh predicate, not a clone)
@@ -179,7 +185,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		return this.addValidator({
 			message: (_, label, error) => typeof error === 'string'
 				? `(${label}) ${error}`
-				: (error as ((label: string) => string))(label),
+				: (error as ((label: string) => string))(label!),
 			validator(value) {
 				const {message, validator} = customValidator(value);
 

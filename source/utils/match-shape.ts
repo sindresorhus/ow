@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
 import test from '../test.js';
-import {isPredicate} from '../predicates/base-predicate.js';
+import {isPredicate, optionalSymbol} from '../predicates/base-predicate.js';
 import type {BasePredicate} from '../index.js';
 
 export type Shape = {
@@ -44,11 +44,24 @@ export function partial(object: Record<string, unknown>, shape: Shape, parent?: 
 	try {
 		for (const key of Object.keys(shape)) {
 			const label = parent ? `${parent}.${key}` : key;
+			const shapeValue = shape[key];
 
-			if (isPredicate(shape[key])) {
-				test(object[key], label, shape[key] as BasePredicate);
-			} else if (is.plainObject(shape[key])) {
-				const result = partial(object[key], shape[key] as Shape, label);
+			if (isPredicate(shapeValue)) {
+				const predicate = shapeValue as BasePredicate;
+				// Skip optional properties that don't exist in the object
+				if (predicate[optionalSymbol] && !(key in object)) {
+					continue;
+				}
+
+				test(object[key], label, predicate);
+			} else if (is.plainObject(shapeValue)) {
+				// Skip nested shapes if the key doesn't exist and it's optional
+				// (though nested shapes themselves aren't predicates, so this is for consistency)
+				if (!(key in object)) {
+					continue;
+				}
+
+				const result = partial(object[key] as Record<string, unknown>, shapeValue, label);
 
 				if (result !== true) {
 					return result;
@@ -79,15 +92,22 @@ export function exact(object: Record<string, unknown>, shape: Shape, parent?: st
 			objectKeys.delete(key);
 
 			const label = parent ? `${parent}.${key}` : key;
+			const shapeValue = shape[key];
 
-			if (isPredicate(shape[key])) {
-				test(object[key], label, shape[key] as BasePredicate);
-			} else if (is.plainObject(shape[key])) {
+			if (isPredicate(shapeValue)) {
+				const predicate = shapeValue as BasePredicate;
+				// Skip optional properties that don't exist in the object
+				if (predicate[optionalSymbol] && !(key in object)) {
+					continue;
+				}
+
+				test(object[key], label, predicate);
+			} else if (is.plainObject(shapeValue)) {
 				if (!Object.hasOwn(object, key)) {
 					return `Expected \`${label}\` to exist`;
 				}
 
-				const result = exact(object[key], shape[key] as Shape, label);
+				const result = exact(object[key] as Record<string, unknown>, shapeValue, label);
 
 				if (result !== true) {
 					return result;

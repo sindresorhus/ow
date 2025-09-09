@@ -160,9 +160,8 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 	partialShape<S extends Shape = Shape>(shape: S): ObjectPredicate<TypeOfShape<S>> {
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
-			validator: object => partial(object, shape),
+			message: (_, label, message) => `${(message as string).replace('Expected', 'Expected property')} in ${label}`,
+			validator: object => partial(object as Record<string, unknown>, shape),
 		}) as unknown as ObjectPredicate<TypeOfShape<S>>;
 	}
 
@@ -186,9 +185,8 @@ export class ObjectPredicate<T extends object = object> extends Predicate<T> {
 		// TODO [typescript@>=6] If higher-kinded types are supported natively by typescript, refactor `addValidator` to use them to avoid the usage of `any`. Otherwise, bump or remove this TODO.
 		return this.addValidator({
 			// TODO: Improve this when message handling becomes smarter
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-			message: (_, label, message) => `${message.replace('Expected', 'Expected property')} in ${label}`,
-			validator: object => exact(object, shape),
+			message: (_, label, message) => `${(message as string).replace('Expected', 'Expected property')} in ${label}`,
+			validator: object => exact(object as Record<string, unknown>, shape),
 		}) as ObjectPredicate<any>;
 	}
 }

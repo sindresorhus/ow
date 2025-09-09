@@ -163,9 +163,8 @@ export class ArrayPredicate<T = unknown> extends Predicate<T[]> {
 		const shape = predicates as unknown as Shape;
 
 		return this.addValidator({
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-			message: (_, label, message) => `${message.replace('Expected', 'Expected element')} in ${label}`,
-			validator: object => exact(object, shape, undefined, true),
+			message: (_, label, message) => `${(message as string).replace('Expected', 'Expected element')} in ${label}`,
+			validator: object => exact(object as unknown as Record<string, unknown>, shape, undefined, true),
 		});
 	}
 }

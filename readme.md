@@ -290,8 +290,6 @@ This can be useful for creating your own reusable validators which can be extrac
 
 ### TypeScript
 
-**Requires TypeScript 4.7 or later.**
-
 Ow includes a type utility that lets you to extract a TypeScript type from the given predicate.
 
 ```ts
@@ -302,6 +300,24 @@ const userPredicate = ow.object.exactShape({
 });
 
 type User = Infer<typeof userPredicate>;
+```
+
+### Performance
+
+Ow is designed for runtime validation of function arguments. While it performs well for most use cases, there are a few things to keep in mind for performance-critical apps:
+
+#### Label Inference
+
+By default, Ow automatically infers the label of the validated value from the source code when no explicit label is provided. This requires reading the source file from disk and parsing it, which can be slow in performance-critical scenarios.
+
+To improve performance, always provide an explicit label as the second argument:
+
+```ts
+// Slower - label is inferred
+ow(username, ow.string);
+
+// Faster - explicit label provided
+ow(username, 'username', ow.string);
 ```
 
 ## Related

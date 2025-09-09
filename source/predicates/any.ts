@@ -1,17 +1,23 @@
 import {ArgumentError} from '../argument-error.js';
 import type {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
-import {testSymbol, type BasePredicate} from './base-predicate.js';
+import {testSymbol, optionalSymbol, type BasePredicate} from './base-predicate.js';
 import type {PredicateOptions} from './predicate.js';
 
 /**
 @hidden
 */
 export class AnyPredicate<T = unknown> implements BasePredicate<T> {
+	[optionalSymbol]?: boolean;
 	constructor(
 		private readonly predicates: BasePredicate[],
 		private readonly options: PredicateOptions = {},
-	) {}
+	) {
+		// Expose optional status via symbol
+		if (this.options.optional === true) {
+			this[optionalSymbol] = true;
+		}
+	}
 
 	[testSymbol](value: T, main: Main, label: string | Function, idLabel: boolean): asserts value {
 		const errors = new Map<string, Set<string>>();
