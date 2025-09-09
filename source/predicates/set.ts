@@ -3,7 +3,7 @@ import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
 import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
-export class SetPredicate<T = any> extends Predicate<Set<T>> {
+export class SetPredicate<T = unknown> extends Predicate<Set<T>> {
 	/**
 	@hidden
 	*/

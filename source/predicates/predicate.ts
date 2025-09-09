@@ -19,7 +19,7 @@ export type ValidatorMessageBuilder<T> = (value: T, label?: string) => string;
 @hidden
 */
 export type Validator<T> = {
-	message(value: T, label?: string, result?: any): string;
+	message(value: T, label?: string, result?: unknown): string;
 
 	validator(value: T): unknown;
 
@@ -179,8 +179,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		return this.addValidator({
 			message: (_, label, error) => typeof error === 'string'
 				? `(${label}) ${error}`
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-				: error(label),
+				: (error as ((label: string) => string))(label),
 			validator(value) {
 				const {message, validator} = customValidator(value);
 
@@ -201,8 +200,8 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	is(validator: (value: T) => boolean | string): this {
 		return this.addValidator({
 			message: (value, label, error) => (error
-				? `(${label}) ${error}`
-				: `Expected ${label} \`${value}\` to pass custom validation function`
+				? `(${label}) ${String(error)}`
+				: `Expected ${label} \`${String(value)}\` to pass custom validation function`
 			),
 			validator,
 		});
@@ -260,7 +259,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	*/
 	protected withValidators(validators: Array<Validator<T>>): this {
 		// eslint-disable-next-line @typescript-eslint/naming-convention
-		const Constructor = this.constructor as new (...arguments_: any[]) => this;
+		const Constructor = this.constructor as new (...arguments_: unknown[]) => this;
 		const instance = new Constructor(this.options, validators);
 		return instance;
 	}

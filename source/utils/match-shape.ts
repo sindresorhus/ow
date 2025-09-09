@@ -25,9 +25,11 @@ type X = TypeOfShape<typeof myShape> // {foo: string; bar: {baz: boolean}}
 This is used in the `ow.object.partialShape(…)` and `ow.object.exactShape(…)` functions.
 */
 export type TypeOfShape<S extends BasePredicate | Shape> =
-	S extends BasePredicate<infer X> ? X extends object ? X : never :
-		S extends Shape ? {[K in keyof S]: TypeOfShape<S[K]>} extends object ? {[K in keyof S]: TypeOfShape<S[K]>} : never :
-			never;
+	S extends BasePredicate<infer X>
+		? X extends object ? X : never
+		: S extends Shape
+			? {[K in keyof S]: TypeOfShape<S[K]>}
+			: never;
 
 /**
 Test if the `object` matches the `shape` partially.
@@ -38,7 +40,7 @@ Test if the `object` matches the `shape` partially.
 @param shape - Shape to test the object against.
 @param parent - Name of the parent property.
 */
-export function partial(object: Record<string, any>, shape: Shape, parent?: string): boolean | string {
+export function partial(object: Record<string, unknown>, shape: Shape, parent?: string): boolean | string {
 	try {
 		for (const key of Object.keys(shape)) {
 			const label = parent ? `${parent}.${key}` : key;
@@ -69,7 +71,7 @@ Test if the `object` matches the `shape` exactly.
 @param shape - Shape to test the object against.
 @param parent - Name of the parent property.
 */
-export function exact(object: Record<string, any>, shape: Shape, parent?: string, isArray?: boolean): boolean | string {
+export function exact(object: Record<string, unknown>, shape: Shape, parent?: string, isArray?: boolean): boolean | string {
 	try {
 		const objectKeys = new Set<string>(Object.keys(object));
 
