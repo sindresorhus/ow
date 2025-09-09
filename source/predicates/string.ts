@@ -100,7 +100,7 @@ export class StringPredicate extends Predicate<string> {
 
 	@param list - List of possible values.
 	*/
-	oneOf(list: readonly string[]): this {
+	oneOf<S extends readonly string[]>(list: S): Predicate<S[number]> {
 		return this.addValidator({
 			message(value, label) {
 				let printedList = JSON.stringify(list);
@@ -113,7 +113,7 @@ export class StringPredicate extends Predicate<string> {
 				return `Expected ${label} to be one of \`${printedList}\`, got \`${value}\``;
 			},
 			validator: value => list.includes(value),
-		});
+		}) as unknown as Predicate<S[number]>;
 	}
 
 	/**
@@ -162,11 +162,11 @@ export class StringPredicate extends Predicate<string> {
 
 	@param expected - Expected value to match.
 	*/
-	equals(expected: string): this {
+	equals<S extends string>(expected: S): Predicate<S> {
 		return this.addValidator({
 			message: (value, label) => `Expected ${label} to be equal to \`${expected}\`, got \`${value}\``,
 			validator: value => value === expected,
-		});
+		}) as unknown as Predicate<S>;
 	}
 
 	/**

@@ -302,6 +302,20 @@ const userPredicate = ow.object.exactShape({
 type User = Infer<typeof userPredicate>;
 ```
 
+#### Literal Type Narrowing
+
+`string.equals()` and `string.oneOf()` narrow to literal types:
+
+```ts
+// ow.string.equals('hello') narrows to 'hello'
+// ow.string.oneOf(['red', 'blue']) narrows to 'red' | 'blue'
+
+function validateColor(input: unknown): 'red' | 'blue' {
+	ow(input, ow.string.oneOf(['red', 'blue']));
+	return input; // TypeScript knows this is 'red' | 'blue'
+}
+```
+
 ### Performance
 
 Ow is designed for runtime validation of function arguments. While it performs well for most use cases, there are a few things to keep in mind for performance-critical apps:
