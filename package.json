@@ -23,7 +23,7 @@
 	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=18"
+		"node": ">=20"
 	},
 	"scripts": {
 		"test": "xo && NODE_OPTIONS='--import=tsx/esm' c8 ava",

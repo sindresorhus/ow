@@ -58,8 +58,7 @@ export const inferLabel = (callsites: readonly CallSite[]): void | string => {
 		return;
 	}
 
-	// @ts-expect-error - Doesn't seem like something I can work around.
-	if (isIdentifier(token) || isIdentifier(token.split('.').pop() ?? '')) { // eslint-disable-line @typescript-eslint/no-unsafe-call
+	if (isIdentifier(token) || isIdentifier(token.split('.').pop() ?? '')) {
 		return token;
 	}
 
