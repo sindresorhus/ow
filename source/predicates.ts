@@ -1,4 +1,3 @@
-import type {Buffer} from 'node:buffer';
 import type {TypedArray} from './typed-array.js';
 import {StringPredicate} from './predicates/string.js';
 import {NumberPredicate} from './predicates/number.js';
@@ -109,11 +108,6 @@ export type Predicates = {
 	Test the value to be a Function.
 	*/
 	readonly function: Predicate<Function>;
-
-	/**
-	Test the value to be a Buffer.
-	*/
-	readonly buffer: Predicate<Buffer>;
 
 	/**
 	Test the value to be a RegExp.
@@ -266,9 +260,6 @@ const predicates = <T>(object: T, options?: PredicateOptions): T & Predicates =>
 		},
 		function: {
 			get: (): Predicate => new Predicate('Function', options),
-		},
-		buffer: {
-			get: (): Predicate => new Predicate('Buffer', options),
 		},
 		regExp: {
 			get: (): Predicate<RegExp> => new Predicate('RegExp', options),

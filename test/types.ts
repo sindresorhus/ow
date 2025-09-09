@@ -1,4 +1,3 @@
-import type {Buffer} from 'node:buffer';
 import test from 'ava';
 import {expectTypeOf, type ExpectTypeOf} from 'expect-type';
 import type {TypedArray} from '../source/typed-array.js';
@@ -110,7 +109,6 @@ function typeTests(value: unknown): Array<(() => void)> {
 				// @ts-expect-error not why this doesn't work
 				bigint: expect => expect.toEqualTypeOf<BigInt>(),
 				boolean: expect => expect.toBeBoolean(),
-				buffer: expect => expect.toEqualTypeOf<Buffer>(),
 				dataView: expect => expect.toEqualTypeOf<DataView>(),
 				date: expect => expect.toEqualTypeOf<Date>(),
 				error: expect => expect.toEqualTypeOf<Error>(),
@@ -157,7 +155,6 @@ function typeTests(value: unknown): Array<(() => void)> {
 				symbol: ow.symbol,
 				array: ow.array,
 				function: ow.function,
-				buffer: ow.buffer,
 				object: ow.object,
 				regExp: ow.regExp,
 				date: ow.date,
@@ -201,7 +198,6 @@ function typeTests(value: unknown): Array<(() => void)> {
 				symbol: symbol;
 				array: unknown[];
 				function: Function;
-				buffer: Buffer;
 				object: object;
 				regExp: RegExp;
 				date: Date;

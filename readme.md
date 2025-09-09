@@ -156,7 +156,6 @@ All the below types return a predicate. Every predicate has some extra operators
 
 - `array`
 - `function`
-- `buffer`
 - `object`
 - `regExp`
 - `date`
