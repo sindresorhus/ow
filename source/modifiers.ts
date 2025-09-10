@@ -5,6 +5,10 @@ type Optionalify<P> = P extends BasePredicate<infer X>
 	? P & BasePredicate<X | undefined>
 	: P;
 
+type Nullify<P> = P extends BasePredicate<infer X>
+	? P & BasePredicate<X | null>
+	: P;
+
 export type Modifiers = {
 	/**
 	Make the following predicate optional so it doesn't fail when the value is `undefined`.
@@ -12,12 +16,22 @@ export type Modifiers = {
 	readonly optional: {
 		[K in keyof Predicates]: Optionalify<Predicates[K]>
 	};
+
+	/**
+	Make the following predicate nullable so it doesn't fail when the value is `null`.
+	*/
+	readonly nullable: {
+		[K in keyof Predicates]: Nullify<Predicates[K]>
+	};
 };
 
 const modifiers = <T>(object: T): T & Modifiers => {
 	Object.defineProperties(object, {
 		optional: {
 			get: (): Predicates => predicates({}, {optional: true}),
+		},
+		nullable: {
+			get: (): Predicates => predicates({}, {nullable: true}),
 		},
 	});
 

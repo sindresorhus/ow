@@ -3,7 +3,12 @@ import {ArgumentError} from '../argument-error.js';
 import {not} from '../operators/not.js';
 import type {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
-import {testSymbol, optionalSymbol, type BasePredicate} from './base-predicate.js';
+import {
+	testSymbol,
+	optionalSymbol,
+	nullableSymbol,
+	type BasePredicate,
+} from './base-predicate.js';
 
 /**
 Function executed when the provided validation fails.
@@ -36,6 +41,7 @@ export type Validator<T> = {
 */
 export type PredicateOptions = {
 	optional?: boolean;
+	nullable?: boolean;
 };
 
 /**
@@ -67,6 +73,7 @@ export type CustomValidator<T> = (value: T) => {
 */
 export class Predicate<T = unknown> implements BasePredicate<T> {
 	[optionalSymbol]?: boolean;
+	[nullableSymbol]?: boolean;
 	private readonly context: Context<T>;
 
 	constructor(
@@ -82,6 +89,11 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		// Expose optional status via symbol
 		if (this.options.optional === true) {
 			this[optionalSymbol] = true;
+		}
+
+		// Expose nullable status via symbol
+		if (this.options.nullable === true) {
+			this[nullableSymbol] = true;
 		}
 
 		// Only add the type validator if we don't have existing validators
@@ -112,7 +124,9 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		const errors = new Map<string, Set<string>>();
 
 		for (const {validator, message} of this.context.validators) {
-			if (this.options.optional === true && value === undefined) {
+			// Skip validation if value matches an allowed modifier
+			if ((this.options.optional === true && value === undefined)
+				|| (this.options.nullable === true && value === null)) {
 				continue;
 			}
 

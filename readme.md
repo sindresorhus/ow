@@ -232,6 +232,18 @@ ow(1, ow.optional.number);
 ow(undefined, ow.optional.number);
 ```
 
+### ow.nullable.{type}
+
+Makes the predicate nullable. A nullable predicate means that it doesn't fail if the value is `null`.
+
+```ts
+ow(1, ow.nullable.number);
+
+ow(null, ow.nullable.number);
+```
+
+This is useful for validating inputs from external sources (like GraphQL APIs) that use `null` to represent absent values. We encourage using `undefined` over `null` in your own APIs, but recognize you can't control what external APIs return. [See our recommendation against using `null`](https://github.com/sindresorhus/meta/issues/7).
+
 ### ow.{type}
 
 All the below types return a predicate. Every predicate has some extra operators that you can use to test the value even more fine-grained.

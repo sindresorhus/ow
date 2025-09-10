@@ -1,7 +1,12 @@
 import {ArgumentError} from '../argument-error.js';
 import type {Main} from '../index.js';
 import {generateArgumentErrorMessage} from '../utils/generate-argument-error-message.js';
-import {testSymbol, optionalSymbol, type BasePredicate} from './base-predicate.js';
+import {
+	testSymbol,
+	optionalSymbol,
+	nullableSymbol,
+	type BasePredicate,
+} from './base-predicate.js';
 import type {PredicateOptions} from './predicate.js';
 
 /**
@@ -9,6 +14,7 @@ import type {PredicateOptions} from './predicate.js';
 */
 export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 	[optionalSymbol]?: boolean;
+	[nullableSymbol]?: boolean;
 	constructor(
 		private readonly predicates: BasePredicate[],
 		private readonly options: PredicateOptions = {},
@@ -16,6 +22,11 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 		// Expose optional status via symbol
 		if (this.options.optional === true) {
 			this[optionalSymbol] = true;
+		}
+
+		// Expose nullable status via symbol
+		if (this.options.nullable === true) {
+			this[nullableSymbol] = true;
 		}
 	}
 
@@ -27,7 +38,9 @@ export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 				main(value, label, predicate, idLabel);
 				return;
 			} catch (error: unknown) {
-				if (value === undefined && this.options.optional === true) {
+				// Return early if value matches an allowed modifier
+				if ((this.options.optional === true && value === undefined)
+					|| (this.options.nullable === true && value === null)) {
 					return;
 				}
 
