@@ -10,6 +10,26 @@
 
 For schema validation, I recommend [`zod`](https://github.com/colinhacks/zod).
 
+## Why use Ow?
+
+TypeScript only validates types at compile time. Once compiled, your program can still receive unexpected data at runtime from:
+
+- Function arguments receiving untrusted input
+- User input and form submissions
+- Environment variables and configuration files
+- CLI arguments and flags
+- Query parameters and route parameters
+
+For complex schema validation (API responses, database queries, JSON parsing), use [Zod](https://github.com/colinhacks/zod) instead.
+
+Ow provides runtime validation that:
+
+- **Catches errors early** - Fail fast with descriptive error messages instead of cryptic runtime errors
+- **Documents expectations** - Make your code self-documenting by explicitly stating what you expect
+- **Simplifies debugging** - Spend less time tracking down type-related bugs in production
+- **Works anywhere** - Use the same validation on the server, in the browser, or in CLI tools
+- **Provides type guards** - Narrow TypeScript types for safer code after validation
+
 ## Highlights
 
 - Expressive chainable API
@@ -42,25 +62,100 @@ unicorn('yo');
 //=> ArgumentError: Expected string `input` to have a minimum length of `5`, got `yo`
 ```
 
-We can also match the shape of an object.
+## Practical Examples
+
+### Function Arguments
 
 ```ts
 import ow from 'ow';
 
-const unicorn = {
-	rainbow: '🌈',
-	stars: {
-		value: '🌟'
-	}
+const resize = (width: unknown, height: unknown) => {
+	ow(width, 'width', ow.number.positive.integer);
+	ow(height, 'height', ow.number.positive.integer);
+	
+	// Process the image...
 };
 
-ow(unicorn, ow.object.exactShape({
-	rainbow: ow.string,
-	stars: {
-		value: ow.number
+resize(640, 480); // ✓
+resize(-100, 200); // ✗ ArgumentError: Expected `width` to be a positive number
+resize(640, "480"); // ✗ ArgumentError: Expected `height` to be of type `number`
+```
+
+### Configuration Validation
+
+```ts
+import ow from 'ow';
+
+const config = {
+	port: process.env.PORT,
+	apiKey: process.env.API_KEY,
+	nodeEnv: process.env.NODE_ENV
+};
+
+// Validate configuration at startup
+ow(config.port, ow.string.numeric);
+ow(config.apiKey, ow.string.minLength(32));
+ow(config.nodeEnv, ow.string.oneOf(['development', 'production', 'test']));
+
+// Your app won't start with invalid configuration
+const port = parseInt(config.port, 10);
+```
+
+### Constructor Validation
+
+```ts
+import ow from 'ow';
+
+class User {
+	constructor(name: string, email: string, age?: number) {
+		ow(name, ow.string.nonEmpty);
+		ow(email, ow.string.email);
+		ow(age, ow.optional.number.integer.positive.lessThanOrEqual(120));
+		
+		this.name = name;
+		this.email = email;
+		this.age = age;
 	}
-}));
-//=> ArgumentError: Expected property `stars.value` to be of type `number` but received type `string` in object `unicorn`
+}
+
+new User('Jane', 'jane@example.com', 25); // ✓
+new User('', 'jane@example.com'); // ✗ ArgumentError: Expected string to not be empty
+```
+
+### Utility Functions
+
+```ts
+import ow from 'ow';
+
+const delay = (milliseconds: unknown) => {
+	ow(milliseconds, ow.number.positive.integer);
+	return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
+
+const getRandomInteger = (min: number, max: number) => {
+	ow(min, ow.number.integer);
+	ow(max, ow.number.integer.greaterThanOrEqual(min));
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+```
+
+### CLI Arguments
+
+```ts
+import ow from 'ow';
+
+const cli = (args: string[]) => {
+	const [command, ...options] = args;
+	
+	ow(command, ow.string.oneOf(['build', 'test', 'deploy']));
+	
+	if (command === 'deploy') {
+		const [environment] = options;
+		ow(environment, ow.string.oneOf(['staging', 'production']));
+	}
+	
+	// Proceed with validated command
+};
 ```
 
 ***Note:*** If you intend on using `ow` for development purposes only, use `import ow from 'ow/dev-only'` instead of the usual `import ow from 'ow'`, and run the bundler with `NODE_ENV` set to `production` (e.g. `$ NODE_ENV="production" parcel build index.js`). This will make `ow` automatically export a shim when running in production, which should result in a significantly lower bundle size.
