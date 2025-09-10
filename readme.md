@@ -8,19 +8,15 @@
 
 > Function argument validation for humans
 
-For schema validation, I recommend [`zod`](https://github.com/colinhacks/zod).
-
 ## Why use Ow?
 
 TypeScript only validates types at compile time. Once compiled, your program can still receive unexpected data at runtime from:
 
 - Function arguments receiving untrusted input
-- User input and form submissions
-- Environment variables and configuration files
 - CLI arguments and flags
-- Query parameters and route parameters
+- Environment variables and configuration files
 
-For complex schema validation (API responses, database queries, JSON parsing), use [Zod](https://github.com/colinhacks/zod) instead.
+For complex schema validation (API responses, database queries, JSON parsing), use [`zod`](https://github.com/colinhacks/zod) instead.
 
 Ow provides runtime validation that:
 
@@ -144,8 +140,8 @@ const getRandomInteger = (min: number, max: number) => {
 ```ts
 import ow from 'ow';
 
-const cli = (args: string[]) => {
-	const [command, ...options] = args;
+const cli = (arguments_: string[]) => {
+	const [command, ...options] = arguments_;
 	
 	ow(command, ow.string.oneOf(['build', 'test', 'deploy']));
 	
@@ -158,7 +154,8 @@ const cli = (args: string[]) => {
 };
 ```
 
-***Note:*** If you intend on using `ow` for development purposes only, use `import ow from 'ow/dev-only'` instead of the usual `import ow from 'ow'`, and run the bundler with `NODE_ENV` set to `production` (e.g. `$ NODE_ENV="production" parcel build index.js`). This will make `ow` automatically export a shim when running in production, which should result in a significantly lower bundle size.
+> [!NOTE]
+> If you intend on using `ow` for development purposes only, use `import ow from 'ow/dev-only'` instead of the usual `import ow from 'ow'`, and run the bundler with `NODE_ENV` set to `production` (e.g. `$ NODE_ENV="production" parcel build index.js`). This will make `ow` automatically export a shim when running in production, which should result in a significantly lower bundle size.
 
 ## API
 

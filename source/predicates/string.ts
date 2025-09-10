@@ -238,4 +238,87 @@ export class StringPredicate extends Predicate<string> {
 			validator: is.urlString,
 		});
 	}
+
+	/**
+	Test a string to be a valid email address.
+
+	The validation is based on a practical subset of RFC 5322 that works for real-world email addresses.
+	This implementation balances strictness with usability and performance.
+
+	@example
+	```
+	import ow from 'ow';
+
+	ow('foo@example.com', ow.string.email);
+	//=> passes
+
+	ow('invalid.email', ow.string.email);
+	//=> ArgumentError: Expected string to be an email address, got `invalid.email`
+	```
+	*/
+	get email(): this {
+		return this.addValidator({
+			message: (value, label) => `Expected ${label} to be an email address, got \`${value}\``,
+			validator(value) {
+				// Maximum length check (RFC 5321)
+				if (value.length > 320) {
+					return false;
+				}
+
+				// Split into local and domain parts
+				const atIndex = value.lastIndexOf('@');
+				if (atIndex === -1) {
+					return false;
+				}
+
+				const localPart = value.slice(0, atIndex);
+				const domainPart = value.slice(atIndex + 1);
+
+				// Check local part length (max 64 characters per RFC)
+				if (localPart.length === 0 || localPart.length > 64) {
+					return false;
+				}
+
+				// Check domain part length (max 255 characters)
+				if (domainPart.length === 0 || domainPart.length > 255) {
+					return false;
+				}
+
+				// Validate local part
+				// This regex allows:
+				// - Alphanumeric characters and common symbols
+				// - Dots not at the beginning or end, and not consecutive
+				// - Quoted strings (basic support for printable ASCII)
+				const localPartRegex = /^(?:[\w!#$%&*+/=?^`{|}~-]+(?:\.[\w!#$%&*+/=?^`{|}~-]+)*|"[ !\u0023-\u005B\u005D-\u007E]+")$/;
+
+				if (!localPartRegex.test(localPart)) {
+					return false;
+				}
+
+				// Validate domain part
+				// Check for IPv4 literal
+				const ipv4Regex = /^\[(?:(?:25[0-5]|2[0-4]\d|[01]?\d{1,2})\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d{1,2})]$/;
+				if (ipv4Regex.test(domainPart)) {
+					return true;
+				}
+
+				// Check for IPv6 literal (simplified)
+				const ipv6Regex = /^\[ipv6:[\da-f:.]+]$/i;
+				if (ipv6Regex.test(domainPart)) {
+					// Basic IPv6 format check
+					return true;
+				}
+
+				// Validate domain name
+				// - Must contain at least one dot
+				// - Each label must be 1-63 characters
+				// - Labels can contain alphanumeric and hyphens
+				// - Labels cannot start or end with hyphens
+				// - TLD must be at least 2 characters
+				const domainRegex = /^(?:[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?\.)+[a-z]{2,}$/i;
+
+				return domainRegex.test(domainPart);
+			},
+		});
+	}
 }
