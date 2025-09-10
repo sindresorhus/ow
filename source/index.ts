@@ -54,6 +54,16 @@ export type Ow = {
 	isValid: <T>(value: unknown, predicate: BasePredicate<T>) => value is T;
 
 	/**
+	Test if the provided value is an Ow predicate.
+
+	Useful for building higher-order functions that need to distinguish between predicates and other values.
+
+	@param value - Value to test.
+	@returns `true` if the value is an Ow predicate, `false` otherwise.
+	*/
+	isPredicate: (value: unknown) => value is BasePredicate;
+
+	/**
 	Create a reusable validator.
 
 	@param predicate - Predicate used in the validator function.
@@ -125,6 +135,9 @@ Object.defineProperties(ow, {
 			}
 		},
 	},
+	isPredicate: {
+		value: isPredicate,
+	},
 	create: {
 		value: <T>(labelOrPredicate: BasePredicate<T> | string | undefined, predicate?: BasePredicate<T>) => (value: unknown, label?: string): asserts value is T => {
 			if (isPredicate(labelOrPredicate)) {
@@ -149,6 +162,7 @@ export default _ow;
 
 export * from './predicates.js';
 export {ArgumentError} from './argument-error.js';
+export {isPredicate} from './predicates/base-predicate.js';
 
 export {Predicate} from './predicates/predicate.js';
 export type {BasePredicate} from './predicates/base-predicate.js';

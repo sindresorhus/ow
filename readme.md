@@ -187,6 +187,12 @@ The `label` is automatically inferred in Node.js but you can override it by pass
 
 Returns `true` if the value matches the predicate, otherwise returns `false`.
 
+### ow.isPredicate(value)
+
+Test if the provided value is an Ow predicate.
+
+Useful for building higher-order functions that need to distinguish between predicates and other values.
+
 ### ow.create(predicate)
 
 Create a reusable validator.
