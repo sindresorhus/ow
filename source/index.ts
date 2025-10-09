@@ -67,12 +67,37 @@ export type Ow = {
 	Create a reusable validator.
 
 	@param predicate - Predicate used in the validator function.
+
+	@example
+	```
+	import ow, {type ReusableValidator} from 'ow';
+
+	// Explicit type annotation required for type narrowing
+	const checkUsername: ReusableValidator<string> = ow.create(ow.string.minLength(3));
+
+	checkUsername('foo');
+	//=> throws ArgumentError
+	```
 	*/
 	create: (<T>(predicate: BasePredicate<T>) => ReusableValidator<T>) & (<T>(label: string, predicate: BasePredicate<T>) => ReusableValidator<T>);
 } & Modifiers & Predicates;
 
 /**
 A reusable validator.
+
+@example
+```
+import ow, {type ReusableValidator} from 'ow';
+
+// Explicit type annotation is required for type narrowing to work
+const checkUsername: ReusableValidator<string> = ow.create(ow.string.minLength(3));
+
+function setUsername(username: unknown) {
+	checkUsername(username);
+	// `username` is now typed as `string`
+	console.log(username.length);
+}
+```
 */
 export type ReusableValidator<T> = {
 	/**
@@ -82,7 +107,7 @@ export type ReusableValidator<T> = {
 	@param label - Override the label which should be used in error messages.
 	*/
 	// eslint-disable-next-line @typescript-eslint/prefer-function-type
-	(value: unknown | T, label?: string): void;
+	(value: unknown, label?: string): asserts value is T;
 };
 
 /**
