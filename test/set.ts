@@ -129,6 +129,14 @@ test('set.ofType', t => {
 	t.throws(() => {
 		ow(new Set(['unicorn']), 'foo', ow.set.ofType(ow.number));
 	}, {message: '(Set `foo`) Expected values to be of type `number` but received type `string`'});
+
+	t.notThrows(() => {
+		ow(new Set(['foo', 1]), ow.set.ofType(ow.any(ow.string, ow.number)));
+	});
+
+	t.throws(() => {
+		ow(new Set(['foo', true]), ow.set.ofType(ow.any(ow.string, ow.number)));
+	}, {message: /Any predicate failed/});
 });
 
 test('set.empty', t => {

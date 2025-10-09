@@ -1,6 +1,7 @@
 import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
+import type {BasePredicate} from './base-predicate.js';
 import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class SetPredicate<T = unknown> extends Predicate<Set<T>> {
@@ -78,7 +79,7 @@ export class SetPredicate<T = unknown> extends Predicate<Set<T>> {
 
 	@param predicate - The predicate that should be applied against every item in the Set.
 	*/
-	ofType(predicate: Predicate<T>): this {
+	ofType(predicate: BasePredicate<T>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: set => ofType(set, 'values', predicate),

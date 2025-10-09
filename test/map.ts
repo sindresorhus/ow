@@ -161,6 +161,14 @@ test('map.keysOfType', t => {
 	t.throws(() => {
 		ow(new Map([['unicorn', '🦄']]), 'foo', ow.map.keysOfType(ow.number));
 	}, {message: '(Map `foo`) Expected keys to be of type `number` but received type `string`'});
+
+	t.notThrows(() => {
+		ow(new Map([['foo', 1], [2, 3]]), ow.map.keysOfType(ow.any(ow.string, ow.number)));
+	});
+
+	t.throws(() => {
+		ow(new Map([['foo', 1], [true, 3]]), ow.map.keysOfType(ow.any(ow.string, ow.number)));
+	}, {message: /Any predicate failed/});
 });
 
 test('map.valuesOfType', t => {
@@ -183,6 +191,14 @@ test('map.valuesOfType', t => {
 	t.throws(() => {
 		ow(new Map([['unicorn', '🦄']]), 'foo', ow.map.valuesOfType(ow.number));
 	}, {message: '(Map `foo`) Expected values to be of type `number` but received type `string`'});
+
+	t.notThrows(() => {
+		ow(new Map([['foo', 'bar'], ['baz', 123]]), ow.map.valuesOfType(ow.any(ow.string, ow.number)));
+	});
+
+	t.throws(() => {
+		ow(new Map([['foo', 'bar'], ['baz', true]]), ow.map.valuesOfType(ow.any(ow.string, ow.number)));
+	}, {message: /Any predicate failed/});
 });
 
 test('map.empty', t => {

@@ -193,4 +193,16 @@ test('array.exactShape', t => {
 	t.throws(() => {
 		ow(['🦄', {isFirstCommit: true}, 'nope', 5, {accepted: false}], ow.array.exactShape([ow.string, ow.object.exactShape({isFirstCommit: ow.boolean}), ow.string]));
 	}, {message: 'Did not expect element `3` to exist, got `5` in array'});
+
+	t.notThrows(() => {
+		ow(['🦄', true], ow.array.exactShape([ow.string, ow.any(ow.string, ow.boolean)]));
+	});
+
+	t.notThrows(() => {
+		ow(['🦄', 'bar'], ow.array.exactShape([ow.string, ow.any(ow.string, ow.boolean)]));
+	});
+
+	t.throws(() => {
+		ow(['🦄', 123], ow.array.exactShape([ow.string, ow.any(ow.string, ow.boolean)]));
+	}, {message: /Any predicate failed/});
 });

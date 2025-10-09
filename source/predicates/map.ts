@@ -1,6 +1,7 @@
 import {deepEqual} from 'fast-equals';
 import hasItems from '../utils/has-items.js';
 import ofType from '../utils/of-type.js';
+import type {BasePredicate} from './base-predicate.js';
 import {Predicate, type PredicateOptions, type Validator} from './predicate.js';
 
 export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, T2>> {
@@ -105,7 +106,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param predicate - The predicate that should be applied against every key in the Map.
 	*/
-	keysOfType(predicate: Predicate<T1>): this {
+	keysOfType(predicate: BasePredicate<T1>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: map => ofType(map.keys(), 'keys', predicate),
@@ -117,7 +118,7 @@ export class MapPredicate<T1 = unknown, T2 = unknown> extends Predicate<Map<T1, 
 
 	@param predicate - The predicate that should be applied against every value in the Map.
 	*/
-	valuesOfType(predicate: Predicate<T2>): this {
+	valuesOfType(predicate: BasePredicate<T2>): this {
 		return this.addValidator({
 			message: (_, label, error) => `(${label}) ${error}`,
 			validator: map => ofType(map.values(), 'values', predicate),
