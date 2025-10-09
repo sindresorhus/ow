@@ -287,6 +287,58 @@ test('isValid', t => {
 	t.false(ow.isValid(true, ow.any(ow.string, ow.number)));
 });
 
+test('validate', t => {
+	// Success cases
+	const result1 = ow.validate(1, ow.number);
+	t.true(result1.success);
+	if (result1.success) {
+		t.is(result1.value, 1);
+	}
+
+	const result2 = ow.validate('foo', ow.string.minLength(3));
+	t.true(result2.success);
+	if (result2.success) {
+		t.is(result2.value, 'foo');
+	}
+
+	const result3 = ow.validate('foo!', ow.any(ow.string, ow.number));
+	t.true(result3.success);
+
+	// Failure cases
+	const result4 = ow.validate(1, ow.string);
+	t.false(result4.success);
+	if (!result4.success) {
+		t.true(result4.error instanceof ArgumentError);
+		t.is(result4.error.message, 'Expected argument to be of type `string` but received type `number`');
+	}
+
+	const result5 = ow.validate(1, ow.number.greaterThan(2));
+	t.false(result5.success);
+	if (!result5.success) {
+		t.true(result5.error instanceof ArgumentError);
+		t.is(result5.error.message, 'Expected number to be greater than 2, got 1');
+	}
+
+	const result6 = ow.validate(true, ow.any(ow.string, ow.number));
+	t.false(result6.success);
+	if (!result6.success) {
+		t.true(result6.error instanceof ArgumentError);
+	}
+
+	// With label
+	const result7 = ow.validate('ab', 'username', ow.string.minLength(3));
+	t.false(result7.success);
+	if (!result7.success) {
+		t.is(result7.error.message, 'Expected string `username` to have a minimum length of `3`, got `ab`');
+	}
+
+	const result8 = ow.validate('foo', 'username', ow.string.minLength(3));
+	t.true(result8.success);
+	if (result8.success) {
+		t.is(result8.value, 'foo');
+	}
+});
+
 test('reusable validator', t => {
 	const checkUsername = ow.create(ow.string.minLength(3));
 	const checkUsername1: AssertingValidator<typeof checkUsername> = checkUsername;

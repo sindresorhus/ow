@@ -187,6 +187,47 @@ The `label` is automatically inferred in Node.js but you can override it by pass
 
 Returns `true` if the value matches the predicate, otherwise returns `false`.
 
+### ow.validate(value, predicate)
+
+Validate a value against a predicate without throwing. Returns a result object with type narrowing.
+
+```ts
+import ow, {type ValidateResult} from 'ow';
+
+const result = ow.validate(value, ow.string);
+
+if (!result.success) {
+	console.error(result.error.message);
+	return;
+}
+
+// result.value is now typed as string
+console.log(result.value.length);
+```
+
+The return type is a discriminated union:
+
+```ts
+type ValidateResult<T> =
+	| {success: true; value: T}
+	| {success: false; error: ArgumentError};
+```
+
+This allows TypeScript to narrow the type based on the `success` property. When `success` is `true`, you can access `value`. When `success` is `false`, you can access `error`.
+
+### ow.validate(value, label, predicate)
+
+Validate a value against a predicate with a custom label without throwing.
+
+```ts
+const result = ow.validate(username, 'username', ow.string.minLength(3));
+
+if (!result.success) {
+	console.error(result.error.message);
+	//=> Expected string `username` to have a minimum length of `3`, got `ab`
+}
+```
+
 ### ow.isPredicate(value)
 
 Test if the provided value is an Ow predicate.
