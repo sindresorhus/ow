@@ -228,6 +228,68 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	}
 
 	/**
+	Use a custom validation function that throws an error when the validation fails. This is useful for reusing existing validators or composing complex validations.
+
+	@param customValidator - Custom validation function that throws an error if the value is invalid.
+
+	@example
+	```
+	import ow from 'ow';
+
+	interface User {
+		name: string;
+		age: number;
+	}
+
+	const validateUser = (user: User) => {
+		ow(user.name, 'User.name', ow.string.nonEmpty);
+		ow(user.age, 'User.age', ow.number.integer.positive);
+	};
+
+	ow([{name: 'Alice', age: 30}], ow.array.ofType(ow.object.custom(validateUser)));
+	```
+
+	@example
+	This is particularly useful when you have existing validation functions and want to compose them:
+
+	```
+	import ow from 'ow';
+
+	interface Animal {
+		type: string;
+		weight: number;
+	}
+
+	const validateAnimal = (animal: Animal) => {
+		ow(animal.type, 'Animal.type', ow.string.oneOf(['dog', 'cat', 'elephant']));
+		ow(animal.weight, 'Animal.weight', ow.number.finite.positive);
+	};
+
+	const animals: Animal[] = [
+		{type: 'dog', weight: 5},
+		{type: 'cat', weight: Number.POSITIVE_INFINITY}
+	];
+
+	ow(animals, ow.array.ofType(ow.object.custom(validateAnimal)));
+	//=> ArgumentError: (array) (object) Expected number `Animal.weight` to be finite, got Infinity
+	```
+	*/
+	custom(customValidator: (value: T) => void): this {
+		return this.is((value: T) => {
+			try {
+				customValidator(value);
+				return true;
+			} catch (error: unknown) {
+				if (error instanceof Error) {
+					return error.message;
+				}
+
+				return String(error);
+			}
+		});
+	}
+
+	/**
 	Provide a new error message to be thrown when the validation fails.
 
 	@param newMessage - Either a string containing the new message or a function returning the new message.

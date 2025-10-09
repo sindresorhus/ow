@@ -513,6 +513,107 @@ test('custom validation function', t => {
 	});
 });
 
+test('custom throwing validation function', t => {
+	type Animal = {
+		type: string;
+		weight: number;
+	};
+
+	const validateAnimal = (animal: Animal): void => {
+		ow(animal.type, 'Animal.type', ow.string.oneOf(['dog', 'cat', 'elephant']));
+		ow(animal.weight, 'Animal.weight', ow.number.finite.positive);
+	};
+
+	t.notThrows(() => {
+		const animals: Animal[] = [{type: 'dog', weight: 5}];
+		ow(animals, ow.array.ofType(ow.object.custom(validateAnimal)));
+	});
+
+	t.throws(() => {
+		const animals: Animal[] = [
+			{type: 'dog', weight: 5},
+			{type: 'cat', weight: Number.POSITIVE_INFINITY},
+		];
+		ow(animals, ow.array.ofType(ow.object.custom(validateAnimal)));
+	}, {message: /Expected number `Animal\.weight` to be finite, got Infinity/});
+
+	t.throws(() => {
+		const animals: Animal[] = [{type: 'bird', weight: 2}];
+		ow(animals, ow.array.ofType(ow.object.custom(validateAnimal)));
+	}, {message: /Expected string `Animal\.type` to be one of/});
+});
+
+test('custom throwing validation with Error instance', t => {
+	const validateEven = (n: number): void => {
+		if (n % 2 !== 0) {
+			throw new Error(`Expected ${n} to be even`);
+		}
+	};
+
+	t.notThrows(() => {
+		ow(4, ow.number.custom(validateEven));
+	});
+
+	t.throws(() => {
+		ow(5, ow.number.custom(validateEven));
+	}, {message: /Expected 5 to be even/});
+
+	t.throws(() => {
+		ow(7, 'myNumber', ow.number.custom(validateEven));
+	}, {message: /number `myNumber`.*Expected 7 to be even/});
+});
+
+test('custom throwing validation with non-Error throw', t => {
+	const validator = (): void => {
+		throw 'String error'; // eslint-disable-line @typescript-eslint/no-throw-literal
+	};
+
+	t.throws(() => {
+		ow('test', ow.string.custom(validator));
+	}, {message: /String error/});
+});
+
+test('custom throwing validation with nested objects', t => {
+	type Config = {
+		port: number;
+		host: string;
+	};
+
+	const validateConfig = (config: Config): void => {
+		ow(config.port, 'config.port', ow.number.integer.inRange(1, 65_535));
+		ow(config.host, 'config.host', ow.string.nonEmpty);
+	};
+
+	t.notThrows(() => {
+		const configs: Config[] = [{port: 3000, host: 'localhost'}];
+		ow(configs, ow.array.ofType(ow.object.custom(validateConfig)));
+	});
+
+	t.throws(() => {
+		const configs: Config[] = [{port: 99_999, host: 'example.com'}];
+		ow(configs, ow.array.ofType(ow.object.custom(validateConfig)));
+	}, {message: /config\.port/});
+
+	t.throws(() => {
+		const configs: Config[] = [{port: 3000, host: ''}];
+		ow(configs, ow.array.ofType(ow.object.custom(validateConfig)));
+	}, {message: /config\.host.*not be empty/});
+});
+
+test('custom throwing validation with no error', t => {
+	const alwaysPass = (): void => {
+		// Does not throw
+	};
+
+	t.notThrows(() => {
+		ow('anything', ow.string.custom(alwaysPass));
+	});
+
+	t.notThrows(() => {
+		ow(123, ow.number.custom(alwaysPass));
+	});
+});
+
 test('ow without valid arguments', t => {
 	t.throws(() => {
 		ow(5, {} as any);

@@ -360,6 +360,50 @@ ow(1, 'input', ow.number.validate(value => ({
 //=> ArgumentError: Expected number `input` to be greater than 10, got 1
 ```
 
+#### custom(fn)
+
+Use a custom validation function that throws an error when the validation fails. This is useful for reusing existing validators or composing complex validations.
+
+```ts
+import ow from 'ow';
+
+interface User {
+	name: string;
+	age: number;
+}
+
+const validateUser = (user: User) => {
+	ow(user.name, 'User.name', ow.string.nonEmpty);
+	ow(user.age, 'User.age', ow.number.integer.positive);
+};
+
+ow([{name: 'Alice', age: 30}], ow.array.ofType(ow.object.custom(validateUser)));
+```
+
+This is particularly useful when you have existing validation functions and want to compose them:
+
+```ts
+import ow from 'ow';
+
+interface Animal {
+	type: string;
+	weight: number;
+}
+
+const validateAnimal = (animal: Animal) => {
+	ow(animal.type, 'Animal.type', ow.string.oneOf(['dog', 'cat', 'elephant']));
+	ow(animal.weight, 'Animal.weight', ow.number.finite.positive);
+};
+
+const animals: Animal[] = [
+	{type: 'dog', weight: 5},
+	{type: 'cat', weight: Number.POSITIVE_INFINITY}
+];
+
+ow(animals, ow.array.ofType(ow.object.custom(validateAnimal)));
+//=> ArgumentError: (array) (object) Expected number `Animal.weight` to be finite, got Infinity
+```
+
 #### message(string | fn)
 
 Provide a custom message:
