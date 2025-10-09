@@ -247,6 +247,70 @@ ow(null, ow.nullable.number);
 
 This is useful for validating inputs from external sources (like GraphQL APIs) that use `null` to represent absent values. We encourage using `undefined` over `null` in your own APIs, but recognize you can't control what external APIs return. [See our recommendation against using `null`](https://github.com/sindresorhus/meta/issues/7).
 
+### ow.absent.{type}
+
+Marks properties in object shapes as absent, meaning the key can be completely missing from the object. This is different from `optional` which allows both missing keys AND `undefined` values.
+
+```ts
+type Hotdog = {
+	length: number;
+	topping: string;
+};
+
+function patchHotdog(hotdog: Hotdog, patchBody: unknown): Hotdog {
+	ow(
+		patchBody,
+		ow.object.exactShape({
+			length: ow.absent.number,
+			topping: ow.absent.string,
+		}),
+	);
+
+	return {
+		...hotdog,
+		...patchBody, // Type-safe object spreading
+	};
+}
+
+const dog = {length: 10, topping: 'mustard'};
+
+patchHotdog(dog, {length: 12}); // ✓ Partial update
+patchHotdog(dog, {}); // ✓ Empty update
+patchHotdog(dog, {length: 12, topping: 'ketchup'}); // ✓ Full update
+patchHotdog(dog, {length: 'twelve'}); // ✗ Wrong type
+```
+
+This is particularly useful for:
+- Patch/update operations where missing keys mean "don't change"
+- Partial form submissions
+- Configuration merging where only specified keys should be overridden
+
+**Key differences from `optional`:**
+
+At runtime, both modifiers allow missing keys. The difference is in how they handle undefined values and type inference:
+
+```ts
+// optional: allows missing keys AND undefined values
+// Type inference: { name: string | undefined }
+ow({}, ow.object.exactShape({
+	name: ow.optional.string // ✓ Valid - missing key
+}));
+ow({name: undefined}, ow.object.exactShape({
+	name: ow.optional.string // ✓ Valid - undefined value
+}));
+
+// absent: allows missing keys but NOT undefined values
+// Type inference: { name?: string }
+ow({}, ow.object.exactShape({
+	name: ow.absent.string // ✓ Valid - missing key
+}));
+ow({name: undefined}, ow.object.exactShape({
+	name: ow.absent.string // ✗ Invalid - undefined not allowed
+}));
+```
+
+The key distinction: use `.absent` when missing keys mean "don't change" (patch operations), and `.optional` when undefined is a valid value.
+
 ### ow.{type}
 
 All the below types return a predicate. Every predicate has some extra operators that you can use to test the value even more fine-grained.

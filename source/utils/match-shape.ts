@@ -1,6 +1,6 @@
 import is from '@sindresorhus/is';
 import test from '../test.js';
-import {isPredicate, optionalSymbol} from '../predicates/base-predicate.js';
+import {isPredicate, optionalSymbol, absentSymbol} from '../predicates/base-predicate.js';
 import type {BasePredicate} from '../index.js';
 
 export type Shape = {
@@ -28,7 +28,29 @@ export type TypeOfShape<S extends BasePredicate | Shape> =
 	S extends BasePredicate<infer X>
 		? X extends object ? X : never
 		: S extends Shape
-			? {[K in keyof S]: TypeOfShape<S[K]>}
+			? {
+				// Required properties (neither optional nor absent)
+				[K in keyof S as S[K] extends {[absentSymbol]: true}
+					? never
+					: S[K] extends {[optionalSymbol]: true}
+						? never
+						: K
+				]: TypeOfShape<S[K]>
+			} & {
+				// Absent properties (key can be missing)
+				[K in keyof S as S[K] extends {[absentSymbol]: true}
+					? K
+					: never
+				]?: TypeOfShape<S[K]>
+			} & {
+				// Optional properties (key must exist but can be undefined)
+				[K in keyof S as S[K] extends {[optionalSymbol]: true}
+					? S[K] extends {[absentSymbol]: true}
+						? never
+						: K
+					: never
+				]: TypeOfShape<S[K]> | undefined
+			}
 			: never;
 
 /**
@@ -48,6 +70,11 @@ export function partial(object: Record<string, unknown>, shape: Shape, parent?: 
 
 			if (isPredicate(shapeValue)) {
 				const predicate = shapeValue as BasePredicate;
+				// Skip absent properties that don't exist in the object
+				if (predicate[absentSymbol] && !(key in object)) {
+					continue;
+				}
+
 				// Skip optional properties that don't exist in the object
 				if (predicate[optionalSymbol] && !(key in object)) {
 					continue;
@@ -96,6 +123,11 @@ export function exact(object: Record<string, unknown>, shape: Shape, parent?: st
 
 			if (isPredicate(shapeValue)) {
 				const predicate = shapeValue as BasePredicate;
+				// Skip absent properties that don't exist in the object
+				if (predicate[absentSymbol] && !(key in object)) {
+					continue;
+				}
+
 				// Skip optional properties that don't exist in the object
 				if (predicate[optionalSymbol] && !(key in object)) {
 					continue;

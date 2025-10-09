@@ -18,6 +18,11 @@ export const nullableSymbol: unique symbol = Symbol('nullable');
 /**
 @hidden
 */
+export const absentSymbol: unique symbol = Symbol('absent');
+
+/**
+@hidden
+*/
 export const isPredicate = (value: unknown): value is BasePredicate => Boolean((value as any)?.[testSymbol]);
 
 /**
@@ -26,5 +31,6 @@ export const isPredicate = (value: unknown): value is BasePredicate => Boolean((
 export type BasePredicate<T = unknown> = {
 	[optionalSymbol]?: boolean;
 	[nullableSymbol]?: boolean;
+	[absentSymbol]?: boolean;
 	[testSymbol](value: T, main: Main, label: string | Function, idLabel?: boolean): void;
 };

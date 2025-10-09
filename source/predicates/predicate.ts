@@ -7,6 +7,7 @@ import {
 	testSymbol,
 	optionalSymbol,
 	nullableSymbol,
+	absentSymbol,
 	type BasePredicate,
 } from './base-predicate.js';
 
@@ -42,6 +43,7 @@ export type Validator<T> = {
 export type PredicateOptions = {
 	optional?: boolean;
 	nullable?: boolean;
+	absent?: boolean;
 };
 
 /**
@@ -74,6 +76,7 @@ export type CustomValidator<T> = (value: T) => {
 export class Predicate<T = unknown> implements BasePredicate<T> {
 	[optionalSymbol]?: boolean;
 	[nullableSymbol]?: boolean;
+	[absentSymbol]?: boolean;
 	private readonly context: Context<T>;
 
 	constructor(
@@ -94,6 +97,11 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 		// Expose nullable status via symbol
 		if (this.options.nullable === true) {
 			this[nullableSymbol] = true;
+		}
+
+		// Expose absent status via symbol
+		if (this.options.absent === true) {
+			this[absentSymbol] = true;
 		}
 
 		// Only add the type validator if we don't have existing validators
