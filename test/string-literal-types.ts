@@ -12,6 +12,16 @@ function validateColor(value: unknown): 'red' | 'green' | 'blue' {
 	return value;
 }
 
+function validateStatus(value: unknown): 'on' | 'off' {
+	ow(value, ow.string.oneOf(['on', 'off'] as const));
+	return value;
+}
+
+function validateStatusAny(value: unknown): 'on' | 'off' {
+	ow(value, ow.any(ow.string.equals('on'), ow.string.equals('off')));
+	return value;
+}
+
 // Tagged union from issue #235
 type Food = {type: 'carrot'} | {type: 'hotdog'};
 
@@ -39,4 +49,16 @@ test('tagged union validation works', t => {
 	const food = validateFood({type: 'carrot'});
 	t.is(food.type, 'carrot');
 	const _check: Food = food;
+});
+
+test('string.oneOf with const assertion narrows to union type', t => {
+	const result = validateStatus('on');
+	t.is(result, 'on');
+	const _check: 'on' | 'off' = result;
+});
+
+test('ow.any with string.equals narrows to union type', t => {
+	const result = validateStatusAny('off');
+	t.is(result, 'off');
+	const _check: 'on' | 'off' = result;
 });
