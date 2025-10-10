@@ -102,7 +102,9 @@
 			"@typescript-eslint/prefer-nullish-coalescing": "off",
 			"import-x/no-mutable-exports": "off",
 			"@typescript-eslint/no-base-to-string": "off",
-			"@typescript-eslint/no-restricted-types": "off"
+			"@typescript-eslint/no-restricted-types": "off",
+			"@typescript-eslint/parameter-properties": "off",
+			"@typescript-eslint/member-ordering": "off"
 		}
 	},
 	"ava": {

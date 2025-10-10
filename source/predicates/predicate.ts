@@ -77,13 +77,17 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 	[optionalSymbol]?: boolean;
 	[nullableSymbol]?: boolean;
 	[absentSymbol]?: boolean;
+	private readonly type: string;
 	private readonly context: Context<T>;
+	protected readonly options: PredicateOptions;
 
 	constructor(
-		private readonly type: string,
-		protected readonly options: PredicateOptions = {},
+		type: string,
+		options: PredicateOptions = {},
 		existingValidators?: Array<Validator<T>>,
 	) {
+		this.type = type;
+		this.options = options;
 		this.context = {
 			validators: existingValidators ? [...existingValidators] : [],
 			...this.options,

@@ -15,10 +15,15 @@ import type {PredicateOptions} from './predicate.js';
 export class AnyPredicate<T = unknown> implements BasePredicate<T> {
 	[optionalSymbol]?: boolean;
 	[nullableSymbol]?: boolean;
+	private readonly predicates: BasePredicate[];
+	private readonly options: PredicateOptions;
+
 	constructor(
-		private readonly predicates: BasePredicate[],
-		private readonly options: PredicateOptions = {},
+		predicates: BasePredicate[],
+		options: PredicateOptions = {},
 	) {
+		this.predicates = predicates;
+		this.options = options;
 		// Expose optional status via symbol
 		if (this.options.optional === true) {
 			this[optionalSymbol] = true;
