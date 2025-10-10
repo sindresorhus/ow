@@ -1,4 +1,4 @@
-import ow from './dist/index.js'
+import ow from './dist/index.js';
 
 const logError = fn => {
 	try {

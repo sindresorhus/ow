@@ -24,25 +24,27 @@ test('any predicate', t => {
 	// #endregion
 
 	// #region Tests line 49 of predicates/any.ts and lines 36-41 of utils/generate-argument-error-message.ts
-	const error_2 = t.throws<ArgumentError>(() => {
-		ow(21 as any, ow.any(
-			ow.string.url.minLength(24),
-			ow.number.greaterThan(42),
-		));
-	},
-	{
-		message: createAnyPredicateError([
-			'string',
-			[
-				'Expected argument to be of type `string` but received type `number`',
-				'Expected string to be a URL, got `21`',
-				'Expected string to have a minimum length of `24`, got `21`',
-			],
-		], [
-			'number',
-			['Expected number to be greater than 42, got 21'],
-		]),
-	});
+	const error_2 = t.throws<ArgumentError>(
+		() => {
+			ow(21 as any, ow.any(
+				ow.string.url.minLength(24),
+				ow.number.greaterThan(42),
+			));
+		},
+		{
+			message: createAnyPredicateError([
+				'string',
+				[
+					'Expected argument to be of type `string` but received type `number`',
+					'Expected string to be a URL, got `21`',
+					'Expected string to have a minimum length of `24`, got `21`',
+				],
+			], [
+				'number',
+				['Expected number to be greater than 42, got 21'],
+			]),
+		},
+	);
 
 	t.is(error_2.validationErrors.size, 2, 'There should be two types of errors reported');
 

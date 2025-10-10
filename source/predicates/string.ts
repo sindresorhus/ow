@@ -136,11 +136,11 @@ export class StringPredicate extends Predicate<string> {
 				// Hence this alternative substitution scheme.
 				const madeVisible = value
 					.replaceAll(' ', '·')
-					.replaceAll('\f', '\\f')
-					.replaceAll('\n', '\\n')
-					.replaceAll('\r', '\\r')
-					.replaceAll('\t', '\\t')
-					.replaceAll('\v', '\\v');
+					.replaceAll('\f', String.raw`\f`)
+					.replaceAll('\n', String.raw`\n`)
+					.replaceAll('\r', String.raw`\r`)
+					.replaceAll('\t', String.raw`\t`)
+					.replaceAll('\v', String.raw`\v`);
 				return `Expected ${label} to not be only whitespace, got \`${madeVisible}\``;
 			},
 			validator: value => value.trim() !== '',

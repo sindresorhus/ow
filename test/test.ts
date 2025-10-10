@@ -617,7 +617,7 @@ test('custom throwing validation with Error instance', t => {
 
 test('custom throwing validation with non-Error throw', t => {
 	const validator = (): void => {
-		throw 'String error'; // eslint-disable-line @typescript-eslint/no-throw-literal
+		throw 'String error'; // eslint-disable-line @typescript-eslint/only-throw-error
 	};
 
 	t.throws(() => {

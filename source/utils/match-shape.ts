@@ -28,7 +28,8 @@ export type TypeOfShape<S extends BasePredicate | Shape> =
 	S extends BasePredicate<infer X>
 		? X extends object ? X : never
 		: S extends Shape
-			? {
+		// eslint-disable-next-line @stylistic/indent
+		? {
 				// Required properties (neither optional nor absent)
 				[K in keyof S as S[K] extends {[absentSymbol]: true}
 					? never

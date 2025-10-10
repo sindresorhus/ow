@@ -115,10 +115,10 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 					const label_ = label?.slice(this.type.length + 1);
 
 					// TODO: The NaN check can be removed when `@sindresorhus/is` is fixed: https://github.com/sindresorhus/ow/issues/231#issuecomment-1047100612
-					// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+
 					return `Expected ${label_ || 'argument'} to be of type \`${this.type}\` but received type \`${Number.isNaN(value) ? 'NaN' : is(value)}\``;
 				},
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
 				validator: value => (is as any)[typeString](value),
 			});
 		}
@@ -151,7 +151,7 @@ export class Predicate<T = unknown> implements BasePredicate<T> {
 				continue;
 			}
 
-			const label2 = is.function_(label) ? label() : label;
+			const label2 = is.function(label) ? label() : label;
 			const labelWithTick = (label2 && idLabel) ? `\`${label2}\`` : label2;
 
 			const label_ = labelWithTick

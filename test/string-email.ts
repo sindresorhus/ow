@@ -163,7 +163,7 @@ test('string.email - invalid email addresses', t => {
 		t.throws(() => {
 			ow(email, ow.string.email);
 		}, {
-			message: new RegExp(`Expected string to be an email address, got \\\`${email.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\\``),
+			message: new RegExp(`Expected string to be an email address, got \\\`${email.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`)}\\\``),
 		}, `Should reject invalid email: ${email}`);
 	}
 });

@@ -1,5 +1,5 @@
 let ow;
-if (process.env.NODE_ENV === 'production') {
+if (globalThis.process.env.NODE_ENV === 'production') { // eslint-disable-line n/prefer-global/process
 	const shim = new Proxy((() => {}), {
 		get: () => shim,
 		apply: () => shim,

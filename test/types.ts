@@ -107,7 +107,7 @@ function typeTests(value: unknown): Array<(() => void)> {
 				array: expect => expect.toBeArray(),
 				arrayBuffer: expect => expect.toEqualTypeOf<ArrayBuffer>(),
 				// @ts-expect-error not why this doesn't work
-				bigint: expect => expect.toEqualTypeOf<BigInt>(),
+				bigint: expect => expect.toEqualTypeOf<bigint>(),
 				boolean: expect => expect.toBeBoolean(),
 				dataView: expect => expect.toEqualTypeOf<DataView>(),
 				date: expect => expect.toEqualTypeOf<Date>(),
@@ -180,11 +180,9 @@ function typeTests(value: unknown): Array<(() => void)> {
 				iterable: ow.iterable,
 				typedArray: ow.typedArray,
 				nested: ow.object.exactShape({
-					nested: ow.array.ofType(
-						ow.object.exactShape({
-							nested: ow.number,
-						}),
-					),
+					nested: ow.array.ofType(ow.object.exactShape({
+						nested: ow.number,
+					})),
 				}),
 			});
 

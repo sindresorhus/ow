@@ -8,7 +8,7 @@ test('regExp', t => {
 
 	t.notThrows(() => {
 		// eslint-disable-next-line prefer-regex-literals
-		ow(new RegExp('\\d'), ow.regExp);
+		ow(new RegExp(String.raw`\d`), ow.regExp);
 	});
 
 	t.throws(() => {
